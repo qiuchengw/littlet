@@ -1,0 +1,60 @@
+﻿<html max-window>
+	<head>
+		<link rel="stylesheet" href="qabs:style.css" type="text/css" />
+		<style type="text/css">
+			#PRINT-TOOLBAR{
+				width:*;height:30px;
+				border-spacing:10px;
+				padding:4 10px;
+				flow:horizontal;
+				white-space:nowrap;
+				border:1px solid white;
+			}
+			#PREVIEW-WRAPER{
+				width:*;height:*;
+				padding:40px;
+				background-color:#ABABAB;
+				overflow:auto;
+				vertical-scrollbar:vscrollbar;
+			}
+			#PRINT-PREVIEW{
+				background-position:center;
+				background-repeat:no-repeat;
+				width:*;height:*;
+				margin:0 *;
+				border:1px solid #888;
+				background-color:white;
+			}
+		</style>
+	</head>
+	<body #wc-top style="min-height:500px;min-width:500px;">
+		<div #wc-caption>
+			<div #wc-sysicon></div>
+			<div #wc-title></div>
+			<table sysbtn>
+				<tr><td xrole="CLOSE" /></tr>
+			</table>
+		</div>
+		<div id="PRINT-TOOLBAR">
+			<button id="BTN-SELFILE">打开文件</button>
+			<button id="BTN-PAGESET">页面设置</button>
+			<button id="BTN-PREVPAGE">上一页</button>
+			<table>
+				<tr>
+					<td><input type="number" id="INPUT-CURRENT-PAGE" style="width:40px;" /></td>
+					<td> / </td>
+					<td id="TOTAL-PAGES"> 000</td>
+				</tr>
+			</table>
+			<button id="BTN-NEXTPAGE">下一页</button>
+			<button id="BTN-ZOOMOUT">放大</button>
+			<button id="BTN-ZOOMIN">缩小</button>
+			<div style="width:*;" />
+			<button id="BTN-PRINTTOFILE">打印到图片</button>
+			<button id="BTN-PRINT">打印</button>
+		</div>
+		<div id="PREVIEW-WRAPER">
+			<div id="PRINT-PREVIEW" />
+		</div>
+	</body>
+</html>

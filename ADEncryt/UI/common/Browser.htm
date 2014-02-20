@@ -1,0 +1,76 @@
+﻿<html>
+	<head>
+		<style type="text/css">
+			#STATUSBAR
+			{
+				width:*;
+				height:24px;
+				overflow:hidden;
+				border-spacing:10px;
+				border-top:1px solid #AAAAAB;
+				padding:2px;
+				flow:horizontal;
+			}
+			#TOOLBAR{
+				width:*;height:24px;
+				overflow:hidden;
+				border-bottom:1px solid #AAAAAB;
+				padding:2px;
+				flow:horizontal;
+			}
+			#TOOLBAR button
+			{
+				padding:0;
+				background-image:none;
+			}
+			[id="P-URL"]
+			{
+				width:*;height:*;
+				vertical-align:middle;
+				border:1px solid green;
+			}
+		</style>
+	</head>
+	<body style="margin:0;padding:0;">
+		<!--工具栏-->
+		<!--
+		<div #TOOLBAR>
+		<!--	<button id="BTN-OPENFILE" .with-icon style="foreground-image:url(qabs:common/icons/folder_16.png);height:18px;" /> 
+			<button id="BTN-GOBACK" .with-icon style="foreground-image:url(qabs:common/icons/back_22.png);height:18px;" />
+			<button id="BTN-GONEXT" .with-icon style="foreground-image:url(qabs:common/icons/next_22.png);height:18px;" />
+			<button id="BTN-STOP" .with-icon style="foreground-image:url(qabs:common/icons/next_22.png);height:18px;" />
+			<button id="BTN-REFRESH" .with-icon style="foreground-image:url(qabs:common/icons/next_22.png);height:18px;" />
+			<input type="text" id="INPUT-ADDRESSLIST" style="width:*;"/>
+		</div>
+		-->
+		
+		<!--浏览器控件，需要创建新窗口-->
+		<widget type="browser" style="width:*;height:*;" />
+		
+		<!--状态栏-->
+		<!--
+		<div id="STATUSBAR">
+			<div id="P-URL" style="width:*;height:*;" />
+			<progress id="PRGS-LOAD" maxvalue="100" style="margin:0;"/>
+			<widget type="menu-button" style="margin:0;">
+				<div id="BTN-ZOOM100">100%</div>
+				<div>
+					<menu>
+						<li id="MENU-ITEM-ZOOMIN">Zoom In [Ctrl +]</li>
+						<li id="MENU-ITEM-ZOOMOUT">Zoom Out [Ctrl -]</li>
+						<hr />
+						<li name=>400%</li>
+						<li>200%</li>
+						<li>150%</li>
+						<li>100%</li>
+						<li>75%</li>
+						<li>50%</li>
+						<hr />
+						<li><input type="number"></input></li>
+					</menu>
+				</div>
+			</widget>
+		</div>
+		-->
+	</body>
+</html>

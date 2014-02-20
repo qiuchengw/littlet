@@ -1,0 +1,176 @@
+﻿body{
+	flow:vertical;
+}
+#EVENT_LIST
+{
+	vertical-scrollbar:vscrollbar;
+	height:*;width:*;
+	overflow-x:hidden;
+	overflow-y:auto;
+	//behavior:scroller;
+}
+#EVENT_LIST>table{
+	draggable:only-move;
+	width:*;height:50px;
+//	border-top:1px dotted #F1F4F5;
+	border-bottom:1px dotted #E7EAEE;
+	background-color:#F6F8F9;
+	color:#96A6B3;
+	overflow:hidden;
+	padding:4 10px;
+	behavior:switch;
+}
+#EVENT_LIST>table:moving{
+	opacity:0.7;
+	height:25px;
+	overflow:hidden;
+}
+#EVENT_LIST>table:hover{
+	background-color:#EEF2F4;
+}
+#EVENT_LIST>table:checked{
+	background-color:#9FABB7;
+	color:white;
+}
+#EVENT_LIST>table td[etype]{
+	width:45px;height:*;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+#EVENT_LIST>table td[etype="tip"]{
+	background-image:url(qabs:icons/clock_32.png);
+}
+#EVENT_LIST>table td[etype="execprog"]{
+	background-image:url(qabs:icons/cmd_32.png);
+}
+#EVENT_LIST>table td[etype="shutdown"]{
+	background-image:url(qabs:icons/shutdown_32.png);
+}
+#EVENT_LIST>table td[etype="sleep"]{
+	background-image:url(qabs:icons/sleep_32.png);
+}
+#EVENT_LIST>table td.event
+{
+	font:9pt bold "微软雅黑";
+	color:#666;
+	width:*;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+#EVENT_LIST>table td.time{
+	font:11pt bold "mv boli";
+	color:#81D1F0;
+	width:80px;
+	height:26px;
+	line-height:26px;
+	vertical-align:bottom;
+	padding-left:20px;
+}
+#EVENT_LIST>table td.date,
+#EVENT_LIST>table td.lifend{
+	height:*;
+	vertical-align:top;
+	font:8pt normal "mv boli";
+	color:gray;
+	padding-left:20px;
+}
+#EVENT_LIST>table td.lifend{
+	padding-left:5px;
+}
+#EVENT_LIST>table td{
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+#EVENT_LIST>table:checked td{
+	color:white;
+}
+
+#EVENT_LIST>table td.btns{
+	flow:horizontal;
+	visibility:hidden;
+}
+#EVENT_LIST>table:hover td.btns{
+	visibility:visible;
+	padding-left:*;
+}
+#EVENT_LIST>table .btn{
+	behavior:clickable;
+	width:20px;height:18px;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+#EVENT_LIST>table .btn:hover{
+	outline:glow gray 2px 2px;
+}
+#EVENT_LIST>table .btn:active{
+	outline:glow gray 4px 4px;
+}
+#EVENT_LIST>table [name="btn_del"]{
+	background-image:url(qabs:icons/delete_16.png);
+}
+#EVENT_LIST>table [name="btn_edit"]{
+	margin-left:*;
+	background-image:url(qabs:icons/edit_16.png);
+}
+#EVENT_LIST>table [name="btn_disable"]{
+	background-image:url(qabs:icons/disable_16.png);
+}
+
+#tbl_detail{
+	border-spacing:0;
+	padding:4px;
+}
+#tbl_detail tr{
+	height:24px;
+}
+
+#tbl_detail td{
+	line-height:20px;
+	height:*;
+	padding:4 8px;
+}
+#tbl_detail th,
+#tbl_detail td:nth-child(1){
+	font:bold 10pt "微软雅黑";
+	white-space:nowrap;
+	color:black;
+	vertical-align:top;
+}
+#tbl_detail th{
+	background-color:#9FABB7;
+	//border-bottom:1px solid gray;
+	vertical-align:middle;
+	color:white;
+}
+#tbl_detail td:nth-child(2){
+	font:normal 9pt "comic sans MS";
+	color:#555;
+}
+
+
+/*垃圾箱*/
+.trash{
+	accept-drop: selector(div.events>table); /* accept drop of items only from carts */ 
+	drop: recycle; /* delete element on drop */
+	width:*;height:*;
+	padding:2 10 2 22px;
+	foreground:url(qabs:icons/delete_16.png) no-repeat;
+	foreground-position:4px center;
+	vertical-align:middle;
+	color:#444;
+	margin-right:5px;
+}
+
+/* dragging operation is in effect and this element is the active target */  
+.trash:drop-target{
+	background-color:#ED5F28;
+	border-color:#D15224;
+}
+
+/* dragging operation is in effect and this element is the active target and dragged element is over this one */  
+.trash:drag-over{
+	background-color:#F227CB;
+	border-color:#B41C98;
+}

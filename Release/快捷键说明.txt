@@ -1,0 +1,12 @@
+﻿LittleT v1.0 可用快捷键
+----------------------------------- 
+系统全局：
+ctrl + shift + h  	前台、后台运行
+ctrl + shift + j  	新自动任务
+ctrl + shift + k 	新todo任务
+ctrl + shift + l 	新计划
+
+主窗口激活状态下快捷键
+ctrl + tab 			切换模式
+ctrl + n 			新建当前模式下任务
+

@@ -1,0 +1,165 @@
+﻿<html>
+	<head>
+		<link rel="StyleSheet" type="text/css" href="qrel:style.css" />
+		<link rel="StyleSheet" type="text/css" href="qabs:style.css" />
+		<style type="text/css">
+			body{
+				min-width:630px;
+				min-height:450px;
+				//background:url(qabs:bk/bk1.jpg) no-repeat;
+			}
+			#body_wrap{
+				width:*;height:*;
+				background-color:white;
+				opacity:0.9;
+			}
+			.td_close{
+				width:1em;
+				height:*;
+				font:8pt normal marlett;
+				behavior:clickable;
+				text-align:center;
+			}
+			table[id="lst_times"] td:nth-child(1){
+				text-align:center;
+			}
+			
+		</style>
+	</head>
+	<body #wc-top>
+		<div #wc-caption>
+			<div #wc-sysicon style="background-image:url(qabs:icons/sysicon.png);" />
+			<div #wc-title>执行时间</div>
+			<table sysbtn><tr><td xrole="CLOSE" /></tr></table>
+		</div>
+
+		<div id="body_wrap">
+			<table .table_box style="height:80px;">
+				<tr>
+					<th colspan=4>设定任务的执行周期和执行时间</th>
+				</tr>
+				<tr .box>
+					<td style="width:60px;text-align:right;">开始时间:</td>
+					<td .row style="border-spacing:2px;">
+						<widget type="date" id="date_begin" style="height:26px;" />
+						<widget type="timectrl" id="time_begin" />
+					</td>
+					<td style="width:80px;text-align:right;">结束时间:</td>
+					<td .row style="border-spacing:2px;">
+						<widget type="date" id="date_end" style="height:26px;" />
+						<widget type="timectrl" id="time_end" />
+					</td>
+				</tr>
+			</table>
+			
+			<widget type="tabs" id="TABS_TIME" style="width:*;height:*;opacity:0.9;margin:4 10px;">
+				<div .strip>
+					<div panel="panel_relate" selected>相对时间执行</div>
+					<div panel="panel_abs">绝对时间执行</div>
+				</div>
+				<div name="panel_relate">
+					<table relate style="margin:10px;">
+						<tr>
+							<td .row>
+								<widget  id="cmb_task_when_do" type="select-dropdown" style="width:120px;" />
+								<widget type="file-path" id="path_progpath" style="width:*;visibility:collapse;"/>
+								<widget type="number" id="edit_span" style="width:60px;" minvalue=1 maxvalue=1000 />
+								<widget type="select-dropdown" id="cmb_span_unit">
+									<option name="m">分钟</option>
+									<option name="h">小时</option>
+								</widget>
+							</td>
+						</tr>
+						<tr>
+							<td .row>
+								<widget type="checkbox" style="width:max-intrinsic;" id="chk_span2">然后间隔一定时间执行</widget>
+								<widget type="number" id="edit_span2" style="width:60px;visibility:hidden;" minvalue=1 maxvalue=1000 />
+								<widget type="select-dropdown" id="cmb_span_unit2" style="visibility:hidden;">
+									<option name="m">分钟</option>
+									<option name="h">小时</option>
+								</widget>
+							</td>
+						</tr>
+						<tr>
+							<td .row>
+								<widget type="checkbox" id="chk_exec_count" style="width:max-intrinsic;margin-left:20px;visibility:hidden;">
+									在执行多少次后停止？
+								</widget>
+								<widget type="number" id="edit_exec_count" style="width:60px;visibility:hidden;" minvalue=1 maxvalue=99999 />
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div name="panel_abs" style="flow:horizontal;">
+					<div style="width:125px;height:*;">
+						<div .rio_td id="rio_absDay" checked>在一个日期</div>
+						<div .rio_td id="rio_absDaily">每几天执行</div>
+						<div .rio_td id="rio_absWeek">每周的某天</div>
+						<div .rio_td id="rio_absMonthDay">每月的某天</div>
+					</div>
+					<div id="div_dates">
+						<!--一个日期-->
+						<div id="div_day" .row style="visibility:visible;">
+							<p>请设定一个执行日期</p>
+							<widget type="date" id="date_Day" value="today"/>
+						</div>
+						<!--每隔x天-->
+						<div id="div_xday" .row>
+							<p>每多少天执行</p>
+							<input type="number" minvalue=1 maxvalue=30 id="edit_XDay" style="width:50px;" value="1" />
+						</div>
+						<!--星期-->
+						<table .chk_table id="menu_absWeekday">
+							<tr>
+								<td v=0>周日</td>
+								<td v=1>周一</td>
+								<td v=2>周二</td>
+								<td v=3>周三</td>
+								<td v=4>周四</td>
+								<td v=5>周五</td>
+								<td v=6>周六</td>
+							</tr>
+						</table>
+						<!--按日-->
+						<div .row id="div_monthday" style="border-spacing:5px;">
+							<table .chk_table id="menu_absMonthDay" style="margin-top:4px;">
+								<tr><td v=1>1</td><td v=2>2</td><td v=3>3</td><td v=4>4</td><td v=5>5</td></tr>
+								<tr><td v=6>6</td><td v=7>7</td><td v=8>8</td><td v=9>9</td><td v=10>10</td></tr>
+								<tr><td v=11>11</td><td v=12>12</td><td v=13>13</td><td v=14>14</td><td v=15>15</td></tr>
+								<tr><td v=16>16</td><td v=17>17</td><td v=18>18</td><td v=19>19</td><td v=20>20</td></tr>
+								<tr><td v=21>21</td><td v=22>22</td><td v=23>23</td><td v=24>24</td><td v=25>25</td></tr>
+								<tr><td v=26>26</td><td v=27>27</td><td v=28>28</td><td v=29>29</td><td v=30>30</td></tr>
+								<tr><td v=31>31</td></tr>
+							</table>
+							<div style="flow:vertical;width:80px;border-spacing:10px;padding-top:4px">
+								<div .color_button .blue id="btn_SelectAll">全选</div>
+								<div .color_button .orange id="btn_SelectNone">全不选</div>
+							</div>
+						</div>
+					</div>
+					
+					<!--时间点-->
+					<table .grid id="lst_times" fixedrows=1 style="height:*;width:120px;behavior:none;">
+						<tr>
+							<th style="width:*;">
+								<widget type="timectrl" id="time_absTime" style="width:80px;" />
+							</th>
+							<th style="width:20px;" .qbtn id="btn_addtime" 
+									style="foreground-image:url(qabs:icons/plus_16.png);" >
+							</th>
+						</tr>
+					</table>
+				</div>
+			</widget>
+			
+			<table style="width:*;margin-bottom:10px;">
+				<tr>
+					<td style="width:*" />
+					<td><div .color_button .blue xrole="OK" style="width:50px;">确定</div></td>
+					<td><div .color_button .orange xrole="Cancel" style="margin-left:20px;width:50px;">取消</div></td>
+					<td style="width:30px;"/>
+				</tr>
+			</table>			
+		</div>
+	</body>
+</html>

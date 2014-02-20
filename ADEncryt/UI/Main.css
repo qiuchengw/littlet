@@ -1,0 +1,266 @@
+﻿/*for global*/
+@const BORDER_COLOR: #CCC;
+@const BORDER:1px solid #ccc;
+@const BORDER_CTRL:1px solid #aaa;
+@const CTRL_BACK_NORMAL:#FAFAFA #FAFAFA #E5E5E5 #E5E5E5;
+@const CTRL_BACK_HOVER:#fefefe #fefefe #EBEBEB #EBEBEB;
+@const CTRL_BACK_ACTIVE:#E1E1E1 #E1E1E1 #DEDEDE #DEDEDE;
+@const CTRL_BACK_WIN7ACTIVE:#DCEBFC #DCEBFC #C1DCFC #C1DCFC;
+@const SOLID_BACK_GRAY:#E9EEDA;
+@const SOLID_BACK_CURRENT:#93BEF6;
+@const CTRL_BACK_DISABLE: gray;
+@const SOLID_BACK_LIGHT:#fefefe;
+@const FONT_COLOR_NORMAL:#6D6D6D;
+@const FONT_COLOR_HOVER:#555;
+@const FONT_COLOR_ACTIVE:#333;
+@const FONT_NORMAL:normal 10pt 宋体;
+@const FONT_NUMBER:normal 9pt "comic sans MS";
+@const FONT_DEFAULT:normal 9pt;
+@const OUTLINE_STYLE_NORMAL:glow gray 2px 2px;
+@const OUTLINE_STYLE_ACTIVE:glow gray 4px 4px;
+
+html{
+	background-color:#8B98A0;
+	width:*;height:*;
+	overflow:hidden;
+	behavior:accesskeys actions;
+}
+body{
+	background-color:#E9E9E9;
+}
+body#top{ 
+	padding:8px;
+	margin:1px;
+	border:1px solid #F7F7FC;
+	border-radius:4px;
+	font: @FONT_NORMAL; 
+	color:@FONT_COLOR_ACTIVE;
+	flow:vertical;
+}
+a{ behavior:button; }
+p{
+	margin-top:5px;
+	width:min-intrinsic;
+	white-space:nowrap;
+}
+widget[type="number"] { min-width:50px; }
+.gbtn:focus{border:1px solid #48D8FB;}
+
+.silver_back{ background-color:@CTRL_BACK_NORMAL;}
+.yellow_back{ background-color:#EAFA64 #EAFA64 #BFC41A #BFC41A; }
+.red_back{ background-color:#FCBCBC #FCBCBC #FC5858 #FC5858; }
+.purple_back{ background-color:#F7B7FC #F7B7FC #CB3ED6 #CB3ED6; }
+.gray_back{ background-color:#BFBCCB; }
+
+input[type="text"].dashed{
+	border:none;
+	border-bottom:1px dashed #555;
+	background-image:none;
+}
+
+
+/*flow box*/	
+.vflow-box,.hflow-box{padding:2px; width:*; height:*;border:@BORDER;over-flow:auto;border-spacing:4px;}
+.vflow-box{ flow:v-flow; }
+.hflow-box{ flow:h-flow; }
+.row{ flow:horizontal; border-spacing:2px; min-height:min-intrinsic;width:*;}
+.col{ flow:vertical; border-spacing:2px; min-width:min-intrinsic; height:*;}
+/*特殊的字体*/
+b.yellow{color:#ED6717;}
+b.red{color:red;}
+b.green{color:green}
+b.back{ background-color:#CECBD8; color:black; margin:1px; padding:0 2px;}
+/*custom button*/
+.gbtn,.gimgbtn{
+	behavior:button; 
+	width:max-intrinsic; 
+	font:@FONT_NORMAL;
+	color:@FONT_COLOR_NORMAL;
+	height:24px; 
+	padding:0 10px; 
+	text-align:center;
+	vertical-align:middle;
+	white-space:nowrap; 
+}
+.gbtn{
+	border:@BORDER_CTRL;
+	border-radius:2px;
+	background-color: @CTRL_BACK_NORMAL;
+}
+.gimgbtn{
+	padding-left:24px; 
+	foreground-repeat:no-repeat; 
+	foreground-position:4px center; 
+}
+.gbtn:disabled,.gimgbtn:disabled{ background-color:gray; }
+.gbtn:hover{ background-color:@CTRL_BACK_HOVER; }
+.gbtn:active{ background-color:@CTRL_BACK_ACTIVE; }
+.gimgbtn:hover{ background:url(theme:toolbar-button-hover) stretch; }
+.gimgbtn:active{ background:url(theme:toolbar-button-pressed) stretch; }
+.marked-btn{ border-color:#5AB9D6; background-color:#82D6EF; }
+
+input[type="progress"].red,widget[type="progress"].red { 
+	border:1px solid #ED6717;
+	foreground-image:url( xctrl/red_progress-fore.png);
+}
+
+/*Icon Box*/
+table[book]{
+	width:80px;height:110px;
+}
+table[book] tr.icon{
+	height:90px;
+}
+table[book] tr.icon>td{
+	width:*; height:*;
+	foreground-position:center center;
+	foreground-repeat:no-repeat; 
+}
+table[book] td.des{ 
+	font:normal 9pt 宋体; 
+	color:gray; 
+	text-align:center;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+table[book]:hover td.des{ color:@FONT_COLOR_HOVER; }
+table[book]:checked{
+	background-color:#DCEBFC #DCEBFC #C1DCFC #C1DCFC;
+	border:1px solid #7DA2CE;
+}
+
+.iconbox{ 
+	flow:h-flow; 
+	width:*; height:*; 
+	border:@BORDER; 
+	background-color:#E0E0E0;
+	padding: 4px;
+	border-spacing:6px; 
+	overflow-y:auto;
+	vertical-scrollbar:vscrollbar;
+}
+.iconbox>table{ 
+	behavior:switch; 
+	background-color:@CTRL_BACK_NORMAL; 
+	border:@BORDER; 
+	opacity:0.9; 
+}
+.iconbox>table:hover{
+	opacity:1.0;
+}
+
+/**************************/
+/*小图标按钮,无边框*/
+.btn{
+	min-height:16px;
+	height:*;width:16px;
+	background-repeat:no-repeat;
+	background-position:center;
+	behavior:clickable;
+}
+.close_12{ background-image:url(images/close_12.png); }
+.edit_16{ background-image:url(images/edit_16.png); }
+.btn:hover{
+	outline:@OUTLINE_STYLE_NORMAL;
+}
+.btn:active{
+	outline:@OUTLINE_STYLE_ACTIVE;
+}
+menu.monthday>li{
+	flow:horizontal;
+	border-spacing:4px;
+	background-image:none;
+}
+widget[type="select-dropdown"].sex option{
+	height:20px;
+	padding-left:18px;
+	background-repeat:no-repeat;
+	background-position:2 2px;
+}
+widget[type="select-dropdown"].sex option.male{
+	background-image:url(images/male.png);
+	color:red;
+}
+widget[type="select-dropdown"].sex option.female{
+	background-image:url(images/female.png);
+}
+
+
+/*Single Tab*/
+.single-tab{ 
+	flow:vertitcal; 
+	width:*; min-height:30px; 
+	border-spacing:0; 
+}
+.single-tab>caption.msgbar{
+	border-bottom:none;
+	margin-bottom:-2px;
+	width:max-intrinsic;
+	border-radius:5 5 0 0;
+	color:#5A7179;
+	padding:2 10px;
+	background-color:#B8D5E3 #B8D5E3 #D8EBEF #D8EBEF;
+}
+.single-tab>div.pane{
+	background-color:#D8EBEF #D8EBEF #fff #fff;
+	border:@BORDER;
+	padding:3px;
+	width:*;height:*;
+}
+
+/*Thumb*/
+.thumbox{
+	flow:vertical;
+	height:*;width:160px;
+	padding:2px;
+	overflow:hidden;
+	border-spacing:2px;
+	behavior:scroller;
+}
+.thumbox>table{
+	width:*;height:60px;
+	border:@BORDER;
+	background-color:@CTRL_BACK_NORMAL;
+	behavior:switch;
+	opacity:0.8;
+}
+.thumbox>table:hover{ 
+	background-color:@CTRL_BACK_HOVER;
+}
+.thumbox>table:checked{ 
+	background-color:@CTRL_BACK_WIN7ACTIVE;
+}
+
+.text-box{
+	border-top:@BORDER;
+	width:*;height:auto;
+	padding:2 10px;
+	text-overflow:ellipsis;
+	border:@BORDER;
+	background-color:#EEE;
+	font:@FONT_NUMBER;
+	color:gray;
+}
+
+table[id="id_head"]{
+	width:*;height:70px;
+	border:@BORDER;
+	background-color:#D4D4D4;
+}
+table[id="id_head"] td{
+	padding:2 4px;
+}
+table[id="id_head"] td.icon{
+	width:80px;height:70px;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+table[id="id_head"] td.btns{
+	width:80px;height:24px;
+	border-spacing:5px;
+	flow:horizontal;
+}
+table[id="id_head"] td.time{
+	font:bold 11pt "comic sans MS";
+	color:#ED6717;
+}

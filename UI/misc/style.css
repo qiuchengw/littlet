@@ -1,0 +1,20 @@
+﻿#mybox{
+	width:*;height:*;
+	behavior:htmlarea;
+	font:normal 9pt "微软雅黑";
+	padding:4 8px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	vertical-scrollbar:vscrollbar;
+	color:#333;
+	//border:1px solid #A0CED6;
+	background-color:white;
+	opacity:0.8;
+	border-radius:5px;
+	background:url(qabs:dlgs/images/clock_128.png) no-repeat;
+	background-position:top right;
+}
+a{
+	behavior:clickable;
+	color:#2CB2CF;
+}

@@ -1,0 +1,36 @@
+<css>Main.css;AutotaskRmd.css</css>
+<html>
+	<body #top style="width:300px;height:200px;">
+		<div #wc_caption>
+			<div #wc_sysicon style="background-image:url(images/login_16.ico);"></div>
+			<div #wc_title>$Title.12$</div>
+			<table sysbtn><tr><td role="sc_pin" /><td role="sc_close" /></tr></table>
+		</div>
+		<table id="id_when">
+			<tr>
+				<td .clock rowspan=2 />
+				<td>Remind</td>
+				<td .btns>
+					<div .btn id="btn_sound" title="$TaskRmd.7$" style="background-image:url(images/sound_16.png);height:20px;" />
+					<div .btn id="btn_prev" title="$TaskRmd.8$" accesskey="left" style="background-image:url(images/prev_16.png);height:20px;" />
+					<div .btn id="btn_delete" title="$TaskRmd.6$" style="background-image:url(images/close_12.png);height:20px;" />
+					<div .btn id="btn_next" title="$TaskRmd.5$" accesskey="right" style="background-image:url(images/next_16.png);height:20px;" />
+				</td>
+			</tr>
+			<tr>
+				<td id="td_time" colspan=2></td>
+			</tr>
+		</table>
+		<table id="id_what">
+			<tr>
+				<td id="td_message"></td>
+			</tr>
+			<tr>
+				<td>
+					<widget type="checkbox" id="chk_DontRemind">$TaskRmd.3$</widget>
+					<button id="btn_DontExec" style="border-radius:0px;">$TaskRmd.2$</button>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

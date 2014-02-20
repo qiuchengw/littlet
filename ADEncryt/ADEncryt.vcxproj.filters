@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\UIBase">
+      <UniqueIdentifier>{7394bd03-4430-4d27-9c51-d8c2e86730e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UIBase\file">
+      <UniqueIdentifier>{4de9385e-2ef3-4424-8ca2-c90ec3fcec88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UIBase\time">
+      <UniqueIdentifier>{3a61fb99-3c07-45a8-b974-9a5e7682c2bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UIBase\ui">
+      <UniqueIdentifier>{ba538844-813e-472c-bb12-0301b9d5a158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UIBase\crypt">
+      <UniqueIdentifier>{3874efaa-c806-42be-ae1e-06bc0d860bff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="QADEnApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainWnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QADEnApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\AppHelper.cpp">
+      <Filter>Source Files\UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\QBuffer.cpp">
+      <Filter>Source Files\UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\FileEnumerator.cpp">
+      <Filter>Source Files\UIBase\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\FileOper.cpp">
+      <Filter>Source Files\UIBase\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\inifile.cpp">
+      <Filter>Source Files\UIBase\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\QFile.cpp">
+      <Filter>Source Files\UIBase\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\TextFile.cpp">
+      <Filter>Source Files\UIBase\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\time\QTime.cpp">
+      <Filter>Source Files\UIBase\time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\WndShadow.cpp">
+      <Filter>Source Files\UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\ECtrl.cpp">
+      <Filter>Source Files\UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\QApp.cpp">
+      <Filter>Source Files\UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\QConfig.cpp">
+      <Filter>Source Files\UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\QUIMgr.cpp">
+      <Filter>Source Files\UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\QWindow.cpp">
+      <Filter>Source Files\UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\XZip.cpp">
+      <Filter>Source Files\UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\CMD5.cpp">
+      <Filter>Source Files\UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\CXUnzip.cpp">
+      <Filter>Source Files\UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\rijndael.cpp">
+      <Filter>Source Files\UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\XUnzip.cpp">
+      <Filter>Source Files\UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\QDataEnDe.cpp">
+      <Filter>Source Files\UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\WndHelper.cpp">
+      <Filter>Source Files\UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\QUI.cpp">
+      <Filter>Source Files\UIBase</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

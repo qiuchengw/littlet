@@ -1,0 +1,41 @@
+﻿<html>
+	<head>
+		<link rel="StyleSheet" type="text/css" href="qabs:style.css" />
+		<style type="text/css">
+			#icon-xbox{
+				width:*;height:*;
+				border-spacing:4px;
+				flow:h-flow;
+				overflow-y:auto;
+				vertical-scrollbar:vscrollbar;
+				opacity:1;
+			}
+			#icon-xbox>picture{
+				width:80px;height:80px;
+				overflow:hidden;
+				border:1px solid #ddd;
+				background-color:white;
+				foreground-position:4 4 4 4px;
+				behavior:picture switch;
+			}
+			#icon-xbox>picture:hover{
+				border:1px solid #E321C6;
+			}
+			#icon-xbox>picture:checked{
+				border:1px solid gold;
+			}
+		</style>
+	</head>
+	<body #wc-top style="width:600px;height:400px;">
+		<div #wc-caption>
+			<div #wc-sysicon style="background-image:url(qabs:icons/sysicon.png);" />
+			<div #wc-title>图标</div>
+			<table sysbtn><tr><td xrole="CLOSE" /></tr></table>
+		</div>
+		<div id="body_wrap">
+			<div id="icon-xbox" />
+			<input type="file-path" id="path-newicon" filter="Image Files:*.jpg,*.png,*.jpeg,*.bmp;" 
+					novalue="(添加一个新的图标)" value="" style="width:*;" />
+		</div>
+	</body>
+</html>

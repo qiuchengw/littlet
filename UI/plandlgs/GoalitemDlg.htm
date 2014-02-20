@@ -1,0 +1,67 @@
+﻿<html>
+	<head>
+		<link rel="StyleSheet" type="text/css" href="qabs:style.css" />
+		<link rel="StyleSheet" type="text/css" href="qrel:style.css" />
+		<style type="text/css">
+			#body_wrap{
+				width:*;height:*;
+				background-color:white;
+				opacity:0.9;
+			}
+			.td_close{
+				width:1em;
+				height:*;
+				font:8pt normal marlett;
+				behavior:clickable;
+				text-align:center;
+			}
+			table[id="lst_times"] td:nth-child(1){
+				text-align:center;
+			}
+			.table_box td{
+				padding:5 10px;
+			}
+		</style>
+	</head>
+	<body #wc-top style="height:250px;">
+		<div #wc-caption>
+			<div #wc-sysicon style="background-image:url(qabs:icons/sysicon.png);" />
+			<div #wc-title>更小的目标</div>
+			<table sysbtn><tr><td xrole="CLOSE" /></tr></table>
+		</div>
+		<div id="body_wrap">
+			<table .table_box style="height:70px;">
+				<tr>
+					<th >请输入分目标名（最多50字符）</th>
+				</tr>
+				<tr .box>
+					<td><input type="text" id="txt-goalitem" maxlength=50 
+							novalue="分目标名："
+							style="width:*;" />
+					</td>
+				</tr>
+			</table>
+			<table .table_box style="height:70px;">
+				<tr>
+					<th >设定分阶段的执行周期</th>
+				</tr>
+				<tr .box>
+					<td .row> 
+						<p>开始于：</p>
+						<widget type="date" id="date_begin" />
+						<p style="margin-left:50px;">结束于：</p>
+						<widget type="date" id="date_end" />
+					</td>
+				</tr>
+			</table>
+			<table style="width:*;margin-bottom:10px;">
+				<tr>
+					<td style="width:*" />
+					<td><div .color_button .blue xrole="OK" accesskey="!RETURN" style="width:50px;">确定</div></td>
+					<td><div .color_button .orange xrole="Cancel" accesskey="!ESCAPE" style="margin-left:20px;width:50px;">取消</div></td>
+					<td style="width:30px;"/>
+				</tr>
+			</table>			
+		</div>
+	</body>
+</html>

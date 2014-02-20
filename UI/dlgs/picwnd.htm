@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<style type="text/css">
+			body{
+				width:*;height:*;
+				//border:2px solid gray;
+				//background-color:#f4f4f4;
+				background-color:black;
+				//padding:10px;
+				overflow:hidden;
+			}
+			#div_pic{
+				width:0;height:*;
+				background-color:black;
+				foreground-image:url(qabs:bk/bk2.jpg);
+				foreground-repeat:no-repeat;
+				foreground-position:center;
+				behavior:switch;
+				//transition:width(linear,1s);
+			}
+			#div_pic:checked{
+				width:*;
+				transition:width(back-in-out,1s);
+				//border:1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div_pic" />
+	</body>
+</html>

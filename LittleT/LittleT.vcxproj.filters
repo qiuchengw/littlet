@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="UIBase">
+      <UniqueIdentifier>{3f21ffa5-8b6b-4384-948f-fbbf8410fe4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIBase\ui">
+      <UniqueIdentifier>{3924436e-dd2e-43f4-b575-2543d1e6dcc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIBase\time">
+      <UniqueIdentifier>{825f9fcc-f70f-43c7-8974-cbe948e5badc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIBase\crypt">
+      <UniqueIdentifier>{76cfaaad-4248-42d1-b304-32f59db38bca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIBase\file">
+      <UniqueIdentifier>{2f66b642-150d-4591-ad1a-54a2c53e868c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIBase\img">
+      <UniqueIdentifier>{8750976a-2a2f-4300-87c9-5b83451d48e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIBase\file\db">
+      <UniqueIdentifier>{0dbe0574-8fe2-4375-8944-a73391128b85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\plan">
+      <UniqueIdentifier>{03553964-4260-43ee-b796-2909811567f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{45bd65da-6c17-4003-86a5-d878e3d0a581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIBase\sys">
+      <UniqueIdentifier>{5ffff52b-ba6a-4402-81cb-b1fc0199b22e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="LittleT.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\LittleT.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LittleT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LittleTFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LViewTodo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LViewEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\UIBase\img\QImgProcess.h">
+      <Filter>UIBase\img</Filter>
+    </ClInclude>
+    <ClInclude Include="LAddTask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QEventRemindDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QPictureLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LDatas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LViewPlan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LFormStage.h">
+      <Filter>Header Files\plan</Filter>
+    </ClInclude>
+    <ClInclude Include="LFormPlan.h">
+      <Filter>Header Files\plan</Filter>
+    </ClInclude>
+    <ClInclude Include="LFormGoalItem.h">
+      <Filter>Header Files\plan</Filter>
+    </ClInclude>
+    <ClInclude Include="LFormGoal.h">
+      <Filter>Header Files\plan</Filter>
+    </ClInclude>
+    <ClInclude Include="QAutoUpdater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LAboutDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QResIconsDlg.h">
+      <Filter>Header Files\plan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\ConstValues.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\LittleTcmn.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\LittleTUIcmn.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\ProcessMan.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\QAutoTask.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\QDBHelper.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\QDBPlan.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\QDBRes.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\QHelper.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\QTimer.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Worker.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\QLongplan.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\QNote.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\QTimerMan.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="QShellListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LittleT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LittleTFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\WndShadow.cpp">
+      <Filter>UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\ECtrl.cpp">
+      <Filter>UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\QApp.cpp">
+      <Filter>UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\QConfig.cpp">
+      <Filter>UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\QUIMgr.cpp">
+      <Filter>UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\QWindow.cpp">
+      <Filter>UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\time\QTime.cpp">
+      <Filter>UIBase\time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\XUnzip.cpp">
+      <Filter>UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\XZip.cpp">
+      <Filter>UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\CMD5.cpp">
+      <Filter>UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\CXUnzip.cpp">
+      <Filter>UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\AppHelper.cpp">
+      <Filter>UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\QBuffer.cpp">
+      <Filter>UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\FileOper.cpp">
+      <Filter>UIBase\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\QFile.cpp">
+      <Filter>UIBase\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\inifile.cpp">
+      <Filter>UIBase\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\TextFile.cpp">
+      <Filter>UIBase\file</Filter>
+    </ClCompile>
+    <ClCompile Include="LViewTodo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LViewEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\img\QImgProcess.cpp">
+      <Filter>UIBase\img</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\db\CppSQLite3U.cpp">
+      <Filter>UIBase\file\db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\db\shell.c">
+      <Filter>UIBase\file\db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\db\sqlite3.c">
+      <Filter>UIBase\file\db</Filter>
+    </ClCompile>
+    <ClCompile Include="LAddTask.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QEventRemindDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QUtilWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\file\FileEnumerator.cpp">
+      <Filter>UIBase\file</Filter>
+    </ClCompile>
+    <ClCompile Include="LDatas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\QDataEnDe.cpp">
+      <Filter>UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\rijndael.cpp">
+      <Filter>UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="LViewPlan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LFormStage.cpp">
+      <Filter>Header Files\plan</Filter>
+    </ClCompile>
+    <ClCompile Include="LFormPlan.cpp">
+      <Filter>Header Files\plan</Filter>
+    </ClCompile>
+    <ClCompile Include="LFormGoal.cpp">
+      <Filter>Header Files\plan</Filter>
+    </ClCompile>
+    <ClCompile Include="LFormGoalItem.cpp">
+      <Filter>Header Files\plan</Filter>
+    </ClCompile>
+    <ClCompile Include="QAutoUpdater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LAboutDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QResIconsDlg.cpp">
+      <Filter>Header Files\plan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\ProcessMan.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\QAutoTask.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\QHelper.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\QTimer.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Worker.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\QDBHelper.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\QDBPlan.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\QDBRes.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\QLongplan.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\QNote.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\QTimerMan.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\SystemTraySDK.cpp">
+      <Filter>UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="QShellListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\ui\WndHelper.cpp">
+      <Filter>UIBase\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\sys\UACSElfElevation.cpp">
+      <Filter>UIBase\sys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\QUI.cpp">
+      <Filter>UIBase</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LittleT.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

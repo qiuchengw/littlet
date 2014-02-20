@@ -1,0 +1,51 @@
+﻿<html>
+	<head>
+		<link rel="StyleSheet" type="text/css" href="qabs:style.css" />
+	</head>
+	
+	<body #wc-top style="width:550px;height:250px;">
+		<div #wc-caption>
+			<div #wc-sysicon style="background-image:url(images/qminder_16.png);"></div>
+			<div #wc-title style="text-align:center;font-weight:bold;">AD Encrypt</div>
+			<table sysbtn>
+				<tr><td xrole="MINIMAZE" /><td xrole="CLOSE" accesskey="!ESCAPE"/></tr>
+			</table>
+		</div>
+		<table style="width:*;height:*;padding:2 20px;">
+			<tr>
+				<td style="width:100px;">图片路径：</td>
+				<td colspan=3>
+					<widget type="file-path" id="path_picture" novalue="选择一个图像文件(*.jpg,*.gif,*.png)"
+						style="width:*;" filter="Image:*.jpg,*.png,*.gif;" />
+				</td>
+			</tr>
+			<tr>
+				<td>图像偏移字节：</td>
+				<td><input type="number" id="input_pic_offset" step="1" minvalue="0" maxvalue="102400" /></td>
+				<td style="width:80px;">密钥长度：</td>
+				<td><input type="number" id="input_pic_keylen" step="1" minvalue="100" maxvalue="102400" /></td>
+			</tr>
+			<tr>
+				<td>数据目录：</td>
+				<td colspan=3>
+					<widget type="folder-path" id="path_data" novalue="选择一个需要加密或解密到的目录" 
+						style="width:*;" />
+				</td>
+			</tr>
+		</table>
+
+		<div #infobox style="border:@BORDER;
+					padding:4px;width:*;height:50px;
+					margin:5 0px;background-color:white;
+					text-align:center;vertical-align:middle;
+					color:red;font-size:16pt;">
+		</div>
+		<div .row style="margin:4 10px;width:*;">
+			<div id="div_info" style="font:@FONT_NUMBER;
+						color:@FONT_COLOR_NORMAL;
+						padding:2px;" >CopyRight@秋城 - 2012</div>
+			<div .color_button .blue id="btn_encrypt" style="margin-left:*;">加密数据</div>
+			<div .color_button .orange id="btn_decrypt" style="margin-left:10px;">解密数据</div>
+		</div>
+	</body>
+</html>
