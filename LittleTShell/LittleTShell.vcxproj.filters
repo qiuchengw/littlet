@@ -41,13 +41,13 @@
     <ClCompile Include="..\common\QHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\UIBase\AppHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\UIBase\file\FileOper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\UIBase\ui\WndHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\AppHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -93,7 +93,7 @@ public:
                     SetWindowPos(HWND_BOTTOM, 0, 0, 0, 0,
                         SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE | SWP_SHOWWINDOW);
 
-                    qcwbase::TransparentWindow(GetSafeHwnd(), nAlpha);
+                    quibase::TransparentWindow(GetSafeHwnd(), nAlpha);
 
                     return TRUE;
                 }

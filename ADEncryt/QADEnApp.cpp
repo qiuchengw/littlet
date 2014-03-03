@@ -29,7 +29,7 @@ BOOL QADEnApp::InitRun()
 
 QString QADEnApp::GetConfigPath()
 {
-	return qcwbase::GetModulePath() + L"Config.ini";
+	return quibase::GetModulePath() + L"Config.ini";
 }
 
 

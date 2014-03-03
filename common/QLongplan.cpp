@@ -1,6 +1,6 @@
 #include "QLongplan.h"
 #include "../common/QDBPlan.h"
-#include "QStrEx.h"
+#include "AppHelper.h"
 
 QString GetTimeFleeText(QTimeSpan &tmSpan)
 {

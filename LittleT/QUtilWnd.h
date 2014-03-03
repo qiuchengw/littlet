@@ -47,7 +47,7 @@ protected:
 
     inline QString _ImgPath()
     {
-        return qcwbase::GetModulePath() + L"__ILoveUButIamSorry.png";
+        return quibase::GetModulePath() + L"__ILoveUButIamSorry.png";
     }
 private:
     QPictureLoader      m_pic;

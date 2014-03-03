@@ -1,10 +1,10 @@
 #pragma once
 
 #include "time/QTime.h"
-#include "XContainer.h"
 #include <list>
 #include "ConstValues.h"
 #include "QTimerListener.h"
+#include "AppHelper.h"
 
 // enum ENUM_AUTOTASK_EXECFLAG
 // {

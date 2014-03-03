@@ -12,6 +12,12 @@
 #include "LittleTFrame.h"
 #include "AppHelper.h"
 
+#ifdef _DEBUG
+#pragma comment(lib, "../Debug/QUIL_d.lib")
+#else
+#pragma comment(lib, "QUIL.lib")
+#endif
+
 class LittleTApp : public QApp
 {
 public:
@@ -45,7 +51,7 @@ private:
 
 #include "ui/QConfig.h"
 
-class LittleTConfig : public QConfig
+class LittleTConfig : public QUIConfig
 {
 public:
     // 休息一会儿的默认播放文件目录
@@ -54,7 +60,7 @@ public:
         QString sRet = GetValue(L"setting",L"pic_folder");
         if (sRet.Find(L':') == -1)
         {   // 相对路径，转换为绝对路径
-            return qcwbase::GetModulePath() + sRet;
+            return quibase::GetModulePath() + sRet;
         }
         return sRet;
     }
@@ -85,7 +91,7 @@ public:
     // 获取图标缩略图的目录
     QString GetIconsDir()
     {
-        return qcwbase::GetModulePath() + L"icons/";
+        return quibase::GetModulePath() + L"icons/";
     }
 
 public:

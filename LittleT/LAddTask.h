@@ -32,7 +32,7 @@ protected:
 
     void OnAbsDateRioCheckChanged(HELEMENT);
 protected:
-    ETab _TabTime() { return GetCtrl("#TABS_TIME"); }
+    ETabCtrl _TabTime() { return GetCtrl("#TABS_TIME"); }
     ECtrl _TabItemRelate() { return _TabTime().GetTab(L"panel_relate"); }
     ECtrl _TabItemAbs() { return _TabTime().GetTab(L"panel_abs"); }
     ESheet _ListTimes() { return GetCtrl("#lst_times"); }

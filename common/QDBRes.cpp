@@ -39,8 +39,8 @@ BOOL QResDB::GetData( int nID, BOOL bWithData, __out TFileData& fd )
             sQ.Format(L"SELECT DataType,DataSize,Refs,Name,Ext,crtime,udtime"
                       L" FROM tbl_data WHERE (ID=%d)",nID);
         }
-		SqlQuery q = m_Database.ExecQuery(sQ);
-		if (!q.eof())
+		SqlQuery q = ExecQuery(sQ);
+		if (q.nextRow())
 		{
 			fd.nID = nID;
 			fd.eType = (ENUM_DBFILE_TYPE)q.IntValue(L"DataType");
@@ -122,8 +122,8 @@ int QResDB::GetDataItems( __out VecFileData& vfd ,DWORD eType)
     }
 
 	QDB_BEGIN_TRY
-		SqlQuery q = m_Database.ExecQuery(sQ);
-		for ( ; !q.eof(); q.nextRow())
+		SqlQuery q = ExecQuery(sQ);
+		while (q.nextRow())
 		{
 			TFileData t;
 			t.nID = q.IntValue(L"ID");
@@ -231,7 +231,7 @@ QString QResMan::GetDBResFilePath( __in int nID )
 
 BOOL QResMan::ReleaseDataToFile( int nID,LPCWSTR szFile )
 {
-    if (qcwbase::IsFileExist(szFile))
+    if (quibase::IsFileExist(szFile))
         return TRUE;
 
     TFileData t;
@@ -248,7 +248,7 @@ QString QResMan::ReleaseDataToFile( int nID )
 	if (QResDB::GetInstance()->GetData(nID,TRUE, t))
     {
         QString sRet = GetDBResFilePath(t);
-        if (!qcwbase::IsFileExist(sRet))
+        if (!quibase::IsFileExist(sRet))
         {
             t.bufData.FileWrite(sRet);
             return sRet;

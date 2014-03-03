@@ -69,13 +69,13 @@ BOOL QDBEvents::TodoTask_Get( int nID,__out TTodoTask &t )
 {
 	QString sQ;
 	sQ.Format(L"SELECT * FROM tbl_todo WHERE (ID=%d)",nID);
-	return _TodoTask(m_Database.ExecQuery(sQ),t);
+	return _TodoTask(ExecQuery(sQ),t);
 }
 
 BOOL QDBEvents::_TodoTask(SqlQuery &q ,__out TTodoTask&t)
 {
 	QDB_BEGIN_TRY
-		if (!q.eof())
+		if (q.nextRow())
 		{
 			t.nID = q.IntValue(L"ID");
 			t.sTask = q.StrValue(L"Task");
@@ -94,10 +94,10 @@ BOOL QDBEvents::_TodoTask(SqlQuery &q ,__out TTodoTask&t)
 
 BOOL QDBEvents::TodoTask_Read( LPCWSTR szSQL ,__out TodoTaskList & lst)
 {
-	try
+	QDB_BEGIN_TRY
 	{
-		SqlQuery q = m_Database.ExecQuery(szSQL);
-		for ( ; !q.eof() ; q.nextRow() )
+		SqlQuery q = ExecQuery(szSQL);
+		while (q.nextRow())
 		{
 			TTodoTask t;
 			if (_TodoTask(q,t))
@@ -107,11 +107,8 @@ BOOL QDBEvents::TodoTask_Read( LPCWSTR szSQL ,__out TodoTaskList & lst)
 		}
 		return TRUE;
 	}
-	catch (CppSQLite3Exception &e)
-	{
-		TRACE_SQLEXCEPTION(e);
-		return FALSE;
-	}
+    QDB_END_TRY;
+    return FALSE;
 }
 
 int QDBEvents::TodoTask_Add( TTodoTask *pItem )
@@ -258,8 +255,8 @@ BOOL QDBEvents::Cate_IsExist( const QString& sCate )
 int QDBEvents::Cate_GetAll( VecCate &vc )
 {
 	QDB_BEGIN_TRY
-		SqlQuery q = m_Database.ExecQuery(L"SELECT * FROM tbl_catelog");
-		for ( ; !q.eof(); q.nextRow())
+		SqlQuery q = ExecQuery(L"SELECT * FROM tbl_catelog");
+		while (q.nextRow())
 		{
 			TCate c;
 			if (_Cate(q,c))
@@ -274,7 +271,7 @@ int QDBEvents::Cate_GetAll( VecCate &vc )
 BOOL QDBEvents::_Cate( SqlQuery &q,__out TCate &c )
 {
 	QDB_BEGIN_TRY
-		if (!q.eof())
+		if (q.nextRow())
 		{
 			c.nID = q.IntValue(L"ID");
 			c.nIconID = q.IntValue(L"IconID");
@@ -291,12 +288,11 @@ BOOL QDBEvents::_Cate( SqlQuery &q,__out TCate &c )
 //////////////////////////////////////////////////////////////////////////
 BOOL QDBEvents::AutoTask_GetAll( AutoTaskList & lst )
 {
-	try
-	{
+	QDB_BEGIN_TRY
 		// 所有的自动计划
 		QAutoTask *pTask;
-		SqlQuery q = m_Database.ExecQuery(L"SELECT * FROM tbl_autotask");
-		for ( ; !q.eof(); q.nextRow())
+		SqlQuery q = ExecQuery(L"SELECT * FROM tbl_autotask");
+		while (q.nextRow())
 		{
 			pTask = new QAutoTask(
 				q.StrValue(L"Task"),
@@ -308,12 +304,8 @@ BOOL QDBEvents::AutoTask_GetAll( AutoTaskList & lst )
 			lst.push_back(pTask);
 		}
 		return TRUE;
-	}
-	catch (CppSQLite3Exception &e)
-	{
-		TRACE_SQLEXCEPTION(e);
-		return FALSE;
-	}
+    QDB_END_TRY
+        return FALSE;
 }
 
 int QDBEvents::AutoTask_Add(LPCWSTR pszTask, int nTimerID,ENUM_AUTOTASK_DOWHAT eDo,int nFlag)
@@ -363,8 +355,8 @@ BOOL QDBEvents::AutoTask_GetInfo( int nTaskID,
 		// 所有的自动计划
 		QString sQ;
 		sQ.Format(L"SELECT * FROM tbl_autotask WHERE (ID=%d)",nTaskID);
-		SqlQuery q = m_Database.ExecQuery(sQ);
-		if (!q.eof())
+		SqlQuery q = ExecQuery(sQ);
+		if (q.nextRow())
 		{
 			sTask = q.StrValue(L"Task");
 			nTimerID = q.IntValue(L"TimerID");
@@ -457,12 +449,12 @@ BOOL QDBEvents::Timer_SetRemindExp( int nTimerID,LPCWSTR pszRmdExp )
 
 QTimer* QDBEvents::Timer_Get( int nID )
 {
-	try
+	QDB_BEGIN_TRY
 	{
 		QString sQ;
 		sQ.Format(L"SELECT * FROM tbl_timer WHERE (ID=%d)",nID);
-		SqlQuery q = m_Database.ExecQuery(sQ);
-		if (!q.eof())
+		SqlQuery q = ExecQuery(sQ);
+		if (q.nextRow())
 		{
 			QTimer *pTimer = new QTimer(
 				nID,
@@ -474,22 +466,19 @@ QTimer* QDBEvents::Timer_Get( int nID )
 			return pTimer;
 		}
 	}
-	catch (CppSQLite3Exception &e)
-	{
-		TRACE_SQLEXCEPTION(e);
-	}
+    QDB_END_TRY
 	return NULL;
 }
 
 BOOL QDBEvents::Timer_GetInfo( int nID,__out QTime&tmBegin,__out QTime&tmEnd,
 	__out QString &sWhenExp,__out QString &sRemindExp,__out QString &sXFiled)
 {
-	try
+	QDB_BEGIN_TRY
 	{
 		QString sQ;
 		sQ.Format(L"SELECT * FROM tbl_timer WHERE (ID=%d)",nID);
-		SqlQuery q = m_Database.ExecQuery(sQ);
-		if (!q.eof())
+		SqlQuery q = ExecQuery(sQ);
+		if (q.nextRow())
 		{
 				tmBegin = q.DateTimeValue(L"BTime");
 				tmEnd = q.DateTimeValue(L"ETime");
@@ -499,10 +488,7 @@ BOOL QDBEvents::Timer_GetInfo( int nID,__out QTime&tmBegin,__out QTime&tmEnd,
 				return TRUE;
 		}
 	}
-	catch (CppSQLite3Exception &e)
-	{
-		TRACE_SQLEXCEPTION(e);
-	}
+    QDB_END_TRY
 	return FALSE;
 }
 

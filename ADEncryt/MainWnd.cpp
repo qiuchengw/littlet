@@ -77,7 +77,7 @@ BOOL MainWnd::ZipData(__in const QString&sDataPath,__out QBuffer &bufData)
 		{
 			return FALSE;
 		}
-		zip.AddFile(CPath((*itr).c_str()).GetFileName(),
+		zip.AddFile(quibase::CPath((*itr).c_str()).GetFileName(),
 			bufFile.GetBuffer(0),bufFile.GetBufferLen());
 		bufFile.ClearBuffer();
 	}
@@ -158,7 +158,7 @@ void MainWnd::OnBtnEncrypt( HELEMENT )
 	// 密钥在图像数据中的偏移
 	bufPic.Write((BYTE*)&dwOffset,sizeof(DWORD));
 
-	if (!bufPic.FileWrite(sDataPath + L"/" + CPath(sPicPath).GetFileName()))
+	if (!bufPic.FileWrite(sDataPath + L"/" + quibase::CPath(sPicPath).GetFileName()))
 	{
 		eInfo.SetText(L"保存文件失败!");
 		return;

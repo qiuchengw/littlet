@@ -149,17 +149,18 @@ void LSettingDlg::OnCmnChkAutoRun( HELEMENT he)
 
     BOOL bOk = FALSE;
     QString sStartupDir;
-    if ( qcwbase::GetSpeialPath(CSIDL_STARTUP, sStartupDir) )
+    if ( quibase::GetSpeialPath(CSIDL_STARTUP, sStartupDir) )
     {
         if (chkAutoRun.IsChecked())
         {
             wchar_t szModuleName[1024] = {0};
             GetModuleFileName(NULL,szModuleName, 1024);
-            bOk = qcwbase::CreateFileShortcut(szModuleName, sStartupDir);
+            ASSERT(FALSE);
+            //bOk = quibase::CreateShortcut(szModuleName, sStartupDir);
         }
         else
         {
-            QString sShortcut = sStartupDir + L"\\" + qcwbase::GetModuleName(FALSE) + L".lnk";
+            QString sShortcut = sStartupDir + L"\\" + quibase::GetModuleName(FALSE) + L".lnk";
             bOk = DeleteFile(sShortcut);
             if (!bOk)
             {
@@ -179,10 +180,10 @@ void LSettingDlg::OnCmnChkAutoRun( HELEMENT he)
 BOOL LSettingDlg::IsStartupShortcutExist()
 {
     QString sPath;
-    if (qcwbase::GetSpeialPath(CSIDL_STARTUP, sPath))
+    if (quibase::GetSpeialPath(CSIDL_STARTUP, sPath))
     {
-        sPath += L"\\" + qcwbase::GetModuleName(FALSE) + L".lnk";
-        return qcwbase::IsFileExist(sPath);
+        sPath += L"\\" + quibase::GetModuleName(FALSE) + L".lnk";
+        return quibase::IsFileExist(sPath);
     }
     return FALSE;
 }

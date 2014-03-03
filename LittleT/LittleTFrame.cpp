@@ -111,7 +111,7 @@ LRESULT LittleTFrame::OnDocumentComplete()
 {
     // ok, 已经启动了，其他进程可以过来通信了
     // 自动靠边隐藏
-    CAutoHideWnd::GetInstance()->RegisterAutoHide(GetSafeHwnd(), 10, 1);
+    wnd_autohide_.RegisterAutoHide(GetSafeHwnd(), 10, 1);
 
     // 初始化版本
     SetTitle(QString(L"LittleT v") + QUIGetAppVersion());  
@@ -252,7 +252,7 @@ namespace littlet
             if (IDYES == XMsgBox::YesNoMsgBox(L"即将关机，是否取消？",
                 L"关机确认！", 30, XMsgBox::ID_MSGBOX_BTN_NO))
             {
-                qcwbase::PreventSystemShutdown();
+                quibase::PreventSystemShutdown();
             }
         }
     };
@@ -277,7 +277,7 @@ void LittleTFrame::OnAutoTaskFired( LPARAM lp )
         {
             wchar_t szMsg[128] = {0};
             StringCchCopy(szMsg,128, L"LittleT请求关机");
-            qcwbase::ShutdownComputer(FALSE, szMsg, 30);
+            quibase::ShutdownComputer(FALSE, szMsg, 30);
 
             htmlayout::queue_hl::push(new littlet::abort_shutdown, GetSafeHwnd());
 
@@ -374,7 +374,7 @@ void LittleTFrame::OnHotKey( int nSystemHotKey,UINT nModifier,UINT nVk )
                 rc.OffsetRect(-rc.left, 0);
             if (rc.top < 0)
                 rc.OffsetRect(0, -rc.top);
-            CSize szScrn = qcwbase::GetScreenSize();
+            CSize szScrn = quibase::GetScreenSize();
             if (rc.right > szScrn.cx)
                 rc.OffsetRect(szScrn.cx - rc.right, 0);
 
@@ -496,7 +496,7 @@ LRESULT LittleTFrame::OnAppVersionCheck( UINT uMsg,
         ASSERT(FALSE);
         return 0;
     }
-    if ( !qcwbase::IsFileExist(p->sParam))
+    if ( !quibase::IsFileExist(p->sParam))
     {
         ASSERT(FALSE);
     }
@@ -529,16 +529,16 @@ void LittleTFrame::OnClkAbout( HELEMENT )
     LAboutDlg::ShowModal();
 }
 
-LRESULT LittleTFrame::HandleAutohideMessage( UINT uMsg, WPARAM wParam, 
-    LPARAM lParam, BOOL& bHandled )
-{
-    CAutoHideWnd::GetInstance()->AutoHideWndProc(
-        GetSafeHwnd(), uMsg, wParam, lParam);
-
-    bHandled = FALSE;
-
-    return 0;
-}
+// LRESULT LittleTFrame::HandleAutohideMessage( UINT uMsg, WPARAM wParam, 
+//     LPARAM lParam, BOOL& bHandled )
+// {
+//     CAutoHideWnd::GetInstance()->AutoHideWndProc(
+//         GetSafeHwnd(), uMsg, wParam, lParam);
+// 
+//     bHandled = FALSE;
+// 
+//     return 0;
+// }
 
 LRESULT LittleTFrame::OnComputerPowerChanged( DWORD dwEvent, DWORD )
 {

@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "..\UIBase\crypt\zli
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LittleTShell", "LittleTShell\LittleTShell.vcxproj", "{354DDE04-7F4C-437B-B91A-83C28BB91D90}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QUIL", "..\UIBase\qui\lib\QUIL.vcxproj", "{D2A45C3A-2633-419F-9AB0-BAA89AAFE278}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -43,6 +45,10 @@ Global
 		{354DDE04-7F4C-437B-B91A-83C28BB91D90}.Debug|Win32.Build.0 = Debug|Win32
 		{354DDE04-7F4C-437B-B91A-83C28BB91D90}.Release|Win32.ActiveCfg = Release|Win32
 		{354DDE04-7F4C-437B-B91A-83C28BB91D90}.Release|Win32.Build.0 = Release|Win32
+		{D2A45C3A-2633-419F-9AB0-BAA89AAFE278}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D2A45C3A-2633-419F-9AB0-BAA89AAFE278}.Debug|Win32.Build.0 = Debug|Win32
+		{D2A45C3A-2633-419F-9AB0-BAA89AAFE278}.Release|Win32.ActiveCfg = Release|Win32
+		{D2A45C3A-2633-419F-9AB0-BAA89AAFE278}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

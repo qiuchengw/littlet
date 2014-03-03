@@ -132,13 +132,13 @@ void MakeRelateExecFlagCMB(ECombobox &eCmb)
 {
 	eCmb.DeleteAllItem();
 
-	int idx;
-	idx = eCmb.InsertItem(L"系统启动后");
-	eCmb.SetItemData(idx,(LPVOID)AUTOTASK_EXEC_AFTERSYSBOOT);
-	idx = eCmb.InsertItem(L"任务启动后");
-	eCmb.SetItemData(idx,(LPVOID)AUTOTASK_EXEC_AFTERTASKSTART);
-	idx = eCmb.InsertItem(L"本程序启动后");
-	eCmb.SetItemData(idx,(LPVOID)AUTOTASK_EXEC_AFTERMINDERSTART);
+	EOption op;
+	op = eCmb.InsertItem(L"系统启动后");
+	op.SetData((LPVOID)AUTOTASK_EXEC_AFTERSYSBOOT);
+	op = eCmb.InsertItem(L"任务启动后");
+	op.SetData((LPVOID)AUTOTASK_EXEC_AFTERTASKSTART);
+	op = eCmb.InsertItem(L"本程序启动后");
+	op.SetData((LPVOID)AUTOTASK_EXEC_AFTERMINDERSTART);
 /*	idx = eCmb.InsertItem(QGetEnumFlagString(L"11"));
 	eCmb.SetItemData(idx,(LPVOID)TASK_EXEC_AFTERPROGSTART);
 	idx = eCmb.InsertItem(QGetEnumFlagString(L"12"));
@@ -306,7 +306,8 @@ BOOL QExecTimeDlg::GetRelateExp(__out QString & sExp)
 	// R
 	ECombobox eCmbWhenDo = GetCtrl("#cmb_task_when_do");
     ENUM_AUTOTASK_EXECFLAG eFlag = 
-        (ENUM_AUTOTASK_EXECFLAG) (int)(eCmbWhenDo.GetItemData(eCmbWhenDo.GetCurSel()));
+        (ENUM_AUTOTASK_EXECFLAG) (int)(eCmbWhenDo.GetCurSelItem().GetData());
+    
 	//P - span1
     int nSpan = ENumber(GetCtrl("#edit_span")).GetInt();
 	wchar_t cUnit = ECombobox(GetCtrl("#cmb_span_unit")).GetCurSelItemAttribute("name").front();
@@ -678,18 +679,18 @@ void LAddEventDlg::OnSelectChangedDoWhat( ECombobox cmb, EOption item )
 
 void MakeTaskDoWhatCMB(ECombobox &eCmb)
 {
-    int idx;
+    EOption op;
 
-    idx = eCmb.InsertItem(L"提示信息");
-    eCmb.SetItemData(idx,(LPVOID)AUTOTASK_DO_REMIND);
-    idx = eCmb.InsertItem(L"执行程序");
-    eCmb.SetItemData(idx,(LPVOID)AUTOTASK_DO_EXECPROG);
+    op = eCmb.InsertItem(L"提示信息");
+    op.SetData((LPVOID)AUTOTASK_DO_REMIND);
+    op = eCmb.InsertItem(L"执行程序");
+    op.SetData((LPVOID)AUTOTASK_DO_EXECPROG);
     // 	idx = eCmb.InsertItem(L"重启系统");
     // 	eCmb.SetItemData(idx,(LPVOID)AUTOTASK_DO_SYSREBOOT);
-    idx = eCmb.InsertItem(L"关闭系统");
-    eCmb.SetItemData(idx,(LPVOID)AUTOTASK_DO_SYSSHUTDOWN);
-    idx = eCmb.InsertItem(L"休息一会儿");
-    eCmb.SetItemData(idx,(LPVOID)AUTOTASK_DO_BREAKAMOMENT);
+    op = eCmb.InsertItem(L"关闭系统");
+    op.SetData((LPVOID)AUTOTASK_DO_SYSSHUTDOWN);
+    op = eCmb.InsertItem(L"休息一会儿");
+    op.SetData((LPVOID)AUTOTASK_DO_BREAKAMOMENT);
 
     eCmb.SetCurSel(0);
 }
@@ -839,8 +840,8 @@ BOOL LAddEventDlg::OnDefaultButton(INT_PTR nID)
 ENUM_AUTOTASK_DOWHAT LAddEventDlg::GetDoWhat()
 {
 	ECombobox eDo = GetCtrl("#cmb_TaskDoWhat");
-	int iSel = eDo.GetCurSel();
-	return (ENUM_AUTOTASK_DOWHAT)(DWORD)eDo.GetItemData(iSel);
+	EOption op = eDo.GetCurSelItem();
+	return (ENUM_AUTOTASK_DOWHAT)(DWORD)op.GetData();
 }
 
 BOOL LAddEventDlg::GetTaskString(QString &sTask)
@@ -887,7 +888,7 @@ BOOL LAddEventDlg::GetRemindExp(QString &sRmdExp)
         if (GetDoWhat() == AUTOTASK_DO_REMIND)
         {   // 如果是提醒做某事，那么为它创建一个默认的
             // 在任务执行前30秒提示
-            sSound = qcwbase::GetModulePath() + L"sound\\msg.wav";
+            sSound = quibase::GetModulePath() + L"sound\\msg.wav";
             sSound.Replace(L'/',L'\\');
             sUnit = L"S";
             GetTaskString(sMsg);
@@ -962,8 +963,8 @@ void LAddEventDlg::SetDoWhat( ENUM_AUTOTASK_DOWHAT eDo ,const QString& sTask )
 			break;
 		}
 	}
-    
-    EOption opotion = eCmbDoWhat.GetItem(eCmbDoWhat.GetCurSel());
+ 
+    EOption opotion = eCmbDoWhat.GetCurSelItem();
 	OnSelectChangedDoWhat(eCmbDoWhat, opotion);
 }
 

@@ -41,13 +41,13 @@ BOOL QDBPlan::GetPlan( int nPlanID,__out QPlan& p )
 {
 	QString sQ;
 	sQ.Format(L"SELECT * FROM tbl_plan WHERE (ID=%d)",nPlanID);
-	return _Plan(m_Database.ExecQuery(sQ),p);
+	return _Plan(ExecQuery(sQ),p);
 }
 
 BOOL QDBPlan::_Plan( SqlQuery &q, __out QPlan& p )
 {
 	QDB_BEGIN_TRY
-		if (!q.eof())
+		if (q.nextRow())
 		{
 			p.m_nID = q.IntValue(L"ID");
 			p.m_nIconID = q.IntValue(L"IconID");
@@ -71,8 +71,8 @@ int QDBPlan::GetAllPlan( __out VecPlan &vp )
 {
 	QDB_BEGIN_TRY
         QPlan *p;
-		SqlQuery q = m_Database.ExecQuery(L"SELECT * FROM tbl_plan WHERE (Deleted=0)");
-		for ( ; !q.eof(); q.nextRow())
+		SqlQuery q = ExecQuery(L"SELECT * FROM tbl_plan WHERE (Deleted=0)");
+		while (q.nextRow())
 		{
             p = new QPlan;
 			if (_Plan(q, *p))
@@ -120,13 +120,13 @@ BOOL QDBPlan::GetStage( int nStageID,QStage& s )
 {
 	QString sQ;
 	sQ.Format(L"SELECT * FROM tbl_stage WHERE (ID=%d)",nStageID);
-	return _Stage(m_Database.ExecQuery(sQ),s);
+	return _Stage(ExecQuery(sQ),s);
 }
 
 BOOL QDBPlan::_Stage( SqlQuery &q,__out QStage &s )
 {
 	QDB_BEGIN_TRY
-		if (!q.eof())
+		if (q.nextRow())
 		{
 			s.m_nID = q.IntValue(L"ID");
             s.m_nIconID = q.IntValue(L"IconID");
@@ -151,8 +151,8 @@ int QDBPlan::GetPlanStages( int nPlanID,__out VecStage &vs )
 		QString sQ;
         QStage *s = NULL;
 		sQ.Format(L"SELECT * FROM tbl_stage WHERE (PlanID=%d)",nPlanID);
-		SqlQuery q = m_Database.ExecQuery(sQ);
-		for ( ; !q.eof(); q.nextRow() )
+		SqlQuery q = ExecQuery(sQ);
+		while (q.nextRow())
 		{
             s = new QStage;
 			if (_Stage(q,*s))
@@ -223,13 +223,13 @@ BOOL QDBPlan::GetGoal( int nGoalID,__out QGoal& g )
 {
 	QString sQ;
 	sQ.Format(L"SELECT * FROM tbl_goal WHERE (ID=%d)",nGoalID);
-	return _Goal(m_Database.ExecQuery(sQ),g);
+	return _Goal(ExecQuery(sQ),g);
 }
 
 BOOL QDBPlan::_Goal( SqlQuery &q,__out QGoal& g )
 {
 	QDB_BEGIN_TRY
-		if (!q.eof())
+		if (q.nextRow())
 		{
 			g.m_nID = q.IntValue(L"ID");
 			g.m_nFlag = q.IntValue(L"Flag");
@@ -251,9 +251,9 @@ int QDBPlan::GetStageGoals( int nStageID,__out VecGoal& vg )
 	QDB_BEGIN_TRY
 		QString sQ;
 		sQ.Format(L"SELECT * FROM tbl_goal WHERE (StageID=%d)",nStageID);
-		SqlQuery q = m_Database.ExecQuery(sQ);
+		SqlQuery q = ExecQuery(sQ);
         QGoal *g;
-		for ( ; !q.eof(); q.nextRow())
+		while (q.nextRow())
 		{
             g = new QGoal;
 			if (_Goal(q, *g))
@@ -306,14 +306,14 @@ BOOL QDBPlan::GetGoalItem( int nItemID,__out QGoalItem& gi )
 {
 	QString sQ;
 	sQ.Format(L"SELECT * FROM tbl_goalitem WHERE (ID=%d)",nItemID);
-	SqlQuery q = m_Database.ExecQuery(sQ);
+	SqlQuery q = ExecQuery(sQ);
 	return _GoalItem(q,gi);
 }
 
 BOOL QDBPlan::_GoalItem( SqlQuery &q,__out QGoalItem &gi )
 {
 	QDB_BEGIN_TRY
-		if (!q.eof())
+		if (q.nextRow())
 		{
 			gi.m_nID = q.IntValue(L"ID");
 			gi.m_nGoalID = q.IntValue(L"GoalID");
@@ -344,9 +344,9 @@ int QDBPlan::GetItemsOfGoal( int nGoalID,__out VecGoalItem &vgi,ENUM_GOALITEM_ST
 		sQ += sPart;
 	}
 	QDB_BEGIN_TRY
-		SqlQuery q = m_Database.ExecQuery(sQ);
+		SqlQuery q = ExecQuery(sQ);
         QGoalItem *gi;
-		for ( ; !q.eof(); q.nextRow())
+		while (q.nextRow())
 		{
             gi = new QGoalItem;
 			if (_GoalItem(q, *gi))
@@ -422,7 +422,7 @@ BOOL QDBPlan::SetGoalItemStagus(int nGoalItemID, ENUM_GOALITEM_STATUS eStatus)
 BOOL QDBPlan::_Note( SqlQuery&q , __out QNote&n )
 {
 	QDB_BEGIN_TRY
-		if (!q.eof())
+		if (q.nextRow())
 		{
 			n.m_nID = q.IntValue(L"ID");
 			n.m_eType = (ENUM_NOTE_TYPE)q.IntValue(L"Typex");
@@ -448,7 +448,7 @@ BOOL QDBPlan::_Note( SqlQuery&q , __out QNote&n )
 
 int QDBPlan::_Notes( SqlQuery&q,__out VecNote&vn )
 {
-	for ( ; !q.eof(); q.nextRow())
+	while (q.nextRow())
 	{
 		QNote n;
 		if (_Note(q,n))
@@ -484,7 +484,7 @@ BOOL QDBPlan::GetNote( int nID,__out QNote& n )
 {
 	QString sQ;
 	sQ.Format(L"SELECT * FROM tbl_note WHERE (ID=%d)",nID);
-	return _Note(m_Database.ExecQuery(sQ),n);
+	return _Note(ExecQuery(sQ),n);
 }
 
 BOOL QDBPlan::UpdateNote( QNote *n )
@@ -505,25 +505,25 @@ int QDBPlan::GetNote_WithParent( int nParentID/*=INVALID_ID*/,__out VecNote& vn 
 {
 	QString sQ;
 	sQ.Format(L"SELECT * FROM tbl_note WHERE (ParentID=%d)",nParentID);
-	return _Notes(m_Database.ExecQuery(sQ),vn);
+	return _Notes(ExecQuery(sQ),vn);
 }
 
 int QDBPlan::GetNote_WithType( ENUM_NOTE_TYPE eType,__out VecNote& vn )
 {
 	QString sQ;
 	sQ.Format(L"SELECT * FROM tbl_note WHERE (Typex=%d)",eType);
-	return _Notes(m_Database.ExecQuery(sQ),vn);
+	return _Notes(ExecQuery(sQ),vn);
 }
 
 int QDBPlan::GetNote_WithTags( const QString& sTag,__out VecNote& vn )
 {
 	QString sQ;
 	sQ.Format(L"SELECT * FROM tbl_note WHERE Tags LIKE '%%%s%%",sTag);
-	return _Notes(m_Database.ExecQuery(sQ),vn);
+	return _Notes(ExecQuery(sQ),vn);
 }
 
 int QDBPlan::GetAllNote( __out VecNote&vn )
 {
-	return _Notes(m_Database.ExecQuery(L"SELECT * FROM tbl_note"),vn);
+	return _Notes(ExecQuery(L"SELECT * FROM tbl_note"),vn);
 }
 

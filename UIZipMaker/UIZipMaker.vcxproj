@@ -78,10 +78,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\UIBase\crypt\CMD5.cpp" />
+    <ClCompile Include="..\..\UIBase\crypt\crijndael.cpp" />
     <ClCompile Include="..\..\UIBase\crypt\CXUnzip.cpp" />
+    <ClCompile Include="..\..\UIBase\crypt\md5.cpp" />
     <ClCompile Include="..\..\UIBase\crypt\QDataEnDe.cpp" />
-    <ClCompile Include="..\..\UIBase\crypt\rijndael.cpp" />
     <ClCompile Include="..\..\UIBase\crypt\XUnzip.cpp" />
     <ClCompile Include="..\..\UIBase\crypt\XZip.cpp" />
     <ClCompile Include="..\..\UIBase\file\FileEnumerator.cpp" />

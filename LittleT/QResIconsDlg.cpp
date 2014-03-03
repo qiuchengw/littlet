@@ -87,7 +87,7 @@ void QResIconsDlg::OnAddNewIcon(HELEMENT he)
     }
 
     // 保存这个小缩略图
-    QString sExt = CPath(sImg).GetExtension();
+    QString sExt = quibase::CPath(sImg).GetExtension();
     QString sTmpFile = 
         ((LittleTConfig*)QUIGetConfig())->GetIconsDir() 
         + L"__temp__" + sExt;

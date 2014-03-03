@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\UIBase;..\..\UIBase\wtl;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\UIBase;..\..\UIBase\wtl;..\..\UIBase\inet;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\UIBase\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -53,6 +53,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;_WINDOWS;QUI_NOT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -87,7 +88,6 @@
     <None Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\UIBase\img\QImgProcess.h" />
     <ClInclude Include="..\common\ConstValues.h" />
     <ClInclude Include="..\common\LittleTcmn.h" />
     <ClInclude Include="..\common\LittleTUIcmn.h" />
@@ -102,6 +102,10 @@
     <ClInclude Include="..\common\QTimer.h" />
     <ClInclude Include="..\common\QTimerMan.h" />
     <ClInclude Include="..\common\Worker.h" />
+    <ClInclude Include="feedback\Feedback.h" />
+    <ClInclude Include="feedback\FileBackup.h" />
+    <ClInclude Include="feedback\QUIConnectCenter.h" />
+    <ClInclude Include="feedback\UserInfo.h" />
     <ClInclude Include="LAboutDlg.h" />
     <ClInclude Include="LAddTask.h" />
     <ClInclude Include="LDatas.h" />
@@ -114,7 +118,6 @@
     <ClInclude Include="LViewEvent.h" />
     <ClInclude Include="LViewPlan.h" />
     <ClInclude Include="LViewTodo.h" />
-    <ClInclude Include="QAutoUpdater.h" />
     <ClInclude Include="QEventRemindDlg.h" />
     <ClInclude Include="QPictureLoader.h" />
     <ClInclude Include="QResIconsDlg.h" />
@@ -123,34 +126,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\UIBase\AppHelper.cpp" />
-    <ClCompile Include="..\..\UIBase\crypt\CMD5.cpp" />
-    <ClCompile Include="..\..\UIBase\crypt\CXUnzip.cpp" />
-    <ClCompile Include="..\..\UIBase\crypt\QDataEnDe.cpp" />
-    <ClCompile Include="..\..\UIBase\crypt\rijndael.cpp" />
-    <ClCompile Include="..\..\UIBase\crypt\XUnzip.cpp" />
-    <ClCompile Include="..\..\UIBase\crypt\XZip.cpp" />
-    <ClCompile Include="..\..\UIBase\file\db\CppSQLite3U.cpp" />
-    <ClCompile Include="..\..\UIBase\file\db\shell.c" />
-    <ClCompile Include="..\..\UIBase\file\db\sqlite3.c" />
-    <ClCompile Include="..\..\UIBase\file\FileEnumerator.cpp" />
-    <ClCompile Include="..\..\UIBase\file\FileOper.cpp" />
-    <ClCompile Include="..\..\UIBase\file\inifile.cpp" />
-    <ClCompile Include="..\..\UIBase\file\QFile.cpp" />
-    <ClCompile Include="..\..\UIBase\file\TextFile.cpp" />
-    <ClCompile Include="..\..\UIBase\img\QImgProcess.cpp" />
-    <ClCompile Include="..\..\UIBase\QBuffer.cpp" />
-    <ClCompile Include="..\..\UIBase\QUI.cpp" />
-    <ClCompile Include="..\..\UIBase\sys\UACSElfElevation.cpp" />
-    <ClCompile Include="..\..\UIBase\time\QTime.cpp" />
-    <ClCompile Include="..\..\UIBase\ui\ECtrl.cpp" />
-    <ClCompile Include="..\..\UIBase\ui\QApp.cpp" />
-    <ClCompile Include="..\..\UIBase\ui\QConfig.cpp" />
-    <ClCompile Include="..\..\UIBase\ui\QUIMgr.cpp" />
-    <ClCompile Include="..\..\UIBase\ui\QWindow.cpp" />
-    <ClCompile Include="..\..\UIBase\ui\SystemTraySDK.cpp" />
-    <ClCompile Include="..\..\UIBase\ui\WndHelper.cpp" />
-    <ClCompile Include="..\..\UIBase\ui\WndShadow.cpp" />
     <ClCompile Include="..\common\ProcessMan.cpp" />
     <ClCompile Include="..\common\QAutoTask.cpp" />
     <ClCompile Include="..\common\QDBHelper.cpp" />
@@ -162,6 +137,9 @@
     <ClCompile Include="..\common\QTimer.cpp" />
     <ClCompile Include="..\common\QTimerMan.cpp" />
     <ClCompile Include="..\common\Worker.cpp" />
+    <ClCompile Include="feedback\Feedback.cpp" />
+    <ClCompile Include="feedback\FileBackup.cpp" />
+    <ClCompile Include="feedback\QUIConnectCenter.cpp" />
     <ClCompile Include="LAboutDlg.cpp" />
     <ClCompile Include="LAddTask.cpp" />
     <ClCompile Include="LDatas.cpp" />
@@ -174,7 +152,6 @@
     <ClCompile Include="LViewEvent.cpp" />
     <ClCompile Include="LViewPlan.cpp" />
     <ClCompile Include="LViewTodo.cpp" />
-    <ClCompile Include="QAutoUpdater.cpp" />
     <ClCompile Include="QEventRemindDlg.cpp" />
     <ClCompile Include="QResIconsDlg.cpp" />
     <ClCompile Include="QShellListener.cpp" />

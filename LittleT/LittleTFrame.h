@@ -8,7 +8,8 @@
 #include "LViewTodo.h"
 #include "LViewPlan.h"
 #include "LDatas.h"
-#include "QAutoUpdater.h"
+#include "feedback/QUIConnectCenter.h"
+#include "ui/WndHelper.h"
 
 DECLARE_USER_MESSAGE(QSOFT_LITTLET_SYSTRAYMSG);
 
@@ -24,9 +25,9 @@ class LittleTFrame : public QFrame
         MSG_WM_SIZE(OnSize)
         MESSAGE_HANDLER(QSOFT_MSG_UPDATEAPP,OnAppVersionCheck)
         MESSAGE_HANDLER(QSOFT_LITTLET_SYSTRAYMSG,OnSysTrayMessage)
-        MESSAGE_HANDLER(WM_ENTERSIZEMOVE, HandleAutohideMessage)
-        MESSAGE_HANDLER(WM_EXITSIZEMOVE, HandleAutohideMessage)
-        MESSAGE_HANDLER(WM_MOUSEMOVE, HandleAutohideMessage)
+//         MESSAGE_HANDLER(WM_ENTERSIZEMOVE, HandleAutohideMessage)
+//         MESSAGE_HANDLER(WM_EXITSIZEMOVE, HandleAutohideMessage)
+//         MESSAGE_HANDLER(WM_MOUSEMOVE, HandleAutohideMessage)
         BEGIN_QUI_MSG
             // todo task
             MSG_QUI_CODE(MWND_NOTIFY_TODOTASKCHANGED,OnTodoTaskStatusChanged)
@@ -51,6 +52,7 @@ class LittleTFrame : public QFrame
 //             MSG_QUI_CODE(MWND_CMD_REBOOT,OnDoWork)
 //             MSG_QUI_CODE(MWND_CMD_SHOWSCREENSAVER,OnDoWork)
         END_QUI_MSG
+        CHAIN_MSG_MAP_MEMBER(wnd_autohide_)
         CHAIN_MSG_MAP(QFrame)
     END_MSG_MAP()
 
@@ -115,14 +117,14 @@ protected:
     void OnCommand(UINT nType, int nID ,HWND hWnd);
     LRESULT OnCopyData(HWND hWnd, PCOPYDATASTRUCT pps);
     // 窗口自动隐藏消息处理
-    LRESULT HandleAutohideMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+//    LRESULT HandleAutohideMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
     void OnTabSwitched(HELEMENT he );
     void RefreshHeader();
     void RefreshEventNum();
     BOOL ConfigHotKey(BOOL bConfig);
 
-    ETab _Tabs() { return GetCtrl("[id=\"TABS-CONT\"]"); }
+    ETabCtrl _Tabs() { return GetCtrl("[id=\"TABS-CONT\"]"); }
 
     void StartUpdater();
 
@@ -133,6 +135,7 @@ private:
     BOOL        m_bStartup;
     ATOM        m_idAtom;
     CSystemTray m_trayicon;
+    CAutoHideWnd    wnd_autohide_;
 
 private:
     BOOL        m_bIsCloseForUpdate;

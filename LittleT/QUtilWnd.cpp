@@ -23,10 +23,11 @@ BOOL QScreenWnd::_Show( LPCWSTR pszPicFolder, int nAlpha /*= 200*/,
     int nPicPeriod/* = 3*/)
 {
     BOOL bOK = Create(QUIGetMainWnd(),WS_POPUP|WS_VISIBLE,
-        WS_EX_TOPMOST|WS_EX_TOOLWINDOW|WS_EX_LAYERED,
-        WS_QEX_FULLSCRNWND);
+        WS_EX_TOPMOST|WS_EX_TOOLWINDOW|WS_EX_LAYERED, 0);
     if (bOK)
     {
+        quibase::MoveToFullScreen(GetSafeHwnd());
+
         m_nLifeSec = max(nSeconds,QSCREENWND_MIN_LIFESEC);
         // ±³¾°É«
         m_ctlPic = (HELEMENT)GetCtrl("#div_pic");

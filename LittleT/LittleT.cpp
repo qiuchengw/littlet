@@ -9,7 +9,7 @@
 #include "sys/UACSElfElevation.h"
 #include "ui/QUIMgr.h"
 #include "img/gdix.h"
-#include "QAutoUpdater.h"
+#include "feedback/QUIConnectCenter.h"
 #include "ui/QUIDlgs.h"
 
 LittleTApp _Module;
@@ -29,7 +29,7 @@ BOOL LittleTApp::InitRun()
     // 有些目录是必须事先存在的
     LittleTConfig *pCfg = (LittleTConfig*)QUIGetConfig();
     // icon dir
-    qcwbase::MakeSureDirExist(pCfg->GetIconsDir());
+    quibase::MakeSureDirExist(pCfg->GetIconsDir());
 
     SetMainWnd(&m_frame);
     if (!QWorker::GetInstance()->Startup())
@@ -58,6 +58,7 @@ BOOL LittleTApp::InitRun()
         XMsgBox::ErrorMsgBox(L"事件管理器启动失败！");
         return FALSE;
     }
+    
 #ifdef _DEBUG
     if (!m_frame.Create(NULL,WS_POPUP|WS_VISIBLE, WS_EX_TOOLWINDOW))
 #else   // release 最顶层
@@ -72,7 +73,7 @@ BOOL LittleTApp::InitRun()
 
     // 检查更新
     _theInst.SetInstanceMainWnd(m_frame.GetSafeHwnd());
-
+    
     // 进程通信事件
     m_hEventMainWnd = CreateEvent(NULL, TRUE, TRUE,
         LITTLET_MAINWND_STARTUP_EVENTNAME);
@@ -100,9 +101,9 @@ BOOL LittleTApp::InitRun()
 void LittleTApp::CheckUpdaterExe()
 {
     // 检查更新程序是否有新版本
-    QString sDir = qcwbase::GetModulePath();
+    QString sDir = quibase::GetModulePath();
     QString sNewUpdater = sDir + LITTLET_UPDATER_NEWNAME;
-    if ( qcwbase::IsFileExist( sNewUpdater ) )
+    if ( quibase::IsFileExist( sNewUpdater ) )
     {
         // 提升自己的运行权限，以应对vista或以上系统的UAC限制
         CUACSElfElevations::SelfElevation();
@@ -123,18 +124,19 @@ BOOL LittleTApp::CheckUpdate()
     if (NULL != pBuf)
     {
         // 去掉前3个字节的文件编码，剩下的就是文件内容了
-        DWORD dw;
-        pBuf->Read((PBYTE)&dw, 3);
-        QString sLines = ATL::CA2WEX<256>((char*)pBuf->GetBuffer());
-        QString sUrl = sLines, sRefer;
-        int idx = sLines.Find(L';');
-        if (-1 != idx)
-        {
-            sUrl = sLines.Left(idx);
-            sRefer = sLines.Mid(idx+1);
-        }
+//         DWORD dw;
+//         pBuf->Read((PBYTE)&dw, 3);
+//         QString sLines = ATL::CA2WEX<256>((char*)pBuf->GetBuffer());
+//         QString sUrl = sLines, sRefer;
+//         int idx = sLines.Find(L';');
+//         if (-1 != idx)
+//         {
+//             sUrl = sLines.Left(idx);
+//             sRefer = sLines.Mid(idx+1);
+//         }
         // 启动自动更新检查
-        return QAutoUpdater::GetInstance()->Startup(sUrl, sRefer);
+//        return QAutoUpdater::GetInstance()->Startup(sUrl, sRefer);
+        return QAutoUpdater::GetInstance()->Startup();
     }
     return FALSE;
 }
@@ -165,10 +167,10 @@ LittleTApp::LittleTApp()
 void LittleTApp::StartUpdateExe()
 {
     // 找到更新程序
-    QString sCurDir = qcwbase::GetModulePath();
+    QString sCurDir = quibase::GetModulePath();
     sCurDir.Replace(L'/',L'\\');
     QString sUpdateExe = sCurDir + L"LittleTUpdater.exe";
-    if (!qcwbase::IsFileExist(sUpdateExe))
+    if (!quibase::IsFileExist(sUpdateExe))
     {
         XMsgBox::ErrorMsgBox(L"更新程序不见了！你都干啥了？ -_-!");
         return;

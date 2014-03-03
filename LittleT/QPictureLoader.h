@@ -30,7 +30,7 @@ public:
 		m_sPath = szFolder;
 		if (m_sPath.Find(L':') == -1)   // ·ÇÈ«Â·¾¶
         {
-            m_sPath = qcwbase::GetModulePath() + m_sPath;
+            m_sPath = quibase::GetModulePath() + m_sPath;
         }
 
 		m_list.clear();

@@ -89,13 +89,7 @@
     <ClCompile Include="..\..\UIBase\crypt\XZip.cpp">
       <Filter>Source Files\UIBase\crypt</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\UIBase\crypt\CMD5.cpp">
-      <Filter>Source Files\UIBase\crypt</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\UIBase\crypt\CXUnzip.cpp">
-      <Filter>Source Files\UIBase\crypt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\UIBase\crypt\rijndael.cpp">
       <Filter>Source Files\UIBase\crypt</Filter>
     </ClCompile>
     <ClCompile Include="..\..\UIBase\crypt\XUnzip.cpp">
@@ -109,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="..\..\UIBase\QUI.cpp">
       <Filter>Source Files\UIBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\crijndael.cpp">
+      <Filter>Source Files\UIBase\crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UIBase\crypt\md5.cpp">
+      <Filter>Source Files\UIBase\crypt</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

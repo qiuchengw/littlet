@@ -1,5 +1,58 @@
-﻿Build started 2014/2/20 20:00:36.
+﻿Build started 2014/3/1 19:52:36.
+     1>Project "E:\Code\LittleT\LittleT\LittleT.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\LittleT.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D DEBUG /D _WINDOWS /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt LViewPlan.cpp
+         LViewPlan.cpp
+       ResourceCompile:
+         All outputs are up-to-date.
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         D:\Program Files\VS2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Code\LittleT\Debug\LittleT.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\LittleT.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Code\LittleT\Debug\LittleT.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Code\LittleT\Debug\LittleT.lib" /MACHINE:X86 Debug\LittleT.res
+         Debug\LittleT.exe.embed.manifest.res
+         Debug\ProcessMan.obj
+         Debug\QAutoTask.obj
+         Debug\QDBHelper.obj
+         Debug\QDBPlan.obj
+         Debug\QDBRes.obj
+         Debug\QHelper.obj
+         Debug\QLongplan.obj
+         Debug\QNote.obj
+         Debug\QTimer.obj
+         Debug\QTimerMan.obj
+         Debug\Worker.obj
+         Debug\Feedback.obj
+         Debug\FileBackup.obj
+         Debug\QUIConnectCenter.obj
+         Debug\LAboutDlg.obj
+         Debug\LAddTask.obj
+         Debug\LDatas.obj
+         Debug\LFormGoal.obj
+         Debug\LFormGoalItem.obj
+         Debug\LFormPlan.obj
+         Debug\LFormStage.obj
+         Debug\LittleT.obj
+         Debug\LittleTFrame.obj
+         Debug\LViewEvent.obj
+         Debug\LViewPlan.obj
+         Debug\LViewTodo.obj
+         Debug\QEventRemindDlg.obj
+         Debug\QResIconsDlg.obj
+         Debug\QShellListener.obj
+         Debug\QUtilWnd.obj
+       Manifest:
+         G:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\LittleT.exe.embed.manifest" /manifest Debug\LittleT.exe.intermediate.manifest
+         All outputs are up-to-date.
+       LinkEmbedManifest:
+         All outputs are up-to-date.
+         LittleT.vcxproj -> E:\Code\LittleT\Debug\LittleT.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\LittleT.unsuccessfulbuild".
+         Touching "Debug\LittleT.lastbuildstate".
+     1>Done Building Project "E:\Code\LittleT\LittleT\LittleT.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.00
+Time Elapsed 00:00:03.73

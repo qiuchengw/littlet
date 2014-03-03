@@ -179,7 +179,7 @@ void LFormTodo::ShowPopupBar( TTodoTask &t,BOOL bEdit,HELEMENT he )
     }
 
     // 确保窗口是前台窗口
-    qcwbase::SetForegroundWindowInternal(QUIGetMainWnd());
+    quibase::SetForegroundWindowInternal(QUIGetMainWnd());
 
     ECtrl bar = _PopupBar();
     //  目录

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "file/db/QDBMgr.h"
-#include "XContainer.h"
 #include "ConstValues.h"
 #include "time/QTime.h"
+#include "AppHelper.h"
 
 enum ENUM_DBFILE_TYPE
 {

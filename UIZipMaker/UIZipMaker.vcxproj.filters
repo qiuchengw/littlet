@@ -42,10 +42,10 @@
     <ClCompile Include="..\..\UIBase\crypt\QDataEnDe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\UIBase\crypt\rijndael.cpp">
+    <ClCompile Include="..\..\UIBase\crypt\crijndael.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\UIBase\crypt\CMD5.cpp">
+    <ClCompile Include="..\..\UIBase\crypt\md5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

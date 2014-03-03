@@ -130,7 +130,7 @@ BOOL QProcessMan::IsExeRun(const QString & sExePath,__out QTime &tmRun)
 		return   FALSE;
 	} 
 
-	QString sPath,sName = CPath(sExePath).GetFileName();
+	QString sPath,sName = quibase::CPath(sExePath).GetFileName();
 	PROCESSENTRY32     pe32; 
 	pe32.dwSize   =   sizeof(PROCESSENTRY32); 
 	if(Process32First(hProcessSnap,&pe32)) 

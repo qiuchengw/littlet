@@ -4,6 +4,16 @@
 #include "stdafx.h"
 #include "ArgParser.h"
 #include "../common/LittleTcmn.h"
+
+#ifdef APP_NAME
+#define APP_NAME L"LittleTShell"
+#endif
+
+CStdStringW QUIGetAppName()
+{
+    return L"LittleTShell";
+}
+
 #include "AppHelper.h"
 
 void ShowHelp()
@@ -115,7 +125,7 @@ HWND GetLittleTMainWnd()
         { // 进程没启动呢，启动它
             theInst.RemoveRestrict();
 
-            CStdStringW sWorkDir = qcwbase::GetModulePath();
+            CStdStringW sWorkDir = quibase::GetModulePath();
             CStdStringW sExe = sWorkDir + L"LittleT.exe";
             if (32 >= (int)ShellExecute(NULL,L"open", sExe, 
                 NULL, sWorkDir, SW_SHOWNORMAL))
