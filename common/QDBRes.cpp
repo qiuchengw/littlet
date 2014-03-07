@@ -40,7 +40,7 @@ BOOL QResDB::GetData( int nID, BOOL bWithData, __out TFileData& fd )
                       L" FROM tbl_data WHERE (ID=%d)",nID);
         }
 		SqlQuery q = ExecQuery(sQ);
-		if (q.nextRow())
+		if (!q.eof())
 		{
 			fd.nID = nID;
 			fd.eType = (ENUM_DBFILE_TYPE)q.IntValue(L"DataType");
@@ -123,7 +123,7 @@ int QResDB::GetDataItems( __out VecFileData& vfd ,DWORD eType)
 
 	QDB_BEGIN_TRY
 		SqlQuery q = ExecQuery(sQ);
-		while (q.nextRow())
+		for (q.nextRow(); !q.eof(); q.nextRow())
 		{
 			TFileData t;
 			t.nID = q.IntValue(L"ID");

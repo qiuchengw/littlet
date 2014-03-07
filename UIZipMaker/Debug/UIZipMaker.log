@@ -1,38 +1,9 @@
-﻿Build started 2014/3/1 17:49:05.
+﻿Build started 2014/3/7 12:44:17.
      1>Project "E:\Code\LittleT\UIZipMaker\UIZipMaker.vcxproj" on node 5 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\UIZipMaker.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\UIBase\crypt\crijndael.cpp ..\..\UIBase\crypt\CXUnzip.cpp ..\..\UIBase\crypt\md5.cpp ..\..\UIBase\crypt\QDataEnDe.cpp ..\..\UIBase\crypt\XUnzip.cpp ..\..\UIBase\crypt\XZip.cpp ..\..\UIBase\file\FileEnumerator.cpp ..\..\UIBase\file\QFile.cpp ..\..\UIBase\QBuffer.cpp ..\..\UIBase\time\QTime.cpp main.cpp
-         main.cpp
-     1>e:\code\uibase\stdstring.h(1682): warning C4996: '_vsnprintf': This function or variable may be unsafe. Consider using _vsnprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\vs2010\vc\include\stdio.h(363) : see declaration of '_vsnprintf'
-     1>e:\code\uibase\stdstring.h(1686): warning C4996: '_vsnwprintf': This function or variable may be unsafe. Consider using _vsnwprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\vs2010\vc\include\stdio.h(488) : see declaration of '_vsnwprintf'
-         QTime.cpp
-         QBuffer.cpp
-         QFile.cpp
-     1>e:\code\uibase\file\qfile.cpp(2252): warning C4244: '=' : conversion from 'ULONGLONG' to 'unsigned long', possible loss of data
-         FileEnumerator.cpp
-     1>e:\code\uibase\file\fileenumerator.cpp(805): warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
-         XZip.cpp
-         XUnzip.cpp
-     1>e:\code\uibase\crypt\xunzip.cpp(3882): warning C4995: '_tcscat': name was marked as #pragma deprecated
-     1>e:\code\uibase\crypt\xunzip.cpp(3882): warning C4995: 'wcscat': name was marked as #pragma deprecated
-     1>e:\code\uibase\crypt\xunzip.cpp(3932): warning C4995: 'strcpy': name was marked as #pragma deprecated
-     1>e:\code\uibase\crypt\xunzip.cpp(4040): warning C4995: '_tcscpy': name was marked as #pragma deprecated
-     1>e:\code\uibase\crypt\xunzip.cpp(4040): warning C4995: 'wcscpy': name was marked as #pragma deprecated
-     1>e:\code\uibase\crypt\xunzip.cpp(4042): warning C4995: '_tcscat': name was marked as #pragma deprecated
-     1>e:\code\uibase\crypt\xunzip.cpp(4042): warning C4995: 'wcscat': name was marked as #pragma deprecated
-     1>e:\code\uibase\crypt\xunzip.cpp(4124): warning C4995: '_tcscpy': name was marked as #pragma deprecated
-     1>e:\code\uibase\crypt\xunzip.cpp(4124): warning C4995: 'wcscpy': name was marked as #pragma deprecated
-         QDataEnDe.cpp
-         md5.cpp
-     1>e:\code\uibase\crypt\md5.cpp(271): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files\vs2010\vc\include\stdio.h(371) : see declaration of 'sprintf'
-         CXUnzip.cpp
-         crijndael.cpp
-         Generating Code...
+         All outputs are up-to-date.
        ManifestResourceCompile:
          G:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\UIZipMaker.exe.embed.manifest.res" Debug\UIZipMaker_manifest.rc 
        Link:
@@ -50,20 +21,9 @@
          Debug\main.obj
        Manifest:
          G:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\UIZipMaker.exe.embed.manifest" /manifest Debug\UIZipMaker.exe.intermediate.manifest
-         G:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\UIZipMaker.exe.embed.manifest.res" Debug\UIZipMaker_manifest.rc 
+         All outputs are up-to-date.
        LinkEmbedManifest:
-         D:\Program Files\VS2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Code\LittleT\Debug\UIZipMaker.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\UIZipMaker.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Code\LittleT\Debug\UIZipMaker.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Code\LittleT\Debug\UIZipMaker.lib" /MACHINE:X86 Debug\UIZipMaker.exe.embed.manifest.res
-         Debug\crijndael.obj
-         Debug\CXUnzip.obj
-         Debug\md5.obj
-         Debug\QDataEnDe.obj
-         Debug\XUnzip.obj
-         Debug\XZip.obj
-         Debug\FileEnumerator.obj
-         Debug\QFile.obj
-         Debug\QBuffer.obj
-         Debug\QTime.obj
-         Debug\main.obj
+         All outputs are up-to-date.
          UIZipMaker.vcxproj -> E:\Code\LittleT\Debug\UIZipMaker.exe
        FinalizeBuildStatus:
          Deleting file "Debug\UIZipMaker.unsuccessfulbuild".
@@ -72,4 +32,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:01:13.36
+Time Elapsed 00:00:05.05

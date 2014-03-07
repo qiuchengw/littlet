@@ -1,10 +1,197 @@
-﻿Build started 2014/3/1 19:52:36.
+﻿Build started 2014/3/7 14:15:32.
      1>Project "E:\Code\LittleT\LittleT\LittleT.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\LittleT.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       PreBuildEvent:
+         ..\7za.exe u ..\Debug\UI.ZIP ..\UI\* -r
+         :VCEnd
+         
+         7-Zip (A) 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+         Scanning
+         
+         Creating archive ..\Debug\UI.ZIP
+         
+         Compressing  addtask\autotask.htm
+         Compressing  addtask\exectime - .htm
+         Compressing  addtask\exectime.htm
+         Compressing  addtask\style.css
+         Compressing  bk\bk1.jpg
+         Compressing  bk\desk.png
+         Compressing  CODE
+         Compressing  common\Browser.htm
+         Compressing  common\Debug.htm
+         Compressing  common\icons\ask.png
+         Compressing  common\icons\ask_48.png
+         Compressing  common\icons\back_22.png
+         Compressing  common\icons\edit_16.png
+         Compressing  common\icons\error.png
+         Compressing  common\icons\error_48.png
+         Compressing  common\icons\find_16.png
+         Compressing  common\icons\folder_16.png
+         Compressing  common\icons\info.png
+         Compressing  common\icons\info_48.png
+         Compressing  common\icons\next_22.png
+         Compressing  common\icons\warning_48.png
+         Compressing  common\images\calendar-body.png
+         Compressing  common\images\calendar-head.png
+         Compressing  common\images\calendar_16.png
+         Compressing  common\images\checkbox-checked.png
+         Compressing  common\images\checkbox-normal.png
+         Compressing  common\images\close_btn.png
+         Compressing  common\images\down.png
+         Compressing  common\images\file_16.png
+         Compressing  common\images\hscrollbar-bar.png
+         Compressing  common\images\hscrollbar-left.png
+         Compressing  common\images\hscrollbar-right.png
+         Compressing  common\images\item-back-pressed.png
+         Compressing  common\images\item-collapse.png
+         Compressing  common\images\item-expand.png
+         Compressing  common\images\item-minus.png
+         Compressing  common\images\item-plus.png
+         Compressing  common\images\max2_btn.png
+         Compressing  common\images\max_btn.png
+         Compressing  common\images\min_btn.png
+         Compressing  common\images\next_16.png
+         Compressing  common\images\next_24.png
+         Compressing  common\images\page_first.png
+         Compressing  common\images\page_last.png
+         Compressing  common\images\page_next.png
+         Compressing  common\images\page_prev.png
+         Compressing  common\images\pin_normal.png
+         Compressing  common\images\pin_top.png
+         Compressing  common\images\popup-back.png
+         Compressing  common\images\prev_16.png
+         Compressing  common\images\prev_24.png
+         Compressing  common\images\progress-back.png
+         Compressing  common\images\progress-fore-green.png
+         Compressing  common\images\progress-fore-red.png
+         Compressing  common\images\purple.png
+         Compressing  common\images\radio-checked-normal.png
+         Compressing  common\images\radio-normal.png
+         Compressing  common\images\radio_12.png
+         Compressing  common\images\search-box-back.png
+         Compressing  common\images\search-btn-fore.png
+         Compressing  common\images\slider.png
+         Compressing  common\images\star_color.png
+         Compressing  common\images\star_gray.png
+         Compressing  common\images\switch-back.png
+         Compressing  common\images\tabbkgnd.png
+         Compressing  common\images\time_16.png
+         Compressing  common\images\up.png
+         Compressing  common\images\vscrollbar-back.png
+         Compressing  common\images\vscrollbar-fore.png
+         Compressing  common\images\weekday-back.png
+         Compressing  common\images\white.png
+         Compressing  common\images\xedit-focus-back.png
+         Compressing  common\images\xedit-hover-back.png
+         Compressing  common\Inputbox.htm
+         Compressing  common\master.css
+         Compressing  common\MsgBox.htm
+         Compressing  common\print\index.htm
+         Compressing  dlgs\AutotaskRmd.css
+         Compressing  dlgs\EventRmdDlg.htm
+         Compressing  dlgs\Icons.htm
+         Compressing  dlgs\images\clock_128.png
+         Compressing  dlgs\images\cmd_128.png
+         Compressing  dlgs\images\shutdown_128.png
+         Compressing  dlgs\images\sleep_128.png
+         Compressing  dlgs\picwnd.htm
+         Compressing  dlgs\rmddlg.htm
+         Compressing  dlgs\style.css
+         Compressing  icons\add_16.png
+         Compressing  icons\autotask_48.png
+         Compressing  icons\check_16.png
+         Compressing  icons\clock_16.png
+         Compressing  icons\clock_32.png
+         Compressing  icons\clock_48.png
+         Compressing  icons\clock_75.png
+         Compressing  icons\cmd_32.png
+         Compressing  icons\cmd_48.png
+         Compressing  icons\cmd_75.png
+         Compressing  icons\delete_16.png
+         Compressing  icons\disable_16.png
+         Compressing  icons\edit_16.png
+         Compressing  icons\list_48.png
+         Compressing  icons\plus_16.png
+         Compressing  icons\shutdown_32.png
+         Compressing  icons\shutdown_48.png
+         Compressing  icons\shutdown_75.png
+         Compressing  icons\sleep_32.png
+         Compressing  icons\sleep_48.png
+         Compressing  icons\sleep_75.png
+         Compressing  icons\sysicon.png
+         Compressing  main\event\index.htm
+         Compressing  main\event\style.css
+         Compressing  main\images\abort_16.png
+         Compressing  main\images\autotask_48.png
+         Compressing  main\images\check_16.png
+         Compressing  main\images\clock_16.png
+         Compressing  main\images\clock_20.png
+         Compressing  main\images\clock_32.png
+         Compressing  main\images\close_12.png
+         Compressing  main\images\delete_16.png
+         Compressing  main\images\header-back.png
+         Compressing  main\images\ie_16.png
+         Compressing  main\images\lock_16.png
+         Compressing  main\images\minus_16.png
+         Compressing  main\images\nosound_16.png
+         Compressing  main\images\plan_20.png
+         Compressing  main\images\plus_16.png
+         Compressing  main\images\quote_32.png
+         Compressing  main\images\redflag_16.png
+         Compressing  main\images\refresh_16.png
+         Compressing  main\images\round_24.png
+         Compressing  main\images\sound_16.png
+         Compressing  main\images\sysicon.png
+         Compressing  main\images\todo_20.png
+         Compressing  main\images\todo_32.png
+         Compressing  main\images\wait_16.png
+         Compressing  main\index.htm
+         Compressing  main\plan\images\add_24.png
+         Compressing  main\plan\images\blue_dot.png
+         Compressing  main\plan\images\check_16.png
+         Compressing  main\plan\images\clock_16.png
+         Compressing  main\plan\images\doit.png
+         Compressing  main\plan\images\edit_24.png
+         Compressing  main\plan\images\green_dot.png
+         Compressing  main\plan\images\note_16.png
+         Compressing  main\plan\images\plan-fore.png
+         Compressing  main\plan\images\popup-back.png
+         Compressing  main\plan\images\red_dot.png
+         Compressing  main\plan\images\time_16.png
+         Compressing  main\plan\images\tool_16.png
+         Compressing  main\plan\images\tool_24.png
+         Compressing  main\plan\images\trash_24.png
+         Compressing  main\plan\images\trash_32.png
+         Compressing  main\plan\index.htm
+         Compressing  main\plan\style.css
+         Compressing  main\style.tmp
+         Compressing  main\todo\images\doit.png
+         Compressing  main\todo\images\minus.png
+         Compressing  main\todo\images\plus.png
+         Compressing  main\todo\images\popup-back.png
+         Compressing  main\todo\images\time.png
+         Compressing  main\todo\images\trashbox.png
+         Compressing  main\todo\index.htm
+         Compressing  main\todo\style-d.css
+         Compressing  main\todo\style.css
+         Compressing  misc\about.htm
+         Compressing  misc\setting.htm
+         Compressing  misc\style.css
+         Compressing  misc\update.htm
+         Compressing  plandlgs\GoalDlg.htm
+         Compressing  plandlgs\GoalitemDlg.htm
+         Compressing  plandlgs\PlanDlg.htm
+         Compressing  plandlgs\StageDlg.htm
+         Compressing  plandlgs\style.css
+         Compressing  raw\mvboli.ttf
+         Compressing  style.css
+         Compressing  url.x
+         
+         Everything is Ok
        ClCompile:
-         D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D DEBUG /D _WINDOWS /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt LViewPlan.cpp
-         LViewPlan.cpp
+         D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D DEBUG /D _WINDOWS /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt LittleTFrame.cpp
+         LittleTFrame.cpp
        ResourceCompile:
          All outputs are up-to-date.
        ManifestResourceCompile:
@@ -55,4 +242,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.73
+Time Elapsed 00:00:04.51

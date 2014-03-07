@@ -53,7 +53,7 @@ LRESULT LViewPlan::OnDocumentComplete()
 {
     m_formPlan.RefreshPlans();
 
-//    NotifyPlanNumChanged();
+    NotifyPlanNumChanged();
 
     return 0;
 }

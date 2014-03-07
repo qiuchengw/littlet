@@ -227,7 +227,6 @@ BOOL LFormStage::SelectStageItem(__in ETable tblStage)
     QUIPostCodeTo(GetSafeHwnd(), VIEWPLAN_NOTIFY_STAGESELCHANGED, 
         (LPARAM)pStage);
 
-//    RefreshStageBar();
     return TRUE;
 }
 

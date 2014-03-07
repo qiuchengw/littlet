@@ -1,12 +1,10 @@
-﻿Build started 2014/3/1 18:08:38.
-     1>Project "E:\Code\LittleT\ADEncryt\ADEncryt.vcxproj" on node 3 (build target(s)).
+﻿Build started 2014/3/7 13:55:13.
+     1>Project "E:\Code\LittleT\ADEncryt\ADEncryt.vcxproj" on node 4 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\ADEncryt.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\UIBase\ui\QWindow.cpp
-         QWindow.cpp
-     1>e:\code\uibase\ui\qwindow.cpp(1015): warning C4018: '>' : signed/unsigned mismatch
-     1>e:\code\uibase\ui\qwindow.cpp(1019): warning C4018: '>' : signed/unsigned mismatch
+         D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\UIBase\ui\WndHelper.cpp
+         WndHelper.cpp
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -48,4 +46,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.29
+Time Elapsed 00:00:03.45

@@ -380,6 +380,11 @@ void LittleTFrame::OnHotKey( int nSystemHotKey,UINT nModifier,UINT nVk )
 
             SetWindowPos(NULL, &rc, SWP_NOZORDER | SWP_SHOWWINDOW | SWP_NOSIZE);
             SendMessage(WM_SHOWWINDOW, (WPARAM)TRUE, 0);
+//             if (!(GetExStyle() & WS_EX_TOPMOST))
+//             {
+//                 SetWindowPos(HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+//                 SetWindowPos(HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+//             }
 
             m_trayicon.HideIcon();
         }

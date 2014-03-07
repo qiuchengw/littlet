@@ -75,7 +75,7 @@ BOOL QDBEvents::TodoTask_Get( int nID,__out TTodoTask &t )
 BOOL QDBEvents::_TodoTask(SqlQuery &q ,__out TTodoTask&t)
 {
 	QDB_BEGIN_TRY
-		if (q.nextRow())
+		if (!q.eof())
 		{
 			t.nID = q.IntValue(L"ID");
 			t.sTask = q.StrValue(L"Task");
@@ -97,7 +97,7 @@ BOOL QDBEvents::TodoTask_Read( LPCWSTR szSQL ,__out TodoTaskList & lst)
 	QDB_BEGIN_TRY
 	{
 		SqlQuery q = ExecQuery(szSQL);
-		while (q.nextRow())
+		for (q.nextRow(); !q.eof(); q.nextRow())
 		{
 			TTodoTask t;
 			if (_TodoTask(q,t))
@@ -256,7 +256,7 @@ int QDBEvents::Cate_GetAll( VecCate &vc )
 {
 	QDB_BEGIN_TRY
 		SqlQuery q = ExecQuery(L"SELECT * FROM tbl_catelog");
-		while (q.nextRow())
+		for (q.nextRow(); !q.eof(); q.nextRow())
 		{
 			TCate c;
 			if (_Cate(q,c))
@@ -271,7 +271,7 @@ int QDBEvents::Cate_GetAll( VecCate &vc )
 BOOL QDBEvents::_Cate( SqlQuery &q,__out TCate &c )
 {
 	QDB_BEGIN_TRY
-		if (q.nextRow())
+		if (!q.eof())
 		{
 			c.nID = q.IntValue(L"ID");
 			c.nIconID = q.IntValue(L"IconID");
@@ -292,7 +292,7 @@ BOOL QDBEvents::AutoTask_GetAll( AutoTaskList & lst )
 		// 所有的自动计划
 		QAutoTask *pTask;
 		SqlQuery q = ExecQuery(L"SELECT * FROM tbl_autotask");
-		while (q.nextRow())
+		for (q.nextRow(); !q.eof(); q.nextRow())
 		{
 			pTask = new QAutoTask(
 				q.StrValue(L"Task"),
@@ -356,7 +356,7 @@ BOOL QDBEvents::AutoTask_GetInfo( int nTaskID,
 		QString sQ;
 		sQ.Format(L"SELECT * FROM tbl_autotask WHERE (ID=%d)",nTaskID);
 		SqlQuery q = ExecQuery(sQ);
-		if (q.nextRow())
+		if (!q.eof())
 		{
 			sTask = q.StrValue(L"Task");
 			nTimerID = q.IntValue(L"TimerID");
@@ -454,7 +454,7 @@ QTimer* QDBEvents::Timer_Get( int nID )
 		QString sQ;
 		sQ.Format(L"SELECT * FROM tbl_timer WHERE (ID=%d)",nID);
 		SqlQuery q = ExecQuery(sQ);
-		if (q.nextRow())
+		if (!q.eof())
 		{
 			QTimer *pTimer = new QTimer(
 				nID,
@@ -478,7 +478,7 @@ BOOL QDBEvents::Timer_GetInfo( int nID,__out QTime&tmBegin,__out QTime&tmEnd,
 		QString sQ;
 		sQ.Format(L"SELECT * FROM tbl_timer WHERE (ID=%d)",nID);
 		SqlQuery q = ExecQuery(sQ);
-		if (q.nextRow())
+		if (!q.eof())
 		{
 				tmBegin = q.DateTimeValue(L"BTime");
 				tmEnd = q.DateTimeValue(L"ETime");

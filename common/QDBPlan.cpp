@@ -47,7 +47,7 @@ BOOL QDBPlan::GetPlan( int nPlanID,__out QPlan& p )
 BOOL QDBPlan::_Plan( SqlQuery &q, __out QPlan& p )
 {
 	QDB_BEGIN_TRY
-		if (q.nextRow())
+		if (!q.eof())
 		{
 			p.m_nID = q.IntValue(L"ID");
 			p.m_nIconID = q.IntValue(L"IconID");
@@ -72,7 +72,7 @@ int QDBPlan::GetAllPlan( __out VecPlan &vp )
 	QDB_BEGIN_TRY
         QPlan *p;
 		SqlQuery q = ExecQuery(L"SELECT * FROM tbl_plan WHERE (Deleted=0)");
-		while (q.nextRow())
+		for (q.nextRow(); !q.eof(); q.nextRow())
 		{
             p = new QPlan;
 			if (_Plan(q, *p))
@@ -126,7 +126,7 @@ BOOL QDBPlan::GetStage( int nStageID,QStage& s )
 BOOL QDBPlan::_Stage( SqlQuery &q,__out QStage &s )
 {
 	QDB_BEGIN_TRY
-		if (q.nextRow())
+		if (!q.eof())
 		{
 			s.m_nID = q.IntValue(L"ID");
             s.m_nIconID = q.IntValue(L"IconID");
@@ -152,7 +152,7 @@ int QDBPlan::GetPlanStages( int nPlanID,__out VecStage &vs )
         QStage *s = NULL;
 		sQ.Format(L"SELECT * FROM tbl_stage WHERE (PlanID=%d)",nPlanID);
 		SqlQuery q = ExecQuery(sQ);
-		while (q.nextRow())
+		for (q.nextRow(); !q.eof(); q.nextRow())
 		{
             s = new QStage;
 			if (_Stage(q,*s))
@@ -229,7 +229,7 @@ BOOL QDBPlan::GetGoal( int nGoalID,__out QGoal& g )
 BOOL QDBPlan::_Goal( SqlQuery &q,__out QGoal& g )
 {
 	QDB_BEGIN_TRY
-		if (q.nextRow())
+		if (!q.eof())
 		{
 			g.m_nID = q.IntValue(L"ID");
 			g.m_nFlag = q.IntValue(L"Flag");
@@ -253,7 +253,7 @@ int QDBPlan::GetStageGoals( int nStageID,__out VecGoal& vg )
 		sQ.Format(L"SELECT * FROM tbl_goal WHERE (StageID=%d)",nStageID);
 		SqlQuery q = ExecQuery(sQ);
         QGoal *g;
-		while (q.nextRow())
+		for (q.nextRow(); !q.eof(); q.nextRow())
 		{
             g = new QGoal;
 			if (_Goal(q, *g))
@@ -313,7 +313,7 @@ BOOL QDBPlan::GetGoalItem( int nItemID,__out QGoalItem& gi )
 BOOL QDBPlan::_GoalItem( SqlQuery &q,__out QGoalItem &gi )
 {
 	QDB_BEGIN_TRY
-		if (q.nextRow())
+		if (!q.eof())
 		{
 			gi.m_nID = q.IntValue(L"ID");
 			gi.m_nGoalID = q.IntValue(L"GoalID");
@@ -346,7 +346,7 @@ int QDBPlan::GetItemsOfGoal( int nGoalID,__out VecGoalItem &vgi,ENUM_GOALITEM_ST
 	QDB_BEGIN_TRY
 		SqlQuery q = ExecQuery(sQ);
         QGoalItem *gi;
-		while (q.nextRow())
+        for (q.nextRow(); !q.eof(); q.nextRow())
 		{
             gi = new QGoalItem;
 			if (_GoalItem(q, *gi))
@@ -422,7 +422,7 @@ BOOL QDBPlan::SetGoalItemStagus(int nGoalItemID, ENUM_GOALITEM_STATUS eStatus)
 BOOL QDBPlan::_Note( SqlQuery&q , __out QNote&n )
 {
 	QDB_BEGIN_TRY
-		if (q.nextRow())
+		if (!q.eof())
 		{
 			n.m_nID = q.IntValue(L"ID");
 			n.m_eType = (ENUM_NOTE_TYPE)q.IntValue(L"Typex");
@@ -448,7 +448,7 @@ BOOL QDBPlan::_Note( SqlQuery&q , __out QNote&n )
 
 int QDBPlan::_Notes( SqlQuery&q,__out VecNote&vn )
 {
-	while (q.nextRow())
+	for (q.nextRow(); !q.eof(); q.nextRow())
 	{
 		QNote n;
 		if (_Note(q,n))

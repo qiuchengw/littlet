@@ -1,12 +1,13 @@
-﻿Build started 2014/3/1 18:14:09.
-     1>Project "E:\Code\LittleT\LittleTUpdater\LittleTUpdater.vcxproj" on node 3 (build target(s)).
+﻿Build started 2014/3/7 12:44:18.
+     1>Project "E:\Code\LittleT\LittleTUpdater\LittleTUpdater.vcxproj" on node 6 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\LittleTUpdater.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\UIBase\sys\UACSElfElevation.cpp
+         Skipping... (no relevant changes detected)
          UACSElfElevation.cpp
        ManifestResourceCompile:
-         All outputs are up-to-date.
+         G:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\LittleTUpdater.exe.embed.manifest.res" Debug\LittleTUpdater_manifest.rc 
        Link:
          D:\Program Files\VS2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Code\LittleT\Debug\LittleTUpdater.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\LittleTUpdater.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Code\LittleT\Debug\LittleTUpdater.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Code\LittleT\Debug\LittleTUpdater.lib" /MACHINE:X86 Debug\LittleTUpdater.exe.embed.manifest.res
          Debug\CXUnzip.obj
@@ -30,4 +31,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.18
+Time Elapsed 00:00:06.42
