@@ -1,5 +1,6 @@
 #include "LittleTFrame.h"
 
+#include "AppHelper.h"
 #include "../common/LittleTUIcmn.h"
 #include "../common/Worker.h"
 #include "../common/ProcessMan.h"
@@ -58,6 +59,7 @@ QUI_BEGIN_EVENT_MAP(LittleTFrame,QFrame)
     ELEMENT_EXPANDED_NAME(L"panel_item", &LittleTFrame::OnTabSwitched)
     BN_CLICKED_ID(L"a-about", &LittleTFrame::OnClkAbout)
     BN_CLICKED_ID(L"a-setting", &LittleTFrame::OnClkSetting)
+    BN_CLICKED_ID(L"a-weibo", &LittleTFrame::OnClkMyWeibo)
 QUI_END_EVENT_MAP()
 
 LittleTFrame::LittleTFrame(void)
@@ -650,4 +652,9 @@ void LittleTFrame::OnSize( UINT nType, WTL::CSize sz )
 void LittleTFrame::OnClkSetting( HELEMENT )
 {
     LSettingDlg::ShowModal();
+}
+
+void LittleTFrame::OnClkMyWeibo(HELEMENT)
+{
+    quibase::VisitWebsiteWithDefaultBrowser(L"http://weibo.com/qiuchengw");    
 }

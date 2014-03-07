@@ -33,7 +33,7 @@ protected:
     void OnMenuItemClkEdit(HELEMENT, EMenuItem mi);
     void OnMenuItemClkDelete(HELEMENT, EMenuItem mi);
     void OnStageItemSelectChanged(HELEMENT he);
-    void OnPageNaveSelectChanged(HELEMENT he, HELEMENT h2);
+    void OnPageNaveSelectChanged(HELEMENT he);
 
 protected:
     ETable AddStage(QStage* pStage);

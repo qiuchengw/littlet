@@ -11,7 +11,7 @@ QUI_BEGIN_EVENT_MAP(LFormStage,QForm)
 //    MENUITEM_CLICK_ID(L"mi-stage-newgoal", &LFormStage::OnMenuItemClkNewGoal)
     MENUITEM_CLICK_ID(L"mi-stage-edit", &LFormStage::OnMenuItemClkEdit)
     MENUITEM_CLICK_ID(L"mi-stage-delete", &LFormStage::OnMenuItemClkDelete)
-    UNKNOWN_SELECTION_CHANGED_ID(L"id_stage_nav", &LFormStage::OnPageNaveSelectChanged)
+    BN_STATECHANGED_ID(L"id_stage_nav", &LFormStage::OnPageNaveSelectChanged)
 QUI_END_EVENT_MAP()
 
 LFormStage::LFormStage(void)
@@ -378,7 +378,7 @@ void LFormStage::RefreshCurrentStageItem()
     RefreshStageItem(_CurrentStageItem());
 }
 
-void LFormStage::OnPageNaveSelectChanged( HELEMENT he, HELEMENT h2 )
+void LFormStage::OnPageNaveSelectChanged( HELEMENT he )
 {
     int idx = _PageNav().GetCurPage();
     if (-1 != idx)

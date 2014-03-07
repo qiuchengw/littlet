@@ -89,6 +89,15 @@
 				overflow:hidden;
 				color:#444;
 				font:normal 9pt;
+				white-space:nowrap;
+			}
+			#bottom_bar>div.clk{
+				behavior:clickable;
+				width:max-intrinsic;
+				text-decoration:underline; 
+				color:#6C311C;
+				cursor:pointer;
+				padding:0; margin-right:10px;
 			}
 		</style>
 	</head>
@@ -137,8 +146,9 @@
 		</widget>
 		<div style="flow:horizontal;" #bottom_bar>
 			<div id="bar_status" />
-			<div style="behavior:clickable;width:30px; color:#6C311C;" id="a-setting">设置</div>
-			<div style="behavior:clickable;width:30px; color:#6C311C;" id="a-about">关于</div>
+			<div .clk style="color:#D33682;" id="a-weibo">微博</div>
+			<div .clk id="a-setting">设置</div>
+			<div .clk id="a-about">关于</div>
 			<!-- <div .led-time style="width:50px;behavior:clock2;">12:30</div> -->
 		</div>
 	</body>

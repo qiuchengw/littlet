@@ -341,6 +341,9 @@ LRESULT QSingleRmdDlg::OnDocumentComplete()
 
         RefreshRemindMessage(); 
     }
+
+    CenterWindow();
+
     return 0;
 }
 
