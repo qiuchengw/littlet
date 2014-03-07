@@ -72,6 +72,7 @@ protected:
     void OnClkAbout(HELEMENT);
     void OnClkSetting(HELEMENT);
     void OnClkMyWeibo(HELEMENT);
+    void OnClkFeedback(HELEMENT);
 
     virtual QView* CustomControlCreate(HELEMENT he);
 

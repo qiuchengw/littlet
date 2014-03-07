@@ -1,5 +1,6 @@
 #include "LittleTFrame.h"
 
+#include "feedback/Feedback.h"
 #include "AppHelper.h"
 #include "../common/LittleTUIcmn.h"
 #include "../common/Worker.h"
@@ -60,6 +61,7 @@ QUI_BEGIN_EVENT_MAP(LittleTFrame,QFrame)
     BN_CLICKED_ID(L"a-about", &LittleTFrame::OnClkAbout)
     BN_CLICKED_ID(L"a-setting", &LittleTFrame::OnClkSetting)
     BN_CLICKED_ID(L"a-weibo", &LittleTFrame::OnClkMyWeibo)
+    BN_CLICKED_ID(L"btn_feedback", &LittleTFrame::OnClkFeedback)
 QUI_END_EVENT_MAP()
 
 LittleTFrame::LittleTFrame(void)
@@ -657,4 +659,9 @@ void LittleTFrame::OnClkSetting( HELEMENT )
 void LittleTFrame::OnClkMyWeibo(HELEMENT)
 {
     quibase::VisitWebsiteWithDefaultBrowser(L"http://weibo.com/qiuchengw");    
+}
+
+void LittleTFrame::OnClkFeedback( HELEMENT )
+{
+    QUserFeedbackWnd::Show();
 }

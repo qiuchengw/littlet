@@ -1,4 +1,4 @@
-﻿Build started 2014/3/7 23:39:53.
+﻿Build started 2014/3/8 1:25:31.
      1>Project "E:\Code\LittleT\LittleT\LittleT.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\LittleT.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -12,11 +12,12 @@
          
          Updating archive ..\Debug\UI.ZIP
          
+         Compressing  common\feedback.htm
          
          Everything is Ok
        ClCompile:
-         D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D DEBUG /D _WINDOWS /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt LittleT.cpp
-         LittleT.cpp
+         D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D DEBUG /D _WINDOWS /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt feedback\Feedback.cpp
+         Feedback.cpp
        ResourceCompile:
          All outputs are up-to-date.
        ManifestResourceCompile:
@@ -67,4 +68,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.64
+Time Elapsed 00:00:04.56

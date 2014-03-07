@@ -99,12 +99,22 @@
 				cursor:pointer;
 				padding:0; margin-right:10px;
 			}
+			#btn_feedback{
+				foreground-image:url(qabs:icons/talk.png);
+				foreground-position:0px center;
+				color:#29AFCE;
+				padding-left:20px;
+				white-space:nowrap;
+				font:normal 10pt '宋体';
+				cursor:pointer;
+			}
 		</style>
 	</head>
 	<body #wc-top drag-move="1">
 		<div #wc-caption>
 			<div #wc-sysicon style="background-image:url(qabs:icons/sysicon.png);" />
 			<div #wc-title style="text-align:center;font-weight:bold;color:#333;">LittleT</div>
+			<div #btn_feedback .qbtn>意见反馈</div>
 			<table sysbtn>
 				<tr><td xrole="MINIMAZE" /><td xrole="CLOSE" /></tr>
 			</table>

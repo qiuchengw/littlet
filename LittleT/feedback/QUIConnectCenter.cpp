@@ -587,3 +587,4 @@ BOOL QAutoUpdater::Startup( __in DWORD dwCheckPeriod /*= 30*/ )
     return FALSE;
 }
 
+
