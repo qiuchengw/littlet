@@ -32,6 +32,15 @@ BOOL LittleTApp::InitRun()
     quibase::MakeSureDirExist(pCfg->GetIconsDir());
 
     SetMainWnd(&m_frame);
+
+    // 信息读取
+    if (!QUIConnectCenter::GetInstance()->Init())
+    {
+        XMsgBox::ErrorMsgBox(L"升级信息读取失败！");
+
+        // return false;
+    }
+
     if (!QWorker::GetInstance()->Startup())
     {
         XMsgBox::ErrorMsgBox(L"工作者线程启动失败!");
@@ -90,10 +99,10 @@ BOOL LittleTApp::InitRun()
     }
 #endif
 
-#ifndef _DEBUG
+//#ifndef _DEBUG
     // 每次启动的时候都检查是否有更新
     CheckUpdate();
-#endif
+//#endif
 
     return TRUE;
 }
@@ -116,13 +125,13 @@ void LittleTApp::CheckUpdaterExe()
 
 BOOL LittleTApp::CheckUpdate()
 {
-    QBuffer* pBuf = NULL;
-    if (!QUIMgr::GetInstance()->LoadData(L"qabs:url.x", (QView*)nullptr, pBuf))
-    {
-        XMsgBox::ErrorMsgBox(L"版本太低啦 -_-!");
-    }
-    if (NULL != pBuf)
-    {
+//     QBuffer* pBuf = NULL;
+//     if (!QUIMgr::GetInstance()->LoadData(L"qabs:url.x", (QView*)nullptr, pBuf))
+//     {
+//         XMsgBox::ErrorMsgBox(L"版本太低啦 -_-!");
+//     }
+//     if (NULL != pBuf)
+//     {
         // 去掉前3个字节的文件编码，剩下的就是文件内容了
 //         DWORD dw;
 //         pBuf->Read((PBYTE)&dw, 3);
@@ -137,8 +146,8 @@ BOOL LittleTApp::CheckUpdate()
         // 启动自动更新检查
 //        return QAutoUpdater::GetInstance()->Startup(sUrl, sRefer);
         return QAutoUpdater::GetInstance()->Startup();
-    }
-    return FALSE;
+//     }
+//     return FALSE;
 }
 
 LittleTApp::~LittleTApp()

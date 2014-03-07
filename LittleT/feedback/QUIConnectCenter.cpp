@@ -204,7 +204,13 @@ BOOL QUIConnectCenter::Init()
     Create(NULL, CRect(0,0,0,0), NULL, 
         WS_POPUP, WS_EX_TOOLWINDOW|WS_EX_TRANSPARENT );
 
-    return IsWindow();
+    if (!IsWindow())
+        return FALSE;
+
+    if (!ui_url_.Init())
+        return FALSE;
+
+    return TRUE;
 }
 
 void QUIConnectCenter::OnAfterRequestSend( FCHttpRequest& rTask )

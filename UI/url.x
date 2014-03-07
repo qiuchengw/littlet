@@ -1,1 +1,31 @@
-﻿http://blog.sina.com.cn/s/blog_936e65db0101n2y7.html;http://blog.sina.com.cn
+{
+    "update":
+    {
+        "1":
+        {
+            "url":"http://www.qiuchengw.com/soft/yulu.htm",
+			"domain":"http://www.qiuchengw.com"
+        }
+        ,
+        "2":
+		{
+			"url":"http://blog.sina.com.cn/s/blog_936e65db0101n2y7.html",
+			"domain":"http://blog.sina.com.cn"
+		}
+    },
+    "user":
+    {
+        "1":
+        {
+            "url":"http://www.qiuchengw.com/soft/yulu.htm",
+			"domain":"http://www.qiuchengw.com"
+        }
+        ,
+        "2":
+		{
+			"url":"http://blog.sina.com.cn/s/blog_936e65db0101n2y7.html",
+			"domain":"http://blog.sina.com.cn"
+		}
+    },
+	"stat":"http://www.qiuchengw.com/statics/yulu.htm"
+}
