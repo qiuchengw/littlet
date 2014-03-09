@@ -2417,20 +2417,13 @@ popup[xrole="tooltip"]{
 	width:max-intrinsic; 
 	max-width:300px; 
 	min-height:15px; 
-	background-color:#FAFAFA #FAFAFA #E5E5E5 #E5E5E5; 
+//	background-color:#FAFAFA #FAFAFA #E5E5E5 #E5E5E5; 
 }
 
 /**************************/
 /*自定义的popup，用于支持ECtrl的ShowTooltip*/
 popup.qtooltip{
-	behavior:qtooltip;
-	border:@BORDER;
-	font:system;
-	background-color:@CTRL_BACK_HOVER;
-	padding:4px;
-	max-width:350px;max-height:500px;
-	min-width:100px;min-height:@CTRL_HEIGHT;
-	width:max-intrinsic;height:max-intrinsic;
+//	behavior:qtooltip;
 }
 
 /**************************/
