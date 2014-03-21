@@ -1,5 +1,5 @@
-﻿Build started 2014/3/7 12:44:18.
-     1>Project "E:\Code\LittleT\LittleTUpdater\LittleTUpdater.vcxproj" on node 6 (build target(s)).
+﻿Build started 2014/3/12 22:51:44.
+     1>Project "E:\Code\LittleT\LittleTUpdater\LittleTUpdater.vcxproj" on node 5 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\LittleTUpdater.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
@@ -31,4 +31,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:06.42
+Time Elapsed 00:00:06.65

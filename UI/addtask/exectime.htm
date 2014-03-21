@@ -26,6 +26,11 @@
 			table[id="lst_times"] tr{
 				background-color:white;
 			}
+			th.tip2,th.tip2:hover,th.tip2:checked{
+				background-color:#AAD6E6;
+				font-weight:normal;
+				foreground-image:none;
+			}
 		</style>
 	</head>
 	<body #wc-top>
@@ -42,13 +47,13 @@
 				<tr .box>
 					<td style="width:60px;text-align:right;">开始时间:</td>
 					<td .row style="border-spacing:2px;">
-						<widget type="date" id="date_begin" style="height:26px;" />
-						<widget type="time" id="time_begin" />
+						<widget type="date" id="date_begin" value="today" style="height:26px;" />
+						<widget type="time" id="time_begin" value="now" />
 					</td>
 					<td style="width:80px;text-align:right;">结束时间:</td>
 					<td .row style="border-spacing:2px;">
-						<widget type="date" id="date_end" style="height:26px;" />
-						<widget type="time" id="time_end" />
+						<widget type="date" id="date_end" value="today" style="height:26px;" />
+						<widget type="time" id="time_end" value="now" />
 					</td>
 				</tr>
 			</table>
@@ -140,17 +145,24 @@
 					</div>
 					
 					<!--时间点-->
-					<table type="sheet" id="lst_times" fixedrows=1 style="height:*;width:120px;behavior:~column-resizer;">
+					<table type="sheet" id="lst_times" fixedrows=2 style="height:*;width:max-intrinsic;behavior:~column-resizer;">
 						<tr>
-							<th style="width:*;">
+							<th style="width:*;" .tip2>
 								执行时间
 								<!-- <widget type="timectrl" id="time_absTime" style="width:80px;" /> -->
 								<widget type="time" cell-widget />
 							</th>
-							<th style="width:20px;" .qbtn id="btn_addtime" 
-									style="foreground-image:url(qabs:icons/plus_16.png);" >
+							<!-- <th style="width:20px;" .tip2 >
+								<div .qbtn id="btn_addtime" 
+									style="foreground-image:url(qabs:icons/plus_16.png);" />
 							</th>
+							-->
 						</tr>
+						<tr><td><input type="time" value="now" /></td></tr>
+						<tr><td><input type="time" value="now" /></td></tr>
+						<tr><td><input type="time" value="now" /></td></tr>
+						<tr><td><input type="time" value="now" /></td></tr>
+						<tr><td><input type="time" value="now" /></td></tr>
 					</table>
 				</div>
 			</widget>

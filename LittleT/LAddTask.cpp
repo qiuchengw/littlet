@@ -364,7 +364,14 @@ BOOL QExecTimeDlg::GetAbsoluteExp( __out QString &sExp ,QTime&tmB,QTime &tmE)
         QString sTimePots;
         for (int i = 0; i < nTimesPot; ++i)
         {
-            arTimePots.push_back(tblTimes.GetCellText(i,0));
+            ETime tp = tblTimes.GetCell(i, 0).find_first("input");
+            QTime t = tp.GetTime();
+            QString s = t.Format(L"%H:%M:%S");
+            if (std::find(arTimePots.begin(), arTimePots.end(), s) == arTimePots.end())
+            {
+                arTimePots.push_back(s);
+            }
+            // arTimePots.push_back(tblTimes.GetCellText(i,0));
         }
     }
     else

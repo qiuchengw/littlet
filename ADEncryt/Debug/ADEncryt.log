@@ -1,49 +1,137 @@
-﻿Build started 2014/3/7 13:55:13.
+﻿Build started 2014/3/12 22:52:22.
      1>Project "E:\Code\LittleT\ADEncryt\ADEncryt.vcxproj" on node 4 (build target(s)).
      1>InitializeBuildStatus:
-         Creating "Debug\ADEncryt.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Debug\ADEncryt.unsuccessfulbuild".
        ClCompile:
-         D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\UIBase\ui\WndHelper.cpp
-         WndHelper.cpp
-       ManifestResourceCompile:
-         All outputs are up-to-date.
-       Link:
-         D:\Program Files\VS2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Code\LittleT\Debug\ADEncryt.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\ADEncryt.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Code\LittleT\Debug\ADEncryt.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Code\LittleT\Debug\ADEncryt.lib" /MACHINE:X86 Debug\ADEncryt.exe.embed.manifest.res
-         Debug\AppHelper.obj
-         Debug\crijndael.obj
-         Debug\CXUnzip.obj
-         Debug\md5.obj
-         Debug\QDataEnDe.obj
-         Debug\XUnzip.obj
-         Debug\XZip.obj
-         Debug\FileEnumerator.obj
-         Debug\FileOper.obj
-         Debug\inifile.obj
-         Debug\QFile.obj
-         Debug\TextFile.obj
-         Debug\QBuffer.obj
-         Debug\QUI.obj
-         Debug\QTime.obj
-         Debug\ECtrl.obj
-         Debug\QApp.obj
-         Debug\QConfig.obj
-         Debug\QUIMgr.obj
-         Debug\QWindow.obj
-         Debug\WndHelper.obj
-         Debug\WndShadow.obj
-         Debug\MainWnd.obj
-         Debug\QADEnApp.obj
-       Manifest:
-         G:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\ADEncryt.exe.embed.manifest" /manifest Debug\ADEncryt.exe.intermediate.manifest
-         All outputs are up-to-date.
-       LinkEmbedManifest:
-         All outputs are up-to-date.
-         ADEncryt.vcxproj -> E:\Code\LittleT\Debug\ADEncryt.exe
-       FinalizeBuildStatus:
-         Deleting file "Debug\ADEncryt.unsuccessfulbuild".
-         Touching "Debug\ADEncryt.lastbuildstate".
-     1>Done Building Project "E:\Code\LittleT\ADEncryt\ADEncryt.vcxproj" (build target(s)).
+         D:\Program Files\VS2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\UIBase\ui\QApp.cpp ..\..\UIBase\ui\QUIMgr.cpp ..\..\UIBase\ui\QWindow.cpp MainWnd.cpp QADEnApp.cpp
+         QADEnApp.cpp
+     1>e:\code\uibase\ui\qwindow.h(854): error C2061: syntax error : identifier 'Skinbags'
+     1>e:\code\uibase\ui\qwindow.h(912): error C2146: syntax error : missing ';' before identifier 'skins_'
+     1>e:\code\uibase\ui\qwindow.h(912): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(912): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\regexp.h(53): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\code\uibase\regexp.h(87): warning C4018: '<' : signed/unsigned mismatch
+         MainWnd.cpp
+     1>e:\code\uibase\ui\qwindow.h(173): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(274): error C2146: syntax error : missing ';' before identifier 'DetectWidgetType'
+     1>e:\code\uibase\ui\qwindow.h(274): error C2433: 'QView::ENUM_WIDGET_TYPE' : 'inline' not permitted on data declarations
+     1>e:\code\uibase\ui\qwindow.h(274): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(274): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(274): warning C4183: 'DetectWidgetType': missing return type; assumed to be a member function returning 'int'
+     1>e:\code\uibase\ui\qwindow.h(347): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(351): error C2146: syntax error : missing ';' before identifier 'eType'
+     1>e:\code\uibase\ui\qwindow.h(351): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(351): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(372): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(431): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(441): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(550): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(560): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(175): error C2065: 'eWidgetType' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(347): error C2065: 'e' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(347): error C2614: 'QView::_SpecialWidgets::_SPECIAL_WIDGET' : illegal member initialization: 'eType' is not a base or member
+     1>e:\code\uibase\ui\qwindow.h(374): error C2065: 'bHandled' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(376): error C2065: 'eWidgetType' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(376): error C2050: switch expression not integral
+     1>e:\code\uibase\ui\qwindow.h(395): error C2065: 'WIDGET_TYPE_DOCKVIEW' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(395): error C2051: case expression not constant
+     1>e:\code\uibase\ui\qwindow.h(411): error C2065: 'WIDGET_TYPE_UNKNOWN' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(411): error C2051: case expression not constant
+     1>e:\code\uibase\ui\qwindow.h(415): error C2065: 'bHandled' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(418): warning C4065: switch statement contains 'default' but no 'case' labels
+     1>e:\code\uibase\ui\qwindow.h(443): error C2065: 'eWidgetType' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(554): error C2065: 'WIDGET_TYPE_UNKNOWN' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(554): error C2065: 'eType' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(556): error C2065: 'eType' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(565): error C2039: 'eType' : is not a member of 'QView::_SpecialWidgets::_SPECIAL_WIDGET'
+                 e:\code\uibase\ui\qwindow.h(346) : see declaration of 'QView::_SpecialWidgets::_SPECIAL_WIDGET'
+     1>e:\code\uibase\ui\qwindow.h(854): error C2061: syntax error : identifier 'Skinbags'
+     1>e:\code\uibase\ui\qwindow.h(912): error C2146: syntax error : missing ';' before identifier 'skins_'
+     1>e:\code\uibase\ui\qwindow.h(912): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(912): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(831): error C2065: 'UIBASE_MSG_SKINBAGDOWN' : undeclared identifier
+     1>e:\code\uibase\regexp.h(53): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\code\uibase\regexp.h(87): warning C4018: '<' : signed/unsigned mismatch
+     1>c1xx : fatal error C1903: unable to recover from previous error(s); stopping compilation
+         QWindow.cpp
+     1>e:\code\uibase\ui\qwindow.h(173): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(274): error C2146: syntax error : missing ';' before identifier 'DetectWidgetType'
+     1>e:\code\uibase\ui\qwindow.h(274): error C2433: 'QView::ENUM_WIDGET_TYPE' : 'inline' not permitted on data declarations
+     1>e:\code\uibase\ui\qwindow.h(274): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(274): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(274): warning C4183: 'DetectWidgetType': missing return type; assumed to be a member function returning 'int'
+     1>e:\code\uibase\ui\qwindow.h(347): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(351): error C2146: syntax error : missing ';' before identifier 'eType'
+     1>e:\code\uibase\ui\qwindow.h(351): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(351): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(372): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(431): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(441): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(550): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(560): error C2061: syntax error : identifier 'ENUM_WIDGET_TYPE'
+     1>e:\code\uibase\ui\qwindow.h(175): error C2065: 'eWidgetType' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(347): error C2065: 'e' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(347): error C2614: 'QView::_SpecialWidgets::_SPECIAL_WIDGET' : illegal member initialization: 'eType' is not a base or member
+     1>e:\code\uibase\ui\qwindow.h(374): error C2065: 'bHandled' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(376): error C2065: 'eWidgetType' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(376): error C2050: switch expression not integral
+     1>e:\code\uibase\ui\qwindow.h(395): error C2065: 'WIDGET_TYPE_DOCKVIEW' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(395): error C2051: case expression not constant
+     1>e:\code\uibase\ui\qwindow.h(411): error C2065: 'WIDGET_TYPE_UNKNOWN' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(411): error C2051: case expression not constant
+     1>e:\code\uibase\ui\qwindow.h(415): error C2065: 'bHandled' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(418): warning C4065: switch statement contains 'default' but no 'case' labels
+     1>e:\code\uibase\ui\qwindow.h(443): error C2065: 'eWidgetType' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(554): error C2065: 'WIDGET_TYPE_UNKNOWN' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(554): error C2065: 'eType' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(556): error C2065: 'eType' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.h(565): error C2039: 'eType' : is not a member of 'QView::_SpecialWidgets::_SPECIAL_WIDGET'
+                 e:\code\uibase\ui\qwindow.h(346) : see declaration of 'QView::_SpecialWidgets::_SPECIAL_WIDGET'
+     1>e:\code\uibase\ui\qwindow.h(854): error C2061: syntax error : identifier 'Skinbags'
+     1>e:\code\uibase\ui\qwindow.h(912): error C2146: syntax error : missing ';' before identifier 'skins_'
+     1>e:\code\uibase\ui\qwindow.h(912): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(912): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\code\uibase\ui\qwindow.h(831): error C2065: 'UIBASE_MSG_SKINBAGDOWN' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.cpp(84): error C2556: 'ENUM_WIDGET_TYPE QView::DetectWidgetType(htmlayout::dom::ECtrl)' : overloaded function differs only by return type from 'int QView::DetectWidgetType(htmlayout::dom::ECtrl)'
+                 e:\code\uibase\ui\qwindow.h(274) : see declaration of 'QView::DetectWidgetType'
+     1>e:\code\uibase\ui\qwindow.cpp(84): error C2371: 'QView::DetectWidgetType' : redefinition; different basic types
+                 e:\code\uibase\ui\qwindow.h(274) : see declaration of 'QView::DetectWidgetType'
+     1>e:\code\uibase\ui\qwindow.cpp(109): error C2264: 'QView::DetectWidgetType' : error in function definition or declaration; function not called
+     1>e:\code\uibase\ui\qwindow.cpp(131): error C2660: 'QView::_SpecialWidgets::HandleCreation' : function does not take 4 arguments
+     1>e:\code\uibase\ui\qwindow.cpp(355): error C2264: 'QView::DetectWidgetType' : error in function definition or declaration; function not called
+     1>e:\code\uibase\ui\qwindow.cpp(359): error C2660: 'QView::_SpecialWidgets::HandleDestrucion' : function does not take 2 arguments
+     1>e:\code\uibase\ui\qwindow.cpp(618): error C2511: 'BOOL QView::_SpecialWidgets::HandleDestrucion(HELEMENT,ENUM_WIDGET_TYPE)' : overloaded member function not found in 'QView::_SpecialWidgets'
+                 e:\code\uibase\ui\qwindow.h(344) : see declaration of 'QView::_SpecialWidgets'
+     1>e:\code\uibase\ui\qwindow.cpp(1015): warning C4018: '>' : signed/unsigned mismatch
+     1>e:\code\uibase\ui\qwindow.cpp(1019): warning C4018: '>' : signed/unsigned mismatch
+     1>e:\code\uibase\ui\qwindow.cpp(1068): error C2065: 'skins_' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.cpp(1068): error C2228: left of '.push_back' must have class/struct/union
+                 type is ''unknown-type''
+     1>e:\code\uibase\ui\qwindow.cpp(1122): error C2065: 'skins_' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.cpp(1122): error C2228: left of '.push_back' must have class/struct/union
+                 type is ''unknown-type''
+     1>e:\code\uibase\ui\qwindow.cpp(1151): error C2065: 'skins_' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.cpp(1151): error C2228: left of '.push_back' must have class/struct/union
+                 type is ''unknown-type''
+     1>e:\code\uibase\ui\qwindow.cpp(1188): error C2511: 'void QSkinUI::SetSkins(Skinbags *)' : overloaded member function not found in 'QSkinUI'
+                 e:\code\uibase\ui\qwindow.h(819) : see declaration of 'QSkinUI'
+     1>e:\code\uibase\ui\qwindow.cpp(1211): error C2065: 'skins_' : undeclared identifier
+     1>e:\code\uibase\ui\qwindow.cpp(1211): error C2228: left of '.begin' must have class/struct/union
+                 type is ''unknown-type''
+     1>e:\code\uibase\ui\qwindow.cpp(1211): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         QUIMgr.cpp
+         QApp.cpp
+     1>e:\code\uibase\ui\htmlayout\value.h(296): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\program files\vs2010\vc\include\string.h(188) : see declaration of 'strncpy'
+     1>e:\code\uibase\ui\htmlayout\value.h(297): warning C4996: 'wcsncpy': This function or variable may be unsafe. Consider using wcsncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\program files\vs2010\vc\include\string.h(306) : see declaration of 'wcsncpy'
+     1>e:\code\uibase\ui\htmlayout\behaviors\behavior_clock2.cpp(77): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>e:\code\uibase\ui\htmlayout\behaviors\behavior_gridselect.cpp(62): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\code\uibase\ui\htmlayout\behaviors\behavior_gridselect.cpp(65): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\code\uibase\ui\htmlayout\behaviors\behavior_scroll_indicator.cpp(129): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+         Generating Code...
+     1>Done Building Project "E:\Code\LittleT\ADEncryt\ADEncryt.vcxproj" (build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:03.45
+Time Elapsed 00:00:15.55
