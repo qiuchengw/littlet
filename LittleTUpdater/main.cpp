@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
 
+// Òþ²Øconsole´°¿Ú
+#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"") 
+
 #include "../common/LittleTcmn.h"
 
 #include "QBuffer.h"
