@@ -2,7 +2,7 @@
 #include <vector>
 
 // Òþ²Øconsole´°¿Ú
-#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"") 
+#pragma comment(linker, "/subsystem:\"windows\" /entry:\"wmainCRTStartup\"") 
 
 #include "../common/LittleTcmn.h"
 
