@@ -1401,8 +1401,10 @@ input[type="vscrollbar"]
 		background-color:#E5E5E5;
 	}
 	.next{
+		background-color:#A7A7A7;
 	}
 	.prev{
+		background-color:#A7A7A7;
 	}
 	.base{  
 		width:6px;
