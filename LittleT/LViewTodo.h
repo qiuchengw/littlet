@@ -1,4 +1,4 @@
-#include "ui/QWindow.h"
+#include "LittleTView.h"
 #include "../common/QDBHelper.h"
 
 class LFormTodo : public QForm
@@ -41,11 +41,11 @@ private:
     ECtrl					m_eItemEdit;
 };
 
-class LViewTodo : public QView
+class LViewTodo : public LittleTView
 {
     BEGIN_MSG_MAP_EX(LViewTodo)
         MSG_WM_KEYDOWN(OnKeyDown)
-        CHAIN_MSG_MAP(QView)
+        CHAIN_MSG_MAP(LittleTView)
     END_MSG_MAP()
 
     QUI_DECLARE_EVENT_MAP;

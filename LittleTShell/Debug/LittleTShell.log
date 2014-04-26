@@ -1,4 +1,4 @@
-﻿Build started 2014/4/23 16:53:13.
+﻿Build started 2014/4/26 10:47:16.
      1>Project "E:\Code\VC\LittleT\LittleTShell\LittleTShell.vcxproj" on node 3 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\LittleTShell.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -19,4 +19,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.06
+Time Elapsed 00:00:00.35

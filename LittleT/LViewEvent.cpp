@@ -6,7 +6,7 @@
 #include "LAddTask.h"
 #include "LDatas.h"
 
-QUI_BEGIN_EVENT_MAP(LViewEvent,QView)
+QUI_BEGIN_EVENT_MAP(LViewEvent,LittleTView)
     // auto task
     BN_CLICKED_ID(L"id_btn_newtask", &LViewEvent::OnClkNewEvent)
     BN_CLICKED_ID(L"btn_TestAutoTask", &LViewEvent::OnCalcTestEvent)

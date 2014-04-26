@@ -118,6 +118,7 @@
     <ClInclude Include="LFormStage.h" />
     <ClInclude Include="LittleT.h" />
     <ClInclude Include="LittleTFrame.h" />
+    <ClInclude Include="LittleTView.h" />
     <ClInclude Include="LViewEvent.h" />
     <ClInclude Include="LViewPlan.h" />
     <ClInclude Include="LViewTodo.h" />

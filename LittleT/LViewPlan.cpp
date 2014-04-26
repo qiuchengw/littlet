@@ -3,7 +3,7 @@
 #include "LFormPlan.h"
 
 //////////////////////////////////////////////////////////////////////////
-QUI_BEGIN_EVENT_MAP(LViewPlan,QView)
+QUI_BEGIN_EVENT_MAP(LViewPlan,LittleTView)
 //    BN_CLICKED_ID(L"tbl-curgoal",&LViewPlan::OnClkCurrentGoal)
     BN_CLICKED_ID(L"id_btn_newplan",&LViewPlan::OnClkNewPlan)
     BN_CLICKED_NAME(L"goal-item",&LViewPlan::OnClkGoalCtl)
@@ -14,7 +14,7 @@ QUI_BEGIN_EVENT_MAP(LViewPlan,QView)
     CHAIN_HLEVENT_TO_FORM(&m_formStage,"#id-stage-box-wrapper")
 QUI_END_EVENT_MAP()
 
-QUI_BEGIN_REFLECT_EVENT_MAP(LViewPlan, QView)
+QUI_BEGIN_REFLECT_EVENT_MAP(LViewPlan, LittleTView)
 //    BN_STATECHANGED_NAME(L"plan-item", &LViewPlan::OnPlanSelectChanged)
 //     BN_CLICKED_ID(L"btn-next-stage", &LViewPlan::OnStageItemChanged)
 //     BN_CLICKED_ID(L"btn-prev-stage", &LViewPlan::OnStageItemChanged)

@@ -1,5 +1,5 @@
-﻿Build started 2014/4/23 16:53:13.
-     1>Project "E:\Code\VC\LittleT\UIZipMaker\UIZipMaker.vcxproj" on node 5 (build target(s)).
+﻿Build started 2014/4/26 10:47:16.
+     1>Project "E:\Code\VC\LittleT\UIZipMaker\UIZipMaker.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\UIZipMaker.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
@@ -17,4 +17,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.07
+Time Elapsed 00:00:01.00

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ui/QWindow.h"
+#include "LittleTView.h"
 #include "../common/ConstValues.h"
 
 class QAutoTask;
 class LittleTFrame;
-class LViewEvent : public QView
+class LViewEvent : public LittleTView
 {
     friend class LittleTFrame;
 
@@ -17,7 +17,7 @@ class LViewEvent : public QView
             MSG_QUI_CODE(EVENTWND_CMD_SELECTAUTOTASK,OnCmdSelectEventItem)
             MSG_QUI_CODE(EVENTWND_NOTIFY_USERJUMPEVENTEXEC,OnNotifyJumpOverExec)
         END_QUI_MSG
-        CHAIN_MSG_MAP(QView)
+        CHAIN_MSG_MAP(LittleTView)
     END_MSG_MAP()
 
 public:

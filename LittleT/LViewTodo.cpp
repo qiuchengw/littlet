@@ -366,7 +366,7 @@ void LFormTodo::OnClkMinus5Minutes( HELEMENT )
 }
 
 //////////////////////////////////////////////////////////////////////////
-QUI_BEGIN_EVENT_MAP(LViewTodo, QView)
+QUI_BEGIN_EVENT_MAP(LViewTodo, LittleTView)
     CHAIN_HLEVENT_TO_FORM(&m_formTodo, "body")
 QUI_END_EVENT_MAP()
 
@@ -386,7 +386,7 @@ void LViewTodo::OnKeyDown( UINT nChar,UINT nRepCnt,UINT nFlags )
 }
 
 //////////////////////////////////////////////////////////////////////////
-QUI_BEGIN_EVENT_MAP(LDesktopTodo, QView)
+QUI_BEGIN_EVENT_MAP(LDesktopTodo, QDesktopEmbedFrame)
     CHAIN_HLEVENT_TO_FORM(&m_formTodo, "body")
 QUI_END_EVENT_MAP()
 

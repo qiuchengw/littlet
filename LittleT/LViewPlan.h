@@ -1,5 +1,6 @@
 #pragma once
 
+#include "LittleTView.h"
 #include "../common/QLongplan.h"
 #include "../common/QDBPlan.h"
 
@@ -8,7 +9,7 @@
 #include "LFormStage.h"
 #include "LFormGoal.h"
 
-class LViewPlan : public QView
+class LViewPlan : public LittleTView
 {
     QUI_DECLARE_EVENT_MAP;
     QUI_DECLARE_REFLECT_EVENT_MAP;
@@ -31,7 +32,7 @@ class LViewPlan : public QView
             MSG_QUI_CODE(VIEWPLAN_NOTIFY_GOALSUBITEMDELETED, OnGoalSubitemDeleted)
             MSG_QUI_CODE(VIEWPLAN_NOTIFY_GOALSUBITEMSTATUSCHANGED, OnGoalSubitemStatusChanged)
         END_QUI_MSG
-        CHAIN_MSG_MAP(QView)
+        CHAIN_MSG_MAP(LittleTView)
     END_MSG_MAP()
 
 public:

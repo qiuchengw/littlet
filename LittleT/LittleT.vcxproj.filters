@@ -147,6 +147,9 @@
     <ClInclude Include="feedback\UserInfo.h">
       <Filter>feedback</Filter>
     </ClInclude>
+    <ClInclude Include="LittleTView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LittleT.cpp">
