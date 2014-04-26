@@ -219,12 +219,12 @@ BOOL LPlanDlg::CheckDate(__out QTime &tmBegin,__out QTime &tmEnd)
     tmBegin = EDate(GetCtrl("#date_begin")).GetDate();
     tmEnd = EDate(GetCtrl("#date_end")).GetDate();
 
-    QTime tmNow = QTime::GetCurrentTime();
-    if ((tmBegin.CompareDate(tmNow) < 0) || (tmBegin >= tmEnd))
-    {
-        XMsgBox::OkMsgBox(L"请设定一个正确的任务周期");
-        return FALSE;
-    }
+//     QTime tmNow = QTime::GetCurrentTime();
+//     if ((tmBegin.CompareDate(tmNow) < 0) || (tmBegin >= tmEnd))
+//     {
+//         XMsgBox::OkMsgBox(L"请设定一个正确的任务周期");
+//         return FALSE;
+//     }
     return TRUE;
 }
 
