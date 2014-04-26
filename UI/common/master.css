@@ -1393,35 +1393,25 @@ input[type="vscrollbar"]
 }
 @set vscrollbar
 {
-	.prev,.next,.next-page,.prev-page{ 
-		foreground-color:transparent;
+	.prev,.next{ 
 		foreground-repeat:stretch;
 		foreground-position:center;
+	}	
+	.next-page,.prev-page{
+		background-color:#E5E5E5;
 	}
 	.next{
-		foreground-image:url(qabs:common/images/down.png);
 	}
 	.prev{
-		foreground-image:url(qabs:common/images/up.png);
-	}
-	.next:hover,.prev:hover{
-		background-color:#eee;
-	}
-	.next:active,.prev:active{
-		background-color:#ddd;
 	}
 	.base{  
 		width:6px;
 		padding:1px;
-		background-image:url(qabs:common/images/vscrollbar-back.png) expand stretch-middle;
-		background-position:2 2 2 2px;
-		border-radius:3px;
+		background-color:#D7E3F1;
+		background-image:none;
 	}
 	.slider{ 
-		width:*; 		
-		background-color:#ddd;
-		//foreground:url(qabs:common/images/vscrollbar-fore.png) expand stretch-middle; 
-		//foreground-position:2 2 2 2px;
+		background-color:#BFBFBF;
 	}
 }
 
