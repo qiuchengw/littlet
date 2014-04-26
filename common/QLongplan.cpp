@@ -38,7 +38,7 @@ BOOL ParseID( const QString&sID,__out IntArray &vi )
 QString MakeIDS( __in IntArray &vi )
 {
 	QString sRet,sPart;
-	for (int i = 0; i < vi.size(); i++)
+	for (unsigned int i = 0; i < vi.size(); i++)
 	{
 		sPart.Format(L"%d;",vi[i]);
 		sRet += sPart;

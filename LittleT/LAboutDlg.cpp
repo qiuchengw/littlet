@@ -155,24 +155,23 @@ void LSettingDlg::OnCmnChkAutoRun( HELEMENT he)
         {
             wchar_t szModuleName[1024] = {0};
             GetModuleFileName(NULL,szModuleName, 1024);
-            ASSERT(FALSE);
-            //bOk = quibase::CreateShortcut(szModuleName, sStartupDir);
+            //ASSERT(FALSE);
+            bOk = quibase::CreateFileShortcut(NULL, sStartupDir);
+//             ATL::CW2AEX<128> dir(sStartupDir);
+//             bOk = quibase::CreateShortcut(dir, szModuleName, NULL, 
+//                 NULL, quibase::GetModulePath(), L"Çï³Ç£¬qiuchengw@163.com");
         }
         else
         {
             QString sShortcut = sStartupDir + L"\\" + quibase::GetModuleName(FALSE) + L".lnk";
             bOk = DeleteFile(sShortcut);
-            if (!bOk)
-            {
-                bOk = IsStartupShortcutExist();
-            }
         }
     }
 
+    chkAutoRun.SetCheck(IsStartupShortcutExist());
+
     if (!bOk)
     {
-        chkAutoRun.SetCheck( !chkAutoRun.IsChecked() );
-
         chkAutoRun.ShowTooltip(L"²Ù×÷Ê§°Ü");
     }
 }

@@ -19,7 +19,7 @@ public:
 	// 枚举之
 	BOOL SnapShot();
 	// 进程数目
-	inline DWORD GetPsNumber()const { return m_vPsID.size(); }
+	inline DWORD GetPsNumber()const { return pids_.size(); }
 	// 遍历进程ID
 	DWORD NextID();
 	
@@ -37,9 +37,9 @@ public:
 	static BOOL IsExeRun(const QString & sExePath,__out QTime &tmRun);
 
 private:
-	typedef std::vector<DWORD> PSIDS;
-	PSIDS	m_vPsID;
-	int		m_idx;
+	typedef std::vector<DWORD> PIDs;
+	PIDs	pids_;
+	int		idx_;
 	static const QTime		sm_tmSystemStart; // 系统启动时间
 	static QTime		sm_tmAppStart;	// 本应用程序启动时间
 };

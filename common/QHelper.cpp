@@ -141,7 +141,7 @@ BOOL QHelper::MakeAbsExp(ENUM_AUTOTASK_EXECFLAG eFlag,QTime& tmB, QTime& tmE,
     QString sTimePots;
     QTime tTime;
     std::vector<DWORD> vExist;
-    for (int i = 0; i < arTimePots.size(); ++i)
+    for (unsigned int i = 0; i < arTimePots.size(); ++i)
     {
         if ( !tTime.ParseDateTime(arTimePots[i], VAR_TIMEVALUEONLY))
         {
@@ -206,7 +206,7 @@ BOOL QHelper::MakeAbsExp(ENUM_AUTOTASK_EXECFLAG eFlag,QTime& tmB, QTime& tmE,
     { 
         // ÖÜ¼¸
         int v , weeks = 0;
-        for (int i = 0; i < arDatePots.size(); ++i)
+        for (unsigned int i = 0; i < arDatePots.size(); ++i)
         {
             if (!QHelper::ParseInt(arDatePots[i], v) || (v > 6))
             {
@@ -226,7 +226,7 @@ BOOL QHelper::MakeAbsExp(ENUM_AUTOTASK_EXECFLAG eFlag,QTime& tmB, QTime& tmE,
     else if (AUTOTASK_EXEC_ATMONTHDAY == eFlag)
     {
         int d, days = 0;
-        for (int i = 0; i < arDatePots.size(); ++i)
+        for (unsigned int i = 0; i < arDatePots.size(); ++i)
         {
             if (!QHelper::ParseInt(arDatePots[i], d) || (d > 31))
             {

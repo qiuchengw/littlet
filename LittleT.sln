@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LittleT", "LittleT\LittleT.vcxproj", "{0A763285-C47C-4125-89AF-6BB461BB1AEF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D2A45C3A-2633-419F-9AB0-BAA89AAFE278} = {D2A45C3A-2633-419F-9AB0-BAA89AAFE278}
+		{D6B774B4-60ED-46EC-885A-5795567A6B63} = {D6B774B4-60ED-46EC-885A-5795567A6B63}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LittleTUpdater", "LittleTUpdater\LittleTUpdater.vcxproj", "{BBB17EE5-B510-415E-A146-7D2177FE3BD1}"
 EndProject
@@ -14,6 +18,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LittleTShell", "LittleTShell\LittleTShell.vcxproj", "{354DDE04-7F4C-437B-B91A-83C28BB91D90}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QUIL", "..\UIBase\qui\lib\QUIL.vcxproj", "{D2A45C3A-2633-419F-9AB0-BAA89AAFE278}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D6B774B4-60ED-46EC-885A-5795567A6B63} = {D6B774B4-60ED-46EC-885A-5795567A6B63}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

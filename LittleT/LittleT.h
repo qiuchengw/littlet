@@ -13,9 +13,9 @@
 #include "AppHelper.h"
 
 #ifdef _DEBUG
-#pragma comment(lib, "../Debug/QUIL_d.lib")
+#pragma comment(lib, "../Debug/QUIL.lib")
 #else
-#pragma comment(lib, "QUIL.lib")
+#pragma comment(lib, "../Release/QUIL.lib")
 #endif
 
 class LittleTApp : public QApp

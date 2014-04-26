@@ -1,5 +1,56 @@
-﻿Build started 2014/2/20 20:00:19.
+﻿Build started 2014/4/27 0:24:08.
+     1>Project "E:\Code\VC\LittleT\LittleT\LittleT.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Release\LittleT.unsuccessfulbuild".
+       ClCompile:
+         All outputs are up-to-date.
+       ResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         D:\Program Files\VS2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Code\VC\LittleT\Release\LittleT.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\LittleT.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Code\VC\LittleT\Release\LittleT.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Code\VC\LittleT\Release\LittleT.lib" /MACHINE:X86 Release\LittleT.res
+         Release\ProcessMan.obj
+         Release\QAutoTask.obj
+         Release\QDBHelper.obj
+         Release\QDBPlan.obj
+         Release\QDBRes.obj
+         Release\QHelper.obj
+         Release\QLongplan.obj
+         Release\QNote.obj
+         Release\QTimer.obj
+         Release\QTimerMan.obj
+         Release\Worker.obj
+         Release\Feedback.obj
+         Release\FileBackup.obj
+         Release\QUIConnectCenter.obj
+         Release\LAboutDlg.obj
+         Release\LAddTask.obj
+         Release\LDatas.obj
+         Release\LFormGoal.obj
+         Release\LFormGoalItem.obj
+         Release\LFormPlan.obj
+         Release\LFormStage.obj
+         Release\LittleT.obj
+         Release\LittleTFrame.obj
+         Release\LViewEvent.obj
+         Release\LViewPlan.obj
+         Release\LViewTodo.obj
+         Release\QEventRemindDlg.obj
+         Release\QResIconsDlg.obj
+         Release\QShellListener.obj
+         Release\QUtilWnd.obj
+         Generating code
+         Finished generating code
+     1>common.lib(guid_string.obj) : warning LNK4099: PDB 'vc80.pdb' was not found with 'common.lib(guid_string.obj)' or at 'E:\Code\VC\LittleT\Release\vc80.pdb'; linking object as if no debug info
+     1>exception_handler.lib(exception_handler.obj) : warning LNK4099: PDB 'vc80.pdb' was not found with 'exception_handler.lib(exception_handler.obj)' or at 'E:\Code\VC\LittleT\Release\vc80.pdb'; linking object as if no debug info
+     1>crash_generation_client.lib(crash_generation_client.obj) : warning LNK4099: PDB 'vc80.pdb' was not found with 'crash_generation_client.lib(crash_generation_client.obj)' or at 'E:\Code\VC\LittleT\Release\vc80.pdb'; linking object as if no debug info
+         LittleT.vcxproj -> E:\Code\VC\LittleT\Release\LittleT.exe
+       Manifest:
+         G:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\Code\VC\LittleT\Release\LittleT.exe;#1" /manifest Release\LittleT.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\LittleT.unsuccessfulbuild".
+         Touching "Release\LittleT.lastbuildstate".
+     1>Done Building Project "E:\Code\VC\LittleT\LittleT\LittleT.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.02
+Time Elapsed 00:00:25.73

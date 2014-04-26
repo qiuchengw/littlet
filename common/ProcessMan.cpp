@@ -7,7 +7,7 @@ const QTime QProcessMan::sm_tmSystemStart =  (QTime::GetCurrentTime()
 
 QProcessMan::QProcessMan(void)
 {
-	m_idx = 0;
+	idx_ = 0;
 }
 
 QProcessMan::~QProcessMan(void)
@@ -16,16 +16,16 @@ QProcessMan::~QProcessMan(void)
 
 BOOL QProcessMan::SnapShot()
 {
-	m_vPsID.clear();
-	m_idx = 0;
+	pids_.clear();
+	idx_ = 0;
 	// Enum all process
 	DWORD arrPS[1024], cbNeeded;
 	if ( !EnumProcesses( arrPS, sizeof(arrPS), &cbNeeded ) )
 		return FALSE;
 	// Calculate how many process identifiers were returned.
-	for (int i = 0; i < (cbNeeded / sizeof(DWORD)); ++i)
+	for (unsigned int i = 0; i < (cbNeeded / sizeof(DWORD)); ++i)
 	{
-		m_vPsID.push_back(arrPS[i]);
+		pids_.push_back(arrPS[i]);
 	}
 	return TRUE;
 }
@@ -92,10 +92,10 @@ BOOL QProcessMan::GetPsPath( __in HWND hWnd,
 
 DWORD QProcessMan::NextID()
 {
-	ASSERT(m_idx >= 0);
-	if ( (GetPsNumber() <= 0) || (GetPsNumber() <= m_idx) )
+	ASSERT(idx_ >= 0);
+	if ( (GetPsNumber() <= 0) || (GetPsNumber() <= idx_) )
 		return INVALID_PROCESS_ID;
-	return m_vPsID.at(m_idx++);
+	return pids_.at(idx_++);
 }
 
 BOOL  QProcessMan::DebugPrivilege(BOOL   bEnable) 

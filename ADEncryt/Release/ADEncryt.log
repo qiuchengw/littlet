@@ -1,5 +1,49 @@
-﻿Build started 2014/2/20 20:00:19.
+﻿Build started 2014/4/27 0:07:11.
+     1>Project "E:\Code\VC\LittleT\ADEncryt\ADEncryt.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Release\ADEncryt.unsuccessfulbuild".
+       ClCompile:
+         D:\Program Files\VS2010\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\UIBase\QUI.cpp
+         QUI.cpp
+         ---> 多线程静态编译选项（/mt）链接breakpad
+       Link:
+         D:\Program Files\VS2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Code\VC\LittleT\Release\ADEncryt.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\ADEncryt.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Code\VC\LittleT\Release\ADEncryt.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Code\VC\LittleT\Release\ADEncryt.lib" /MACHINE:X86 Release\AppHelper.obj
+         Release\crijndael.obj
+         Release\CXUnzip.obj
+         Release\md5.obj
+         Release\QDataEnDe.obj
+         Release\XUnzip.obj
+         Release\XZip.obj
+         Release\FileEnumerator.obj
+         Release\FileOper.obj
+         Release\inifile.obj
+         Release\QFile.obj
+         Release\TextFile.obj
+         Release\QBuffer.obj
+         Release\QUI.obj
+         Release\QTime.obj
+         Release\ECtrl.obj
+         Release\QApp.obj
+         Release\QConfig.obj
+         Release\QUIMgr.obj
+         Release\QWindow.obj
+         Release\WndHelper.obj
+         Release\WndShadow.obj
+         Release\MainWnd.obj
+         Release\QADEnApp.obj
+         Generating code
+         Finished generating code
+     1>common.lib(guid_string.obj) : warning LNK4099: PDB 'vc80.pdb' was not found with 'common.lib(guid_string.obj)' or at 'E:\Code\VC\LittleT\Release\vc80.pdb'; linking object as if no debug info
+     1>exception_handler.lib(exception_handler.obj) : warning LNK4099: PDB 'vc80.pdb' was not found with 'exception_handler.lib(exception_handler.obj)' or at 'E:\Code\VC\LittleT\Release\vc80.pdb'; linking object as if no debug info
+     1>crash_generation_client.lib(crash_generation_client.obj) : warning LNK4099: PDB 'vc80.pdb' was not found with 'crash_generation_client.lib(crash_generation_client.obj)' or at 'E:\Code\VC\LittleT\Release\vc80.pdb'; linking object as if no debug info
+         ADEncryt.vcxproj -> E:\Code\VC\LittleT\Release\ADEncryt.exe
+       Manifest:
+         G:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\Code\VC\LittleT\Release\ADEncryt.exe;#1" /manifest Release\ADEncryt.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\ADEncryt.unsuccessfulbuild".
+         Touching "Release\ADEncryt.lastbuildstate".
+     1>Done Building Project "E:\Code\VC\LittleT\ADEncryt\ADEncryt.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.00
+Time Elapsed 00:00:09.97

@@ -45,7 +45,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>..\..\UIBase\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>..\..\UIBase;..\..\UIBase\wtl;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\UIBase;..\..\UIBase\wtl;..\..\UIBase\inet;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
