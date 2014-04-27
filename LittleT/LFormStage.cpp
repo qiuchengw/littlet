@@ -2,6 +2,7 @@
 #include "../common/LittleTUIcmn.h"
 #include "LFormGoal.h"
 #include "QResIconsDlg.h"
+#include "ui/QUIGlobal.h"
 
 QUI_BEGIN_EVENT_MAP(LFormStage,QForm)
 //     BN_CLICKED_ID(L"btn-prev-stage", &LFormStage::OnClkBtnPrevStage)

@@ -1,9 +1,42 @@
-﻿Build started 2014/4/27 0:24:08.
-     1>Project "E:\Code\VC\LittleT\LittleT\LittleT.vcxproj" on node 3 (build target(s)).
+﻿Build started 2014/4/27 16:03:26.
+     1>Project "E:\Code\VC\LittleT\LittleT\LittleT.vcxproj" on node 4 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "Release\LittleT.unsuccessfulbuild".
+         Creating "Release\LittleT.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         All outputs are up-to-date.
+         D:\Program Files\VS2010\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Os /Oy- /GL /D WIN32 /D NDEBUG /D QUI_NOT_DLL /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\common\ProcessMan.cpp ..\common\QAutoTask.cpp ..\common\QDBHelper.cpp ..\common\QDBPlan.cpp ..\common\QDBRes.cpp ..\common\QHelper.cpp ..\common\QLongplan.cpp ..\common\QNote.cpp ..\common\QTimer.cpp ..\common\QTimerMan.cpp ..\common\Worker.cpp LAboutDlg.cpp LAddTask.cpp LDatas.cpp LFormGoal.cpp LFormGoalItem.cpp LFormPlan.cpp LFormStage.cpp LViewEvent.cpp LViewPlan.cpp LViewTodo.cpp LittleT.cpp LittleTFrame.cpp QEventRemindDlg.cpp QResIconsDlg.cpp QShellListener.cpp QUtilWnd.cpp feedback\Feedback.cpp feedback\FileBackup.cpp feedback\QUIConnectCenter.cpp
+         ProcessMan.cpp
+     1>..\common\ProcessMan.cpp(96): warning C4018: '<=' : signed/unsigned mismatch
+         QAutoTask.cpp
+         QDBHelper.cpp
+         QDBPlan.cpp
+         QDBRes.cpp
+         QHelper.cpp
+     1>..\common\QHelper.cpp(48): warning C4244: 'return' : conversion from 'double' to 'DWORD', possible loss of data
+         QLongplan.cpp
+         QNote.cpp
+         QTimer.cpp
+         QTimerMan.cpp
+         Worker.cpp
+         LAboutDlg.cpp
+         LAddTask.cpp
+         LDatas.cpp
+         LFormGoal.cpp
+         LFormGoalItem.cpp
+         LFormPlan.cpp
+         LFormStage.cpp
+         LViewEvent.cpp
+         LViewPlan.cpp
+         Compiling...
+         LViewTodo.cpp
+         LittleT.cpp
+         LittleTFrame.cpp
+         QEventRemindDlg.cpp
+         QResIconsDlg.cpp
+         QShellListener.cpp
+         QUtilWnd.cpp
+         Feedback.cpp
+         FileBackup.cpp
+         QUIConnectCenter.cpp
        ResourceCompile:
          All outputs are up-to-date.
        Link:
@@ -53,4 +86,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:25.73
+Time Elapsed 00:01:11.70

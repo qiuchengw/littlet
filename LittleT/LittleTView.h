@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ui/QWindow.h"
+#include "ui/QUIGlobal.h"
 
 class LittleTView : public QView
 {

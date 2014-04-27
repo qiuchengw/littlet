@@ -3,6 +3,7 @@
 #include "../common/ConstValues.h"
 #include "LDatas.h"
 #include "ui/WndHelper.h"
+#include "ui/QUIGlobal.h"
 
 QUI_BEGIN_EVENT_MAP(LFormTodo, QForm)
     BN_CLICKED_NAME(L"Chk_NoteTask", &LFormTodo::OnClkTaskChk)

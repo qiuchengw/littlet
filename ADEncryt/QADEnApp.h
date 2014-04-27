@@ -2,8 +2,13 @@
 
 #include "ui/QApp.h"
 #include "ui/QConfig.h"
-
 #include "MainWnd.h"
+
+#ifdef _DEBUG
+#pragma comment(lib, "../Debug/QUIL.lib")
+#else
+#pragma comment(lib, "../Release/QUIL.lib")
+#endif
 
 class QADEnApp : public QApp
 {

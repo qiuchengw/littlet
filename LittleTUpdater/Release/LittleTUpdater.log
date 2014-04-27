@@ -1,10 +1,18 @@
-﻿Build started 2014/4/27 0:05:27.
+﻿Build started 2014/4/27 16:03:02.
      1>Project "E:\Code\VC\LittleT\LittleTUpdater\LittleTUpdater.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Release\LittleTUpdater.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         D:\Program Files\VS2010\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\UIBase\crypt\XUnzip.cpp
-         XUnzip.cpp
+         D:\Program Files\VS2010\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D QUI_NOT_DLL /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\UIBase\QBuffer.cpp ..\..\UIBase\crypt\CXUnzip.cpp ..\..\UIBase\file\QFile.cpp ..\..\UIBase\time\QTime.cpp main.cpp
+         QBuffer.cpp
+         CXUnzip.cpp
+         QFile.cpp
+     1>..\..\UIBase\file\QFile.cpp(2252): warning C4244: '=' : conversion from 'ULONGLONG' to 'unsigned long', possible loss of data
+         QTime.cpp
+     1>..\..\UIBase\time\QTime.cpp(1719): warning C4553: '==' : operator has no effect; did you intend '='?
+     1>..\..\UIBase\time\QTime.cpp(2203): warning C4553: '==' : operator has no effect; did you intend '='?
+     1>..\..\UIBase\time\QTime.cpp(2205): warning C4553: '==' : operator has no effect; did you intend '='?
+         main.cpp
        Link:
          D:\Program Files\VS2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Code\VC\LittleT\Release\LittleTUpdater.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\LittleTUpdater.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\Code\VC\LittleT\Release\LittleTUpdater.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Code\VC\LittleT\Release\LittleTUpdater.lib" /MACHINE:X86 Release\CXUnzip.obj
          Release\XUnzip.obj
@@ -26,4 +34,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.31
+Time Elapsed 00:00:08.31

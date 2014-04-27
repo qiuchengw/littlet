@@ -2,6 +2,7 @@
 #include "../common/LittleTUIcmn.h"
 #include "../common/QAutoTask.h"
 #include "../common/QDBHelper.h"
+#include "ui/QUIGlobal.h"
 
 #include "LAddTask.h"
 #include "LDatas.h"

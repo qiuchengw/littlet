@@ -10,6 +10,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LittleTUpdater", "LittleTUpdater\LittleTUpdater.vcxproj", "{BBB17EE5-B510-415E-A146-7D2177FE3BD1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ADEncryt", "ADEncryt\ADEncryt.vcxproj", "{175DBD32-F27D-4F5E-9824-347B98A0BF18}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D2A45C3A-2633-419F-9AB0-BAA89AAFE278} = {D2A45C3A-2633-419F-9AB0-BAA89AAFE278}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UIZipMaker", "UIZipMaker\UIZipMaker.vcxproj", "{AEB092E5-D5B4-4A0F-A2C0-B4A88135BE6A}"
 EndProject

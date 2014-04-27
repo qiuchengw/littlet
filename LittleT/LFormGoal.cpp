@@ -1,5 +1,6 @@
 #include "LFormGoal.h"
 #include "../common/LittleTUIcmn.h"
+#include "ui/QUIGlobal.h"
 
 QUI_BEGIN_EVENT_MAP(LFormGoal,QForm)
 //    BN_STATECHANGED_NAME(L"goal-item",&LFormGoal::OnGoalSelChanged)

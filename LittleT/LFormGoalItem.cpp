@@ -1,5 +1,6 @@
 #include "LFormGoalItem.h"
 #include "../common/LittleTUIcmn.h"
+#include "ui/QUIGlobal.h"
 
 QUI_BEGIN_EVENT_MAP(LFormGoalItem,QForm)
     BN_CLICKED_NAME(L"btn_goalitem_delete", &LFormGoalItem::OnClkDeleteItem)

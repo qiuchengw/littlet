@@ -1,6 +1,7 @@
 #include "LViewPlan.h"
 #include "LDatas.h"
 #include "LFormPlan.h"
+#include "ui/QUIGlobal.h"
 
 //////////////////////////////////////////////////////////////////////////
 QUI_BEGIN_EVENT_MAP(LViewPlan,LittleTView)

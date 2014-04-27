@@ -1,6 +1,7 @@
 #include "LFormPlan.h"
 #include "../common/LittleTUIcmn.h"
 #include "LFormStage.h"
+#include "ui/QUIGlobal.h"
 
 QUI_BEGIN_EVENT_MAP(LFormPlan,QForm)
     MENUITEM_CLICK_ID(L"mi-plan-newplan", &LFormPlan::OnMenuItemNewPlan)
