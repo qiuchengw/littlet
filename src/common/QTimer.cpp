@@ -757,11 +757,11 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)
 	{
     case AUTOTASK_EXEC_ATYEARDAY:
         {
-            QTime t = QTime::ParseDate(m_arX[0]);
             QTime t2 = QTime::ParseDate(dwDate);
 
             for (int year = t2.GetYear(); year < t2.GetYear() + 2; ++year)
             {
+                QTime t = QTime::ParseDate(m_arX[0]);
                 t.SetDate(year, t.GetMonth(), t.GetDay());
                 t -= QTimeSpan(m_dwSpan, 0, 0, 0);
                 if ((t.CompareDate(t2) >= 0) && (t.CompareDate(GetLifeEnd()) <= 0))
