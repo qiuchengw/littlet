@@ -1,0 +1,3500 @@
+﻿@const BORDER_COLOR:#CCC;
+@const BORDER:1px solid #ccc;
+@const BORDER_CTRL:1px solid #aaa;
+@const CTRL_BACK_NORMAL:#FAFAFA #FAFAFA #E5E5E5 #E5E5E5;
+@const CTRL_BACK_HOVER:#fefefe #fefefe #EBEBEB #EBEBEB;
+@const CTRL_BACK_ACTIVE:#E1E1E1 #E1E1E1 #DEDEDE #DEDEDE;
+@const CTRL_BACK_WIN7ACTIVE:#DCEBFC #DCEBFC #C1DCFC #C1DCFC;
+@const SOLID_BACK_GRAY:#E9EEDA;
+@const SOLID_BACK_CURRENT:#93BEF6;
+@const CTRL_BACK_DISABLE: gray;
+@const SOLID_BACK_LIGHT:#fefefe;
+@const FONT_COLOR_NORMAL:#444;
+@const FONT_COLOR_HOVER:#333;
+@const FONT_COLOR_ACTIVE:#111;
+@const FONT_NORMAL:normal 10pt "微软雅黑" "宋体";
+@const FONT_NUMBER:normal 9pt "comic sans MS";
+@const FONT_BOLD_TEXT2:bold 10pt "微软雅黑" "宋体";
+@const FONT_DEFAULT:normal 9pt;
+@const OUTLINE_STYLE_NORMAL:glow gray 2px 2px;
+@const OUTLINE_STYLE_ACTIVE:glow gray 4px 4px;
+@const CTRL_HEIGHT:24px;
+
+html{
+	width:*;height:*;
+	overflow:hidden;
+	behavior:accesskeys actions;
+}
+body{
+	width:*;height:*;
+	background-color:#F4F4F4;
+	margin:0;
+	padding:0;
+	font: @FONT_NORMAL; 
+	color:@FONT_COLOR_ACTIVE;
+	flow:vertical;
+}
+
+form 
+{ 
+	behavior:form; 
+} 
+
+hr
+{ 
+	border-top:1px solid #C5C5C5;  
+	border-bottom:1px solid #fff; 
+}
+
+a:link { text-decoration:underline; color:blue; cursor:pointer; behavior:hyperlink; }
+a:link:focus { text-decoration:double-underline; }
+a:link:hover { color:red; }
+a:link:active { text-decoration:none; }
+a:link:tab-focus { outline-width:1px; outline-offset:0px; outline-style:dotted; }
+
+
+*:drop-marker { visibility:hidden; }
+
+/*特殊的颜色*/
+.yellow{color:#ED6717;}
+.red{color:red;}
+.green{color:green}
+.back{ background-color:#CECBD8; color:black; margin:1px; padding:0 2px;}
+
+input[type="hidden"] {  display:none; }
+
+fieldset 
+{
+  background-image:url(theme:groupbox-normal); 
+  background-repeat:stretch; 
+}
+ 
+fieldset > legend{
+	background-color:threedhighlight; 
+	padding: 2px 4px;
+	margin-left:4px;
+	margin-right:*;
+}
+fieldset > legend:rtl /* see http://terrainformatica.com/forums/topic.php?id=1772 */
+{
+  margin-left:*;
+  margin-right:4px;
+}
+
+
+/**************************/
+/*标准按钮，带输入焦点*/
+widget[type="button"], 
+input[type="button"], 
+input[type="reset"], 
+input[type="submit"], 
+button
+{ 
+	style-set: "std-button";
+}
+
+@set std-button
+{
+    :root
+    { 
+		font:system;
+//		font:@FONT_NORMAL;
+		color:#959595;
+		padding:4 8px;
+		height:@CTRL_HEIGHT; line-height:@CTRL_HEIGHT;
+		white-space: nowrap;
+		text-align:center;
+		behavior:button;
+		width:max-intrinsic;
+		background-image:none;  
+		cursor:default;
+	}
+	:root.imgbtn
+	{
+		padding-left:@CTRL_HEIGHT;
+		foreground-repeat:no-repeat; 
+		foreground-position:4px center;
+	}
+    :root[role="default-button"]
+	{
+		background-image:url(theme:button-defaulted); 
+	}
+    :root:hover
+	{ 
+		background-image:url(theme:button-hover);  
+		transition: blend;
+    }
+	:root:focus
+    {
+      background-image:url(theme:button-defaulted); 
+    }
+    :root:active
+	{ 
+		background-image:url(theme:button-pressed);  
+    }
+    :root:active > *
+    { 
+      position:relative;
+      left:1px;
+      top:1px;
+    }
+    :root:disabled
+    { 
+		background-image:url(theme:button-disabled);
+		color:graytext;
+    }
+    :root:tab-focus
+    {
+		outline:1px dotted -4px; /* inside */
+    }
+	/* vertical alignment */    
+    :root > :first-child { margin-top:*; }
+    :root > :last-child { margin-bottom:*; }
+    @media handheld
+    {
+        :root:tab-focus
+        {
+          outline:1px solid -2px highlight;
+        }
+        :root:hover
+        { 
+	      transition:none;
+	      color:highlighttext
+        }      
+    }        
+}
+
+button.with-icon{
+	foreground-repeat:no-repeat;
+	foreground-position:4px center;
+	padding-left:22px;
+}
+.qbtn{
+	width:18px; height:*;
+	color:white;
+	vertical-align:middle;
+	foreground-repeat:no-repeat;
+	foreground-position:center;
+	behavior:clickable;
+}
+.qbtn:hover{
+	foreground-image-transformation: contrast-brightness-gamma(1, 0.5, 0.8);
+	//outline:@OUTLINE_STYLE_NORMAL;
+}
+
+.qbtn:hover{
+	foreground-image-transformation: contrast-brightness-gamma(1, 0.8, 1.2);
+	//outline:@OUTLINE_STYLE_ACTIVE;
+}
+.color_button{
+	font:@FONT_NORMAL;
+	color:#555;
+	padding:4 8px;
+	height:@CTRL_HEIGHT; 
+	line-height:@CTRL_HEIGHT;
+	white-space: nowrap;
+	text-align:center;
+	behavior:button;
+	width:max-intrinsic;
+	min-width:50px;
+	cursor:default;
+}
+.color_button.blue{
+	background-color:#7BEDEB #7BEDEB #78D3D1 #78D3D1;
+	border:1px solid #78D4D2;
+}
+.color_button.blue:hover{
+	background-color:#9BF7F5 #9BF7F5 #78D3D1 #78D3D1;
+}
+.color_button.blue:active{
+	background-color:#78D4D2;
+}
+
+.color_button.orange{
+	background-color:#F2632A #F2632A #D65021 #D65021;
+	border:1px solid #DE5824;
+	color:#333;
+}
+.color_button.orange:hover{
+	background-color:#F57443 #F57443 #D65021 #D65021;
+}
+.color_button.orange:active{
+	background-color:#D65021;
+}
+
+.color_button.blue2{
+	background-color:#6CC4E8 #6CC4E8 #57AEE4 #57AEE4;
+	border:1px solid #57AEE4;
+}
+.color_button.blue2:hover{
+	background-color:#8BC6E5 #8BC6E5 #57AEE4 #57AEE4;
+}
+.color_button.blue2:active{
+	background-color:#57AEE4;
+}
+
+.color_button.purple{
+	background-color:#E88ECC;
+	border:1px solid #E089C6;
+}
+.color_button.purple:hover{
+	background-color:#F0A5D8 #F0A5D8 #E88ECC #E88ECC;
+}
+.color_button.purple:active{
+	background-color:#E089C6;
+}
+/**************************/
+/*单选按钮*/
+button[type="radio"],
+widget[type="radio"]
+{ 
+	style-set:"std-radio";
+} 
+@set std-radio
+{
+	:root:not(input)
+    {
+		padding:4px 4px 4px system-small-icon-width;  
+		behavior:radio; 
+		background-repeat:no-repeat; 
+      background-position:1px 50%;  
+	  background-image:url(qabs:common/images/radio-normal.png);  
+	  vertical-align:baseline; 
+	  text-align:left; 
+	  white-space:nowrap; 
+	  cursor:pointer;
+	  width:min-intrinsic;
+    }
+	:root:not(input):rtl
+    {
+      padding:4px system-small-icon-width 4px 4px; 
+      background-position-right:1px;
+	    background-position-left:auto;
+    }
+/*    
+	:root:hover
+    { 
+      transition:blend;
+      background-image:url(theme:radio-hover);  
+    }
+	:root:active{  background-image:url(qabs:common/images/radio-active.png);  } 
+*/
+    :root:disabled  {  background-image:url(theme:radio-disabled); color:graytext;  }
+    :root:checked {  background-image:url(qabs:common/images/radio-checked-normal.png); }
+/*    :root:checked:hover {  background-image:url(qabs:common/images/radio-checked-hover.png);   }
+    :root:checked:active {  background-image:url(qabs:common/images/radio-checked-active.png);  }
+    :root:checked:disabled {  background-image:url(theme:radio-checked-disabled);  color:graytext; }
+*/   
+	:root:tab-focus 
+    {
+      outline:1px dotted invert -1px; 
+    }
+    @media handheld
+    {
+        :root:tab-focus
+        {
+            outline:1px solid -1px highlight;
+        }
+    }     
+}
+  
+/**************************/
+/*多选按钮*/
+widget[type="checkbox"],
+button[type="checkbox"]
+{ 
+	style-set: "std-checkbox";
+}
+@set std-checkbox
+{
+	:root
+	{
+		padding:0 4 0 17px;
+		font:@FONT_NORMAL;
+		height:system-small-icon-height; 
+		width:system-small-icon-width; 
+		min-height:18px;
+		min-height:18px;
+		behavior:check;
+		background:url(qabs:common/images/checkbox-normal.png) no-repeat;
+		background-position:1 5px;
+		
+		cursor:default; 
+		vertical-align:middle; 
+		white-space:nowrap; 
+		color:@FONT_COLOR_HOVER;
+	}
+	/*    
+	:root:hover{  color:@FONT_COLOR_ACTIVE; background-image:url(qabs:common/images/checkbox-hover.png);  }
+	:root:active{ color:@FONT_COLOR_ACTIVE;  background-image:url(qabs:common/images/checkbox-hover.png); }
+	*/
+	:root:disabled
+	{  
+		background-image:url(qabs:common/images/checkbox-normal.png);
+		background-image-transformation:color-schema(gray); 
+	}
+	:root:checked
+	{ 
+		color:@FONT_COLOR_ACTIVE; 
+		background-image:url(qabs:common/images/checkbox-checked.png); 
+	}
+	/*    :root:checked:hover{   background-image:url(qabs:common/images/checkbox-checked-hover.png); }
+	:root:checked:active{   background-image:url(qabs:common/images/checkbox-hover.png);  }
+	:root:checked:disabled{  background-image:url(qabs:common/images/checkbox-checked.png);	background-image-transformation:color-schema(gray);}
+	*/
+	:root:tab-focus{ outline:1px dotted invert -1px;  }
+	
+	:root[mixed]:empty
+    { 
+      background-image:url(theme:check-mixed-normal);  
+    }
+    :root[mixed]:empty:hover
+    { 
+      background-image:url(theme:check-mixed-hover);  
+    }
+    :root[mixed]:empty:active
+    { 
+      background-image:url(theme:check-mixed-pressed);  
+    }
+    :root[mixed]:empty:disabled
+    { 
+      background-image:url(theme:check-mixed-disabled);  
+	    color:graytext;
+    }
+	
+	@media handheld
+	{
+		:root:tab-focus
+		{
+			outline:1px solid -1px highlight;
+		}
+		widget:root,
+		button:root
+		{
+			text-decoration:none;
+		}
+	}     
+}
+
+/**************************/
+/*标准输入框*/
+input[type="text"],
+widget[type="password"],
+input[type="password"],
+widget[type="currency"],
+input[type="currency"],
+widget[type="url"],
+input[type="url"],
+input:not([type])
+{
+  style-set: "std-edit";
+}
+@set std-edit
+{
+    :root 
+    {
+      font:system;
+      padding:3px; 
+      height:18px; 
+      width:1em; 
+      background-image:url(theme:edit-normal); 
+      background-repeat:stretch;
+      min-width: min-intrinsic;
+      min-height: min-intrinsic;
+      text-align: left;
+      cursor:text;
+      overflow:hidden;
+      white-space: nowrap;
+      behavior:edit; 
+      context-menu:url(res:behavior-edit-menu.htm);
+	  text-selection: highlighttext highlight;
+	}
+    :root:disabled
+    { 
+      background-image:url(theme:edit-disabled); 
+	  color:graytext;
+    }
+    :root[type="password"]
+    { 
+      behavior:password; 
+    }
+    :root[type="currency"]
+    { 
+      text-align: right;
+      behavior:currency; 
+    }
+    :root[type="url"]
+    { 
+      behavior:url; 
+    }
+ 	:root:empty{
+		font-size:9pt;
+		color:gray;
+	}
+    :root[invalid]
+    {
+      color:red;
+    }
+}
+
+/**************************/
+/*可定制输入控件*/
+input[type="masked"]
+{
+	style-set: "std-masked-edit";
+}
+@set std-masked-edit < std-edit
+{
+    :root
+    { 
+      behavior:masked-edit;
+      text-align:center;
+    }
+}
+  
+/**************************/
+/*标准输入框，数字*/
+widget[type="decimal"],
+input[type="decimal"],
+widget[type="number"],
+input[type="number"]
+{
+	style-set: "std-number-edit";
+}
+@set std-number-edit
+  {
+    :root
+    {
+      text-align: right;
+      behavior:number; 
+      font:system;
+	  padding:3px; 
+      height:18px;
+      width:1em; 
+      background-image:url(theme:edit-normal); 
+      background-repeat:expand;
+	  background-position:5 5 5 5px;
+      min-width: min-intrinsic;
+      min-height: min-intrinsic;
+      cursor:text;
+      overflow:visible;
+      white-space: nowrap;
+	  flow:vertical;
+      context-menu:url(res:behavior-edit-menu.htm);
+    }
+	:root[type="decimal"]
+    {
+      behavior:decimal; 
+      width:2em; 
+	    context-menu:none;
+    }
+    :root:disabled
+    { 
+      background-image:url(theme:edit-disabled); 
+	  color:graytext;
+    }
+    :root[invalid]
+    {
+      color:red;
+    }
+	:root > button{ 
+		behavior:clickable;
+      cursor:default;
+		border:none; 
+		border-radius:0; 
+		background-color:transparent;
+	}
+	:root:rtl > button.minus
+    {
+      margin: 0 * -2px -2px;
+    }
+    :root > button.minus
+    {
+      padding:0;
+      transition:none;
+      margin: 0 -2px -2px *;
+      background-image:url(theme:v-spin-minus-normal); 
+      background-repeat:stretch; 
+	  width:system-scrollbar-width;
+	  height:50%%;
+    }
+ 
+    :root > button.minus:hover
+    {
+		transition:none;
+      background-image:url(theme:v-spin-minus-hover); 
+    }
+    :root > button.minus:active
+    {
+      background-image:url(theme:v-spin-minus-pressed); 
+    }
+    :root > button.minus:disabled
+    {
+      background-image:url(theme:v-spin-minus-disabled); 
+    }
+    :root > button.plus
+    {
+      padding:0;
+	   margin: -2px -2px -1 *;
+      transition:none;
+      background-image:url(theme:v-spin-plus-normal); 
+      background-repeat:stretch; 
+	  width:system-scrollbar-width;
+	  height:50%%;
+    }
+	:root:rtl > button.plus
+    {
+      margin: -2px * -1px -2px;
+      //border: 1px solid red;
+	}
+	:root > button.plus:hover
+    {
+      background-image:url(theme:v-spin-plus-hover); 
+    }
+    :root > button.plus:active
+    {
+      background-image:url(theme:v-spin-plus-pressed); 
+    }
+    :root > button.plus:disabled
+    {
+      background-image:url(theme:v-spin-plus-disabled); 
+    }
+    @media handheld
+	  {
+	    :root
+	    {
+	        padding:3px;
+	        flow:horizontal;
+	    }
+	    :root > button.plus
+	    {
+	        height:100%%;
+	        margin: -3px 0px -3px *;
+	    }
+	    :root > button.minus
+	    {
+	        height:100%%;
+	        margin: -3px -3px -3px -1px;
+	    }
+    }
+}
+
+
+/*只有虚下划线的输入框*/
+input[type="text"].dashed,
+input[type="password"].dashed,
+input[type="decimal"].dashed,
+input[type="currency"].dashed,
+input[type="url"].dashed,
+input[type="number"].dashed,
+input[type="masked"].dashed,
+input:not([type]).dashed
+{
+	border:none;
+	border-bottom:1px dashed #555;
+	background-image:none;
+}
+
+
+/**************************/
+/*多行输入框*/
+textarea, 
+widget[type="textarea"], 
+plaintext
+{
+	style-set: "std-textarea";
+}
+@set std-textarea
+{
+    :root
+	{
+		flow:null;
+		overflow-x:auto; 
+		overflow-y:auto;
+		cursor:text;
+		white-space:prewrap;
+		font: system;
+		vertical-scrollbar:vscrollbar;
+		padding:system-3d-border-width; 
+		background:url(theme:edit-normal) stretch; 
+		width:*;height:*;
+		behavior:plaintext; 
+		context-menu:url(res:behavior-text-menu.htm);
+		text-selection: windowtext threedface;
+	}
+
+	:root:focus
+	{
+		text-selection: highlighttext highlight;
+	}
+
+	:root:disabled
+	{
+		background-image:url(theme:edit-disabled); 
+		overflow:hidden; 
+		cursor:default;
+    }
+
+	textarea:root
+	{
+	   min-width: min-intrinsic;
+	   min-height: min-intrinsic;
+	   width: min-intrinsic;
+	   height: min-intrinsic;
+	}
+	plaintext:root
+	{
+      width: *;
+	  height: *;
+	}
+	:root[wrap="off"]
+	{
+	   overflow-x:scroll; 
+	   overflow-y:scroll; 
+	   white-space:pre;
+	}
+	:root:empty { color:graytext;}
+	plaintext:root:empty { color:graytext; vertical-align:top;}
+}
+ 
+textarea[wrap="off"],
+plaintext[wrap="off"]
+{
+   overflow-x:scroll; 
+   overflow-y:scroll; 
+   white-space:pre;
+}
+ 
+richtext, 
+widget[type="richtext"]
+{
+	style-set: "std-richtext";
+}
+@set std-richtext
+{
+	:root 
+	{
+		flow:null;
+		font: 10pt Verdana, Arial, sans-serif;
+		width:*;
+		height:150px;
+		padding:3px; 
+		background-image:url(theme:edit-normal); 
+		background-repeat:stretch; 
+		overflow-x:auto; 
+		overflow-y:scroll; 
+		//cursor:text;
+		behavior:richtext;
+		context-menu:url(res:behavior-richtext-menu.htm);
+		text-selection: windowtext threedface;
+	}
+	:root:focus
+	{
+		text-selection: highlighttext highlight;
+	}
+	:root:empty 
+	{ 
+		color:graytext; 
+		vertical-align:top;
+	}
+}
+
+textarea:disabled, 
+richtext:disabled,
+widget[type="textarea"]:disabled, 
+widget[type="richtext"]:disabled,
+plaintext:disabled
+{
+	background-image:url(theme:edit-disabled); 
+    overflow:hidden; 
+	cursor:default;
+}
+
+/**************************/
+/*进度条*/
+progress,
+input[type="progress"],
+widget[type="progress"]
+{
+  behavior:progress; 
+  background:url(qabs:common/images/progress-back.png) expand stretch-middle;
+  background-position:4 4 4 4px;  
+  height:12px;
+  width:80px;
+  padding:1px;
+ 
+  foreground:url(qabs:common/images/progress-fore-green.png) stretch;
+}
+
+progress[red]{
+	foreground-image:url(qabs:common/images/progress-fore-red.png);
+}
+/**************************/
+/*可交互式进度条，鼠标拖动进度*/
+widget[type="inactive-progress"]
+{
+	behavior:progress inactive-progress; 
+	background-repeat:expand repeat-middle; 
+	background-position:3 5 3 5px;
+	background-image:url(qabs:common/images/progress-back.png);  
+	foreground-repeat:repeat-x;  
+	foreground-image:url(qabs:common/images/progress-fore.png);
+	foreground-position:5 2px;	
+	height: 18px; width: 8em;
+	padding:0 5px;
+	cursor:pointer;
+}
+
+/**************************/
+/*list*/
+select[type="select"], 
+widget[type="select"],
+popup[type="select"]
+{
+  style-set: "std-select";
+}
+@set std-select
+{
+	:root{ 
+	    font:system;
+		behavior:select;
+		overflow-x:hidden; 
+		overflow-y:auto; 
+		background-image:none; 
+		width: max-intrinsic;
+		height: min-intrinsic;
+		background-color:#fefefe; 
+		background-image:none; 
+		padding:1px;
+		color:@FONT_COLOR_HOVER;
+		border:@BORDER; 
+		vertical-scrollbar:vscrollbar;
+	}
+	:root:disabled
+	{ 
+//		overflow:hidden; 
+		background-image:url(theme:edit-disabled); 
+		color:graytext;
+	}
+	optgroup > caption 
+	{ 
+		padding:3px 3px; 
+		font-weight:bold; 
+		color: graytext; 
+	}
+	optgroup{
+		padding:1px; 
+		font-weight:bold; 
+		color: graytext; 
+		background-color:@CTRL_BACK_NORMAL;
+		padding-left:10px;
+		border-bottom:@BORDER;
+		height:26px;
+		line-height:26px;
+	} 
+	option 
+	{ 
+		padding:1px 1px 1px 3px; 
+		color: windowtext;
+		min-height:1em;
+		width: 100%%;
+		white-space: nowrap;
+	}
+	option:rtl 
+	{ 
+		padding:1px 3px 1px 1px; 
+	}
+
+	option:checked:not(:has-children-of-type(option)) 
+	{ 
+		background-color:threedface; color:windowtext;
+	}
+	
+	:root:focus option:current:not(:has-children-of-type(option)),
+	popup:root option:current:not(:has-children-of-type(option))
+	{ 
+		background-color:highlight; color:highlighttext; 
+	}
+
+
+	optgroup > option
+	{ 
+		padding-left:19px; 
+	}
+	optgroup > option:rtl
+	{ 
+		padding-right:19px; 
+		padding-left:0; 
+	}
+
+    option:has-children-of-type(option),
+
+	options
+	{
+		padding-left:32px;
+		foreground-repeat: no-repeat;
+		foreground-position: 3px 3px;
+		width: 100%%;
+		min-height:1em;
+		foreground-image-cursor:pointer;
+	}
+	option:has-children-of-type(option):rtl,
+	options:rtl
+	{
+	  padding-right:32px;
+		padding-left:0;
+		foreground-position-right: 3px;
+		foreground-position-left: auto;
+	}
+
+	option:has-children-of-type(option):collapsed,	
+
+	options:has-children:collapsed {	foreground-image:url(theme:tree-view-glyph-closed); }
+
+    option:has-children-of-type(option):expanded,
+	options:has-children:expanded  {	foreground-image:url(theme:tree-view-glyph-open); }
+
+
+
+
+	/* all elements in the options by default are non-visible */
+    option:has-children-of-type(option) > *,
+	options > *	{ visibility:collapse; }
+
+
+	/* elements in open options are visible */
+	option:has-children-of-type(option):expanded > *,
+	options:expanded > * { visibility:visible; }
+
+
+	/* options caption element, always visible */
+	option:has-children-of-type(option) > :first-child,
+	options > :first-child
+	{
+	  padding:1px 1px 1px 3px;
+	  visibility:visible;
+	  width: 100%%;
+	  white-space: nowrap;
+	  margin-left:-16px;
+	}
+	option:has-children-of-type(option) > :first-child:rtl,
+	options > :first-child:rtl
+	{
+	  padding:1px 3px 1px 1px;
+	  margin-right:-16px;
+	  margin-left:0;
+	}
+	option:has-children-of-type(option):current > :first-child,
+
+	options:current > :first-child
+	{ 
+	  background-color:threedlight; color:windowtext; 
+	}
+
+  :root:focus option:has-children-of-type(option):current > :first-child,
+
+	:root:focus options:current > :first-child
+	{ 
+	  background-color:highlight; color:highlighttext; 
+	}
+}
+
+/**************************/
+/*多选列表，无多选按钮*/
+select[type="select"][multiple=""],
+widget[type="select"][multiple=""]
+{
+  style-set: "std-select-multiple";
+}
+ 
+@set std-select-multiple < std-select
+  {
+    :root 
+    {
+      background-color:transparent; 
+	  color:windowtext;
+    }
+    option
+    {
+      padding:1px 1px 1px 3px; 
+      padding-left:1.6em; 
+      background-color:transparent; color:windowtext;
+    }
+    option:rtl
+    {
+      padding:1px 3px 1px 1px; 
+      padding-right:1.6em; 
+      background-color:transparent; color:windowtext;
+    }
+    option:checked
+    {
+      list-style-type:disc;
+      display:list-item;
+      background-color:threedface; color:windowtext;
+    }
+    :root:focus option:current
+    {
+      background-color:highlight; color:highlighttext;
+    }
+} 
+
+/**************************/
+/*多选列表，有多选按钮*/
+select[type="select"][multiple="checks"],
+widget[type="select"][multiple="checks"]
+{
+	style-set: "std-select-multiple-checkmarks";
+}
+@set std-select-multiple-checkmarks < std-select
+  {
+    option
+    {
+      padding: 1px 1px 1px system-small-icon-width; 
+      foreground-repeat:no-repeat; 
+      foreground-position:1px 50%;
+      foreground-image:url(theme:check-normal);  
+      background-color:transparent; color:windowtext;
+    }
+    option:checked
+    {
+      foreground-image:url(theme:check-checked-normal);  
+      background-color:transparent; color:windowtext;
+    }
+    option:rtl
+    {
+      padding: 1px system-small-icon-width 1px 1px; 
+      foreground-position-right:1px;
+      foreground-position-left:auto;
+    }
+}
+
+/**************************/
+/*下拉列表（组合框）*/
+widget[type="select-dropdown"],
+select[type="select-dropdown"]
+{	
+	style-set: "std-select-dropdown";
+}
+@set std-select-dropdown{
+    :root
+	{ 
+		behavior:dropdown-select;
+		padding:0 5px;
+		height:22px;
+		flow:horizontal;
+		background-color:#f0f0f0;
+		border:@BORDER;
+		width:max-intrinsic;
+		min-width:80px;
+	}
+	:root:disabled,
+	:root[editable]:disabled
+	{ 
+		color:graytext;
+		background-color:gray;
+	}
+	:root:hover
+	{
+		color:@FONT_COLOR_ACTIVE;
+		//outline:@OUTLINE_STYLE_NORMAL;
+	}
+    :root > caption
+	{ 
+		background-color:transparent;  
+		width:*; height:*; 
+		min-height:1em; 
+	    min-width: system-scrollbar-width;
+		vertical-align:middle; 
+		white-space: nowrap;
+		margin-right:4px;
+	}
+	:root > popup
+	{  
+		overflow-x:hidden; 
+		overflow-y:auto;
+		vertical-scrollbar:vscrollbar;
+		padding:0; 
+		border:@BORDER;
+		border-top:none;
+		behavior:select;  
+		min-width: max-intrinsic; 
+		width: *;
+		  height: min-intrinsic;
+		  transition:window-slide-ttb;
+		max-height:200px;
+		display:block; 
+		visibility:collapse;/* invisible normally */
+	}
+	:root > popup:popup
+    {
+      visibility:visible;/* visible when popup */
+    }
+	:root > popup option
+	{ 
+		height:21px; line-height:21px;
+		background-color:transparent;
+		color:#333;
+	}
+	:root > popup option:current
+	{
+		background-color:#3BC4A2; 
+		color:white;
+    }	
+	:root > popup option:hover{
+		background-color:#E49B7F; 
+		color:white;
+	}
+
+    :root > button
+	{
+		behavior:clickable; 
+		width:20px; height:*; 
+		padding:0;
+		background-image:none;
+		foreground:url(stock:arrow-down) no-repeat;
+		foreground-position:center;
+	}
+	:root:disabled > button,
+	:root[editable]:disabled>button{ background-image:none; background-color:gray;}
+	:root[editable] > caption
+    { 
+      behavior:edit; 
+      cursor:text;
+	  context-menu:url(res:behavior-edit-menu.htm);
+    }
+	:root[editable] > button{ border-left:@BORDER;}
+	:root[editable] > button:hover{ background-color:@CTRL_BACK_HOVER; }
+	
+	 /*
+    @media ms-vista-aero
+    {    
+      :root  { background-image:url(theme:button-normal); }
+      :root:hover { background-image:url(theme:button-hover);  }
+      :root:disabled { background-image:url(theme:button-disabled); }
+      :root:active { background-image:url(theme:button-pressed); }
+      :root > caption { padding: 2px; background-color:transparent; color:windowtext; }
+      :root:focus > caption { outline:1px dotted -2px; }
+      :root > button { background: url(stock:arrow-down) center center no-repeat;}
+      :root > button:hover { background-image:url(stock:arrow-down); background-position: center center; background-repeat: no-repeat;}
+      :root > button:active { background-image:url(stock:arrow-down); background-position: center center; }
+      :root:disabled > button  { background-image:url(stock:arrow-down); background-position: center center; }    
+    }
+    */
+}
+
+/**************************/
+/*树控件*/
+select[type="tree"],
+widget[type="tree"]
+{
+  style-set: "std-tree";
+}
+select[type="tree"][checkmarks],
+widget[type="tree"][checkmarks]
+{
+  style-set: "std-tree-checkmarks";
+}
+    
+@set std-tree
+{
+	:root
+	{ 
+	  font:system;
+	  behavior: tree;
+		overflow-x:hidden; 
+		overflow-y:auto; 
+		flow:vertical;
+		padding:2px; 
+		background-repeat:stretch; 
+		background-image:url(theme:edit-normal); 
+		width: max-intrinsic;
+		height: min-intrinsic;
+	}
+
+	:root:disabled
+	{ 
+		background-image:url(theme:edit-disabled); 
+		color:graytext;
+	}
+
+	option 
+	{ 
+		color: windowtext;
+		min-height:1em;
+		width: 100%%;
+		white-space: nowrap;
+	}
+	
+	optgroup > caption 
+	{ 
+		padding:3px 3px; 
+		font-weight:bold; 
+		color: graytext; 
+	}
+
+	optgroup > option 
+	{ 
+		padding-left:19px; 
+	}
+	optgroup > option:rtl
+	{ 
+		padding-right:19px; 
+		padding-left:0; 
+	}
+
+  option:has-children-of-type(option)
+	{
+		padding-left:20px;
+		foreground-repeat: no-repeat;
+		foreground-position: 3px 4px;
+		width: 100%%;
+		min-height:1em;
+		foreground-image-cursor:pointer;
+	}
+	option:has-children-of-type(option):rtl
+	{
+	  padding-right:20px;
+		padding-left:0;
+		foreground-position-right: 3px;
+		foreground-position-left: auto;
+	}
+
+  /* all option captions */  
+	option > :first-child
+	{
+	  padding:2px 3px 2px 3px;
+	}
+	option > :first-child:rtl
+	{
+	  padding:2px 3px 2px 3px;
+	}
+
+	option:has-children-of-type(option):collapsed
+	{	foreground-image:url(theme:tree-view-glyph-closed); }
+
+  option:has-children-of-type(option):expanded
+	{	foreground-image:url(theme:tree-view-glyph-open); }
+
+	/* all elements in the options by default are non-visible */
+  option:has-children-of-type(option) > *
+  { visibility:collapse; }
+
+	/* elements in open options are visible */
+	option:has-children-of-type(option):expanded > *
+	{ visibility:visible; }
+  
+	/* options caption element, always visible */
+  option:has-children-of-type(option) > :first-child
+  {
+	  visibility:visible;
+	  width: 100%%;
+	  white-space: nowrap;
+    margin-left:-6px;
+  }
+  
+  option:has-children-of-type(option) > :first-child:rtl
+  {
+    margin-left:0;
+    margin-right:-6px;
+  }
+  /* :current hightlighting */
+	option:current > :first-child
+	{ 
+	  background-color:threedlight; color:windowtext; 
+	}
+	:root:focus option:current > :first-child,
+	popup:root option:current > :first-child
+	{ 
+		background-color:highlight; color:highlighttext; 
+	}
+
+  /* tree line support: */
+  :root[treelines] option:has-children-of-type(option) > option 
+  {
+    display: list-item;
+    list-style-type: tree-line;
+    list-marker-size:1px;
+    list-marker-color:threedshadow;
+    list-marker-style:dotted;      
+  }
+  
+  option,
+  option > :first-child
+  {
+    width:max-intrinsic;
+  }
+  //option > :first-child:hover /* highlight caption */
+  //{
+  //  outline:1px solid highlight -1px;
+  //}      
+}    
+    
+@set std-tree-checkmarks < std-tree
+{
+  :root { behavior: tree-checkmarks; }
+  option > :first-child /* option caption gets checkmark icon */
+  {
+    //margin:0;
+    padding-left:16px; 
+    foreground-image:url(theme:check-normal);
+    foreground-repeat: no-repeat;
+    foreground-position: 2px 50%;
+    foreground-image-cursor: pointer;
+  }
+  
+  option > :first-child:rtl 
+  {
+    padding-left:0; 
+    padding-right:16px;
+    foreground-position-left:auto;
+    foreground-position-right:2px;
+  }
+  
+  option:has-children-of-type(option)
+  {
+    padding-left:26px;
+  }
+  option:has-children-of-type(option) > :first-child
+  {
+    margin-left:-10px;
+  }
+  option:has-children-of-type(option):rtl
+  {
+    padding-left:0;
+    padding-right:26px;
+  }
+  option:has-children-of-type(option) > :first-child:rtl
+  {
+    margin-left:0;
+    margin-right:-10px;
+  }
+  option:incomplete > :first-child { foreground-image:url(theme:check-mixed-normal);  }
+  option:checked > :first-child    { foreground-image:url(theme:check-checked-normal); }      
+}
+/**************************/
+/*水平滑动条*/
+widget[type="hslider"],
+input[type="hslider"]
+{ 
+	style-set:"std-hslider";
+}
+@set std-hslider
+{
+    :root 
+	{
+	    behavior:slider;
+		cursor:default;
+		padding:2px; 
+		height:min-intrinsic; 
+		width:100px; 
+		background-image:url(qabs:common/images/h-trackbar-back.png); 
+		background-repeat:stretch; 
+	}
+ 
+	:root > .slider
+	{ 
+		foreground-image:url(qabs:common/images/h-trackbar-thumb-normal.png); 
+		foreground-repeat:stretch; 
+		width:10px;
+	}
+	:root > .slider:hover,
+	:root > .slider:active
+	{ 
+		foreground-image:url(qabs:common/images/h-trackbar-thumb-active.png); 
+	}
+	
+	:root:disabled > .slider
+	{ 
+		foreground-image:url(theme:h-trackbar-thumb-disabled); 
+	}
+  
+	:root:tab-focus
+	{ 
+		outline:1px dotted invert -1px; 
+	}
+	:root:focus > .slider
+	{ 
+		foreground-image:url(theme:h-trackbar-thumb-focus); 
+	}
+    @media handheld
+    {
+        :root:tab-focus
+        {
+            outline:1px solid -2px highlight;
+        }
+    }
+}
+
+/**************************/
+/*垂直滑动条*/
+widget[type="vslider"],
+input[type="vslider"]
+{ 
+	style-set: "std-vslider";
+}
+@set std-vslider
+{
+    :root
+	{
+		behavior:slider;
+		cursor:default;
+		padding:2px; 
+		height:100px;
+		width:min-intrinsic; 
+		background-image:url(theme:v-trackbar-back); 
+		background-repeat:stretch; 
+	}
+	:root:tab-focus
+	{ 
+		outline:1px dotted invert -1px; 
+	}
+ 
+	:root > .slider
+	{ 
+		foreground-image:url(theme:v-trackbar-thumb-normal); 
+		foreground-repeat:stretch; 
+	}
+	:root > .slider:hover
+	{ 
+		foreground-image:url(theme:v-trackbar-thumb-hover); 
+	}
+	:root  > .slider:active
+	{ 
+		foreground-image:url(theme:v-trackbar-thumb-pressed); 
+	}
+ 
+	:root:disabled > .slider
+	{ 
+		foreground-image:url(theme:v-trackbar-thumb-disabled); 
+	}
+ 
+	:root:focus > .slider
+	{ 
+		foreground-image:url(theme:v-trackbar-thumb-focus); 
+	}
+    @media handheld
+    {
+        :root:tab-focus
+        {
+            outline:1px solid -2px highlight;
+        }
+    }
+}
+
+/**************************/
+/*垂直滚动条*/
+widget[type="vscrollbar"],
+input[type="vscrollbar"]
+{
+  behavior: scroll-bar;
+  width:6px;
+  height:100%%;
+  style-set: "vscrollbar";
+}
+@set vscrollbar
+{
+	.prev,.next{ 
+		foreground-repeat:stretch;
+		foreground-position:center;
+	}	
+	.next-page,.prev-page{
+		background-color:#E5E5E5;
+	}
+	.next{
+		background-color:#A7A7A7;
+	}
+	.prev{
+		background-color:#A7A7A7;
+	}
+	.base{  
+		width:6px;
+		padding:1px;
+		background-color:#D7E3F1;
+		background-image:none;
+	}
+	.slider{ 
+		background-color:#BFBFBF;
+	}
+}
+
+
+/**************************/
+/*水平滚动条*/
+widget[type="hscrollbar"],
+input[type="hscrollbar"]
+{
+  behavior: scroll-bar;
+  width:100%%;
+  height:min-intrinsic;
+  style-set: "hscrollbar";
+}
+@set hscrollbar 
+{
+	:root
+	{
+		background-image:url(qabs:common/images/hscrollbar-back.png );
+		background-repeat:expand;
+		background-position:1 30 1 30px;
+	}
+	.prev,.next{ width:20px;foreground-position:center; foreground-repeat:no-repeat; }
+	.prev{ foreground-image:url( qabs:common/images/hscrollbar-left.png ); }
+	.next{ foreground-image:url( qabs:common/images/hscrollbar-right.png ); }
+	.base,.next-page, .prev-page {  
+		height:14px;
+	}
+	.slider { 
+		height:12px; 
+		foreground-repeat:expand; 
+		foreground-position:1 20 1 20px;
+		foreground-image:url(qabs:common/images/hscrollbar-bar.png); 
+	}
+}
+
+/**************************/
+/*嵌入框架*/
+frame 
+{ 
+  behavior: frame; 
+  width:*; 
+  height:*;
+  overflow:hidden;
+}
+ 
+iframe 
+{ 
+  behavior: frame; 
+  width:300px; 
+  height:150px;
+}
+
+iframe[history],
+frame[history]
+{
+  behavior: history frame; 
+}
+
+frame[type="pager"]
+{
+  style-set: "std-pager";
+}
+
+@set std-pager
+{
+  :root 
+  {
+    flow:null; // it will use manual layout
+    behavior:pager;
+    overflow:hidden;
+  }
+  
+  :root > div.page
+  {
+	background-color:white;
+	border: 1px solid black;
+	outline: 3px glow black 1px;
+	outline-shift: 2px;
+  }
+}
+
+frameset,
+frameset[cols] { style-set: "std-frameset-cols"; }
+frameset[rows] { style-set: "std-frameset-rows"; }
+@set std-frameset-cols
+{
+  :root 
+  {
+    behavior: frame-set; 
+    width:*; 
+    height:*;
+    flow:horizontal;
+  }
+  :root[history] { behavior: history frame-set; } 
+  :root:not(:has-children-of-type(splitter)):not(:has-children-of-type(hr))
+  {
+    border-spacing:3px;
+    background-color:threedface;
+  }
+  :root > * { height:*; }
+  :root > hr,
+  :root > splitter { width:5px; cursor:e-resize; background-color: threedface; margin:0; border:none; }
+  :root > hr:hover,
+  :root > splitter:hover { background-color:threedhighlight threedshadow threedshadow threedhighlight; }
+  /*:root > splitter:active { background:transparent url(theme:toolbar-button-checked) stretch; }*/
+}
+
+@set std-frameset-rows
+{
+  :root 
+  {
+    behavior: frame-set; 
+    width:*; 
+    height:*;
+    flow:vertical;
+  }
+  :root[history] { behavior: history frame-set; } 
+  :root:not(:has-children-of-type(splitter)):not(:has-children-of-type(hr))
+  {
+    border-spacing:3px;
+    background-color:threedface;
+  }
+  :root > * { width:*; }
+  :root > hr,
+  :root > splitter { height:5px; cursor:n-resize; background-color: threedface; margin:0; border:none; }
+  :root > hr:hover,
+  :root > splitter:hover { background-color:threedhighlight threedhighlight threedshadow threedshadow ; }
+  /*:root > splitter:active { background:transparent url(theme:toolbar-button-checked) stretch; }*/
+
+}
+
+/**************************/
+/*弹出式菜单*/
+widget[type="menu"], 
+button[type="menu"]
+{ 
+	style-set: "std-button-menu";
+}
+@set std-button-menu < std-button
+{
+	:root{
+		behavior:button popup-menu;
+		background-image:none;
+//		background-color:#F0F0F0;
+		width:max-intrinsic;
+	}
+	:root[with-icon]{
+		padding-left:20px;
+		foreground-repeat:no-repeat;
+		foreground-position:4px center;
+	}
+	:root:hover{
+		border:1px solid #DEDEDE;
+	}
+	:root:owns-popup{
+//		border:1px solid #DEDEDE;
+		border-bottom:none;
+	}
+	:root>menu{
+		background-image:none;
+//		background-color:#F0F0F0;
+//		border:1px solid #DEDEDE;
+		border:none;
+		margin-top:-2px;
+		width:*;
+	}
+	:root>menu>li{
+		height:28px;
+		padding-left:30px;
+		vertical-align:middle;
+	}
+	:root>menu>li:hover{
+		background-color:#F4A93A;
+	}
+}
+
+widget[type="button-menu"]{
+	style-set:"custom-button-menu";
+}
+@set custom-button-menu{
+	:root{
+		behavior:clickable popup-menu;
+		background-image:none;
+//		background-color:#F0F0F0;
+//		border-left:1px solid #F0F0F0;
+		width:max-intrinsic;
+		height:*;
+		//width:min-intrinsic;
+		width:max-intrinsic;
+		font:9pt normal "微软雅黑";
+		color:#777;
+		padding:2 4px;
+	}
+	:root[with-icon]{
+		padding-left:22px;
+		foreground-repeat:no-repeat;
+		foreground-position:4px center;
+	}
+	:root:hover{
+//		border-left:1px solid #C4C4C4;
+	}
+	:root:owns-popup{
+//		border-color:#C4C4C4;
+	}
+	:root>menu{
+//		background-color:#F0F0F0;
+		outline:none;
+		border:none;
+//		border-left:1px solid #C4C4C4;
+		margin-top:-1px;
+		width:*;
+	}
+	:root>menu>li{
+		height:28px;
+		padding-left:30px;
+		vertical-align:middle;
+	}
+	:root>menu>li:hover{
+		background-color:#F4A93A;
+	}
+}
+    
+button[type="selector"]
+{
+  style-set: "std-selector";
+} 
+button[type="selector"]
+{
+    style-set: "std-selector";
+} 
+@set std-selector 
+  {
+    :root
+    { 
+      font:system;
+      color:windowtext;
+      white-space: nowrap;
+      background-repeat:stretch; 
+      background-image:url(theme:button-normal); 
+      cursor:default;
+      text-align:center;
+      padding:4px 14px 4px 8px; /* + room for the arrow */
+      behavior:popup-selector;
+      foreground-image:url(stock:arrow-down); /* that arrow */
+      foreground-repeat: no-repeat;
+      foreground-position-top: 50%;
+      foreground-position-right: 3px;
+      overflow: hidden;
+      height:min-intrinsic;
+    }
+    
+    :root > caption { margin-top:*; margin-bottom:*; }    
+   
+    :root:hover
+    { 
+      background-image:url(theme:button-hover);  
+      transition: blend;
+    }
+    :root:focus
+    {
+      background-image:url(theme:button-defaulted); 
+    }
+    :root:active 
+    { 
+      background-image:url(theme:button-pressed);  
+    }
+        
+    :root:active > caption
+    { 
+      position:relative;
+	    left:1px;
+	    top:1px;
+    }
+    :root:disabled
+    { 
+      background-image:url(theme:button-disabled);
+	    color:graytext;
+    }
+    :root:tab-focus
+    {
+	    outline:1px dotted -4px; /* inside */
+    }
+    :root:active
+    { 
+
+      foreground-position-top: 55%;
+      foreground-position-right: 2px;
+    }
+    :root > menu,
+    :root > popup
+    { 
+      style-set: "std-popup-menu";
+      display:block; 
+      visibility:collapse;/* invisible normally */
+      border:none;
+      min-width: max-intrinsic;
+	    width: *;
+      height: max-intrinsic;
+      transition:window-slide-ttb;
+    }
+    :root > menu:popup,
+    :root > popup:popup
+    {
+      visibility:visible;/* visible when popup */
+    }
+}
+  
+popup 
+{
+  style-set: "std-popup"; /* used to break chain of style-sets so <button><popup><button/></popup></button> will work */
+}
+
+@set std-popup
+{
+  
+}
+
+menu
+{
+  style-set: "std-popup-menu";
+}
+@set std-popup-menu
+{
+    :root,menu
+	{
+		behavior:menu;
+		flow:vertical;
+		display:none; 
+		margin:2px;  
+		background-image:none;
+		max-width:max-intrinsic;
+		background-color:white;
+		font:9pt normal "微软雅黑";
+		color:#777;
+		padding:2 4px;
+		margin:1 0 0 0px; 
+		max-height:240px;
+    }
+    /* menu item in popup menus */
+    li {  
+		margin:0;
+		height:28px;
+		padding:0 8 0 30px;
+		vertical-align:middle;
+		white-space:nowrap;
+		width:*;
+		foreground-repeat:no-repeat;
+		foreground-position:2px center;
+    }
+	menu > option:rtl,
+    li:rtl 
+    { 
+      text-align:right; 
+      padding-right:24px; /* room for icon */
+      padding-left:12px; /* room for the arrow */
+      foreground-position-left:auto;
+      foreground-position-right:2px;
+    }
+	li:hover
+	{ 
+		background-color:#F4A93A;
+	}
+	menu > option:has-child-of-type(menu),
+	li:has-child-of-type(menu)
+	{
+      background-image:url(stock:arrow-right); /* that arrow */
+      background-repeat: no-repeat;
+      background-position: 100% 50%;
+    }
+    menu > option:disabled, 
+	li:disabled{ 
+	   color:threedshadow; font-weight: normal; 
+	   foreground-image-transformation: contrast-brightness-gamma( 0.15,0.75,1.0);
+	}
+    /* accesskey label (span) */
+    span.accesskey{
+      display:inline-block;
+      margin-left:*; /* spring to attach it to the right */
+      padding-left:1em;
+      color:threeddarkshadow;
+    }
+	menu > option:current span.accesskey,
+    li:current span.accesskey
+    {
+      color:brown;
+    }
+ 
+    /* current menu item */
+	menu > option:current,
+    li:current{ 
+      background-color:#F4A93A;
+    }
+ 
+    /* menu separator */
+    hr 
+    {
+      margin:2px; 
+    }
+	caption
+	{
+	  margin:2px;
+	  color:graytext;
+	}
+	img.hr
+	{
+	  display:inline-block;
+	  vertical-align:bottom;
+	  width:*;
+	  height:0;
+	  margin-bottom:0.4em;
+	  border-top:1px solid threedshadow;	
+	  border-bottom:1px solid threedlight;
+	}
+}
+
+menu.popup,
+menu.context,
+menu:synthetic  /* builtin popup menu */
+{
+  style-set: "std-popup-menu";
+}
+
+
+/**************************/
+/*菜单条*/
+ul[type="menubar"]{
+	style-set: "std-menubar";
+}
+@set std-menubar
+{
+	:root
+	{
+		behavior:menu-bar;
+		flow: horizontal;
+		color:windowtext; 
+		margin:0;  
+		padding:0px;
+		border-spacing:10px;
+		font:@FONT_NORMAL;
+		color:@FONT_COLOR_ACTIVE;
+	}
+	:root>li
+	{
+		padding:0 8px;
+		margin:0;
+		white-space:nowrap;
+		width:max-intrinsic;
+		display:block;
+		background-color:@CTRL_BACK_HOVER;
+		border:@BORDER;
+		height:21px;
+		line-height:21px;
+	}
+}
+
+/**************************/
+/*菜单按钮*/		
+widget[type="split-button-menu"]
+{
+	style-set: "std-split-button-menu";	
+}
+@set std-split-button-menu
+{
+	:root
+	{
+		hover-on!:
+				self.child(1):hover=true,
+				self.child(2):hover=true;
+				
+		hover-off!:
+				self.child(1):hover=false,
+				self.child(2):hover=false;							
+		
+		width:max-intrinsic;
+		flow:horizontal;
+		vertical-align:middle;
+		border-spacing:0;
+	}
+	div
+	{
+		font:system;
+		  color:windowtext;
+		  padding:4px 8px; 
+		  white-space: nowrap;
+		  behavior:clickable; 
+		  background-repeat:stretch; 
+		  cursor:default;
+	}
+	div:nth-child(1)
+	{	
+		width:*;height:*;
+		background-image:url(theme:toolbar-split-button-normal);
+		hover-off!:
+				self:hover=self.next():hover;
+	}
+	div:nth-child(1):hover
+	{
+		background-image:url(theme:toolbar-split-button-hover);
+	}
+	div:nth-child(1):active
+	{
+		background-image:url(theme:toolbar-split-button-checked);
+	}
+	div:nth-child(1):disabled
+	{
+		background-image:url(theme:toolbar-split-button-disabled);
+	}
+	div:nth-child(2)
+	{
+		behavior:clickable popup-menu; 
+		background-image:url(theme:toolbar-split-dd-button-normal);
+		height:*;
+		width:20px;
+		margin-left:-5px;
+		padding:0;
+		
+		hover-off!:
+				self:hover=self.previous():hover;
+	}
+	div:nth-child(2):hover
+	{
+		background-image:url(theme:toolbar-split-dd-button-hover);
+	}
+	div:nth-child(2):active,
+	div:nth-child(2):owns-popup
+	{
+		background-image:url(theme:toolbar-split-dd-button-checked);
+	}
+	div:nth-child(2):disabled
+	{
+		background-image:url(theme:toolbar-split-dd-button-disabled);
+	}
+}
+
+/**************************/
+/*日历控件*/
+widget[type="calendar"],
+input[type="calendar"]
+{
+  style-set: "std-calendar";
+}
+@set std-calendar 
+{
+    :root
+	{
+      behavior:calendar;      
+      min-width:280px;min-height:300px;
+	  overflow:hidden;  
+      font:system;
+	  color:#606366;
+      white-space: nowrap;
+      cursor:default;
+	}
+	:root>caption{
+		text-align:center;
+		flow:horizontal;
+		border-spacing:2px;
+		color:#898E91;
+		font-size:11pt;
+		vertical-align:middle;
+		font-weight:bold;
+		background:url(qabs:common/images/calendar-head.png) stretch;
+		height:45px;
+	}
+	popup{
+		padding:0;
+		border:none;
+		
+		width:max-intrinsic;
+		min-width:max-intrinsic;
+		max-width:max-intrinsic;
+	}
+    table{ 
+      width:*;height:*;
+      border-spacing:1px;
+	  padding:0px;
+	  background:url(qabs:common/images/calendar-body.png) stretch;
+    }
+	td{
+      text-align:center;
+      padding:2px;
+      width:*;
+	  border-width:1px;
+	  border-color:transparent;
+	}
+	td:hover{
+		border:1px solid #51C4D4;
+	}
+	td:active{
+		background-color:#A0A0C0;
+	}
+	td.day{
+		background-color:white;
+	}
+	td.day.today{ 
+		background-color:#F35050;
+		color:white;
+	}
+	td.day.off{ 
+		color: brown; 
+	}
+    td.day.other-month { 
+		color: #B0B0B0; 
+		background-color:transparent;
+	}
+    th.weekday{
+		width:max-intrinsic;
+		padding:4 2px;
+		font-size:8pt;
+		font-family:Arial;
+		color:#4FC4F6;
+		text-align:center;
+		margin-bottom:0;
+    }
+//	span{ visibility:collapse; }
+	.button{	
+		height:18px;
+		padding:2 6px;
+	}
+	.button:hover{
+		background:url(theme:toolbar-button-hover) stretch;
+	}
+	.button:active{
+		background:url(theme:toolbar-button-pressed) stretch;
+	}
+	.prev-date,.next-date{
+		width:40;height:*;
+		background-repeat:no-repeat;
+		background-position:center;
+	}
+	.prev-date:hover,.next-date:hover{
+		backforeground-image-transformation:contrast-brightness-gamma(0.5,0,1.5,1.2);
+	}
+	.prev-date{ background-image:url(qabs:common/images/prev_24.png); }
+	.next-date{ background-image:url(qabs:common/images/next_24.png); }
+	.prev-date:hover,.next-date:hover{
+		outline:@OUTLINE_STYLE_HOVER;
+    }
+	.prev-date:active,.next-date:active{
+		outline:@OUTLINE_STYLE_ACTIVE;
+    }
+	:root:current td.month:current,
+    :root:focus td.month:current,
+    :root:current td.day:current,
+    :root:focus td.day:current,
+    :root:current td.year:current,
+    :root:focus td.year:current,
+    :root:current td.decade:current,
+    :root:focus td.decade:current   
+    {
+      background-color:#43ADD7;
+	  color:white;
+    }
+	/*下面的那个 今天：日期。为了美观，隐藏之*/
+	text.statusbar 
+    {
+      padding:1px;
+	  color:red;
+      line-height:1.4em;
+	  visibility:collapse;
+    }
+	span.today 
+    {
+      display:inline-block;  
+      padding:2px;      
+    }   
+    
+    span.today:hover {
+        background-repeat:stretch;
+        background-image:url(theme:toolbar-button-hover);
+    }
+    
+    span.today:active {
+        background-repeat:stretch;
+        background-image:url(theme:toolbar-button-pressed);
+    }
+    
+    span.today-legend 
+    {
+      display:inline-block;
+      border-radius:2px;
+      width:15pt;
+      height:10pt;   
+      margin:* * * 2px;
+    }
+} 
+
+/**************************/
+/*日期控件*/
+widget[type="date"],
+input[type="date"]
+{
+    font:system;
+    style-set: "std-date";
+}
+@set std-date < std-edit 
+{
+    :root { 
+		height:@CTRL_HEIGHT; 
+		behavior:date; 
+		cursor:default; 
+		padding:0px; 
+		flow:horizontal;
+	}
+    :root > caption { 
+		width:75px;height:*;  
+		behavior: masked-edit; 
+		cursor:text; 
+		color:@FONT_COLOR_HOVER;
+		font-family:Consolas "宋体";
+		margin:0px;
+		padding-left:3px; 
+	}
+	:root>caption:hover,:root>caption:focus{
+		color:@FONT_COLOR_ACTIVE;
+	}
+    :root > button  {  
+		behavior: none; 
+		border:none;
+		height:*;width:25px;
+		padding:0;
+		margin:1 1 1 -5px;
+		background-image:url(qabs:common/images/calendar_16.png);
+		background-repeat:no-repeat; 
+		background-position:4 3px; 
+		opacity:0.8;
+	}
+    :root > button:hover,:root > button:active{
+		opacity:1.0;
+	}
+	:root>popup{
+	}
+}     
+
+/**************************/
+/*时间控件*/
+widget[type="time"],
+input[type="time"]
+{
+	style-set: "std-time-edit";
+}
+@set std-time-edit
+  {
+    :root
+    {
+      behavior:time; 
+      font:system;
+      color:windowtext;
+      height:@CTRL_HEIGHT; 
+      width:1em; 
+      background-image:url(theme:edit-normal); 
+      background-repeat:stretch; 
+      padding:system-border-width; 
+      min-width: min-intrinsic;
+      min-height: min-intrinsic;
+      cursor:default;
+      overflow:hidden;
+      white-space: nowrap;
+	    flow:grid;
+	    context-menu:url(res:behavior-edit-menu.htm);
+	    text-selection: highlighttext highlight;
+    }
+
+    :root > caption 
+    { 
+      left:1#;right:1#;
+      top:1#;bottom:2#;
+      height:*; width:*;
+      min-height: min-intrinsic;
+      padding:2px; 
+      behavior: masked-edit;
+	    cursor:default;
+    }
+    
+    :root > caption:rtl 
+    {
+      left:2#;right:2#;
+    }
+      
+    :root:disabled
+    { 
+      background-image:url(theme:edit-disabled); 
+	    color:graytext;
+      /*cursor:default;*/
+    }
+  
+    :root[invalid]
+    {
+      color:red;
+    }
+  
+    :root > button
+    {
+      behavior:clickable;
+      cursor:default;
+    }
+  
+    :root > button.minus
+    {
+      left:2#;right:2#;
+      top:2#;bottom:2#;
+      padding:0;
+      margin: 0;
+      background-image:url(theme:v-spin-minus-normal); 
+      background-repeat:stretch; 
+      width:system-scrollbar-width;
+      height:50%%;
+    }
+    :root > button.minus:rtl
+    {
+      left:1#;right:1#;
+    }
+   
+    :root > button.minus:hover
+    {
+	    transition:none;
+      background-image:url(theme:v-spin-minus-hover); 
+    }
+    :root > button.minus:active
+    {
+      background-image:url(theme:v-spin-minus-pressed); 
+    }
+    :root > button.minus:disabled
+    {
+      background-image:url(theme:v-spin-minus-disabled); 
+    }
+    :root > button.plus
+    {
+      padding:0;
+      left:2#;right:2#;
+      top:1#;bottom:1#;
+	    margin: 0;
+      background-image:url(theme:v-spin-plus-normal); 
+      background-repeat:stretch; 
+	    width:system-scrollbar-width;
+	    height:50%%;
+    }
+    :root > button.plus:rtl
+    {
+      left:1#;right:1#;
+    }
+    
+    @media handheld
+	  {
+	    :root
+	    {
+	        padding:3px;
+	        flow:horizontal;
+	    }
+	    :root > button.plus
+	    {
+	        height:100%%;
+	    }
+	    :root > button.minus
+	    {
+	        height:100%%;
+	    }
+    }
+    
+    :root > button.plus:hover
+    {
+	    transition:none;
+      background-image:url(theme:v-spin-plus-hover); 
+    }
+    :root > button.plus:active
+    {
+      background-image:url(theme:v-spin-plus-pressed); 
+    }
+    :root > button.plus:disabled
+    {
+      background-image:url(theme:v-spin-plus-disabled); 
+    }
+}
+
+/**************************/
+/*自定义时间控件*/
+widget[type="timectrl"]{
+	style-set: "x-timectrl";
+}
+@set x-timectrl{
+	:root{ 
+		width:90px; height:@CTRL_HEIGHT; 
+		white-space:nowrap; 
+		border:@BORDER; 
+		font-size:9pt; 
+		background-color:@CTRL_BACK_HOVER; 
+		behavior:xtimectrl; 
+	}
+	:root>caption{ 
+		width:*; height:*; 
+		text-align:center;
+		vertical-align:middle; 
+	}
+	:root>table{ 
+		behavior:xtimepopup; 
+		width:*;
+		border:@BORDER; 
+		border-bottom:none; 
+		padding:0px; 
+		border-spacing:0px; 
+		display:none; 
+	}	
+	:root>table td{
+		background-color:@CTRL_BACK_NORMAL;
+		border-bottom:@BORDER_CTRL; 
+		text-align:center; 
+		line-height:18px;
+		height:18px;
+		behavior:switch; 
+	}
+	:root>table td.xclock{ 
+		background-color:#F4F9FF #F4F9FF #FCC6DB #FCC6DB; color:blue; 
+	}
+	:root>table td:checked,
+	:root>table td.xclock:checked{ 
+		background-color:#D9ECFE #D9ECFE #8CC6FA #8CC6FA; 
+		font-weight:bold;
+	}
+	:root>table td:hover,
+	:root>table td.xclock:hover{ 
+		background-color:#F4F9FF #F4F9FF #CEEAFF #CEEAFF; 
+		font-size:10pt; 
+		color:#333; 
+	}
+}
+
+/**************************/
+/*富文本编辑器*/
+widget.editor { 
+	width:*; height:*; 
+	min-height:100px; 
+	border:@BORDER_CTRL;  
+	overflow:hidden;
+	style-set: "richtext-editor";  
+}
+@set richtext-editor{
+  richtext{ 
+		padding:0; 
+		background-color:window; background-image:none; 
+		behavior: ~ richtext-current-objects;
+		width:*; height:*; 
+		overflow-x:auto; overflow-y:auto; 
+		font: 10pt Verdana;
+		vertical-scrollbar:vscrollbar; 
+	}
+	
+  widget.toolbar { flow:horizontal-flow;background-color: @CTRL_BACK_NORMAL;
+	border-bottom:@BORDER_CTRL; padding:1px; }
+	
+  widget.tb-button { font-family:tahoma arial;
+	behavior: clickable; padding:3px; width:20px; height:*; text-align:center;
+	vertical-align:middle; background: url(theme:toolbar-button-normal) stretch; }  widget.tb-button:disabled { background: url(theme:toolbar-button-disabled) stretch; color:threedshadow; }    
+  widget.tb-button:disabled img { foreground-image-transformation: contrast-brightness-gamma(0.15,0.75,1.0); }    
+  
+  widget.tb-button:hover:not(:disabled)  { background: #E7F3FF #E7F3FF #A5D3FF #A5D3FF; }    
+  widget.tb-button:active:not(:disabled) { background: #E7F3FF #E7F3FF #A5D3FF #A5D3FF; padding:4px 2px 2px 4px; }    
+  widget.tb-button:checked:not(:disabled) { background: #E7F3FF #E7F3FF #A5D3FF #A5D3FF; border:1px solid #769DC0;}    
+  widget.tb-button:checked:hover:not(:disabled) { background: #E7F3FF #E7F3FF #A5D3FF #A5D3FF; }    
+  
+  widget.tb-button.h:not(:disabled) { color:threedshadow; }    
+  widget.tb-button.h:not(:disabled) b { color:windowtext; }      widget.toolbar > hr { width:0; height:*; margin: 3 2px; border: 1px solid; border-color: #fff #E5E5E5 #fff #838183; }    
+  
+  widget.toolbar>widget[id="richtext-fontfamily"]{
+	value-changed!:self.parent().parent().$(richtext).setFontName(self:value);
+   }
+   widget.toolbar>widget[id="richtext-fontsize"]{
+	value-changed!:self.parent().parent().$(richtext).setFontSize(self:value);
+   }
+   widget.toolbar>widget[id="richtext-fontcolor"]{
+	value-changed!:self.parent().parent().$(richtext).setFontColor(self.value);
+   }
+} 
+
+/**************************/
+/*弹出窗口*/
+popup{ 
+	width: max-intrinsic; max-width:450px;
+	height: max-intrinsic;
+	background:url(qabs:common/images/popup-back.png) expand stretch-middle;
+	background-position:9 12 14 10px;
+	background-color:transparent;
+	padding:9 12 14 10px;
+	overflow:none;
+	text-overflow:none;
+	font:system;
+	color:gray;
+	display:none;
+}
+
+/*提示控件*/
+popup[xrole="tooltip"]{  
+	width:max-intrinsic; 
+	max-width:300px; 
+	min-height:15px; 
+//	background-color:#FAFAFA #FAFAFA #E5E5E5 #E5E5E5; 
+}
+
+/**************************/
+/*自定义的popup，用于支持ECtrl的ShowTooltip*/
+popup.qtooltip{
+//	behavior:qtooltip;
+}
+
+/**************************/
+/*星星控件（可用于选择星级等）*/
+ul[type="starbox"]
+{	
+	style-set: "x-starbox";
+}
+@set x-starbox
+{
+	:root
+	{  
+		flow:horizontal; 
+		border-spacing:1px;
+		cursor:pointer;
+		height:18px;padding:2px; 
+		width:min-intrinsic;
+		margin:0px; 
+		behavior:starbox; 
+	}	
+	:root>li{ 
+		display:block; 
+		margin:0; padding:0; 
+		background-image:url(qabs:common/images/star_gray.png);
+		background-repeat:no-repeat; 
+		width:16px; height:*; 
+		behavior:clickable; 
+	}
+	:root>li:hover,:root>li:checked{ 
+		background-image:url(qabs:common/images/star_color.png); 
+	}
+}
+
+/**************************/
+/*单选的图片button*/
+widget[type="radiobox"]
+{
+	style-set: "x-radiobox";
+}
+@set x-radiobox
+{
+	:root
+	{
+		border-spacing:0px;height:@CTRL_HEIGHT;width:min-intrinsic;
+		flow:horizontal;border:@BORDER;padding:0px;
+		white-space:nowrap;
+	}
+	button{
+		behavior:switch;
+		foreground-repeat:no-repeat;foreground-position:5 4px;
+		border:none;border-right:@BORDER;
+		height:*;padding:* 4 * 22px;
+		border-radius:0;
+		min-width:0px;
+	}
+	button:not(:first-child){margin-left:-7px;}
+	button:nth-last-child(1){border:none; }
+	button:checked{
+		background:url(qabs:common/images/switch-back.png) stretch;
+		foreground-image-transformation:color-schema(#fff);color:@FONT_COLOR_ACTIVE;
+	}
+}
+
+/**************************/
+/*单选的文字和图片button*/
+widget[type="image-button-box"]
+{
+	style-set: "image-button-box";
+}
+@set image-button-box
+{
+	:root
+	{
+		border-spacing:0px;
+		height:@CTRL_HEIGHT;
+		width:min-intrinsic;
+		flow:horizontal;
+		border:@BORDER;
+		white-space:nowrap;
+		padding:0;
+		foreground-repeat:no-repeat;
+		foreground-image:url(qabs:common/images/ibb-fore.png);
+		foreground-position:center left;
+	}
+	button{
+		behavior:switch;
+		background-image:none;
+		background-repeat:stretch;
+		background-position:0 0 0 0;
+		foreground-repeat:no-repeat;
+		foreground-image:url(qabs:common/images/ibb-fore.png);
+		foreground-position:center right;
+		border:none;
+		height:*;
+		padding:4 14 4 30px;
+		border-radius:0;
+		min-width:50px;
+		font:bold 10pt ;
+		color:white;
+	}
+	button:hover{
+		background-image:url(qabs:common/images/ibb-back-hover.png);
+	}
+	button:not(:first-child){margin-left:-7px;}
+//	button:nth-last-child(1){ border:none; }
+	button:checked{
+		background-image:url(qabs:common/images/ibb-back-check.png);
+	}
+}
+
+/**************************/
+/*单选的文字和图片button*/
+div.msgbar
+{
+	border:@BORDER; 
+	font-weight:bold;
+	vertical-align:middle;
+	width: *; padding: 4 10px; 
+	min-height:22px;line-height:22px;
+	flow:horizontal; 
+	overflow:hidden;
+}
+
+/**************************/
+/*文件选择*/
+input[type="file-path"],
+widget[type="file-path"],
+input[type="folder-path"],
+widget[type="folder-path"]
+{ 
+  style-set: "std-file-selector"; 
+  behavior:path-select;
+}
+
+input[type="file"],
+widget[type="file"] 
+{ 
+  style-set: "std-file-selector"; 
+  behavior:file;
+}
+@set std-file-selector
+{
+  :root 
+  {
+    padding:1px;
+    font:system;
+    flow:horizontal;
+    width:20em;
+	height:@CTRL_HEIGHT;
+	overflow:hidden;
+    background-repeat:stretch; 
+    background-image:url(theme:edit-normal); 
+  }
+  :root:disabled 
+  {
+    background-image:url(theme:edit-disabled);       
+  }
+  :root > caption
+  {
+    behavior:file-icon;/* file-icon*/
+    width:*;
+    padding:2px 2px 2px 22px;
+    height:*;
+	vertical-align:middle;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    foreground-repeat:no-repeat;
+    foreground-position: 4px 50%;
+  }
+  :root[editable]>caption{
+	behavior:edit file-icon path;
+  }
+  :root:empty > caption
+  {
+    color:graytext;
+  }
+  :root:disabled > caption
+  {
+    color:graytext;
+  }
+  :root > button
+  {
+	foreground:url(qabs:common/images/file_16.png) no-repeat;
+	foreground-position:center;
+    width:@CTRL_HEIGHT;//max-intrinsic;
+	overflow:hidden;
+    height:*;
+	background-color:transparent;
+  }
+  :root > button:hover{
+	background-color:transparent;
+  }
+}
+
+/*
+widget[type="file-path"],
+input[type="file-path"]
+{
+  style-set: "std-file-path";
+}
+@set std-file-path
+{
+	:root{
+		behavior:file;
+		height:@CTRL_HEIGHT;
+		line-height:@CTRL_HEIGHT;
+		flow:horizontal;
+		white-space:nowrap;
+		background-image:url(theme:edit-normal);
+		background-repeat:stretch;
+		overflow:hidden;
+	}
+	:root>caption{
+		behavior:path;
+		padding-left:@CTRL_HEIGHT;
+		margin:0;width:*;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		foreground-position:center 2px; 
+	}
+	:root:empty,:root>caption:empty{
+		font-size:9pt;
+		color:#666;
+	}
+	:root>button{ 
+		width:@CTRL_HEIGHT; height:*;
+		padding:0px;
+		overflow:hidden;
+		border-radius:0;border:none;
+		border:@BORDER_CTRL;
+		text-align:center;
+	}
+	:root:disabled{
+		background-image:url(theme:edit-disabled);
+	}
+}
+*/
+
+/**************************/
+/*文件夹选择*/
+/*
+widget[type="folder-path"],
+input[type="folder-path"]
+{
+  style-set: "std-folder-path";
+}
+@set std-folder-path
+{
+	:root{
+		behavior:path-select folder;
+		height:@CTRL_HEIGHT;
+		line-height:@CTRL_HEIGHT;
+		vertical-align:center;
+		flow:horizontal;
+		white-space:nowrap;
+		background-image:url(theme:edit-normal);
+		background-repeat:stretch;
+		overflow:hidden;
+	}
+	:root>caption{
+		behavior:shell-icon path;
+		padding-left:@CTRL_HEIGHT;
+		width:*;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		foreground-position:center 2px; 
+	}
+	:root:empty,:root>caption:empty{
+		font-size:9pt;
+		color:#666;
+	}
+	:root>button{ 
+		width:@CTRL_HEIGHT; height:*;
+		min-width:@CTRL_HEIGHT;
+		padding:0px;
+		overflow:hidden;
+		border-radius:0;border:none;
+		text-align:center;
+		background-image:url(qabs:common/images/path-btn-normal.png);
+		background-repeat:stretch;
+		background-position:0 0 0 0px;
+	}
+	:root>button:hover{ 
+		background-image:url(qabs:common/images/path-btn-hover.png);
+	}
+	:root>button:active{ 
+		background-image:url(qabs:common/images/path-btn-active.png);
+	}
+	:disabled{
+		background-image:url(theme:edit-disabled);
+	}
+}
+*/
+
+/**************************/
+/**************************/
+/*多页控件（像blog页面下面的那个文章选择）*/
+widget[type="pagenav"]
+{
+  style-set: "std-pagenav";
+}
+@set std-pagenav
+{
+	:root
+	{
+		text-align:center;
+		padding:4 10px;
+		height:30px;
+		width:*;
+		min-width:50px;
+		flow:horizontal;
+		overflow:hidden;
+		margin-bottom:2px;
+		behavior:xscroller;
+	}
+	div{
+		margin:* 2px;
+		behavior:pagenav switch;
+		text-align:center;
+		vertical-align:middle;
+		width:20px;height:20px;
+		border:@BORDER;
+		font:10pt bold Arial;
+		background-color:white;
+		color:#1469C3;
+	}
+	div:hover{
+		background-color:#C577FA;
+	}
+	div:checked{
+		background-color:#1469C3;
+		color:white;
+	}
+}
+
+/**************************/
+/*表格控件*/
+table.grid{
+	style-set:"custom-grid";
+}
+@set custom-grid
+{
+	:root
+	{
+		behavior:sortable-grid column-resizer;
+		width:*;height:*;
+		background-color:transparent;
+		border-spacing:0;
+		padding:0;
+		overflow:auto;
+		vertical-scrollbar:vscrollbar;
+		horizontal-scrollbar:hscrollbar;
+		border:@BORDER;
+	}
+	:root>tr>th{
+		border-bottom:@BORDER;
+		padding:2 4px;
+		text-align:center;
+		height:26px;
+		border-left:@BORDER;
+		background-color:@CTRL_BACK_NORMAL;
+	}
+	:root>tr>th:nth-child(1){
+		border-left:none;
+	}
+	:root>tr>th:checked{ 
+	  foreground-image: url(stock:arrow-down); 
+	  foreground-repeat: no-repeat;   
+	  foreground-position-top: 50%;   
+	  foreground-position-right: 5px;   
+	}
+	:root>tr{
+		border-bottom:@BORDER;
+		height:@CTRL_HEIGHT;
+	}
+	:root>tr:not(:first-child):hover{
+		background-color:#989898;
+	}
+	:root>tr:not(:first-child):checked{
+		background-color:#6A6A6A;
+	}
+	:root>tr>td{ 
+		padding:2 4px;
+		height:28px;
+		white-space:nowrap;
+		text-overflow:ellipsis; 
+	}
+	:root>tr>td:nth-child(1){
+		border-left:none;
+	}
+}
+
+/**************************/
+/*
+ * 	多页控件（tab）
+ *	tabs 使用 show_close_button="button-name"
+ * 	button-name 用于按钮的name属性值
+ */
+widget[type="tabs"]
+{
+	style-set:"x-tabs";
+}
+@set x-tabs
+{
+	:root
+	{
+		font:system;
+		behavior:tabs;
+		height:*;width:*;
+		overflow:hidden;
+	}
+	:root>.strip{
+	  flow: horizontal;
+	  width:*;
+	  padding:2 10 0 10px;
+		border-bottom:@BORDER;
+	}
+	:root[tab-pos="bottom"]>.strip
+	{
+	  padding:0 10 2 10px;
+		border-top:@BORDER;  
+		border-bottom:none;
+	}
+	:root > .strip > [panel]{
+	  padding: 3px 8px;
+	  height: *;
+	  vertical-align:middle;
+	  max-width: auto;
+	  background-color: window;
+	  border-radius: 4px 4px 0 0;
+	  border:@BORDER;
+	  border-bottom:none;
+	  margin:0 -1px;
+	  cursor:pointer;
+	  flow:horizontal;
+	}
+	:root[tab-pos="bottom"]>.strip > [panel]
+	{
+		border-radius: 0 0 4 4px;
+		border:@BORDER;
+	  border-top:none;
+	}
+	:root>.strip>[panel]>.icon{
+		width:1em;
+		height:1em;
+		background-image:none;
+		padding:1px;
+		font-family: marlett;
+		font-size:10pt;
+		behavior:clickable;
+	}
+	:root>.strip>[panel]>.icon:hover{
+		color:orange;
+	}
+	:root>.strip>[panel]>.icon:active{
+		background-color:#274749;
+	}
+	:root > .strip > [panel]:nth-child(1) { background-color:bisque; }
+	:root > .strip > [panel]:nth-child(2) { background-color:lavender; }
+	:root > .strip > [panel]:nth-child(3) { background-color:lemonchiffon; }
+	:root > .strip > [panel]:nth-child(4) { background-color:mistyrose; }
+
+	:root > .strip > [panel]:hover{
+	  font-weight:bold;
+	}
+	:root > .strip > [panel]:current{
+	  margin:-1px;
+	  padding: 4px 10px 5px 10px; 
+	  background-color-bottom-right: window;
+	  background-color-bottom-left: window;
+	  position:relative;
+	  border-color:gold;
+	  font-weight:bold;
+	}
+
+	:root > .strip > [panel]:current:hover{
+	}
+
+	:root:tab-focus > .strip > [panel]:current > *{
+	  outline: 1px dotted invert;
+	}
+
+	:root > [name] { 
+		display:none; 
+		background-color:white;
+	}
+	:root > [name]:expanded
+	{ 
+	  padding:4px;
+	  display:block; 
+	  width:*;height:*;
+	  border:@BORDER; 
+	  border-top-style:none;  
+	}	
+	:root[tab-pos="bottom"]>[name]:expanded
+	{
+	  border-top-style:solid; 
+	  border-bottom-style:none; 
+	}
+}
+
+/**************************/
+/* 颜色选择器 */
+widget[type="colorpicker"]{
+	style-set: "x-colorpicker";
+}
+@set x-colorpicker
+{
+	:root
+	{ 
+		height:16px; 
+		width:16px; 
+		padding:2px; 
+		border:@BORDER_CTRL;
+		background-color:black;
+		behavior:xcolorpicker;
+	}
+	:root>popup
+	{
+		width:200px;
+		height:180px;
+		padding:1px;
+		border:@BORDER_CTRL; 
+		behavior:popup;
+	}
+	:root>popup>table
+	{ 
+		width:*; height:*; 
+		border:@BORDER; 
+		padding:1px;  
+		border-spacing:0px;  
+	}	
+	:root>popup>table td
+	{	
+		border-right:@BORDER;
+		border-bottom:1px solid #eee; 
+		width:*;height:*;
+		behavior:switch; 
+	}
+	:root>popup>table td:hover,
+	:root>popup>table td:checked
+	{
+		border:1px solid yellow;
+	}
+}
+
+/**************************/
+/* 用于滚动buddy 
+ * <widget type="scroll-buddy" buddy="buddy-selector" />
+ * 使用buddy属性指定需要被滚动的容器，
+ * 比如tab标签太多一行显示不完而有不便使用滚动条
+**/
+widget[type="hscroll-buddy"]
+{
+	style-set:"hscroll-buddy";
+}
+@set hscroll-buddy
+{
+	:root
+	{
+		flow:horizontal;
+		width:max-intrinsic;
+		height:min-intrinsic;
+		behavior:hscroll-buddy;
+		border-spacing:0;
+	}
+	:root>div
+	{
+		height:22px;width:25px;
+		background-repeat:stretch;
+		background-position:0 0 0 0;
+		behavior:clickable;
+	}
+	:root div[name="left"]
+	{
+		background-image:url(theme:h-scrollbar-minus-normal);
+	}
+	:root div[name="left"]:hover
+	{
+		background-image:url(theme:h-scrollbar-minus-hover);
+	}
+	:root div[name="left"]:active
+	{
+		background-image:url(theme:h-scrollbar-minus-pressed);
+	}
+	
+	:root div[name="right"]
+	{
+		background-image:url(theme:h-scrollbar-plus-normal);
+	}
+	:root div[name="right"]:hover
+	{
+		background-image:url(theme:h-scrollbar-plus-hover);
+	}
+	:root div[name="right"]:active
+	{
+		background-image:url(theme:h-scrollbar-plus-pressed);
+	}
+}
+
+/**************************/
+/* 实体窗口控件 */
+widget[type="windowed"],
+widget[type="flash"],
+widget[type="WebBrowser"]
+{
+	width:*;height:*;
+	display:block;
+}
+
+/**************************/
+/** outlook 控件 
+ *	 使用 multi-expand=‘true’ 
+ */
+widget[type="outlook"]
+{
+	style-set:"custom-set-outlook";
+}
+@set custom-set-outlook
+{
+	:root{
+		height:*; width:200px;	  
+		margin:0;
+		padding:0;
+		overflow:hidden;
+		behavior:expandable-list;
+		background-image:url(qabs:common/images/sidebar-back.png);
+		background-repeat:expand stretch-top stretch-left stretch-right stretch-bottom stretch-middle;
+		background-position:7px 7px 7px 7px;
+	}
+	:root> li {
+		transition:slide; 
+	}
+	:root> li:expanded{
+		height:100%%;
+	}
+	:root> li > caption{
+		background-repeat:stretch;
+		background-image:url(qabs:common/images/sidebar-item-back-normal.png);
+		padding:0 4 4 20px;
+		height:@CTRL_HEIGHT;
+		vertical-align:middle;
+		font:bold 9pt;
+		color:white;
+		line-height:23px;
+		foreground-image:url(qabs:common/images/item-collapse.png);
+		foreground-position:2px center;
+		foreground-repeat:no-repeat;
+	} 
+	:root>li>caption:hover{
+		background-image:url(qabs:common/images/sidebar-item-back.png);
+	}
+	:root>li:expanded>caption{
+		background-image:url(qabs:common/images/sidebar-item-back.png);
+		foreground-image:url(qabs:common/images/item-expand.png);  
+	}
+	:root> li > .content {
+		visibility:collapse;
+		height:100%%; 
+		overflow-y:hidden;
+	}
+	:root> li:expanded > .content {
+		visibility:visible; 
+	}
+}
+
+/**************************/
+/* tag 控件 
+ *使用 show_close_button=“button-name” 属性显示关闭按钮
+ *属性值为按钮的名称（name）
+**/
+widget[type="tagbox"]
+{
+	style-set:"tagbox";
+}
+@set tagbox
+{
+	:root
+	{
+		width:*;height:max-intrinsic;
+		min-height:18px;
+		padding:0 2 2 2px;
+		flow:h-flow;
+		border-spacing:2px;
+		border:@BORDER;
+		background-color:white;
+	}
+	:root>table{
+		width:max-intrinsic;
+		height:16px;min-width:40px;
+		background-color:#8693A1;
+		border-radius:2px;
+		color:white;
+		behavior:switch;
+		cursor:pointer;
+	}
+	:root>table td{
+		text-align:center;
+		vertical-align:middle;
+		padding:0 10px;
+		font:8pt normal;
+	}
+	:root>table:checked{
+		background-color:#2E3436;
+	}
+	/*第二个td为关闭按钮*/
+	:root>table td.icon{
+		width:1em;
+		height:*;
+		font:10pt normal marlett;
+		behavior:clickable;
+	}
+	:root>table td.icon:hover
+	{
+		outline:@OUTLINE_STYLE_NORMAL;
+	}
+	:root>table td.icon:active
+	{
+		outline:@OUTLINE_STYLE_ACTIVE;
+	}
+}
+
+/**************************/
+/* tag 控件 */
+widget[type="led"]
+{
+	style-set:"stdled";
+}
+@set stdled
+{
+	:root
+	{
+		width:max-intrinsic;
+		min-width:40px;
+		height:20px;
+		padding:2 4px;
+		overflow:hidden;
+		border-spacing:2px;
+		background-image:url(qabs:common/images/led-back.png);
+		background-repeat:expand;
+		background-position:8 8 8 8px;
+		flow:horizontal;
+	}
+	:root>li
+	{
+		width:16px;height:*;
+		display:block;
+		margin:0;
+		background-image:url(qabs:common/images/led-gray.png);
+		background-repeat:no-repeat;
+		background-position:center;
+	}
+	/*允许交互鼠标选中和反选*/
+	:root[enable_inactive]>li
+	{
+		display:block;
+		margin:0;
+		background-image:url(qabs:common/images/led-gray.png);
+		background-repeat:no-repeat;
+		background-position:center;
+		behavior:check;
+	}
+	li:checked
+	{
+		background-image:url(qabs:common/images/led-light.png);
+	}
+}
+
+/***********************************************/
+/*窗体组件的修饰*/
+#wc-caption{ 
+	flow:horizontal; 
+	height:26px; width:*;
+	line-height:26px; 
+	vertical-align:middle;
+	overflow:hidden;
+	background-color:@CTRL_BACK_NORMAL;
+}
+#wc-caption #wc-sysicon{ 
+	height:20px; width:18px; 
+	background-position:1 1px; 
+	background-repeat:no-repeat; 
+}
+#wc-caption #wc-title{ 
+	width:*; height:*; 
+	padding:1 1px; 
+	margin-left:5px; 
+	overflow:hidden; 
+	white-space:nowrap; 
+	color:@FONT_COLOR_NORMAL;
+}
+
+#wc-caption table[sysbtn] td[xrole]{ 
+	background-position:center; 
+	background-repeat:no-repeat; 
+	width:18px; height:18px; 
+	font-family:marlett;
+	behavior:clickable; 
+}
+
+/**共4种窗口状态
+ * 最小，普通，最大，全屏（覆盖任务栏）
+ * maximazed=0 为普通
+ * maximazed=1 为最大
+**/
+#wc-caption table[sysbtn] td[xrole="MINIMAZE"]{ background-image:url(qabs:common/images/min_btn.png); }
+#wc-caption table[sysbtn] td[xrole="MAXIMAZE"]{ background-image:url(qabs:common/images/max_btn.png); }
+#wc-caption table[sysbtn] td[xrole="MAXIMAZE"][maximazed]{ background-image:url(qabs:common/images/max2_btn.png); }
+#wc-caption table[sysbtn] td[xrole="CLOSE"]{ background-image:url(qabs:common/images/close_btn.png); }
+#wc-caption table[sysbtn] td:hover{ outline:@OUTLINE_STYLE_NORMAL; }
+#wc-caption table[sysbtn] td:active{ outline:@OUTLINE_STYLE_ACTIVE;}
+
+/*flow box*/	
+.vflow-box,.hflow-box{padding:2px; width:*; height:*;border:@BORDER;over-flow:auto;border-spacing:4px;}
+.vflow-box{ flow:v-flow; }
+.hflow-box{ flow:h-flow; }
+.row{ flow:horizontal; border-spacing:2px; min-height:min-intrinsic;width:*;}
+.col{ flow:vertical; border-spacing:2px; min-width:min-intrinsic; height:*;}
+
+/*文字显示输出*/
+div.text-box{
+	border-top:@BORDER;
+	width:*;height:auto;
+	padding:2 10px;
+	text-overflow:ellipsis;
+	border:@BORDER;
+	background-color:#EEE;
+	font:@FONT_NUMBER;
+	color:gray;
+}
+
+/*************************/
+/*搜索条*/
+#search-box{ 
+	flow:horizontal; 
+	width:*; height:20px; 
+	margin:100%% 4 4 4px;
+	border:@BORDER; 
+	border-radius:4px; 
+	background-color:@SOLID_BACK_LIGHT; 
+}
+#search-box>#search-btn{ 
+	width:32px; height:*;
+	foreground-repeat:no-repeat; 
+	foreground-image:url(xctrl/find_16.png);
+	foreground-position:center; 
+	opacity:0.5; 
+	behavior:button; 
+}
+#search-box>#search-btn:hover{ 
+	opacity:0.8; 
+	background-color:#E2E2E2 #E2E2E2 #bbb #bbb; 
+}
+#search-box>#search-btn:active{ 
+	opacity:1.0; 
+	background-color:#E2E2E2 #E2E2E2 #bbb #bbb; 
+}
+
+widget[type="sbox"]
+{
+  style-set: "sbox";
+}
+@set sbox
+{
+	:root {
+		font:system; 
+		padding-left:6px;  
+		margin:3 2px; 
+		height:*;  width:*; 
+		background-repeat:stretch; 
+		min-width:80px; min-height: min-intrinsic; 
+		text-align: left; 
+		cursor:text;
+		overflow:hidden; 
+		white-space: nowrap; 
+		behavior:edit;  
+		color:gray; 
+	}
+	:root:hover{ 
+//		background-image:url(theme:edit-normal); 
+	}
+	:root:focus{ 
+		color:@FONT_COLOR_ACTIVE; 
+//		background-image:url(theme:edit-normal); 
+		outline:@OUTLINE_STYLE_NORMAL;
+	}
+}
+
+.caption{
+	background-color:#5ED7EF;
+	flow:horizontal;
+	width:*;height:30px;
+	padding:2px;
+	border-spacing:4px;
+	vertical-align:middle;
+}
+
+/**
+ * sheet控件，类似excel
+	使用方式如下：
+	1,cell的控件类型应该在同列的th下定义
+	2,th下的控件需要具有"cell-widget"属性
+		<table type="sheet">
+			<tr>
+				<th>名称
+					<input type="text" maxlength=100 id="input_seneryname" cell-widget/>
+				</th>
+				<th>景点
+					<select type="select-dropdown" id="cmb_senerypot" cell-widget>
+						<option>test1</option>
+						<option>test2</option>
+						<option>test3</option>
+						<option>test4</option>
+					</select>
+				</th>
+				<th>情景描述
+					<textarea id="txt_videodes" cell-widget/>
+				</th>
+			</tr>
+		</table>
+ **/
+table[type="sheet"]{
+	style-set:"std-sheet";
+}
+@set std-sheet < custom-grid{
+	:root{
+		behavior:sheet column-resizer;
+	}
+	th [cell-widget]{
+		visibility:collapse;
+	}
+	td{
+		color:#333;
+	}
+	td [cell-widget]{
+		width:*;height:*;
+		visibility:collapse;
+		focus-off!:
+			self.$1p(table).wfoff(self.$1p(td));
+		key-on!:
+			key-code() == 'RETURN' ? self.$1p(table).wfoff(self.$1p(td));
+	}
+}
+
+
+/**
+ * 模拟Tree和list结合
+ **/
+table[type="treelist"]
+{
+	style-set:"std-treelist";
+}
+@set std-treelist < custom-grid
+{
+	:root
+	{ 
+		behavior:sortable-grid column-resizer treelist;
+		overflow:auto;
+		width:*; height:*; 
+		border-spacing:0;
+		background-color:white;
+		assigned! : 
+		  self:focus = true,
+		  $1( tr[tl_top] ):current = true; // first row is :current by default
+		  key-on! : !key-code('LEFT','RIGHT')? return, // return with nothing if key is neither VK_LEFT nor VK_RIGHT
+			  cur = self.$1(tr[tl_sub]:current), 
+			  cur = cur? self.$1(tr[tl_top][process="< cur.process >"]) # 
+						 self.$1(tr[tl_top]:current),
+			  !cur? return,  // return with nothing, no current item. 
+			  // cur here contains tr[tl_top] that we need to collapse/expand
+			  key-code() == 'LEFT'?  // VK_LEFT?
+				(
+				  self.$1(tr:current):current = false, // remove current one
+				  cur:current = true,                  // set this one as a new current
+				  self.$(tr[process="< cur.process >"]).collapsed = true // collapse all of them in the group
+				), 
+			  key-code() == 'RIGHT'? // VK_RIGHT?
+				  self.$(tr[process="< cur.process >"]).collapsed = null, // expand all of them in the group
+			  return cancel; // return 'cancel' value - further processing is not required as we've handled the key.
+	}
+	tr { cursor:pointer; }
+	tr[tl_top] > td:nth-child(1) { 
+		padding-left:16px; 
+		foreground-image:url(stock:arrow-down); 
+		foreground-position:1px 50%; 
+		foreground-repeat:no-repeat; 
+	}
+	tr[tl_top][collapsed] > td:nth-child(1) {
+		foreground-image:url(stock:arrow-right);
+	}
+	tr[tl_sub] > td:nth-child(1) { padding-left:48px; }
+	tr[tl_sub][collapsed] { display:none; }
+
+	/* behavioral styles */
+	tr[tl_top] 
+	{
+		double-click! : self.collapsed = self.collapsed? null # true, // flip-flop collapsed attribute
+					$( tr[tl_sub="<self.tl_top>"] ).collapsed = self.collapsed; 
+								  // expand/collapse all tr[tl_sub] rows having the same process name
+	}
+
+	tr[tl_top] > td:nth-child(1)
+	{
+		active-on!: is-on-icon() ? (self.parent().double-click(), return cancel);
+	}
+	a#expand-all
+	{
+	click! : $( tr[tl_sub], tr[tl_top] ).collapsed = null; 
+	}
+	a#collapse-all
+	{
+	click! :  $( tr[tl_sub], tr[tl_top] ).collapsed = true, // add to all of them [collapsed="true"]
+			  cur_dll = $1( tr[tl_sub]:current ), // Sanity check, if we are hiding current row...
+			  cur_dll? 
+			  (
+				cur_dll:current = false, 
+				$1( tr[tl_top] ):current = true // make its owner tr[tl_top] as a current
+			  );  
+	}
+
+	/* sort column on header cell click: */
+	th:nth-child(1)
+	{
+		foreground-position:100% 50%; 
+		foreground-repeat:no-repeat;
+		active-on! :
+		  self.parent().$1( td[sorted] ).sorted = null,   // remove @sorted from previous td of the row, if any
+		  self.sorted = "asc",                            // set @sorted="asc" on this element
+		  ncolumn = self:index,                           // store ncolumn for future use in the comparator
+		  is_less = @(row1, row2)                         // comparator function per se
+			row1.process < row2.process ? true #
+			row1.process > row2.process ? false #
+			row1:index < row2:index,
+		  $(:root>tr:not(.header)).sort(is_less);         // do the sort.
+	}
+}
+
+/**
+ * 浮动在content上的滚动条
+ **/
+div.scroll-indicator-box{
+	position:relative;
+	height:*;width:*;
+	overflow:hidden;
+	behavior:scroll-indicator-box;
+}
+
+div.scroll-indicator-box>div.vindicator-bar{
+	behavior:vscroll-indicator-bar;
+	position:absolute;
+	padding:1px;
+	top:10px;
+	bottom:10px;
+	right:2px;
+	border-radius:3px;
+	width:8px;
+	opacity:0;
+	background-color:#ccc;
+	transition:opacity(linear,0.1s);
+	cursor:pointer;
+}
+
+div.scroll-indicator-box>div.vindicator-bar > div.slider
+{ 
+	behavior:vscroll-indicator-slider;
+	position:absolute;
+	width:*;
+	border-radius:3px;
+	height:40px;
+	background-color:#888;
+	opacity:0.9;
+}
+
+div.scroll-indicator-box:hover>div.vindicator-bar{
+	opacity:0.6;
+	transition:opacity(linear,0.1s);
+}
+
+div.scroll-indicator-box>.content-box{
+	overflow:hidden-scroll;
+	width:*;height:*;
+}

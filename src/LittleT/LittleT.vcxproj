@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0A763285-C47C-4125-89AF-6BB461BB1AEF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>LittleT</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\..\..\UIBase\wtl;..\..\..\UIBase;..\..\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>..\..\bin\$(Configuration)\</OutDir>
+    <IntDir>..\..\build\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>..\..\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\..\UIBase\wtl;..\..\..\UIBase;..\..\;$(IncludePath)</IncludePath>
+    <OutDir>..\..\bin\$(Configuration)\</OutDir>
+    <IntDir>..\..\build\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;_WINDOWS;QUI_NOT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>..\7za.exe u $(OutDir)\UI.ZIP ..\UI\* -r
+copy ..\..\..\UIBase\lib\*.lib ..\..\lib\*.lib 
+copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
+    </PreLinkEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MinSpace</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;QUI_NOT_DLL;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PreLinkEvent>
+      <Command>..\7za.exe u $(OutDir)\UI.ZIP ..\UI\* -r
+copy ..\..\..\UIBase\lib\*.lib ..\..\lib\*.lib 
+copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
+    </PreLinkEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="icon1.ico" />
+    <None Include="LittleT.ico" />
+    <None Include="ReadMe.txt" />
+    <None Include="res\LittleT.ico" />
+    <None Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\ConstValues.h" />
+    <ClInclude Include="..\common\LittleTcmn.h" />
+    <ClInclude Include="..\common\LittleTUIcmn.h" />
+    <ClInclude Include="..\common\ProcessMan.h" />
+    <ClInclude Include="..\common\QAutoTask.h" />
+    <ClInclude Include="..\common\QDBHelper.h" />
+    <ClInclude Include="..\common\QDBPlan.h" />
+    <ClInclude Include="..\common\QDBRes.h" />
+    <ClInclude Include="..\common\QHelper.h" />
+    <ClInclude Include="..\common\QLongplan.h" />
+    <ClInclude Include="..\common\QNote.h" />
+    <ClInclude Include="..\common\QTimer.h" />
+    <ClInclude Include="..\common\QTimerMan.h" />
+    <ClInclude Include="..\common\Worker.h" />
+    <ClInclude Include="LAboutDlg.h" />
+    <ClInclude Include="LAddTask.h" />
+    <ClInclude Include="LDatas.h" />
+    <ClInclude Include="LFormGoal.h" />
+    <ClInclude Include="LFormGoalItem.h" />
+    <ClInclude Include="LFormPlan.h" />
+    <ClInclude Include="LFormStage.h" />
+    <ClInclude Include="LittleT.h" />
+    <ClInclude Include="LittleTFrame.h" />
+    <ClInclude Include="LittleTView.h" />
+    <ClInclude Include="LViewEvent.h" />
+    <ClInclude Include="LViewPlan.h" />
+    <ClInclude Include="LViewTodo.h" />
+    <ClInclude Include="QEventRemindDlg.h" />
+    <ClInclude Include="QPictureLoader.h" />
+    <ClInclude Include="QResIconsDlg.h" />
+    <ClInclude Include="QShellListener.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\UIBase\ui\SystemTraySDK.cpp" />
+    <ClCompile Include="..\common\ProcessMan.cpp" />
+    <ClCompile Include="..\common\QAutoTask.cpp" />
+    <ClCompile Include="..\common\QDBHelper.cpp" />
+    <ClCompile Include="..\common\QDBPlan.cpp" />
+    <ClCompile Include="..\common\QDBRes.cpp" />
+    <ClCompile Include="..\common\QHelper.cpp" />
+    <ClCompile Include="..\common\QLongplan.cpp" />
+    <ClCompile Include="..\common\QNote.cpp" />
+    <ClCompile Include="..\common\QTimer.cpp" />
+    <ClCompile Include="..\common\QTimerMan.cpp" />
+    <ClCompile Include="..\common\Worker.cpp" />
+    <ClCompile Include="auto_update.cpp" />
+    <ClCompile Include="LAboutDlg.cpp" />
+    <ClCompile Include="LAddTask.cpp" />
+    <ClCompile Include="LDatas.cpp" />
+    <ClCompile Include="LFormGoal.cpp" />
+    <ClCompile Include="LFormGoalItem.cpp" />
+    <ClCompile Include="LFormPlan.cpp" />
+    <ClCompile Include="LFormStage.cpp" />
+    <ClCompile Include="LittleT.cpp" />
+    <ClCompile Include="LittleTFrame.cpp" />
+    <ClCompile Include="LViewEvent.cpp" />
+    <ClCompile Include="LViewPlan.cpp" />
+    <ClCompile Include="LViewTodo.cpp" />
+    <ClCompile Include="QEventRemindDlg.cpp" />
+    <ClCompile Include="QResIconsDlg.cpp" />
+    <ClCompile Include="QShellListener.cpp" />
+    <ClCompile Include="QUtilWnd.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LittleT.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

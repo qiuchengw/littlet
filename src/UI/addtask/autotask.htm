@@ -1,0 +1,100 @@
+﻿<html>
+	<head>
+		<link rel="StyleSheet" type="text/css" href="qabs:style.css" />
+		<link rel="StyleSheet" type="text/css" href="qrel:style.css" />
+		<style type="text/css">
+			body{
+				min-width:580px;
+				min-height:420px;
+				//background:url(qabs:bk/bk1.jpg) no-repeat;
+			}
+		</style>		
+	</head>
+	<body #wc-top>
+		<div #wc-caption>
+			<div #wc-sysicon style="background-image:url(qabs:icons/sysicon.png);" />
+			<div #wc-title>自动任务</div>
+			<table sysbtn><tr><td xrole="CLOSE" /></tr></table>
+		</div>
+		<div id="body_wrap">
+			<table .table_box style="height:64px;">
+				<tr>
+					<th colspan=2>选择一个任务</th>
+				</tr>
+				<tr .box>
+					<td style="width:90px;">
+						<widget type="select-dropdown" id="cmb_TaskDoWhat" style="width:100px;" />
+					</td>
+		<!--			
+					<td style="white-space:nowrap;text-align:right;">目录</td>
+					<td .row>
+						<widget type="select-dropdown" style="min-width:100px;" id="cmb_TaskCate" .category />
+						<div class="btn edit_16" style="margin-left:2px;height:22px;"  id="btn_NewCate" title="$Autotask.8$"/>
+					</td>
+		-->
+					<td style="width:*;">
+						<input type="text" id="INPUT-REMINDTEXT" style="width:*;" />
+						<widget type="file-path" editable id="path_DoWhatExecprog" style="width:*;visibility:collapse;" />
+					</td>
+				</tr>
+			</table>
+			
+			<table .table_box exectime style="height:75px;">
+				<tr>
+					<th colspan=2>设置任务执行时间</th>
+				</tr>
+				<tr .box>
+					<td style="padding:0 4px;background-color:tansparent;">
+						<div .color_button .blue id="btn_ExecTime">设定执行时间</div>
+					</td>
+					<td id="td_ExecTime" style="width:*;height:*;padding:2 10px;
+							border:@BORDER;background-color:#EEE;
+							font:@FONT_NUMBER;color:gray;overflow:hidden;
+							text-overflow:ellipsis;">
+						还没有设定执行时间
+					</td>
+				</tr>
+			</table>
+			<table .table_box>
+				<tr>
+					<th colspan=3>设定提示时间</th>
+				</tr>
+				<tr .box style="height:40px;">
+					<td>
+						<widget type="checkbox" id="chk_TaskRemind" checked>在每次任务执行前</widget>
+					</td>
+					<td>
+						<input type="number" minvalue=1 maxvalue=1500 id="edit_RemindTime" style="min-width:50px;width:50px;" value="1"/>
+					</td>
+					<td style="width:*;">
+						<widget type="select-dropdown" id="cmb_RemindTimeUnit" style="width:40px;text-align:left;">
+							<option name="m">分钟</option>
+							<option name="h">小时</option>
+						</widget>
+					</td>
+				</tr>
+				<tr .box style="height:40px;">
+					<td><widget type="checkbox" id="chk_remind_playsound">播放声音</widget></td>
+					<td colspan=2>
+						<input type="file-path" id="filepath_remind_sound" 
+								filter="声音文件:*.wav" 
+								novalue="(请选择一个声音文件*.wav)" 
+								style="width:*;visibility:hidden;"/>
+					</td>
+				</tr>
+				<tr .box style="height:40px;"> 
+					<td><widget type="checkbox" id="chk_remind_customsg">提示信息</widget></td>
+					<td colspan=2><input type="text" id="edit_remind_customsg" style="width:*;visibility:hidden;"/></td>
+				</tr>
+			</table>
+			<table style="width:*;">
+				<tr>
+					<td style="width:*" />
+					<td><div .color_button .blue xrole="OK" accesskey="!RETURN" style="width:50px;">确定</div></td>
+					<td><div .color_button .orange xrole="Cancel" accesskey="!ESCAPE" style="margin-left:20px;width:50px;">取消</div></td>
+					<td style="width:30px;"/>
+				</tr>
+			</table>			
+		</div>
+	</body>
+</html>

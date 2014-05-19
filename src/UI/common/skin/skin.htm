@@ -1,0 +1,53 @@
+﻿<html>
+	<head>
+		<link rel="stylesheet" href="qabs:style.css" type="text/css" />
+		<style type="text/css">
+			html{
+				background:url(qrel:img/bk.png) stretch;
+				background-color:transparent;
+			}
+			body{
+				background-color:transparent;
+			}
+			#box_themes{
+				width:*;height:*;
+				flow:h-flow;
+				border-spacing:4px;
+				margin:15 10 0 10px;
+			}
+			#box_themes>table{
+				width:37px;height:37px;
+				behavior:switch;
+				background-repeat:stretch;
+				background-position:center;			
+				foreground-repeat:no-repeat;
+				foreground-position:center;
+			}
+			#box_themes>table:hover{
+				//foreground-image:url(qrel:img/item_h.png);
+			}
+			#box_themes>table:checked{
+				//border:1px solid red;
+			}
+			#box_themes>table progress{
+				visibility:collapse;
+			}
+			#box_themes>table:checked td.chk{
+				foreground:url(qrel:img/check.png) no-repeat;
+				foreground-position:right center;
+			}
+			
+		</style>
+	</head>
+	<body style="height:252px;width:198px;">
+		<div id="box_themes">
+			<!--
+				<picture name="item_skin" />
+			-->
+		</div>
+		<div style="height:40px;width:*;padding:4 10px;vertical-align:middle;flow:horizontal;">
+			<input type="hslider" id="sld_opacity" max=155 step=10 value=0  />
+			<div .qbtn style="foreground-image:url(qrel:img/opacity.png);margin-left:*;"/>
+		</div>
+	</body>
+</html>

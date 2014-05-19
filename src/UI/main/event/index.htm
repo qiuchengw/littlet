@@ -1,0 +1,64 @@
+﻿<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+		<link rel="stylesheet" href="qrel:style.css" type="text/css" />
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<div .events id="EVENT_LIST" show_checkeditem_onmouseleave=true>
+		<!--
+			<table >
+				<tr>
+					<td rowspan=2><img src="qabs:icons/clock_32.png" /></td>
+					<td .time>12:30</td>
+					<td .event colspan=2>这是测试页面</td>
+				</tr>
+				<tr>
+					<td .date>2013/12/30</td>
+					<td .btns>
+						<div .btn name="btn_edit" title="编辑" />
+						<div .btn name="btn_del" title="删除" />
+						<div .btn name="btn_disable" title="禁止执行" />
+					</td>
+				</tr>
+			</table>
+		-->
+		</div>
+		<div .caption id="id_event_caption">
+			<div .trash id="event_trashbox">拖动项目到此处删除任务</div>
+			<div .color_button .orange id="id_btn_newtask">新建任务</div>
+		</div>
+		<!--弹出窗口-->
+		<popup id="popup_eventitem">
+			<table id="tbl_detail">
+				<tr><th colspan=2>任务详细</th></tr>
+				<tr>
+					<td>创建时间：</td>
+					<td id="p_crtime"></td>
+				</tr>
+				<tr>
+					<td>当前状态：</td>
+					<td id="p_status"></td>
+				</tr>
+				<tr>
+					<td>任务描述：</td>
+					<td id="p_do_what"></td>
+				</tr>
+				<tr>
+					<td>执行时间：</td>
+					<td id="p_do_time"></td>
+				</tr>
+				<tr>
+					<td>任务提示：</td>
+					<td id="p_rmd"></td>
+				</tr>
+				<tr>
+					<td>任务周期：</td>
+					<td id="p_tlife"></td>
+				</tr>
+			</table>
+		</popup>
+	</body>
+</html>

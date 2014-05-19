@@ -16,6 +16,12 @@
 *.log	
 *.ipch
 *.zip
+*.lib
 UIP
 Debug
 Release
+/bin
+/build
+/dll
+/UIP
+
