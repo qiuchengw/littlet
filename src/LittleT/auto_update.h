@@ -74,7 +74,7 @@ public:
     **/
     BOOL Startup(__in _Url& urlUpdation, __in _Url& urlBaseData, __in DWORD dwCheckPeriod = 30);
     //BOOL Startup(__in DWORD dwCheckPeriod = 30);
-protected:
+
     /** 异步方式检查程序更新.
     *      如果启动检查成功，检查结束后将会向程序的主窗口发送一个QSOFT_MSG_UPDATEAPP消息
     *	return:
@@ -83,6 +83,7 @@ protected:
     BOOL CheckUpdate( );
     // BOOL CheckBaseData( );
 
+protected:
     enum ENUM_TASK_TYPE 
     {
         TASK_TYPE_UPDATION = 1,
@@ -123,6 +124,7 @@ private:
     //     QString             m_sUrl;
     //     QString             m_sRefer;   // 可以破解防盗链
     _Url        url_updation_;
+    static BOOL        updating_;  // 正在检查更新
     // _Url        url_basedata_;
 };
 

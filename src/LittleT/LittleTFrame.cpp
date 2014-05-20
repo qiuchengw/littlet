@@ -6,6 +6,7 @@
 #include "../common/Worker.h"
 #include "../common/ProcessMan.h"
 
+#include "auto_update.h"
 #include "QEventRemindDlg.h"
 #include "QUtilWnd.h"
 #include "LittleT.h"
@@ -62,6 +63,7 @@ QUI_BEGIN_EVENT_MAP(LittleTFrame,QFrame)
     BN_CLICKED_ID(L"a-setting", &LittleTFrame::OnClkSetting)
     BN_CLICKED_ID(L"a-weibo", &LittleTFrame::OnClkMyWeibo)
     BN_CLICKED_ID(L"btn_feedback", &LittleTFrame::OnClkFeedback)
+    BN_CLICKED_ID(L"btn_check_update", &LittleTFrame::OnClkCheckUpdation)
 QUI_END_EVENT_MAP()
 
 LittleTFrame::LittleTFrame(void)
@@ -664,4 +666,12 @@ void LittleTFrame::OnClkMyWeibo(HELEMENT)
 void LittleTFrame::OnClkFeedback( HELEMENT )
 {
 //    QUserFeedbackWnd::Show();
+}
+
+void LittleTFrame::OnClkCheckUpdation( HELEMENT )
+{
+    if ( QAutoUpdater::GetInstance()->CheckUpdate())
+    {
+        XMsgBox::OkMsgBox(L"<b .red>正在检查……</b><br/><br/>您先忙其他的^_^", L"检查更新", 6);
+    }
 }

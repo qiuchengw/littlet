@@ -227,6 +227,12 @@
     <ClCompile Include="..\..\..\UIBase\ui\SystemTraySDK.cpp">
       <Filter>uibase</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\UIBase\img\QImgProcess.cpp">
+      <Filter>uibase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\UIBase\img\DrawHelper.cpp">
+      <Filter>uibase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LittleT.rc">

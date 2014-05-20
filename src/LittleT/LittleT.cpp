@@ -7,9 +7,11 @@
 #include "time/QTime.h"
 #include "sys/singleinst.h"
 #include "sys/UACSElfElevation.h"
+#include "img/GDIpInitializer.h"
 #include "ui/QUIMgr.h"
-#include "img/gdix.h"
 #include "ui/QUIDlgs.h"
+
+
 #include "auto_update.h"
 
 LittleTApp _Module;
@@ -148,7 +150,8 @@ BOOL LittleTApp::CheckUpdate()
         _Url url_updation;
         url_updation.url_ = sUrl;
         url_updation.domain_ = sRefer;
-       return QAutoUpdater::GetInstance()->Startup(url_updation, _Url());
+        // 每5个小时检查一次更新
+       return QAutoUpdater::GetInstance()->Startup(url_updation, _Url(), 5*60);
 //        return QAutoUpdater::GetInstance()->Startup();
      }
      return FALSE;
@@ -208,6 +211,11 @@ void LittleTApp::StartUpdateExe()
 LPCWSTR LittleTApp::GetAppVersion() const
 {
     // 更新历史：<br/>
+    // LittleT v3.2 2013/10/28<br/>
+    // ----------------------<br/>
+    // 新增：自动任务“每年的某天”执行功能
+    // 修改：修改为每5个小时自动检查更新
+    // 
     // LittleT v3.2 2013/10/28<br/>
     // ----------------------<br/>
     // 修复：自动任务特殊情况下提示时间不正确<br/>
@@ -313,7 +321,7 @@ LPCWSTR LittleTApp::GetAppVersion() const
     // ----------------------<br/>
     // 第一个版本
 
-    return L"3.2";
+    return L"3.3";
 }
 
 //////////////////////////////////////////////////////////////////////////

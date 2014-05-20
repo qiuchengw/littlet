@@ -10,6 +10,7 @@ QAutoUpdater::QAutoUpdater(void)
 {
     //m_bEnd = FALSE;
     m_hTimer = NULL;
+    updating_ = FALSE;
 }
 
 VOID CALLBACK QAutoUpdater::CheckUpdateCallback(
@@ -27,6 +28,10 @@ VOID CALLBACK QAutoUpdater::CheckUpdateCallback(
 
 BOOL QAutoUpdater::CheckUpdate( )
 {
+    if (updating_)
+        return TRUE;
+    updating_ = TRUE;
+
     _Download_Param *p = new _Download_Param(TASK_TYPE_UPDATION);
     p->sURL = url_updation_.url_;
     p->sRefer = url_updation_.domain_;
@@ -38,6 +43,7 @@ BOOL QAutoUpdater::CheckUpdate( )
         CloseHandle(hThread);
         return TRUE;
     }
+    updating_ = FALSE;
     delete p;
     return FALSE;
 }
@@ -215,6 +221,9 @@ UINT_PTR __stdcall QAutoUpdater::thread_download( void* pparam )
     if (NULL == p)
     {
         ASSERT(FALSE);
+
+        updating_ = FALSE;
+
         return 0;
     }
 
@@ -253,6 +262,9 @@ UINT_PTR __stdcall QAutoUpdater::thread_download( void* pparam )
     if (!bOK || !bHasUpdate)
     {
         delete p;
+
+        updating_ = FALSE;
+
         return 0;
     }
 
@@ -315,6 +327,8 @@ UINT_PTR __stdcall QAutoUpdater::thread_download( void* pparam )
     }
     delete p;
 
+    updating_ = FALSE;
+
     return 0;
 }
 
@@ -332,11 +346,12 @@ BOOL QAutoUpdater::Startup( __in _Url& urlUpdation,
 
     dwCheckPeriod = max(10, dwCheckPeriod);
 
-    // 启动15秒的时候先检查一次更新
+    // 启动3分钟后的时候先检查一次更新
     return CreateTimerQueueTimer(&m_hTimer, NULL, CheckUpdateCallback, this,
-        15 * 1000, dwCheckPeriod * 60 * 1000, WT_EXECUTEDEFAULT);
+        3 * 60 * 1000, dwCheckPeriod * 60 * 1000, WT_EXECUTEDEFAULT);
 }
 
+BOOL QAutoUpdater::updating_;
 
 // BOOL QAutoUpdater::Startup( __in DWORD dwCheckPeriod /*= 30*/ )
 // {
