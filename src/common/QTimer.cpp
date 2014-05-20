@@ -547,66 +547,66 @@ BOOL QTimer::_ParseToIntArray( __inout CStdString& sExp,__out IntArray & ar )
 	return ar.size();
 }
 
-BOOL QTimer::IsTheDate( const QTime& d )
-{
-	ASSERT(!IsRelateTimer());
-	
-	switch (eflag_exec_)
-	{
-    case AUTOTASK_EXEC_ATYEARDAY:	// = 0x00010000,	// 绝对日期 2011/11/11
-        {
-            // 哪月哪日执行
-            QTime t = QTime::ParseDate(m_arX[0]);
-            // 年 需要使用测试的值
-            t.SetDate(d.GetYear(), t.GetMonth(), t.GetDay());
-            // 减掉提前量，得到执行的日期
-            t -= QTimeSpan(m_dwSpan, 0, 0, 0);
-            // 提前日期
-            return t.CompareDate(d) == 0;
-        }
-	case AUTOTASK_EXEC_ATDATE:	// = 0x00010000,	// 绝对日期 2011/11/11
-		{
-			return m_arX.contain(d.MakeDate());
-		}
-	case AUTOTASK_EXEC_ATDAILY:	// = 0x00020000,	// 每x天,
-		{
-			if (m_arX.size())
-			{
-				QTime t2 = d;
-				t2.SetTime(m_tmLifeBegin.GetHour(),m_tmLifeBegin.GetMinute(),0);
-				// 余数为0则执行
-				return !((DWORD)((t2 - m_tmLifeBegin).GetTotalDays()) % (m_arX[0])); 
-			}
-			ASSERT(FALSE); return FALSE;
-		}
-	case AUTOTASK_EXEC_ATMONTHDAY:	// = 0x00040000,	// 每月的x号 
-		{	
-			if (m_arX.size())
-			{
-				return (m_arX[0] & (0x1<<(d.GetDay()-1)));
-			}
-			ASSERT(FALSE);return FALSE;
-		}
-	case AUTOTASK_EXEC_ATWEEKDAY:	// = 0x00080000,	// 每月的x周 x[所有周|第一周|。。|第4周]
-		{	
-			if (m_arX.size())
-			{// 1 - sunday , 7 - saturday
-				return ((m_arX[0]) & (0x1<<(d.GetDayOfWeek()-1)));
-			}
-			ASSERT(FALSE); return FALSE;
-		}
-	default: { ASSERT(FALSE);  return FALSE; }
-	}
-	return FALSE;
-}
+// BOOL QTimer::IsTheDate( const QTime& d )
+// {
+// 	ASSERT(!IsRelateTimer());
+// 	
+// 	switch (eflag_exec_)
+// 	{
+//     case AUTOTASK_EXEC_ATYEARDAY:	// = 0x00010000,	// 绝对日期 2011/11/11
+//         {
+//             // 哪月哪日执行
+//             QTime t = QTime::ParseDate(m_arX[0]);
+//             // 年 需要使用测试的值
+//             t.SetDate(d.GetYear(), t.GetMonth(), t.GetDay());
+//             // 减掉提前量，得到执行的日期
+//             t -= QTimeSpan(m_dwSpan, 0, 0, 0);
+//             // 提前日期
+//             return t.CompareDate(d) == 0;
+//         }
+// 	case AUTOTASK_EXEC_ATDATE:	// = 0x00010000,	// 绝对日期 2011/11/11
+// 		{
+// 			return m_arX.contain(d.MakeDate());
+// 		}
+// 	case AUTOTASK_EXEC_ATDAILY:	// = 0x00020000,	// 每x天,
+// 		{
+// 			if (m_arX.size())
+// 			{
+// 				QTime t2 = d;
+// 				t2.SetTime(m_tmLifeBegin.GetHour(),m_tmLifeBegin.GetMinute(),0);
+// 				// 余数为0则执行
+// 				return !((DWORD)((t2 - m_tmLifeBegin).GetTotalDays()) % (m_arX[0])); 
+// 			}
+// 			ASSERT(FALSE); return FALSE;
+// 		}
+// 	case AUTOTASK_EXEC_ATMONTHDAY:	// = 0x00040000,	// 每月的x号 
+// 		{	
+// 			if (m_arX.size())
+// 			{
+// 				return (m_arX[0] & (0x1<<(d.GetDay()-1)));
+// 			}
+// 			ASSERT(FALSE);return FALSE;
+// 		}
+// 	case AUTOTASK_EXEC_ATWEEKDAY:	// = 0x00080000,	// 每月的x周 x[所有周|第一周|。。|第4周]
+// 		{	
+// 			if (m_arX.size())
+// 			{// 1 - sunday , 7 - saturday
+// 				return ((m_arX[0]) & (0x1<<(d.GetDayOfWeek()-1)));
+// 			}
+// 			ASSERT(FALSE); return FALSE;
+// 		}
+// 	default: { ASSERT(FALSE);  return FALSE; }
+// 	}
+// 	return FALSE;
+// }
 
-BOOL QTimer::IsTheTime(WORD wTime)
-{
-	ASSERT(!IsRelateTimer());
-// 	if ((m_wTimeBegin > wTime) || (m_wTimeEnd < wTime) )
-// 		return FALSE;
-	return m_arTime.contain(wTime);
-}
+// BOOL QTimer::IsTheTime(WORD wTime)
+// {
+// 	ASSERT(!IsRelateTimer());
+// // 	if ((m_wTimeBegin > wTime) || (m_wTimeEnd < wTime) )
+// // 		return FALSE;
+// 	return m_arTime.contain(wTime);
+// }
 
 ENUM_AUTOTASK_RUNNING_STATUS QTimer::_RelateTime_CheckWith(
 	const QTime& tmX,const QTime& tmTest,__out QTime& tmExec)
@@ -757,19 +757,32 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)
 	{
     case AUTOTASK_EXEC_ATYEARDAY:
         {
-            QTime t2 = QTime::ParseDate(dwDate);
+            // 需要测试的执行日期
+            QTime t_test = QTime::ParseDate(dwDate);
 
-            for (int year = t2.GetYear(); year < t2.GetYear() + 2; ++year)
+            for (int year = t_test.GetYear() - 1; year < t_test.GetYear() + 2; ++year)
             {
-                QTime t = QTime::ParseDate(m_arX[0]);
-                t.SetDate(year, t.GetMonth(), t.GetDay());
-                t -= QTimeSpan(m_dwSpan, 0, 0, 0);
-                if ((t.CompareDate(t2) >= 0) && (t.CompareDate(GetLifeEnd()) <= 0))
+                // 设定的执行点
+                QTime t_exec = QTime::ParseDate(m_arX[0]);
+                t_exec.SetDate(year, t_exec.GetMonth(), t_exec.GetDay());
+                // 执行点减去提前量的执行时间
+                QTime t_adv = t_exec;
+                t_adv -= QTimeSpan(m_dwSpan, 0, 0, 0);
+
+                TRACEDATE(t_adv);
+                TRACEDATE(t_test);
+                TRACEDATE(t_exec);
+
+                // 如果执行时间甚至还没有到提前量的执行时间，那么返回提前量处的执行时间
+                if ((t_adv.CompareDate(t_test) >= 0) && (t_adv.CompareDate(GetLifeEnd()) <= 0))
                 {
-                    TRACEDATE(t);
-                    TRACE(L"\n");
-                    TRACEDATE(t2);
-                    dwDate = t.MakeDate();
+                    dwDate = t_adv.MakeDate();
+                    return AUTOTASK_RUNNING_STATUS_OK;
+                }
+                // 如果测试时间点落入[提前点，执行点]之间，那么返回这个测试时间点
+                else if ((t_test.CompareDate(t_adv) >= 0) && (t_test.CompareDate(t_exec) <= 0))
+                {
+                    dwDate = t_test.MakeDate();
                     return AUTOTASK_RUNNING_STATUS_OK;
                 }
             }

@@ -477,6 +477,8 @@ BOOL QExecTimeDlg::GetAbsoluteExp( __out CStdString &sExp ,QTime&tmB,QTime &tmE)
     // 每年的某天、类似于生日
     else if (ERadio(GetCtrl("#rio_absYearDay")).IsChecked())
     {
+        tmB = QTime::GetCurrentTime();
+        tmE.SetDateTime(2049, 1, 1, 0, 0, 0);
         // 提前提醒
         eFlag = AUTOTASK_EXEC_ATYEARDAY;
 

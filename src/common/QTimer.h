@@ -297,9 +297,9 @@ protected:
     ENUM_AUTOTASK_RUNNING_STATUS _AbsTime_NextRightTimeFrom(__in const QTime&tmTest,
             __in const QTime& tmExec,__inout DWORD &dwNextExecTime);
     // 这两个函数用于检测绝对时间执行
-    BOOL IsTheDate( const QTime& d );
-    BOOL IsTheTime(WORD wTime);
-    BOOL IsTheTime(const QTime& t);
+    // BOOL IsTheDate( const QTime& d );
+//     BOOL IsTheTime(WORD wTime);
+//     BOOL IsTheTime(const QTime& t);
     // 这个函数用于相对时间执行的辅助函数
     // 相对于tmX，找出大于等于tmTest的执行时间，放入到tmExec中
     ENUM_AUTOTASK_RUNNING_STATUS _RelateTime_CheckWith( const QTime& tmX,
