@@ -145,9 +145,9 @@ void LSettingDlg::OnCmnChkAutoRun( HELEMENT he)
 
     BOOL bOk = FALSE;
     CStdString sStartupDir;
-    if ( quibase::GetSpeialPath(/*CSIDL_STARTUP*/CSIDL_DESKTOP, sStartupDir) )
+    if ( quibase::GetSpeialPath(CSIDL_STARTUP/*CSIDL_DESKTOP*/, sStartupDir) )
     {
-        sStartupDir = L"D:\\";
+        sStartupDir += L"\\";
         if (chkAutoRun.IsChecked())
         {
             wchar_t szModuleName[1024] = {0};
