@@ -2,7 +2,18 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
 		<link rel="StyleSheet" type="text/css" href="qabs:style.css" />
-		<link rel="StyleSheet" type="text/css" href="qrel:style.css" />
+		<style>
+			#body_wrap{
+				width:*;height:*;
+				overflow-y:auto;
+				vertical-scrollbar:vscrollbar;
+			}
+			#box-content{
+				overflow-y:auto;
+				overflow-x:hidden;
+				line-height:20px;
+			}
+		</style>
 	</head>
 	<body #wc-top style="width:380px;height:380px;" drag-move="1">
 		<div #wc-caption style="background-color:white;">
@@ -11,7 +22,8 @@
 			<table sysbtn><tr><td xrole="CLOSE" /></tr></table>
 		</div>
 		<div id="body_wrap">
-			<div id="box-content" />
+			<div id="box-content">
+			</div>
 		</div>
 		<div .row style="width:*;margin-bottom:4px;border-spacing:20px;">
 			<div .color_button .purple xrole="OK" accesskey="!RETURN" style="margin-left:*;">立即更新</div>

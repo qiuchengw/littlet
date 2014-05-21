@@ -151,7 +151,7 @@ BOOL LittleTApp::CheckUpdate()
         url_updation.url_ = sUrl;
         url_updation.domain_ = sRefer;
         // 每5个小时检查一次更新
-       return QAutoUpdater::GetInstance()->Startup(url_updation, _Url(), 5*60);
+       return QAutoUpdater::GetInstance()->Startup(url_updation, _Url(), 4*60);
 //        return QAutoUpdater::GetInstance()->Startup();
      }
      return FALSE;
