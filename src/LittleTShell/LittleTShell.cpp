@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "ArgParser.h"
 #include "../common/LittleTcmn.h"
+#include "sys/singleinst.h"
+#include "qmemfile.h"
 
 #ifdef APP_NAME
 #define APP_NAME L"LittleTShell"
@@ -121,7 +123,7 @@ void ShowHelp()
 
 HWND GetLittleTMainWnd()
 {
-    HANDLE hEventMain = QMUF::CreateEvent(NULL,TRUE, 
+    HANDLE hEventMain = QMemFile::CreateEvent(NULL,TRUE, 
         FALSE, LITTLET_MAINWND_STARTUP_EVENTNAME);
     if (GetLastError() != ERROR_ALREADY_EXISTS) 
     {   // 主窗口还没创建，进程是否已经在运行？
@@ -167,9 +169,9 @@ BOOL SendRequestToLittleT(ENUM_AUTOTASK_DOWHAT nDoWhat, const CStdStringW& sDoWh
 
     _LittleTShell_CopyData_Param pra;
     ZeroMemory(&pra, sizeof(pra));
-    StringCchCopy(pra.szDoWhatParam, MAX_PATH, sDoWhatParam);
-    StringCchCopy(pra.szRemindExp, MAX_PATH, sRemindexp);
-    StringCchCopy(pra.szWhenDo, MAX_PATH, sWhenDo);
+    wcscpy_s(pra.szDoWhatParam, MAX_PATH, sDoWhatParam);
+    wcscpy_s(pra.szRemindExp, MAX_PATH, sRemindexp);
+    wcscpy_s(pra.szWhenDo, MAX_PATH, sWhenDo);
     pra.eDoWhat = nDoWhat;
     pra.tmBegin = tmBegin.m_dt;
     pra.tmEnd = tmEnd.m_dt;

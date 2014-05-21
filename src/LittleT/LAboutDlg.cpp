@@ -61,10 +61,10 @@ QUI_BEGIN_EVENT_MAP(LSettingDlg, QDialog)
     BN_CLICKED_ID(L"chk_cmn_autorun",&LSettingDlg::OnCmnChkAutoRun)
 QUI_END_EVENT_MAP()
 
-static LPCWSTR SC_PSZ_AUTORUN_REGPATH = 
-    L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
-
-static LPCWSTR SC_PSZ_AUTORUN_ITEMNAME = L"LittleT";
+// static LPCWSTR SC_PSZ_AUTORUN_REGPATH = 
+//     L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+// 
+// static LPCWSTR SC_PSZ_AUTORUN_ITEMNAME = L"LittleT";
 
 LSettingDlg::LSettingDlg()
     :QDialog(L"qabs:misc/setting.htm")
@@ -96,12 +96,12 @@ LRESULT LSettingDlg::OnDocumentComplete()
     return 0;
 }
 
-CStdStringW LSettingDlg::_KeyPath()
-{
-    CStdStringW sRet;
-    sRet.Format(L"%s\\%s",SC_PSZ_AUTORUN_REGPATH, SC_PSZ_AUTORUN_ITEMNAME);
-    return sRet;
-}
+// CStdStringW LSettingDlg::_KeyPath()
+// {
+//     CStdStringW sRet;
+//     sRet.Format(L"%s\\%s",SC_PSZ_AUTORUN_REGPATH, SC_PSZ_AUTORUN_ITEMNAME);
+//     return sRet;
+// }
 
 CStdStringW LSettingDlg::_ProgPath()
 {

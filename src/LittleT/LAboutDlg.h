@@ -86,7 +86,7 @@ protected:
     }
 
     // 本程序的注册表路径
-    CStdStringW _KeyPath();
+    // CStdStringW _KeyPath();
     CStdStringW _ProgPath();
 
 private:

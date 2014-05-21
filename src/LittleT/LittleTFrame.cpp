@@ -678,7 +678,7 @@ void LittleTFrame::OnClkSetting( HELEMENT )
 
 void LittleTFrame::OnClkMyWeibo(HELEMENT)
 {
-    quibase::VisitWebsiteWithDefaultBrowser(L"http://weibo.com/qiuchengw");    
+    quibase::VisitWebsiteWithDefaultBrowser(L"http://t.qq.com/qiuchengw_");    
 }
 
 void LittleTFrame::OnClkFeedback( HELEMENT )
