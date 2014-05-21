@@ -3,46 +3,6 @@
 #include "ui/QDialog.h"
 #include "../common/QTimer.h"
 
-/*
-class QEventRemindDlg : public QDialog
-{
-	QUI_DECLARE_EVENT_MAP;
-
-	typedef std::list<LPTASK_REMINDER_PARAM> RmdList;
-	typedef RmdList::iterator RmdListItr;
-
-public:
-	QEventRemindDlg(void);
-	~QEventRemindDlg(void);
-
-	void AddRemind(LPTASK_REMINDER_PARAM pTRP);
-	void DeleteRemind(int nTaskID);
-
-protected:
-	void OnClkPrevRemind(HELEMENT hBtn);
-	void OnClkNextRemind(HELEMENT hBtn);
-	void OnClkDeleteRemind(HELEMENT hBtn);
-	void OnClkDontRemindAgain(HELEMENT hBtn);
-	void OnClkDontExecThis(HELEMENT hBtn);
-
-	void ShowRemind(LPTASK_REMINDER_PARAM pTRP);
-	void SetRemind(LPTASK_REMINDER_PARAM pTRP);
-
-	virtual BOOL OnDefaultButton(INT_PTR nID);
-
-	RmdListItr	_FindRemind(int nTaskID);
-	LPTASK_REMINDER_PARAM NextRemind();
-	LPTASK_REMINDER_PARAM PrevRemind();
-
-	// 如果有过期的则删除之
-	void CheckRmdList();
-
-protected:
-	RmdList		m_lstRmd;
-	LPTASK_REMINDER_PARAM	m_pCur;
-};
-*/
-
 enum 
 {
     AUTOTASK_REMINDER_COUNTDOWN_TIMERID = 101,

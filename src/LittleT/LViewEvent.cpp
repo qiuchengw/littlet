@@ -98,9 +98,11 @@ void LViewEvent::RefreshEventList()
     eListTask.DeleteAllChild();
 
     QAutoTask* pTask = NULL;
-//    ENUM_AUTOTASK_RUNNING_STATUS eStatus;
     for (AutoTaskList::iterator itr = lst.begin(); itr != lst.end(); ++itr)
     {
+        // 暂停后再启动，刷新任务
+        (*itr)->Pause();
+        (*itr)->Startup();
         (*itr)->Run();
 //        eStatus = pTask->GetLastStartStatus();
 //         if (AUTOTASK_RUNNING_STATUS_OVERDUE == eStatus)

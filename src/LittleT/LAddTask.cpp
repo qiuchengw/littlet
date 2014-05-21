@@ -11,45 +11,6 @@
 #include "QBuffer.h"
 #include "AppHelper.h"
 
-/*
-struct TASK_DO
-{
-	QString sItem;
-	ENUM_AUTOTASK_DOWHAT eDo;
-}g_mapTaskDo[]=
-{
-	{L"do_what_reminder",AUTOTASK_DO_REMIND},
-	{L"do_what_execprog",AUTOTASK_DO_EXECPROG},
-	{L"do_what_sysreboot",AUTOTASK_DO_SYSREBOOT},
-	{L"do_what_sysshutdown",AUTOTASK_DO_SYSSHUTDOWN},
-};
-
-QString GetTaskDoString(ENUM_AUTOTASK_DOWHAT eDo)
-{
-	for (int i = 0; i < ARRAYSIZE(g_mapTaskDo); i++)
-	{
-		if (eDo == g_mapTaskDo[i].eDo)
-		{
-			return g_mapTaskDo[i].sItem;
-		}
-	}
-	return L"";
-}
-
-ENUM_AUTOTASK_DOWHAT GetTaskDo(LPCWSTR sDoString)
-{
-	for (int i = 0; i < ARRAYSIZE(g_mapTaskDo); i++)
-	{
-		if (0 == g_mapTaskDo[i].sItem.CompareNoCase(sDoString))
-		{
-			return g_mapTaskDo[i].eDo;
-		}
-	}
-	return AUTOTASK_DO_NOTSET;
-}
-*/
-
-//////////////////////////////////////////////////////////////////////////
 QUI_BEGIN_EVENT_MAP(QExecTimeDlg,QDialog)
 	BN_CLICKED_ID(L"chk_span2", &QExecTimeDlg::OnClkChkSpan)
 	BN_CLICKED_ID(L"chk_exec_count", &QExecTimeDlg::OnClkChkExecCount)

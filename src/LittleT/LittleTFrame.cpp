@@ -117,7 +117,7 @@ LRESULT LittleTFrame::OnDocumentComplete()
 {
     // ok, 已经启动了，其他进程可以过来通信了
     // 自动靠边隐藏
-    wnd_autohide_.RegisterAutoHide(GetSafeHwnd(), 10, 1);
+    wnd_autohide_.RegisterAutoHide(GetSafeHwnd(), CAutoHideWnd::ALIGN_ALL, 10, 1);
 
     // 初始化版本
     SetTitle(CStdString(L"LittleT v") + QUIGetAppVersion());  
@@ -568,7 +568,25 @@ LRESULT LittleTFrame::OnSysTrayMessage( UINT uMsg, WPARAM wParam,
     if (LOWORD(lParam) == WM_LBUTTONUP)
     {
         // 显示窗口
-        ShowWindow(SW_RESTORE);
+        // ShowWindow(SW_RESTORE);
+
+        // 如果是停靠隐藏着的，显示一下
+        CRect rc;
+        if (GetWindowRect(&rc))
+        {
+            if (rc.left < 0)
+                rc.OffsetRect(-rc.left + 1, 0);
+            else if (rc.top < 0)
+                rc.OffsetRect(0, -rc.top + 1);
+            else
+            {
+                CSize sz = quibase::GetScreenSize();
+                if (rc.right > sz.cx)
+                    rc.OffsetRect(sz.cx - rc.right, 0);
+            }
+        }
+        MoveWindow(&rc);
+
         // 隐藏trayicon
         m_trayicon.HideIcon();
     }
