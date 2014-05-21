@@ -211,10 +211,11 @@ void LittleTApp::StartUpdateExe()
 LPCWSTR LittleTApp::GetAppVersion() const
 {
     // 更新历史：<br/>
-    // LittleT v3.2 2013/10/28<br/>
+    // LittleT v3.4 2013/10/28<br/>
     // ----------------------<br/>
     // 新增：自动任务“每年的某天”执行功能
     // 修改：修改为每5个小时自动检查更新
+    // 新增：我的微博连接地址
     // 
     // LittleT v3.2 2013/10/28<br/>
     // ----------------------<br/>
@@ -321,7 +322,7 @@ LPCWSTR LittleTApp::GetAppVersion() const
     // ----------------------<br/>
     // 第一个版本
 
-    return L"3.3";
+    return L"3.4";
 }
 
 //////////////////////////////////////////////////////////////////////////
