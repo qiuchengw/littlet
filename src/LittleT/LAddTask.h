@@ -20,7 +20,8 @@ protected:
 	void OnClkMonthDaySelectAll(HELEMENT hBtn);
     void OnClkMonthDaySelectNone(HELEMENT hBtn);
     void OnClkAddTimeSpot(HELEMENT hBtn);
-	void OnClkDeleteTimeRow(HELEMENT hBtn);
+    void OnClkDeleteTimeRow(HELEMENT hBtn);
+	void OnTabSelReleatPanel(HELEMENT hBtn);
 
 	virtual BOOL OnDefaultButton(INT_PTR nID);
 	virtual LRESULT OnDocumentComplete();

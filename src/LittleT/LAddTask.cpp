@@ -25,6 +25,7 @@ QUI_BEGIN_EVENT_MAP(QExecTimeDlg,QDialog)
     BN_STATECHANGED_ID(L"rio_absYearDay",&QExecTimeDlg::OnAbsDateRioCheckChanged)
     CMB_SELECTION_CHANGED_ID(L"cmb_task_when_do", &QExecTimeDlg::OnCmbTaskWhenDoSelectChanged)  
     CMB_SELECTION_CHANGED_ID(L"cmb_date_yearmonth", &QExecTimeDlg::OnCmbAbsDateMonthSelectChanged)
+    ELEMENT_EXPANDED_NAME(L"relate_exp", &QExecTimeDlg::OnTabSelReleatPanel)
 //    CMB_SELECTION_CHANGED_ID(L"time_absTime",&QExecTimeDlg::OnSelectDatetimeChanged)
 //     QMSG_ID_SELECTCHANGED(L"date_begin", &QExecTimeDlg::OnSelectDatetimeChanged)
 //     QMSG_ID_SELECTCHANGED(L"date_end", &QExecTimeDlg::OnSelectDatetimeChanged)
@@ -117,15 +118,19 @@ LRESULT QExecTimeDlg::OnDocumentComplete()
 	ECombobox eCmbRelateExec = GetCtrl("#cmb_task_when_do");
 	MakeRelateExecFlagCMB(eCmbRelateExec);
 
-	// 生命期
-	EDate(GetCtrl("#date_begin")).SetDate(life_begin_);
-	EDate(GetCtrl("#date_end")).SetDate(life_end_);
-	ETime(GetCtrl("#time_begin")).SetTime(life_begin_);
-	ETime(GetCtrl("#time_end")).SetTime(life_end_);
-
 	if (!m_bEditMode)
-		return 0;
-	// 编辑模式，设定各个控件的值
+    {
+        EEdit(GetCtrl("#edit_span")).SetFocus();
+        return 0;
+    }
+
+    // 生命期
+    EDate(GetCtrl("#date_begin")).SetDate(life_begin_);
+    EDate(GetCtrl("#date_end")).SetDate(life_end_);
+    ETime(GetCtrl("#time_begin")).SetTime(life_begin_);
+    ETime(GetCtrl("#time_end")).SetTime(life_end_);
+
+    // 编辑模式，设定各个控件的值
 	QTimer testTimer;
 	if (!testTimer.SetExp(m_sExp))
 	{
@@ -145,7 +150,9 @@ LRESULT QExecTimeDlg::OnDocumentComplete()
 		DWORD dwNum = testTimer.GetExecSpan();
 		if (dwNum <= 0)
 			return 0;
-		EEdit(GetCtrl("#edit_span")).SetInt(dwNum);
+		EEdit inpt = (GetCtrl("#edit_span"));
+        inpt.SetInt(dwNum);
+        inpt.SetFocus();
 		// span unit
 		WCHAR cUnit = testTimer.GetExecSpanUnit();
 		ECombobox(GetCtrl("#cmb_span_unit")).SelectItem_IDorName(&cUnit);
@@ -660,6 +667,11 @@ void QExecTimeDlg::OnCmbAbsDateMonthSelectChanged( ECombobox cmb, EOption item )
         }
         break;
     }
+}
+
+void QExecTimeDlg::OnTabSelReleatPanel( HELEMENT hBtn )
+{
+    EEdit(GetCtrl("#edit_span")).SetFocus();
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -71,9 +71,9 @@ BOOL LittleTApp::InitRun()
     }
     
 #ifdef _DEBUG
-    if (!m_frame.Create(NULL,WS_POPUP|WS_VISIBLE/*, WS_EX_TOOLWINDOW*/))
+    if (!m_frame.Create(NULL,WS_POPUP|WS_VISIBLE, WS_EX_TOOLWINDOW))
 #else   // release ×î¶¥²ã
-    if (!m_frame.Create(NULL,WS_POPUP|WS_VISIBLE, /*WS_EX_TOOLWINDOW|*/WS_EX_TOPMOST))
+    if (!m_frame.Create(NULL,WS_POPUP|WS_VISIBLE, WS_EX_TOOLWINDOW|WS_EX_TOPMOST))
 #endif
     {
         return FALSE;

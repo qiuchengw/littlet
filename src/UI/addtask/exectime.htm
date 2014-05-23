@@ -42,26 +42,26 @@
 		<div id="body_wrap">
 			<table .table_box style="height:80px;">
 				<tr>
-					<th colspan=4>设定任务的执行周期和执行时间</th>
+					<th colspan=4 style="padding:3 0px;">设定任务的执行周期和执行时间</th>
 				</tr>
 				<tr .box>
-					<td style="width:60px;text-align:right;">开始时间:</td>
+					<td style="width:max-intrinsic;text-align:right;">开始时间:</td>
 					<td .row style="border-spacing:2px;">
 						<widget type="date" id="date_begin" value="today" style="height:26px;" />
-						<widget type="time" id="time_begin" value="now" />
+						<widget type="time" id="time_begin" value="00:00" no-seconds />
 					</td>
 					<td style="width:80px;text-align:right;">结束时间:</td>
 					<td .row style="border-spacing:2px;">
-						<widget type="date" id="date_end" value="today" style="height:26px;" />
-						<widget type="time" id="time_end" value="now" />
+						<widget type="date" id="date_end" value="2040-1-1" style="height:26px;font-weight:bold" />
+						<widget type="time" id="time_end" value="23:59" no-seconds />
 					</td>
 				</tr>
 			</table>
 			
 			<widget type="tabs" id="TABS_TIME" style="width:*;height:*;margin:4 10px;">
 				<div .strip>
-					<div panel="panel_relate" selected>相对时间执行</div>
-					<div panel="panel_abs">绝对时间执行</div>
+					<div panel="panel_relate" name="relate_exp" selected>相对时间执行</div>
+					<div panel="panel_abs" name="abs_exp">绝对时间执行</div>
 				</div>
 				<div name="panel_relate">
 					<table relate style="margin:10px;">
