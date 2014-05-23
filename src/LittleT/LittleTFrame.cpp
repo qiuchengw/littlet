@@ -264,7 +264,7 @@ namespace littlet
     };
 }
 
-void LittleTFrame::OnAutoTaskFired( LPARAM lp )
+void LittleTFrame::OnEventFired( LPARAM lp )
 {
     QAutoTask* pTask = reinterpret_cast<QAutoTask*>(lp);
     if (NULL == pTask)
@@ -558,6 +558,9 @@ LRESULT LittleTFrame::OnComputerPowerChanged( DWORD dwEvent, DWORD )
     {
         // 刷新自动任务。
         m_viewEvent.RefreshEventList();
+
+        // 只刷新EventList貌似没有更新Header
+        RefreshHeader();
     }
     return TRUE;
 }

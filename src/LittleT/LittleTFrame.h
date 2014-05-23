@@ -41,7 +41,7 @@ class LittleTFrame : public QFrame
             MSG_QUI_CODE(MWND_NOTIFY_AUTOTASKDELETE,OnEventDelete)
             MSG_QUI_CODE(MWND_NOTIFY_AUTOTASKPAUSE,OnEventPause)
             MSG_QUI_CODE(MWND_CMD_SHOWAUTOTASKREMIND,OnCmdShowEventReminder)
-            MSG_QUI_CODE(MWND_NOTIFY_AUTOTASKFIRED,OnAutoTaskFired)
+            MSG_QUI_CODE(MWND_NOTIFY_AUTOTASKFIRED,OnEventFired)
             // plan
             MSG_QUI_CODE(MWND_NOTIFY_PLANNUMCHANGED,OnPlanNumChanged)
             // app mode
@@ -84,7 +84,7 @@ protected:
 
     void OnCmdShowEventReminder(LPARAM lp);
 
-    void OnAutoTaskFired(LPARAM lp);
+    void OnEventFired(LPARAM lp);
 
     // event（qautotask）要求执行响应的任务
 //    void OnDoWork(LPARAM lp);
