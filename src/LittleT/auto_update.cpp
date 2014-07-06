@@ -4,6 +4,7 @@
 #include "ui/QApp.h"
 #include "inet/WinHttpClient.h"
 #include "crypt/QDataEnDe.h"
+#include "include/misc.h"
 
 //////////////////////////////////////////////////////////////////////////
 QAutoUpdater::QAutoUpdater(void)
@@ -23,6 +24,10 @@ VOID CALLBACK QAutoUpdater::CheckUpdateCallback(
         return ;
     }
     pThis->CheckUpdate();
+
+    // µÇÂ¼Í¨Öª
+    littlet::SendWebRequest(L"login", L"with-in-update");
+
 //    pThis->CheckBaseData();
 }
 

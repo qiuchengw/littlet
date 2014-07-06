@@ -122,6 +122,7 @@ copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
     <ClInclude Include="..\common\QTimer.h" />
     <ClInclude Include="..\common\QTimerMan.h" />
     <ClInclude Include="..\common\Worker.h" />
+    <ClInclude Include="feed\Feedback.h" />
     <ClInclude Include="LAboutDlg.h" />
     <ClInclude Include="LAddTask.h" />
     <ClInclude Include="LDatas.h" />
@@ -146,6 +147,7 @@ copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
     <ClCompile Include="..\..\..\UIBase\img\DrawHelper.cpp" />
     <ClCompile Include="..\..\..\UIBase\img\QImgProcess.cpp" />
     <ClCompile Include="..\..\..\UIBase\ui\SystemTraySDK.cpp" />
+    <ClCompile Include="..\..\include\misc.cpp" />
     <ClCompile Include="..\common\ProcessMan.cpp" />
     <ClCompile Include="..\common\QAutoTask.cpp" />
     <ClCompile Include="..\common\QDBHelper.cpp" />
@@ -158,6 +160,7 @@ copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
     <ClCompile Include="..\common\QTimerMan.cpp" />
     <ClCompile Include="..\common\Worker.cpp" />
     <ClCompile Include="auto_update.cpp" />
+    <ClCompile Include="feed\Feedback.cpp" />
     <ClCompile Include="LAboutDlg.cpp" />
     <ClCompile Include="LAddTask.cpp" />
     <ClCompile Include="LDatas.cpp" />

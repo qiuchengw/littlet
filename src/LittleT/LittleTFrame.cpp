@@ -1,6 +1,6 @@
 #include "LittleTFrame.h"
 
-//#include "feedback/Feedback.h"
+#include "feed/Feedback.h"
 #include "AppHelper.h"
 #include "../common/LittleTUIcmn.h"
 #include "../common/Worker.h"
@@ -11,6 +11,7 @@
 #include "QUtilWnd.h"
 #include "LittleT.h"
 #include "LAboutDlg.h"
+#include "include/misc.h"
 
 struct _APPMODE_2_TABIDX
 {
@@ -94,6 +95,12 @@ void LittleTFrame::OnClose()
         QUIGetApp()->SaveWindowPos();
         // 退出
         PostQuitMessage(0);
+
+        // 隐藏自己
+        ShowWindow(SW_HIDE);
+
+        // 退出通知
+        littlet::SendWebRequest(L"logout", L"bye bye! black bird!");
     }
 
     LittleTApp* pApp = (LittleTApp*)QUIGetApp();
@@ -686,7 +693,7 @@ void LittleTFrame::OnClkMyWeibo(HELEMENT)
 
 void LittleTFrame::OnClkFeedback( HELEMENT )
 {
-//    QUserFeedbackWnd::Show();
+    QUserFeedbackWnd::Show();
 }
 
 void LittleTFrame::OnClkCheckUpdation( HELEMENT )
