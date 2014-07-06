@@ -211,9 +211,9 @@ button.with-icon{
 }
 
 .color_button.orange{
-	background-color:#F2632A #F2632A #D65021 #D65021;
+	background-color:#F5936C #F5936C #D85D2E #D65021;
 	border:1px solid #DE5824;
-	color:#333;
+	color:black;
 }
 .color_button.orange:hover{
 	background-color:#F57443 #F57443 #D65021 #D65021;
@@ -397,9 +397,10 @@ input:not([type])
       padding:3px; 
       height:18px; 
       width:1em; 
-      background-image:url(theme:edit-normal); 
-      background-repeat:stretch;
-      min-width: min-intrinsic;
+      background-image:none;
+	  background-color:white;
+	  border:1px solid #ddd;
+	  min-width: min-intrinsic;
       min-height: min-intrinsic;
       text-align: left;
       cursor:text;

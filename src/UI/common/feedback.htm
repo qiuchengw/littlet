@@ -8,20 +8,25 @@
 				overflow-x:hidden;
 				overflow-y:auto;
 				white-space:prewrap;
+				background:url(qrel:images/talk.png) no-repeat;
+				background-position:top right;
+				background-color:white;
+				border:1px solid #E3DEDE;
 			}
 			.wbody_box{
 				font:12px normal "宋体";
 				flow:vertical;
 				//padding:10px;
 				width:*;height:*;
-				background-color:white;
 				margin:10px;
 				padding:0;
+				background-color:transparent;
 			}
 		</style>
 	</head>
 	<body #wc-top style="min-height:320px; height:max-intrinsic; width:420px;">
 		<div #wc-caption>
+			<div #wc-sysicon style="background-image:url(qabs:icons/talk.png);"/>
 			<div #wc-title style="padding:2 6px;font:10pt bold;">意见反馈</div>
 			<table sysbtn>
 				<tr>
@@ -33,16 +38,17 @@
 		<div .wbody_box>
 			<table style="width:*;height:*;overflow:hidden;" #tbl_input>
 				<tr><td> <textarea id="txt_feed" novalue="多谢建议：" maxlength="1024" /> </td></tr>
-				<tr><td> <input type="text" id="txt_mail" style="margin-top:10px;width:*;"
+				<tr><td> <input type="text" id="txt_mail" style="margin-top:10px;width:*;min-height:30px;"
 					novalue="您的联系方式：QQ / Email / 微博 / 网站" /> </td></tr>
-				<tr><td> <div .color_button .blue style="margin-left:*;margin-top:10px;" id="btn_submit">提交反馈</button> </td></tr>
-			</table>
-			<table style="width:*;color:#448ACA;margin:4 0 10 0px;font:12px normal '宋体';">
-				<tr>
-					<td><a .btn href="ddd" #a_website url_x="http://www.qiuchengw.com">官方网站</a></td>
-					<td><a .btn href="ddd" #a_website url_x="http://weibo.com/qiuchengw">新浪微博</a></td>
-					<td style="text-align:right;"><htmlarea style="cursor:text;">QQ群：276826620</htmlarea></td>
-				</tr>
+				<tr><td style="flow:horizontal;">
+				
+					<!-- <a .btn href="ddd" #a_website url_x="http://www.qiuchengw.com">官方网站</a> -->
+					<a href="ddd" #a_website style="color:#A7401C;behavior:clickable;" url_x="http://t.qq.com/qiuchengw_">作者微博</a>
+					<htmlarea style="cursor:text;">QQ群：276826620</htmlarea>
+					
+					<div .color_button .orange style="margin-left:*;margin-top:10px;" id="btn_submit">发射&gt;&gt;&gt;</div> 
+				
+				</td></tr>
 			</table>
 		</div>
 	</body>

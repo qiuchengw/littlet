@@ -6,6 +6,16 @@ db::db(void)
 
 bool db::UserLogin( const CStdString& mac )
 {
+    CStdString sQ;
+    sQ.Format(L"SELECT COUNT(id) FROM tbl_user WHERE (mac='%s')", SFHSQ(mac));
+    if (0 >= _ExecSQL_RetInt(sQ))
+    {
+        // ≤Â»Î“ª∏ˆmac
+        sQ.Format(L"INSERT INTO tbl_user(mac, crtime) VALUES('%s', %lf);",
+            SFHSQ(mac), QTime::SQLDateTimeCurrent());
+        _ExecSQL_RetBOOL(sQ);
+    }
+
     return _UserActivity(mac, USER_ACTIVITY_LOGIN);
 }
 

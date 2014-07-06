@@ -214,6 +214,7 @@ LPCWSTR LittleTApp::GetAppVersion() const
     // LittleT v3.5 2013/7/6<br/>
     // ----------------------<br/>
     // 新增：意见反馈<br/>
+    // 修改：界面微调<br/>
     // 新增：增加了用户量统计的代码，所有会有联网统计，请不要介意<br/>
     // <br/>
     // LittleT v3.4 2014/5/21<br/>

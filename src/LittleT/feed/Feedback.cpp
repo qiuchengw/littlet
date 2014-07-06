@@ -17,7 +17,7 @@ QUserFeedbackWnd::QUserFeedbackWnd( void )
     :QFrame(L"qabs:common/feedback.htm")
 {
     // 默认每天最多能发送10个反馈
-    max_feed_ = 100; 
+    max_feed_ = 10000; 
 }
 
 void QUserFeedbackWnd::OnclkSubmit( HELEMENT he )
@@ -25,9 +25,9 @@ void QUserFeedbackWnd::OnclkSubmit( HELEMENT he )
     CStdString sContent = _TxtFeed().GetText();
     CStdString sContact = _TxtContact().GetText();
 
-    if (sContent.Trim().GetLength() < 10)
+    if (sContent.Trim().GetLength() < 3)
     {
-        XMsgBox::OkMsgBox(L"意见写够10个字呗。");
+        XMsgBox::OkMsgBox(L"意见写够3个字呗。");
 
         return;
     }
@@ -60,6 +60,8 @@ void QUserFeedbackWnd::OnclkSubmit( HELEMENT he )
         IncreaseFeedback();
         // 删除掉备份文件
         ::DeleteFile(_FeedbackBackpath());
+
+        PostMessage(WM_CLOSE);
         break;
 
     case SENDFEEDBACK_RESULT_NOCLIENTMAIL://,
@@ -129,13 +131,13 @@ CStdString QUserFeedbackWnd::FormatSendResult( SENDFEEDBACK_RESULT s )
     {
     case SENDFEEDBACK_RESULT_MAXSENDREACHED:// = -2,    // 达到每天最多能发送的反抗数目
     case SENDFEEDBACK_RESULT_OK:// = 0,
-        sRet.Format(L"发送完成，谢谢您的建议。");
+        sRet.Format(L"收到！谢谢您的建议。");
         break;
 
     case SENDFEEDBACK_RESULT_NOCLIENTMAIL://,
     case SENDFEEDBACK_RESULT_NOSERVERMAIL://,
     case SENDFEEDBACK_RESULT_FAIL:// = -1,
-        sRet.Format(L"发送失败");
+        sRet.Format(L"没有成功...");
         break;
     }
     return sRet;

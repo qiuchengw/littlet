@@ -19,7 +19,8 @@ namespace littlet
         // sock.connect("tcp://www.0woow.com:5230");
         try
         {
-            sock.connect("tcp://127.0.0.1:5231");
+            sock.connect("tcp://www.0woow.com:5231");
+            // sock.connect("tcp://127.0.0.1:5231");
 
             // 第一帧是名字地址
             sock.send(name.c_str(), name.GetLength() * sizeof(CStdString::value_type), ZMQ_SNDMORE);
