@@ -211,7 +211,7 @@ void LittleTApp::StartUpdateExe()
 LPCWSTR LittleTApp::GetAppVersion() const
 {
     // 更新历史：<br/>
-    // LittleT v3.5 2013/7/6<br/>
+    // LittleT v3.5 2014/7/6<br/>
     // ----------------------<br/>
     // 新增：意见反馈<br/>
     // 修改：界面微调<br/>

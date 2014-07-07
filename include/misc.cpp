@@ -9,7 +9,7 @@
 
 namespace littlet
 {
-    bool SendWebRequest(const CStdString& name, const CStdString& content)
+    bool SendWebRequest(const CStdString& name, const CStdString& content, BOOL bAsync /*= TRUE*/)
     {
         // 使用zmq的request
         zmq::context_t ctx;
@@ -22,7 +22,8 @@ namespace littlet
             sock.connect("tcp://www.0woow.com:5231");
             // sock.connect("tcp://127.0.0.1:5231");
 
-            // 第一帧是名字地址
+            // 第一帧是服务名字
+            // login / logout / feed
             sock.send(name.c_str(), name.GetLength() * sizeof(CStdString::value_type), ZMQ_SNDMORE);
 
             // 第二帧是mac地址
@@ -35,7 +36,7 @@ namespace littlet
 
             // 最后必然有一个接收的动作
             char buf[64];
-            sock.recv(buf, 64);
+            sock.recv(buf, 64, bAsync ? ZMQ_NOBLOCK : 0);
 
             sock.close();
             ctx.close();
@@ -44,6 +45,7 @@ namespace littlet
         catch (zmq::error_t& t)
         {
 #ifdef _DEBUG
+            OutputDebugStringA("------>ZMQ Exception:");
             OutputDebugStringA(t.what());
             OutputDebugStringA("\n");
 #endif
@@ -96,6 +98,5 @@ namespace littlet
 
         return bok;
     }
-
 
 }
