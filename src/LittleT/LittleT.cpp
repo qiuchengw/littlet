@@ -11,7 +11,6 @@
 #include "ui/QUIMgr.h"
 #include "ui/QUIDlgs.h"
 
-
 #include "auto_update.h"
 
 LittleTApp _Module;

@@ -286,6 +286,7 @@ void LViewEvent::RefreshEventItem(ECtrl &eItem)
         sTime = tmExec.Format(L"%H:%M:%S");
         sDate = tmExec.Format(L"%x");
         sLifeEnd = pTask->LifeEnd().Format(L"%c");
+        sLifeEnd = sLifeEnd.Left(sLifeEnd.GetLength() - 3);
     }
     else
     {
@@ -323,7 +324,7 @@ void LViewEvent::RefreshEventItem(ECtrl &eItem)
         L"   <td .lifend>%s</td>"
         L"   <td .btns>"
         L"      <div .btn name=\"btn_edit\" title=\"±à¼­\" />"
-//        L"      <div .btn name=\"btn_del\" title=\"É¾³ý\" />"
+        L"      <div .btn name=\"btn_del\" title=\"É¾³ý\" />"
 //        L"      <div .btn name=\"btn_disable\" title=\"½ûÖ¹Ö´ÐÐ\" />"
         L"   </td>"
         L"</tr>", // %s Reminder Flag

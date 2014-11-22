@@ -17,11 +17,14 @@ QSingleRmdDlg::QSingleRmdDlg( LPTASK_REMINDER_PARAM pRP )
     :QDialog(L"qabs:dlgs/rmddlg.htm")
 {
     m_pRP = pRP;
+
     m_nCountDown = 300;
+
 }
 
 QSingleRmdDlg::~QSingleRmdDlg( void )
 {
+
     if (IsWindow())
     {
         SendMessage(WM_CLOSE);
@@ -161,9 +164,10 @@ void QSingleRmdDlg::RefreshRemindMessage()
             break;
         }
     }
+
     GetCtrl("#img_type").set_attribute("src",sImg);
     GetCtrl("#td_time").SetText(m_pRP->tmExec.Format(L"%H:%M:%S")); // :%S
-    GetCtrl("#td_tip").SetHtml(m_pRP->sMsg);
+    GetCtrl("#td_tip").SetHtml(m_pRP->sMsg.IsEmpty() ? pTask->GetDoWhatString() : m_pRP->sMsg);
     GetCtrl("#td_dowhat").SetHtml(pTask->GetDoWhatString());
 
     if (!(m_pRP->sSound.IsEmpty()))
@@ -172,7 +176,7 @@ void QSingleRmdDlg::RefreshRemindMessage()
     }
 }
 
-//////////////////////////////////////////////////////////////////////////
+//////////////////////////
 BOOL LReminderBox::ShowReminderDlg( LPTASK_REMINDER_PARAM pRP )
 {
     CheckRmdList();
