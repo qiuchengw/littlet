@@ -1,5 +1,5 @@
 #include "ProcessMan.h"
-#include "file/FileOper.h"
+#include "deps/file/FileOper.h"
 
 QTime QProcessMan::sm_tmAppStart;
 const QTime QProcessMan::sm_tmSystemStart =  (QTime::GetCurrentTime() 

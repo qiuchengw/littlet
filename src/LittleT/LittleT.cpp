@@ -6,8 +6,8 @@
 
 #include "time/QTime.h"
 #include "sys/singleinst.h"
-#include "sys/UACSElfElevation.h"
-#include "img/GDIpInitializer.h"
+#include "deps/sys/UACSElfElevation.h"
+#include "deps/img/GDIpInitializer.h"
 #include "ui/QUIMgr.h"
 #include "ui/QUIDlgs.h"
 
@@ -17,6 +17,8 @@
 LittleTApp _Module;
 
 #include "LAboutDlg.h"
+#include "deps/FileVersion.hpp"
+#include "deps/app.h"
 
 BOOL LittleTApp::InitRun()
 {
@@ -208,14 +210,14 @@ void LittleTApp::StartUpdateExe()
     CloseHandle(hEvent);
 }
 
-LPCWSTR LittleTApp::GetAppVersion() const
+CStdString LittleTApp::GetAppVersion() const
 {
     // 更新历史：<br/>
-    // LittleT v3.5 2014/7/6<br/>
+    // LittleT v3.6 2014/7/6<br/>
     // ----------------------<br/>
     // 新增：意见反馈<br/>
     // 修改：界面微调<br/>
-    // 新增：增加了用户量统计的代码，所有会有联网统计，请不要介意<br/>
+    // 新增：增加了用户量统计的代码<br/>
     // <br/>
     // LittleT v3.4 2014/5/21<br/>
     // ----------------------<br/>
@@ -328,7 +330,7 @@ LPCWSTR LittleTApp::GetAppVersion() const
     // ----------------------<br/>
     // 第一个版本
 
-    return L"3.5";
+    return FileVersion().GetMajorMinorVersion();
 }
 
 //////////////////////////////////////////////////////////////////////////

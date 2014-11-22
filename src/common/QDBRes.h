@@ -4,7 +4,7 @@
 #include "ConstValues.h"
 #include "time/QTime.h"
 #include "AppHelper.h"
-#include "exarray.h"
+#include <exarray.h>
 
 enum ENUM_DBFILE_TYPE
 {
@@ -79,7 +79,7 @@ private:
 	int GetDataItems( __out VecFileData& vfd ,DWORD eType = DBFILE_TYPE_ALL);
 
 	// bIncludeData 包括BLOB数据
-	int GetDataItems(__in IntArray& vi,__out VecFileData& vfd,BOOL bIncludeData=FALSE);
+	int GetDataItems(__in ExArray<int>& vi,__out VecFileData& vfd,BOOL bIncludeData=FALSE);
 };
 
 // QResDB 管理器
@@ -125,7 +125,7 @@ public:
     int GetDataItems( __out VecFileData& vfd ,DWORD eType = DBFILE_TYPE_ALL);
 
     // bIncludeData 包括BLOB数据
-    int GetDataItems(__in IntArray& vi,__out VecFileData& vfd,BOOL bIncludeData=FALSE);
+    int GetDataItems(__in ExArray<int>& vi,__out VecFileData& vfd,BOOL bIncludeData=FALSE);
 
     // 对 tbl_file 操作
     BOOL AddData( __inout TFileData &fd );
@@ -137,7 +137,7 @@ public:
     int GetDataCount();
 
 private:
-    IntArray    m_vResIcons;    // 已经释放到cache中的icon的id会被记录这儿
+    ExArray<int>    m_vResIcons;    // 已经释放到cache中的icon的id会被记录这儿
     CStdString     m_sIconDir;
 };
 

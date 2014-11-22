@@ -12,6 +12,7 @@
 #include "LittleT.h"
 #include "LAboutDlg.h"
 #include "include/misc.h"
+#include "deps/app.h"
 
 struct _APPMODE_2_TABIDX
 {
@@ -100,7 +101,7 @@ void LittleTFrame::OnClose()
         ShowWindow(SW_HIDE);
 
         // ÍË³öÍ¨Öª
-        littlet::SendWebRequest(L"logout", L"bye bye! black bird!");
+        // littlet::SendWebRequest(L"logout", L"bye bye! black bird!");
     }
 
     LittleTApp* pApp = (LittleTApp*)QUIGetApp();

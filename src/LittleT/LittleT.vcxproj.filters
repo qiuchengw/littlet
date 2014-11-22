@@ -25,6 +25,15 @@
     <Filter Include="userfeed">
       <UniqueIdentifier>{ab304cfd-3932-45a2-93cf-6bcef6e9b23f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="便签">
+      <UniqueIdentifier>{1c3c5f71-91a3-4564-a129-cdff9696d216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="deps">
+      <UniqueIdentifier>{5ccd0fb2-d501-4bae-b499-84fea6187415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="deps\db">
+      <UniqueIdentifier>{21270f94-4bae-44d7-9eab-53458c22a759}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -144,6 +153,45 @@
     <ClInclude Include="feed\Feedback.h">
       <Filter>userfeed</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\deps\FileVersion.hpp">
+      <Filter>deps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\sys\UACSElfElevation.h">
+      <Filter>deps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\file\FileOper.h">
+      <Filter>deps</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\ui\SystemTraySDK.h">
+      <Filter>deps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\img\QImgProcess.h">
+      <Filter>deps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\file\FileEnumerator.h">
+      <Filter>deps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\app.h">
+      <Filter>deps</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\file\db\codec.h">
+      <Filter>deps\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\file\db\QDBMgr.h">
+      <Filter>deps\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\file\db\sqlite3.h">
+      <Filter>deps\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\file\db\sqlite3ext.h">
+      <Filter>deps\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\deps\crypt\rijndael.h">
+      <Filter>deps</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LittleT.cpp">
@@ -230,20 +278,44 @@
     <ClCompile Include="auto_update.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\UIBase\ui\SystemTraySDK.cpp">
-      <Filter>uibase</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\UIBase\img\QImgProcess.cpp">
-      <Filter>uibase</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\UIBase\img\DrawHelper.cpp">
-      <Filter>uibase</Filter>
-    </ClCompile>
     <ClCompile Include="feed\Feedback.cpp">
       <Filter>userfeed</Filter>
     </ClCompile>
     <ClCompile Include="..\..\include\misc.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\FileVersion.cpp">
+      <Filter>deps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\sys\UACSElfElevation.cpp">
+      <Filter>deps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\file\FileOper.cpp">
+      <Filter>deps</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\ui\SystemTraySDK.cpp">
+      <Filter>deps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\img\QImgProcess.cpp">
+      <Filter>deps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\file\FileEnumerator.cpp">
+      <Filter>deps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\app.cpp">
+      <Filter>deps</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\file\db\wxsqlite3.cpp">
+      <Filter>deps\db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\file\db\codec.c">
+      <Filter>deps\db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\deps\crypt\rijndael.c">
+      <Filter>deps</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

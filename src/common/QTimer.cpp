@@ -526,7 +526,7 @@ BOOL QTimer::_ParseSpanTime( __in const CStdString &sExp ,
 	return FALSE;
 }
 
-BOOL QTimer::_ParseToIntArray( __inout CStdString& sExp,__out IntArray & ar )
+BOOL QTimer::_ParseToIntArray( __inout CStdString& sExp,__out ExArray<int> & ar )
 {
 	ar.clear();
 	int idx;

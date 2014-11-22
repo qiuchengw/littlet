@@ -2,9 +2,9 @@
 #include "ui/QUIGlobal.h"
 #include "ui/QConfig.h"
 #include "ui/QApp.h"
-#include "inet/WinHttpClient.h"
 #include "crypt/QDataEnDe.h"
 #include "include/misc.h"
+#include "deps/inet/WinHttpClient.h"
 
 //////////////////////////////////////////////////////////////////////////
 QAutoUpdater::QAutoUpdater(void)

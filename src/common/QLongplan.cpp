@@ -24,7 +24,7 @@ CStdString GetTimeFleeText(QTimeSpan &tmSpan)
 }
 
 /////////////////////////////////////////////////////////////////////////
-BOOL ParseID( const CStdString&sID,__out IntArray &vi )
+BOOL ParseID( const CStdString&sID,__out ExArray<int> &vi )
 {
 	if (sID.IsEmpty())
 		return FALSE;
@@ -36,7 +36,7 @@ BOOL ParseID( const CStdString&sID,__out IntArray &vi )
 	return TRUE;
 }
 
-CStdString MakeIDS( __in IntArray &vi )
+CStdString MakeIDS( __in ExArray<int> &vi )
 {
 	CStdString sRet,sPart;
 	for (unsigned int i = 0; i < vi.size(); i++)
@@ -51,7 +51,7 @@ CStdString MakeIDS( __in IntArray &vi )
 
 int QGoalItem::GetAttachs( __out VecFileData &vfd, BOOL bIncludeData/*=FALSE*/ )
 {
-	IntArray vi;
+	ExArray<int> vi;
 	if (ParseID(Attachs(),vi))
 	{
         return QResMan::GetInstance()->GetDataItems(vi,vfd,bIncludeData);
@@ -65,7 +65,7 @@ int QGoalItem::AddNotes( int nNoteID )
 	sID.Format(L"%d;",nNoteID);
 	m_sNotes += sID;
 
-	IntArray vi;
+	ExArray<int> vi;
 	if (ParseID(Notes(),vi))
 	{
 		m_sNotes = MakeIDS(vi);

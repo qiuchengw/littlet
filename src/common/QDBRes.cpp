@@ -147,7 +147,7 @@ BOOL QResDB::DeleteData( int nID )
 	return _ExecSQL_RetBOOL(sQ);
 }
 
-int QResDB::GetDataItems( __in IntArray& vi,__out VecFileData& vfd,BOOL bIncludeData/*=FALSE*/ )
+int QResDB::GetDataItems( __in ExArray<int>& vi,__out VecFileData& vfd,BOOL bIncludeData/*=FALSE*/ )
 {
 	for (unsigned i = 0; i < vi.size(); i++)
 	{
@@ -263,7 +263,7 @@ int QResMan::GetDataItems( __out VecFileData& vfd ,DWORD eType /*= DBFILE_TYPE_A
     return QResDB::GetInstance()->GetDataItems(vfd, eType);
 }
 
-int QResMan::GetDataItems( __in IntArray& vi,__out VecFileData& vfd,BOOL bIncludeData/*=FALSE*/ )
+int QResMan::GetDataItems( __in ExArray<int>& vi,__out VecFileData& vfd,BOOL bIncludeData/*=FALSE*/ )
 {
     return QResDB::GetInstance()->GetDataItems(vi, vfd, bIncludeData);
 }

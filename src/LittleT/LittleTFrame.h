@@ -3,7 +3,7 @@
 #include "../common/ConstValues.h"
 
 #include "ui/QFrame.h"
-#include "ui/SystemTraySDK.h"
+#include "deps/ui/SystemTraySDK.h"
 #include "LViewEvent.h"
 #include "LViewTodo.h"
 #include "LViewPlan.h"

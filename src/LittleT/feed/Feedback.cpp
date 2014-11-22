@@ -1,10 +1,11 @@
 #include "Feedback.h"
 #include "ui/QUIDlgs.h"
-#include "sys/SyncInvoker.h"
+#include "deps/sys/SyncInvoker.h"
 #include "ui/QConfig.h"
 #include "AppHelper.h"
 #include "deps/zmq.hpp"
 #include "include/misc.h"
+#include "deps/app.h"
 
 //////////////////////////////////////////////////////////////////////////
 QUI_BEGIN_EVENT_MAP(QUserFeedbackWnd, QFrame)

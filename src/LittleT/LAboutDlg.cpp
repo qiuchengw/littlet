@@ -3,6 +3,7 @@
 #include "crypt/CXUnzip.h"
 #include "LittleT.h"
 #include <ShlObj.h>
+#include "deps/app.h"
 
 QUI_BEGIN_EVENT_MAP(LAboutDlg, QDialog)
     BN_CLICKED_NAME(L"a-link", &LAboutDlg::OnClkLink)

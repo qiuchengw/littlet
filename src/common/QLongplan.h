@@ -7,9 +7,9 @@
 
 // sID是以字符‘;’分割的如： 1;2;5;8
 // 将1;2;3;8 解析为整数数组返回
-BOOL ParseID(const CStdString&sID,__out IntArray &vi);
+BOOL ParseID(const CStdString&sID,__out ExArray<int> &vi);
 // 返回形式：1;2;3;8
-CStdString MakeIDS(__in IntArray &vi);
+CStdString MakeIDS(__in ExArray<int> &vi);
 
 
 class QDBPlan;

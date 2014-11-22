@@ -1,11 +1,11 @@
 #pragma once
 
 #include <list>
-#include "exarray.h"
 #include "time/QTime.h"
 #include "ConstValues.h"
 #include "QTimerListener.h"
 #include "AppHelper.h"
+#include "exarray.h"
 
 // enum ENUM_AUTOTASK_EXECFLAG
 // {
@@ -327,7 +327,7 @@ protected:
 
     // 2,4,8,9
     // 以 英文‘,’ 分隔的数字字符，转换到整数值
-    BOOL _ParseToIntArray( __inout CStdString& sExp,__out IntArray & ar );
+    BOOL _ParseToIntArray( __inout CStdString& sExp,__out ExArray<int> & ar );
 
 private:
     // 启动定时器的时候调用，以设定提前提示任务
@@ -364,8 +364,8 @@ private:	// Relate;
 
 private: // absolute
     //----------------------------------------
-    IntArray		m_arX;		// 执行日期点，需配合ENUM_TASK_EXECFLAG才能确定其值的意义
-    IntArray		m_arTime;	// 执行时间点，
+    ExArray<int>		m_arX;		// 执行日期点，需配合ENUM_TASK_EXECFLAG才能确定其值的意义
+    ExArray<int>		m_arTime;	// 执行时间点，
     //-----------------------------------------------
     // 在一天中的 [03:00 ~ 20:00] 每隔 30m 执行一次
     WORD			m_wTimeBegin;	// 执行时间

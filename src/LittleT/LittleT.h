@@ -13,9 +13,9 @@
 #include "AppHelper.h"
 
 #ifdef _DEBUG
-#pragma comment(lib, "quil_d.lib")
+#pragma comment(lib, "quil_mtd.lib")
 #else
-#pragma comment(lib, "quil.lib")
+#pragma comment(lib, "quil_mt.lib")
 #endif
 
 class LittleTApp : public QApp
@@ -27,8 +27,8 @@ public:
 
     virtual BOOL InitRun();
 
-    virtual LPCWSTR GetAppVersion()const;
-
+    virtual CStdString GetAppVersion()const override;
+   
     BOOL CheckUpdate();
 
 public:
