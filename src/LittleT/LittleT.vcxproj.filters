@@ -177,21 +177,6 @@
     <ClInclude Include="..\..\deps\app.h">
       <Filter>deps</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\deps\file\db\codec.h">
-      <Filter>deps\db</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\deps\file\db\QDBMgr.h">
-      <Filter>deps\db</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\deps\file\db\sqlite3.h">
-      <Filter>deps\db</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\deps\file\db\sqlite3ext.h">
-      <Filter>deps\db</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\deps\crypt\rijndael.h">
-      <Filter>deps</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LittleT.cpp">
@@ -306,15 +291,6 @@
       <Filter>deps</Filter>
     </ClCompile>
     <ClCompile Include="..\..\deps\app.cpp">
-      <Filter>deps</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\deps\file\db\wxsqlite3.cpp">
-      <Filter>deps\db</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\deps\file\db\codec.c">
-      <Filter>deps\db</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\deps\crypt\rijndael.c">
       <Filter>deps</Filter>
     </ClCompile>
   </ItemGroup>

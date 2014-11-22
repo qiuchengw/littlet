@@ -114,12 +114,7 @@ copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\deps\app.h" />
-    <ClInclude Include="..\..\deps\crypt\rijndael.h" />
     <ClInclude Include="..\..\deps\FileVersion.hpp" />
-    <ClInclude Include="..\..\deps\file\db\codec.h" />
-    <ClInclude Include="..\..\deps\file\db\QDBMgr.h" />
-    <ClInclude Include="..\..\deps\file\db\sqlite3.h" />
-    <ClInclude Include="..\..\deps\file\db\sqlite3ext.h" />
     <ClInclude Include="..\..\deps\file\FileEnumerator.h" />
     <ClInclude Include="..\..\deps\file\FileOper.h" />
     <ClInclude Include="..\..\deps\img\QImgProcess.h" />
@@ -163,18 +158,7 @@ copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\deps\app.cpp" />
-    <ClCompile Include="..\..\deps\crypt\rijndael.c">
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\deps\FileVersion.cpp" />
-    <ClCompile Include="..\..\deps\file\db\codec.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </ForcedIncludeFiles>
-    </ClCompile>
-    <ClCompile Include="..\..\deps\file\db\wxsqlite3.cpp" />
     <ClCompile Include="..\..\deps\file\FileEnumerator.cpp" />
     <ClCompile Include="..\..\deps\file\FileOper.cpp" />
     <ClCompile Include="..\..\deps\img\QImgProcess.cpp" />
