@@ -32,7 +32,7 @@ protected:
 	BOOL GetAbsoluteExp( __out CStdString &sExp ,QTime&tmB,QTime &tmE);
 
     void OnAbsDateRioCheckChanged(HELEMENT);
-
+    
     /**
      *	绝对时间：每年的某天
      *      每一个月的天数不一样，当月改变的时候，改变对应的日
@@ -94,6 +94,14 @@ protected:
 
 	EEdit _InputRemindText() { return GetCtrl("#INPUT-REMINDTEXT"); }
     void RefreshWhenDo(QTimer* pTimer);
+   
+    void OnSoundFileSelected(HELEMENT he);
+
+protected:
+    inline ECombobox CmbSound()
+    {
+        return GetCtrl("#cmb_sound");
+    }
 
 private:
 	BOOL		m_bEditMode;	// 添加模式还是编辑模式

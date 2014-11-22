@@ -18,6 +18,7 @@ LittleTApp _Module;
 #include "LAboutDlg.h"
 #include "deps/FileVersion.hpp"
 #include "deps/app.h"
+#include "../../../UIBase/qstrex.h"
 
 BOOL LittleTApp::InitRun()
 {
@@ -336,3 +337,25 @@ CStdString LittleTApp::GetAppVersion() const
 LittleTConfig _Config;
 
 
+std::vector<CStdString> LittleTConfig::GetHistorySoundFile()
+{
+    CStdString s_files = GetValue(L"Sound", L"file");
+    std::vector<CStdString> ret;
+    QStrEx(L'*', s_files).GetAll(ret);
+    return ret;
+}
+
+std::vector<CStdString> LittleTConfig::AddSoundFilePath(const CStdString& file)
+{
+    auto files = GetHistorySoundFile();
+    QStrEx se(L'*', L"");
+    for (auto &s : files)
+    {
+        se.AddString(s);
+    }
+    se.AddString(file);
+    se.Unique();
+    SetValue(L"Sound", L"file", se.Commbine());
+
+    return GetHistorySoundFile();
+}

@@ -523,7 +523,8 @@ LRESULT LittleTFrame::OnAppVersionCheck( UINT uMsg,
     {
         // 弹出对话框，询问用户是否打算更新
         // 2013/6/18 v2.9 不再询问，静默更新
-        if (LUpdateInfoDlg(p->sParam).DoModal() == IDOK)
+        // 2014/11/12 v4.0 不再循环，直接更新
+//        if (LUpdateInfoDlg(p->sParam).DoModal() == IDOK)
 //         if (XMsgBox::YesNoMsgBox(L"应用程序更新已经下载，是否更新？<br/>"
 //                 L"放心吧，不会超过10秒钟！") == IDYES)
         {

@@ -8,6 +8,10 @@
 				min-height:420px;
 				//background:url(qabs:bk/bk1.jpg) no-repeat;
 			}
+			#filepath_remind_sound{
+				background:url(qabs:icons/plus_16.png) no-repeat;
+				background-position:center;
+			}
 		</style>		
 	</head>
 	<body #wc-top>
@@ -75,11 +79,12 @@
 				</tr>
 				<tr .box style="height:40px;">
 					<td><widget type="checkbox" id="chk_remind_playsound">播放声音</widget></td>
-					<td colspan=2>
+					<td colspan=2 style="flow:horizontal;">
+						<select type="select-dropdown" id="cmb_sound" style="width:*;min-width:250px;max-width:500px;">
+						</select>
 						<input type="file-path" id="filepath_remind_sound" 
-								filter="声音文件:*.wav" 
-								novalue="(请选择一个声音文件*.wav)" 
-								style="width:*;visibility:hidden;"/>
+								filter="声音文件:*.wav"
+								style="width:30px;"/>
 					</td>
 				</tr>
 				<tr .box style="height:40px;"> 

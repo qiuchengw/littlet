@@ -10,6 +10,8 @@
 #include "ui/QUIMgr.h"
 #include "QBuffer.h"
 #include "AppHelper.h"
+#include "LittleT.h"
+#include "../../../UIBase/ui/QUIGlobal.h"
 
 QUI_BEGIN_EVENT_MAP(QExecTimeDlg,QDialog)
 	BN_CLICKED_ID(L"chk_span2", &QExecTimeDlg::OnClkChkSpan)
@@ -22,7 +24,8 @@ QUI_BEGIN_EVENT_MAP(QExecTimeDlg,QDialog)
     BN_STATECHANGED_ID(L"rio_absDaily",&QExecTimeDlg::OnAbsDateRioCheckChanged)
     BN_STATECHANGED_ID(L"rio_absWeek",&QExecTimeDlg::OnAbsDateRioCheckChanged)
     BN_STATECHANGED_ID(L"rio_absMonthDay",&QExecTimeDlg::OnAbsDateRioCheckChanged)
-    BN_STATECHANGED_ID(L"rio_absYearDay",&QExecTimeDlg::OnAbsDateRioCheckChanged)
+    BN_STATECHANGED_ID(L"rio_absYearDay", &QExecTimeDlg::OnAbsDateRioCheckChanged)
+    
     CMB_SELECTION_CHANGED_ID(L"cmb_task_when_do", &QExecTimeDlg::OnCmbTaskWhenDoSelectChanged)  
     CMB_SELECTION_CHANGED_ID(L"cmb_date_yearmonth", &QExecTimeDlg::OnCmbAbsDateMonthSelectChanged)
     ELEMENT_EXPANDED_NAME(L"relate_exp", &QExecTimeDlg::OnTabSelReleatPanel)
@@ -674,6 +677,7 @@ void QExecTimeDlg::OnTabSelReleatPanel( HELEMENT hBtn )
     EEdit(GetCtrl("#edit_span")).SetFocus();
 }
 
+
 //////////////////////////////////////////////////////////////////////////
 QUI_BEGIN_EVENT_MAP(LAddEventDlg,QDialog)
 	BN_CLICKED_ID(L"chk_TaskRemind", &LAddEventDlg::OnClkChkTaskRemind)
@@ -681,6 +685,7 @@ QUI_BEGIN_EVENT_MAP(LAddEventDlg,QDialog)
 	BN_CLICKED_ID(L"chk_remind_playsound", &LAddEventDlg::OnClkChkRemindPlaySound)
 	BN_CLICKED_ID(L"chk_remind_customsg", &LAddEventDlg::OnClkChkRemindCustomMsg)
     CMB_SELECTION_CHANGED_ID(L"cmb_TaskDoWhat", &LAddEventDlg::OnSelectChangedDoWhat)
+    BN_STATECHANGED_ID(L"filepath_remind_sound", &LAddEventDlg::OnSoundFileSelected)
 QUI_END_EVENT_MAP()
 
 BOOL LAddEventDlg::EditEvent( QAutoTask *pTask )
@@ -755,6 +760,14 @@ LRESULT LAddEventDlg::OnDocumentComplete()
 {
 	MakeTaskDoWhatCMB(ECombobox(GetCtrl("#cmb_TaskDoWhat")));
 	
+    // 历史声音文件
+    ECombobox cmb_sound = CmbSound();
+    LittleTConfig* cfg = (LittleTConfig*)QUIGetConfig();
+    for (auto& s : cfg->GetHistorySoundFile())
+    {
+        cmb_sound.InsertItem(s);
+    }
+
 	if (m_bEditMode)
 	{
 		ASSERT(m_pTask != NULL);
@@ -992,8 +1005,8 @@ BOOL LAddEventDlg::GetRemindExp(CStdString &sRmdExp)
 
 void LAddEventDlg::OnClkChkRemindPlaySound( HELEMENT hBtn )
 {
-	GetCtrl("#filepath_remind_sound").ShowCtrl(
-        ECheck(hBtn).IsChecked()? SHOW_MODE_SHOW : SHOW_MODE_HIDE);
+// 	GetCtrl("#filepath_remind_sound").ShowCtrl(
+//         ECheck(hBtn).IsChecked()? SHOW_MODE_SHOW : SHOW_MODE_HIDE);
 }
 
 void LAddEventDlg::OnClkChkRemindCustomMsg( HELEMENT hBtn )
@@ -1047,7 +1060,8 @@ void LAddEventDlg::SetRemindExp( const CStdString &sRmdExp )
 		ECheck eChkSound = GetCtrl("#chk_remind_playsound");
 		eChkSound.SetCheck(TRUE);
 		// sound path
-		EFilePath(GetCtrl("#filepath_remind_sound")).SetFilePath(sSound);
+        EFilePath(GetCtrl("#filepath_remind_sound")).SetFilePath(sSound);
+        CmbSound().SelectItem_Text(sSound);
 
 		OnClkChkRemindPlaySound(eChkSound);
 	}
@@ -1063,3 +1077,26 @@ void LAddEventDlg::SetRemindExp( const CStdString &sRmdExp )
 	}
 }
 
+void LAddEventDlg::OnSoundFileSelected(HELEMENT he)
+{
+    CStdString s_file = EFilePath(he).GetFilePath();
+    LittleTConfig* cfg = (LittleTConfig*)QUIGetConfig();
+    auto files = cfg->AddSoundFilePath(s_file);
+
+    bool found = false;
+    for (auto& s : files)
+    {
+        if (s_file.CompareNoCase(s) == 0)
+        {
+            found = true;
+            break;
+        }
+    }
+
+    ECombobox cmb = CmbSound();
+    if (!found)
+    {
+        cmb.InsertItem(s_file, 0);
+    }
+    cmb.SelectItem_Text(s_file);
+}

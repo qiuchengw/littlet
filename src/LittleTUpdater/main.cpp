@@ -8,7 +8,7 @@
 
 #include "QBuffer.h"
 #include "crypt/CXUnzip.h"
-#include "sys/UACSElfElevation.h"
+#include "deps/sys/UACSElfElevation.h"
 
 #include <atlbase.h>
 #include <atlstr.h>
@@ -19,9 +19,9 @@ using namespace std;
 // #define  _DEBUG   1
 // #endif
 #ifdef _DEBUG
-#pragma comment(lib, "quil_d")
+#pragma comment(lib, "quil_mtd")
 #else
-#pragma comment(lib, "quil")
+#pragma comment(lib, "quil_mt")
 #endif
 
 BOOL IsFileExist(LPCTSTR pszFile)

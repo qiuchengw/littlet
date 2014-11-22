@@ -94,6 +94,12 @@ public:
         return quibase::GetModulePath() + L"icons/";
     }
 
+    // 历史使用过的声音文件
+    std::vector<CStdString> GetHistorySoundFile();
+
+    // 添加一个声音文件
+    std::vector<CStdString> AddSoundFilePath(const CStdString& file);
+
 public:
     void SetBreakFolder(LPCWSTR szFolder)
     {
