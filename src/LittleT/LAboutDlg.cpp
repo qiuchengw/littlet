@@ -4,6 +4,7 @@
 #include "LittleT.h"
 #include <ShlObj.h>
 #include "deps/app.h"
+#include "ui/QUIDlgs.h"
 
 QUI_BEGIN_EVENT_MAP(LAboutDlg, QDialog)
     BN_CLICKED_NAME(L"a-link", &LAboutDlg::OnClkLink)
@@ -59,7 +60,8 @@ LRESULT LUpdateInfoDlg::OnDocumentComplete()
 
 //////////////////////////////////////////////////////////////////////////
 QUI_BEGIN_EVENT_MAP(LSettingDlg, QDialog)
-    BN_CLICKED_ID(L"chk_cmn_autorun",&LSettingDlg::OnCmnChkAutoRun)
+    BN_CLICKED_ID(L"chk_cmn_autorun", &LSettingDlg::OnCmnChkAutoRun)
+    BN_CLICKED_ID(L"chk_cmn_pintotaskbar", &LSettingDlg::OnCmnChkPinToTaskbar)
 QUI_END_EVENT_MAP()
 
 // static LPCWSTR SC_PSZ_AUTORUN_REGPATH = 
@@ -182,5 +184,17 @@ BOOL LSettingDlg::IsStartupShortcutExist()
         return quibase::IsFileExist(sPath);
     }
     return FALSE;
+}
+
+void LSettingDlg::OnCmnChkPinToTaskbar(HELEMENT h)
+{
+    CStdString s_dir = quibase::GetModulePath();
+    CStdString s_exe_name = quibase::GetModuleName(FALSE);
+
+    ATL::CW2AEX<128> d(s_dir);
+    quibase::CreateShortcut(d);
+    quibase::PinToTaskbar(s_dir + s_exe_name);
+
+    XMsgBox::OkMsgBox(L"搞定！<br/>关闭程序就能看到了。");
 }
 

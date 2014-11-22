@@ -157,8 +157,8 @@ namespace quibase
      *      lpszProgram     为NULL代表创建调用者的路径。
      *                      ！！！调用者可能为DLL
     **/
-    BOOL CreateShortcut(LPCSTR lpszDestPath, LPCTSTR lpszProgram, LPCTSTR lpszIco,
-        LPCTSTR lpszArguments, LPCTSTR lpszWorkingDir, LPCTSTR lpszDescription);
+    BOOL CreateShortcut(LPCSTR lpszDestPath, LPCTSTR lpszProgram = nullptr, LPCTSTR lpszIco = nullptr,
+        LPCTSTR lpszArguments = nullptr, LPCTSTR lpszWorkingDir = nullptr, LPCTSTR lpszDescription = nullptr);
 
     /**
      * 是否是PE文件		

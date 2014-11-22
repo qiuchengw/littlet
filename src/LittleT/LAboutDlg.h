@@ -52,6 +52,7 @@ protected:
     virtual LRESULT OnDocumentComplete();
     virtual BOOL OnDefaultButton(INT_PTR nBtn);
     void OnCmnChkAutoRun(HELEMENT);
+    void OnCmnChkPinToTaskbar(HELEMENT);
     BOOL IsStartupShortcutExist();
 
 protected:

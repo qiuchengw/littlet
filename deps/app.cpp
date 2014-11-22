@@ -770,7 +770,16 @@ namespace quibase
     {
         char szPath[MAX_PATH] = {0};
         strcpy_s(szPath, MAX_PATH, lpszDestPath);
-        CStdString name = CPath(lpszProgram).GetFileTitlex();
+        CStdString name;
+        if (nullptr != lpszProgram)
+        {
+            name = CPath(lpszProgram).GetFileTitlex();
+        }
+        else
+        {
+            name = GetModuleName();
+        }
+
         strcat_s(szPath, MAX_PATH, ATL::CW2AEX<128>(name));
         strcat_s(szPath, MAX_PATH, ".lnk");
 
@@ -790,7 +799,7 @@ namespace quibase
             {
                 psl->SetDescription(lpszDescription);    //设置备注
                 if (NULL == lpszProgram)
-                    psl->SetPath(quibase::GetModuleName(TRUE));               //设置源文件地址
+                    psl->SetPath(quibase::GetModulePath() + quibase::GetModuleName(TRUE));               //设置源文件地址
                 else
                     psl->SetPath(lpszProgram);               //设置源文件地址
 
