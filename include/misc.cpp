@@ -48,6 +48,8 @@ namespace littlet
             OutputDebugStringA("------>ZMQ Exception:");
             OutputDebugStringA(t.what());
             OutputDebugStringA("\n");
+#else
+            UNUSED(t);
 #endif
             return false;
         }

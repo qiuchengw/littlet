@@ -47,7 +47,7 @@ CStdString QHelper::UniqueString()
 // t2 - t1 的差值，相距的秒数
 DWORD QHelper::TimeSpan(WORD t1,WORD t2)
 {
-	return (QTime::ParseTime(t2) - QTime::ParseTime(t1)).GetTotalSeconds();
+	return (DWORD)((QTime::ParseTime(t2) - QTime::ParseTime(t1)).GetTotalSeconds());
 }
 
 // 返回t1 + dwSecs 秒得到的时间值，

@@ -705,3 +705,26 @@ void LittleTFrame::OnClkCheckUpdation( HELEMENT )
         XMsgBox::OkMsgBox(L"<b .red>正在检查……</b><br/><br/>您先忙其他的^_^", L"检查更新", 6);
     }
 }
+
+LRESULT LittleTFrame::OnSideVisibleChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+{
+    // To prevent the window button from being placed on the taskbar, create the unowned window with the WS_EX_TOOLWINDOW extended style.As an alternative, you can create a hidden window and make this hidden window the owner of your visible window.
+    // 
+    // The Shell will remove a window's button from the taskbar only if the window's style supports visible taskbar buttons.If you want to dynamically change a window's style to one that doesn't support visible taskbar buttons, you must hide the window first(by calling ShowWindow with SW_HIDE), change the window style, and then show the window.
+
+    // 必须得先隐藏，再显示，才能让wx_ex_toolwindow 生效
+    ShowWindow(SW_HIDE);
+    if (lParam)
+    {
+        // 显示了
+        ModifyStyleEx(WS_EX_TOOLWINDOW, WS_EX_APPWINDOW);
+    }
+    else
+    {
+        // 隐藏了
+        ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW | WS_EX_TOPMOST, SWP_NOACTIVATE | SWP_NOREDRAW);
+    }
+    ShowWindow(SW_SHOW);
+    return 0;
+}
+

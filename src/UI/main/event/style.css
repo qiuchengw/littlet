@@ -26,7 +26,7 @@
 	overflow:hidden;
 }
 #EVENT_LIST>table:hover{
-	background-color:#EEF2F4;
+	background-color:#E3E5E5;
 }
 #EVENT_LIST>table:checked{
 	background-color:#9FABB7;

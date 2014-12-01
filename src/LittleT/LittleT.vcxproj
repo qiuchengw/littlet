@@ -48,8 +48,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>..\..\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>..\..\..\UIBase-g\deps\wtl;..\..\..\UIBase-g\src\qui;..\..\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\lib;F:\Code\VC\uibase-g\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\..\UIBase-g\deps\wtl;..\..\..\UIBase-g\src\qui;..\..\;..\..\deps;$(IncludePath)</IncludePath>
     <OutDir>..\..\bin\$(Configuration)\</OutDir>
     <IntDir>..\..\build\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -194,7 +194,9 @@ copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
     <ClCompile Include="QResIconsDlg.cpp" />
     <ClCompile Include="QShellListener.cpp" />
     <ClCompile Include="QUtilWnd.cpp" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LittleT.rc" />

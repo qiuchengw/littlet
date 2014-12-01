@@ -24,7 +24,8 @@ class LittleTFrame : public QFrame
         MSG_WM_COMMAND(OnCommand)
         MSG_WM_COPYDATA(OnCopyData)
         MSG_WM_SIZE(OnSize)
-        MESSAGE_HANDLER(QSOFT_MSG_UPDATEAPP,OnAppVersionCheck)
+        MESSAGE_HANDLER(MSG_AUTOHIDEWND_WNDVISIBLECHGED, OnSideVisibleChanged)
+        MESSAGE_HANDLER(QSOFT_MSG_UPDATEAPP, OnAppVersionCheck)
         MESSAGE_HANDLER(QSOFT_LITTLET_SYSTRAYMSG,OnSysTrayMessage)
 //         MESSAGE_HANDLER(WM_ENTERSIZEMOVE, HandleAutohideMessage)
 //         MESSAGE_HANDLER(WM_EXITSIZEMOVE, HandleAutohideMessage)
@@ -116,6 +117,11 @@ protected:
     *		-[out]
     **/
     LRESULT OnAppVersionCheck(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+
+    /*
+     *	在侧边栏隐藏的消息
+     */
+    LRESULT OnSideVisibleChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     // system tray 消息
     LRESULT OnSysTrayMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     void OnCommand(UINT nType, int nID ,HWND hWnd);
