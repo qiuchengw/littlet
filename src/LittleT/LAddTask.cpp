@@ -6,12 +6,12 @@
 #include "../common/QAutoTask.h"
 #include "../common/QTimerMan.h"
 
+#include "ui/QUIGlobal.h"
 #include "ui/ECtrl.h"
 #include "ui/QUIMgr.h"
 #include "QBuffer.h"
 #include "AppHelper.h"
 #include "LittleT.h"
-#include "../../../UIBase/ui/QUIGlobal.h"
 
 QUI_BEGIN_EVENT_MAP(QExecTimeDlg,QDialog)
 	BN_CLICKED_ID(L"chk_span2", &QExecTimeDlg::OnClkChkSpan)
@@ -685,7 +685,7 @@ QUI_BEGIN_EVENT_MAP(LAddEventDlg,QDialog)
 	BN_CLICKED_ID(L"chk_remind_playsound", &LAddEventDlg::OnClkChkRemindPlaySound)
 	BN_CLICKED_ID(L"chk_remind_customsg", &LAddEventDlg::OnClkChkRemindCustomMsg)
     CMB_SELECTION_CHANGED_ID(L"cmb_TaskDoWhat", &LAddEventDlg::OnSelectChangedDoWhat)
-    BN_STATECHANGED_ID(L"filepath_remind_sound", &LAddEventDlg::OnSoundFileSelected)
+    BN_CLICKED_ID(L"filepath_remind_sound", &LAddEventDlg::OnSoundFileSelected)
 QUI_END_EVENT_MAP()
 
 BOOL LAddEventDlg::EditEvent( QAutoTask *pTask )
@@ -980,8 +980,8 @@ BOOL LAddEventDlg::GetRemindExp(CStdString &sRmdExp)
 	// play sound
 	if (GetCtrl("#chk_remind_playsound").IsChecked())
 	{
-		EFilePath eFile = GetCtrl("#filepath_remind_sound");
-		sSound = eFile.GetFilePath();
+		EButton eFile = GetCtrl("#filepath_remind_sound");
+        sSound = CmbSound().GetCurItemText();
 		if (sSound.IsEmpty())
 		{
 			eFile.ShowTooltip(L"请选择一个声音文件(*.wav)");
@@ -1060,7 +1060,7 @@ void LAddEventDlg::SetRemindExp( const CStdString &sRmdExp )
 		ECheck eChkSound = GetCtrl("#chk_remind_playsound");
 		eChkSound.SetCheck(TRUE);
 		// sound path
-        EFilePath(GetCtrl("#filepath_remind_sound")).SetFilePath(sSound);
+        // EFilePath(GetCtrl("#filepath_remind_sound")).SetFilePath(sSound);
         CmbSound().SelectItem_Text(sSound);
 
 		OnClkChkRemindPlaySound(eChkSound);
@@ -1077,12 +1077,88 @@ void LAddEventDlg::SetRemindExp( const CStdString &sRmdExp )
 	}
 }
 
+namespace
+{
+
+    bool ask_file_name(bool to_save, const CStdStringW& caption, 
+        CStdStringW& filename, const wchar_t* def_ext,
+        const wchar_t* filter, void* owner_window)
+    {
+        HWND owner = HWND(owner_window);
+        wchar_t filepath_buffer[_MAX_PATH + 1] = { 0 };
+        wchar_t filename_buffer[_MAX_FNAME + 1] = { 0 };
+
+        int last_slash = filename.find_last_of('/');
+        if (last_slash < 0) last_slash = filename.find_last_of('\\');
+        if (last_slash >= 0)
+        {
+            //wcsncpy(filepath_buffer,filename.c_str(),_MAX_PATH);
+            wcsncpy(filepath_buffer, filename.c_str() + last_slash + 1, _MAX_PATH);
+        }
+        else if (filename.length())
+            wcsncpy(filepath_buffer, filename.c_str(), _MAX_PATH);
+
+#ifndef UNDER_CE  
+        OPENFILENAMEW ofn = { 0 };
+#else
+        OPENFILENAME ofn = { 0 };
+#endif
+        ofn.lStructSize = sizeof(ofn);
+        ofn.lpstrFile = filepath_buffer;
+        ofn.nMaxFile = _MAX_PATH;
+        // ofn.lpstrDefExt = def_ext;
+        ofn.lpstrFileTitle = filename_buffer;
+        ofn.nMaxFileTitle = _MAX_FNAME;
+#ifndef UNDER_CE
+        DWORD dwFlags = to_save ? (OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT) : 0;
+        ofn.Flags = dwFlags | OFN_EXPLORER | OFN_ENABLESIZING;
+#else // CE specific
+        DWORD dwFlags = 0;
+        ofn.Flags = dwFlags | OFN_EXPLORER;
+#endif // !_WIN32_WCE
+        ofn.lpstrFilter = filter;
+        ofn.hInstance = QUIGetInstance();
+        ofn.hwndOwner = owner;
+
+        // setup initial file name
+        //wcsncpy(filepath_buffer, filename, _MAX_PATH);
+        filename.Replace(L'/', L'\\');
+        ofn.lpstrInitialDir = filename.c_str();
+
+        if (caption.length())
+            ofn.lpstrTitle = caption.c_str();
+
+        //filepath_buffer[0] = 0;
+        //filepath_buffer[_MAX_PATH] = 0;
+
+        BOOL bRet;
+        if (to_save)
+            bRet = ::GetSaveFileNameW(&ofn);
+        else
+            bRet = ::GetOpenFileNameW(&ofn);
+
+        if (bRet)
+        {
+            filename = filepath_buffer;
+            return true;
+        }
+
+        return false;
+    }
+
+}
+
 void LAddEventDlg::OnSoundFileSelected(HELEMENT he)
 {
-    CStdString s_file = EFilePath(he).GetFilePath();
-    LittleTConfig* cfg = (LittleTConfig*)QUIGetConfig();
-    auto files = cfg->AddSoundFilePath(s_file);
+    CStdString s_file;
+    if (!ask_file_name(false, L"选择声音文件", s_file,
+        nullptr, L"*.wav\0*.wav\0", GetSafeHwnd()))
+    {
+        return;
+    }
 
+    LittleTConfig* cfg = (LittleTConfig*)QUIGetConfig();
+    auto files = cfg->GetHistorySoundFile();
     bool found = false;
     for (auto& s : files)
     {
@@ -1096,6 +1172,8 @@ void LAddEventDlg::OnSoundFileSelected(HELEMENT he)
     ECombobox cmb = CmbSound();
     if (!found)
     {
+        cfg->AddSoundFilePath(s_file);
+
         cmb.InsertItem(s_file, 0);
     }
     cmb.SelectItem_Text(s_file);

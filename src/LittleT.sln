@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LittleT", "LittleT\LittleT.vcxproj", "{0A763285-C47C-4125-89AF-6BB461BB1AEF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{641C5F36-32EE-4323-B740-992B651CF9D6} = {641C5F36-32EE-4323-B740-992B651CF9D6}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LittleTUpdater", "LittleTUpdater\LittleTUpdater.vcxproj", "{BBB17EE5-B510-415E-A146-7D2177FE3BD1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LittleTShell", "LittleTShell\LittleTShell.vcxproj", "{354DDE04-7F4C-437B-B91A-83C28BB91D90}"
@@ -15,6 +10,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "svr", "svr\svr.vcxproj", "{B71DA2CD-53B8-49F0-B62C-2A46239FBCF9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libzmq", "..\deps\zmq\builds\msvc\libzmq\libzmq.vcxproj", "{641C5F36-32EE-4323-B740-992B651CF9D6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LittleT", "LittleT\LittleT.vcxproj", "{0A763285-C47C-4125-89AF-6BB461BB1AEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,16 +22,6 @@ Global
 		WithOpenPGM|Win32 = WithOpenPGM|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.Debug|Win32.ActiveCfg = Debug|Win32
-		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.Debug|Win32.Build.0 = Debug|Win32
-		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.Release|Win32.ActiveCfg = Release|Win32
-		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.Release|Win32.Build.0 = Release|Win32
-		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.StaticDebug|Win32.ActiveCfg = Debug|Win32
-		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.StaticDebug|Win32.Build.0 = Debug|Win32
-		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.StaticRelease|Win32.ActiveCfg = Release|Win32
-		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.StaticRelease|Win32.Build.0 = Release|Win32
-		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.WithOpenPGM|Win32.ActiveCfg = Release|Win32
-		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.WithOpenPGM|Win32.Build.0 = Release|Win32
 		{BBB17EE5-B510-415E-A146-7D2177FE3BD1}.Debug|Win32.ActiveCfg = Debug|Win32
 		{BBB17EE5-B510-415E-A146-7D2177FE3BD1}.Debug|Win32.Build.0 = Debug|Win32
 		{BBB17EE5-B510-415E-A146-7D2177FE3BD1}.Release|Win32.ActiveCfg = Release|Win32
@@ -75,6 +62,16 @@ Global
 		{641C5F36-32EE-4323-B740-992B651CF9D6}.StaticRelease|Win32.Build.0 = StaticRelease|Win32
 		{641C5F36-32EE-4323-B740-992B651CF9D6}.WithOpenPGM|Win32.ActiveCfg = WithOpenPGM|Win32
 		{641C5F36-32EE-4323-B740-992B651CF9D6}.WithOpenPGM|Win32.Build.0 = WithOpenPGM|Win32
+		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.Debug|Win32.Build.0 = Debug|Win32
+		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.Release|Win32.ActiveCfg = Release|Win32
+		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.Release|Win32.Build.0 = Release|Win32
+		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.StaticDebug|Win32.ActiveCfg = Debug|Win32
+		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.StaticDebug|Win32.Build.0 = Debug|Win32
+		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.StaticRelease|Win32.ActiveCfg = Release|Win32
+		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.StaticRelease|Win32.Build.0 = Release|Win32
+		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.WithOpenPGM|Win32.ActiveCfg = Release|Win32
+		{0A763285-C47C-4125-89AF-6BB461BB1AEF}.WithOpenPGM|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -51,7 +51,7 @@
     <LibraryPath>..\..\lib;F:\Code\VC\uibase-g\lib;$(LibraryPath)</LibraryPath>
     <IncludePath>..\..\..\UIBase-g\deps\wtl;..\..\..\UIBase-g\src\qui;..\..\;..\..\deps;$(IncludePath)</IncludePath>
     <OutDir>..\..\bin\$(Configuration)\</OutDir>
-    <IntDir>..\..\build\$(Configuration)\</IntDir>
+    <IntDir>..\..\build\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -98,10 +98,10 @@ copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>..\..\..\UIBase-g\lib;d:\Program Files (x86)\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreLinkEvent>
-      <Command>..\7za.exe u $(OutDir)\UI.ZIP ..\UI\* -r
-copy ..\..\..\UIBase\lib\*.lib ..\..\lib\*.lib 
+      <Command>copy ..\..\..\UIBase\lib\*.lib ..\..\lib\*.lib 
 copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>

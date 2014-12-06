@@ -722,7 +722,8 @@ LRESULT LittleTFrame::OnSideVisibleChanged(UINT uMsg, WPARAM wParam, LPARAM lPar
     else
     {
         // าþฒุมห
-        ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW | WS_EX_TOPMOST, SWP_NOACTIVATE | SWP_NOREDRAW);
+        ModifyStyleEx(WS_EX_APPWINDOW,  WS_EX_TOOLWINDOW | WS_EX_TOPMOST,
+            SWP_NOACTIVATE | SWP_NOREDRAW);
     }
     ShowWindow(SW_SHOW);
     return 0;

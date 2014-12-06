@@ -213,6 +213,13 @@ void LittleTApp::StartUpdateExe()
 CStdString LittleTApp::GetAppVersion() const
 {
     // 更新历史：<br/>
+    // LittleT v3.8 2014 / 12 / 6 < br / >
+    // ----------------------<br / >
+    // 新增：添加到任务栏快速启动<br / >
+    // 修改：提醒界面重新设计，简介了一点（好像更难看了？！）。<br / >
+    // 修改：已用提示音保存记录，方便下次选择。
+    // 修改：多处界面微调。<br / >
+    // <br / >
     // LittleT v3.6 2014/7/6<br/>
     // ----------------------<br/>
     // 新增：意见反馈<br/>

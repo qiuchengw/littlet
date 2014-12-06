@@ -195,6 +195,6 @@ void LSettingDlg::OnCmnChkPinToTaskbar(HELEMENT h)
     quibase::CreateShortcut(d);
     quibase::PinToTaskbar(s_dir + s_exe_name);
 
-    XMsgBox::OkMsgBox(L"搞定！<br/>关闭程序就能看到了。");
+    XMsgBox::OkMsgBox(L"搞定！<br/>（对XP系统无效）。");
 }
 
