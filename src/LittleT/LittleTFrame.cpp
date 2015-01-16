@@ -708,7 +708,9 @@ void LittleTFrame::OnClkCheckUpdation( HELEMENT )
 {
     if ( QAutoUpdater::GetInstance()->CheckUpdate())
     {
-        XMsgBox::OkMsgBox(L"<b .red>正在检查……</b><br/><br/>您先忙其他的^_^", L"检查更新", 6);
+        XMsgBox::OkMsgBox(L"<b .red>正在检查……</b><br/>"
+            L"有更新会自动更新，<br/>没有就不提示您了",
+            L"检查更新", 6);
     }
 }
 
