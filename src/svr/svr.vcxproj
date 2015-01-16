@@ -73,21 +73,17 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>E:\Code\VC\UIBase;E:\Code\VC\UIBase\wtl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>F:\Code\VC\uibase-g\src\qui;F:\Code\VC\uibase-g\deps\wtl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>F:\Code\VC\uibase-g\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\UIBase\file\db\sqlite3.c" />
-    <ClCompile Include="..\..\..\UIBase\file\db\wxsqlite3.cpp" />
-    <ClCompile Include="..\..\..\UIBase\file\QFile.cpp" />
-    <ClCompile Include="..\..\..\UIBase\QBuffer.cpp" />
-    <ClCompile Include="..\..\..\UIBase\time\QTime.cpp" />
     <ClCompile Include="db.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />

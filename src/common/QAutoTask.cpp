@@ -27,7 +27,8 @@ CStdString QGetTaskDoWhatString(ENUM_AUTOTASK_DOWHAT eDo)
 
 // 任务定时器
 VOID CALLBACK TaskCallback(__in  PVOID lpParameter,__in  BOOLEAN TimerOrWaitFired)
-{	// 任务交给工作者线程来完成
+{	
+    // 任务交给工作者线程来完成
 	QAutoTask *pTask = QAutoTaskMan::GetInstance()->GetTask((int)lpParameter);
 	if (NULL != pTask)
 	{
@@ -193,7 +194,7 @@ BOOL QAutoTask::IsStartup() const
 	return FALSE;
 }
 
-BOOL QAutoTask::GetNextExecTime(QTime &tmNext)
+BOOL QAutoTask::GetNextExecTime(QTime &tmNext)const
 {
 	ASSERT(m_pTimer != NULL);
 	if (m_pTimer != NULL)
@@ -211,7 +212,7 @@ BOOL QAutoTask::GetNextExecTime(QTime &tmNext)
 	return FALSE;
 }
 
-CStdString QAutoTask::GetNextExecTimeString()
+CStdString QAutoTask::GetNextExecTimeString()const
 {
 	ASSERT(m_pTimer != NULL);
 	if (m_pTimer != NULL)
@@ -228,7 +229,7 @@ CStdString QAutoTask::GetNextExecTimeString()
 	return L"无效的定时器";
 }
 
-CStdString QAutoTask::GetDoWhatString()
+CStdString QAutoTask::GetDoWhatString()const
 {
 	CStdString sRet;
 	switch (m_eDoWhat)
@@ -264,7 +265,7 @@ CStdString QAutoTask::GetDoWhatString()
 	return sRet;
 }
 
-CStdString QAutoTask::GetWhenDoString()
+CStdString QAutoTask::GetWhenDoString()const
 {
     CStdString sRet = L"Bad Timer";
 	if (NULL != m_pTimer)
@@ -274,7 +275,7 @@ CStdString QAutoTask::GetWhenDoString()
 	return sRet;
 }
 
-CStdString QAutoTask::GetLifeTimeString()
+CStdString QAutoTask::GetLifeTimeString()const
 {
 	ASSERT(m_pTimer != NULL);
 	if (m_pTimer != NULL)
@@ -299,7 +300,7 @@ CStdString QAutoTask::GetRemindString()const
 	return sRet;
 }
 
-ENUM_AUTOTASK_EXECFLAG QAutoTask::GetExecFlag()
+ENUM_AUTOTASK_EXECFLAG QAutoTask::GetExecFlag()const
 {
 	if (m_pTimer != NULL)
 	{
@@ -309,7 +310,7 @@ ENUM_AUTOTASK_EXECFLAG QAutoTask::GetExecFlag()
 	return AUTOTASK_EXEC_NOTSET;
 }
 
-CStdString QAutoTask::GetLastStartStatusDes()
+CStdString QAutoTask::GetLastStartStatusDes()const
 {
 	return GetRunningStatusDescription(m_eLastStatus);
 }
@@ -346,6 +347,25 @@ BOOL QAutoTask::IsPaused() const
 		return TRUE;
 	}
 	return FALSE;
+}
+
+BOOL QAutoTask::IsStartupAndLastExec() const
+{
+    if (!IsStartup())
+        return FALSE;
+
+    QTime tm_nouse;
+    switch (m_pTimer->GetNextNextExecTime(tm_nouse))
+    {
+    case AUTOTASK_RUNNING_STATUS_OVERDUE:// ,	// 任务过期了
+    case AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT://,	// 需要下次机器重启，任务才执行
+    case AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT://,	// 需要程序重启，任务才执行
+    case AUTOTASK_RUNNING_STATUS_BASEDONEXETERNALPROG://,	// 依赖的外部程序并没有运行
+    case AUTOTASK_RUNNING_STATUS_TIMENOTMATCH://,	// 无可执行的时间匹配
+    case AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC://,	// 虽然任务未过期，但是余下的时间里，任务都没有机会再执行了
+        return TRUE;
+    }
+    return FALSE;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -437,7 +457,8 @@ void QAutoTaskMan::GetTaskList( AutoTaskList &lst )
 		std::back_insert_iterator<AutoTaskList>(lst));
 }
 
-QAutoTask* QAutoTaskMan::AddTask( LPCWSTR szTask,int nTimerID,ENUM_AUTOTASK_DOWHAT eDo,int nFlag )
+QAutoTask* QAutoTaskMan::AddTask( LPCWSTR szTask,int nTimerID,
+    ENUM_AUTOTASK_DOWHAT eDo,int nFlag )
 {
 	int nID = QDBEvents::GetInstance()->AutoTask_Add(szTask,nTimerID,eDo,nFlag);
 	if (INVALID_ID != nID)

@@ -27,7 +27,11 @@ class QWorker
 	typedef std::queue<LPWORK_PARAM> WorkItemQueue;
 	typedef std::list<LPWORK_PARAM> WorkingItemList; 
 
-	SINGLETON_ON_DESTRUCTOR(QWorker){}
+	SINGLETON_ON_DESTRUCTOR(QWorker)
+    {
+        CheckWorkingList();
+    }
+
 public:
 	QWorker();
 

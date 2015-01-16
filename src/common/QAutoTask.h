@@ -7,8 +7,6 @@
 DWORD HowManySecondsWillPendding();
 VOID CALLBACK TaskCallback(__in PVOID lpParameter,__in BOOLEAN TimerOrWaitFired);
 
-
-
 class QDBEvents;
 class QWorker;
 class QAutoTask
@@ -28,62 +26,90 @@ public:
 // 	[CreateTime] DOUBLE(8) NOT NULL DEFAULT (0.0)
     QAutoTask(LPCWSTR szTask, int nID,int nTimerID,
               ENUM_AUTOTASK_DOWHAT eDo, int nFlag,QTime tmCreate );
-    CStdString GetNextExecTimeString();
-    BOOL GetNextExecTime(QTime &tmNext);
-    CStdString GetDoWhatString();
-    CStdString GetWhenDoString();
-    CStdString GetLifeTimeString();
 
-    DWORD Flag()const
+    CStdString GetNextExecTimeString() const;
+
+    BOOL GetNextExecTime(QTime &tmNext)const;
+
+    CStdString GetDoWhatString()const;
+
+    CStdString GetWhenDoString()const;
+
+    CStdString GetLifeTimeString()const;
+
+    inline DWORD Flag()const
     {
         return m_nFlag;
     }
+
+    /*
+     *	是否是已经启动，并且是最后一次执行任务
+     *      以下标志返回true：
+     *
+     */
+    BOOL IsStartupAndLastExec() const;
+
     // 是否启用定时器
     BOOL EnableReminder(BOOL bEnable=TRUE);
+
     BOOL IsReminderEnabled()const ;
+
     BOOL IsOverdue()const;
+
     BOOL IsStartup()const;
+
     BOOL IsPaused()const;
+
     inline QTime CreationTime()const
     {
         return m_tmCreate;
     }
+
     inline int ID()const
     {
         return m_nID;
     }
+
     inline CStdString Task()const
     {
         return m_sTask;
     }
+
     inline CStdString RemindExp()const
     {
         return m_pTimer?m_pTimer->GetRemindExp():L"";
     }
+
     inline CStdString TimerExp()const
     {
         return m_pTimer?m_pTimer->GetWhenExp():L"";
     }
+
     inline QTimer* GetTimer()const
     {
         return m_pTimer;
     }
+
     inline QTime LifeBegin()const
     {
         return m_pTimer?m_pTimer->GetLifeBegin():QTime();
     }
+
     inline QTime LifeEnd()const
     {
         return m_pTimer?m_pTimer->GetLifeEnd():QTime();
     }
+
     inline ENUM_AUTOTASK_DOWHAT GetDoWhat()const
     {
         return m_eDoWhat;
     }
+
     inline BOOL IsHasRunningFlag(int bitFlag)const
     {
         return m_nRunningFlag & bitFlag;
     }
+
     inline int GetTimerID() const
     {
         return (nullptr!=m_pTimer)?m_pTimer->ID():INVALID_ID;
@@ -102,24 +128,30 @@ public:
     // 跳过此次任务的执行，直接到下一次执行时间执行
     BOOL JumpoverThisExec();
 
-    CStdString GetLastStartStatusDes();
-    ENUM_AUTOTASK_RUNNING_STATUS GetLastStartStatus()const
+    CStdString GetLastStartStatusDes()const;
+
+    inline ENUM_AUTOTASK_RUNNING_STATUS GetLastStartStatus()const
     {
         return m_eLastStatus;
     };
 
     BOOL SetDoWhat( ENUM_AUTOTASK_DOWHAT eDo ,LPCWSTR szTask);
+
     // 任务更改后改动到数据库
 //	BOOL Update();
-    ENUM_AUTOTASK_EXECFLAG GetExecFlag();
+    ENUM_AUTOTASK_EXECFLAG GetExecFlag()const;
+
     BOOL SetTimer(const QTime&tmBegin,const QTime&tmEnd,LPCWSTR sTimerExp);
+    
     CStdString GetRemindString()const;
 
 protected:
     // 定时器执行了
     BOOL TaskFired();
+    
     // 此函数用于将flag保存到数据库中
     BOOL FlagChanged();
+
 private:
     int					m_nID;			// 任务ID
     ENUM_AUTOTASK_DOWHAT	m_eDoWhat;			//

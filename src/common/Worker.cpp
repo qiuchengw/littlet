@@ -74,6 +74,8 @@ void QWorker::EndWorker()
 {
 	m_bRun = FALSE;
 	m_hThread = NULL;
+
+    CheckWorkingList();
 }
 
 DWORD WINAPI QWorker::QWorkItem(LPVOID lpParameter)
@@ -133,6 +135,7 @@ void QWorker::DoWork( LPWORK_PARAM pWork )
 
 void QWorker::CheckWorkingList()
 {
+    m_cMutex.Lock();
 	WorkingItemList::iterator itrEnd = m_WorkingList.end(); 
 	for (WorkingItemList::iterator itr = m_WorkingList.begin();
 		itr != itrEnd; ++itr)
@@ -145,6 +148,7 @@ void QWorker::CheckWorkingList()
 				break;
 		}
 	}
+    m_cMutex.Unlock();
 }
 
 

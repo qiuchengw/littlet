@@ -158,46 +158,58 @@ public:
     static BOOL ParseRemindExp( const CStdString&sExp,__out int &nA,
                                 __out WCHAR&cAUnit,__out CStdString&sSound,__out CStdString&sMsg );
 
-    BOOL GetRemindString(__out CStdString& sReminderDes);
+    BOOL GetRemindString(__out CStdString& sReminderDes)const;
+    
     //----------------------------------------------------------
     // status
     // 定时器是否已经启动
-    BOOL IsStarted()const
+    inline BOOL IsStarted()const
     {
         return m_hTimerTask != NULL;
     }
+    
     // nTaskID 如果不为无效id，那么如果停止失败，则尝试重启任务
     BOOL Stop(HANDLE hTimerQueue, int nTaskID = INVALID_ID);
+    
     ENUM_AUTOTASK_RUNNING_STATUS Start( HANDLE hTimerQueue ,int nTaskID);
+    
     // 跳过此次任务的执行，直接到下一次执行时间执行
     ENUM_AUTOTASK_RUNNING_STATUS JumpoverThisExec(HANDLE hTimerQueue,int nTaskID);
-    QTime NextExecTime()const
+
+    inline QTime NextExecTime()const
     {
         ASSERT(IsStarted());
         return m_tmNextExec;
     }
+    
     // 检查任务是否合法或过期，并不真正设定定时器
     ENUM_AUTOTASK_RUNNING_STATUS TestStart( );
-    BOOL IsReminderEnabled()const
+
+    inline BOOL IsReminderEnabled()const
     {
         return !(m_dwTimerFlag & TIMER_FLAG_REMINDERDISABLED);
     }
+    
     BOOL EnableReminder( HANDLE hTimerQueue,int nTaskID,BOOL bEnable=TRUE );
 
     //----------------------------------------------------------
     BOOL IsTheYear(int y)const;
-    int ID()const
+    
+    inline int ID()const
     {
         return m_nID;
     }
+
     inline BOOL IsValid()const
     {
         return m_nID != INVALID_ID;
     }
-    inline BOOL IsRelateTimer()
+
+    inline BOOL IsRelateTimer() const
     {
         return m_eTimerType == TIMER_TYPE_RELATE;
     }
+    
     inline ENUM_AUTOTASK_EXECFLAG GetExecFlag()const
     {
         return eflag_exec_;
@@ -205,20 +217,26 @@ public:
 
     // tmTest之后的下次执行时间
     // tmTest 将被调整，毫秒级别将会忽略置为0
-    ENUM_AUTOTASK_RUNNING_STATUS GetNextExecTimeFrom( __inout QTime& tmTest, __out QTime& tmExec );
+    ENUM_AUTOTASK_RUNNING_STATUS GetNextExecTimeFrom(__inout QTime& tmTest, __out QTime& tmExec) const;
+
+    // 下一次之后一次的执行时间
+    ENUM_AUTOTASK_RUNNING_STATUS GetNextNextExecTime(__out QTime& tmExec) const;
+
     BOOL SetLifeTime(QTime tmLifeBegin,QTime tmLifeEnd);
-    QTime GetLifeBegin()
+    
+    inline QTime GetLifeBegin() const
     {
         return m_tmLifeBegin;
     }
-    QTime GetLifeEnd()
+
+    inline QTime GetLifeEnd() const
     {
         return m_tmLifeEnd;
     }
 
     BOOL SetExp(const CStdString& sExp);
 
-    int GetTimerID()const
+    inline int GetTimerID()const
     {
         return m_nID;
     }
@@ -229,35 +247,43 @@ protected:
     ENUM_AUTOTASK_RUNNING_STATUS StartFrom(QTime &tmBegin,HANDLE hTimerQueue ,int nTaskID);
 
 public: // relate
-    DWORD GetExecSpan()const
+    inline DWORD GetExecSpan()const
     {
         return m_dwSpan;
     }
+
     // 解析为秒返回
     DWORD GetExecSpanSeconds()const ;
-    WCHAR GetExecSpanUnit()const
+    
+    inline WCHAR GetExecSpanUnit()const
     {
         return m_cSpanUnit;
     }
-    DWORD GetExecSpan2()const
+
+    inline DWORD GetExecSpan2()const
     {
         return m_dwSpan2;
     }
+
     DWORD GetExecSpanSeconds2()const ;
-    WCHAR GetExecSpanUnit2()const
+    
+    inline WCHAR GetExecSpanUnit2()const
     {
         return m_cSpanUnit2;
     }
-    DWORD GetExecCount()const
+
+    inline DWORD GetExecCount()const
     {
         return m_iExecCount;
     }
+
     // 执行第一次后是否再间隔执行
-    BOOL IsExecSpan2()const
+    inline BOOL IsExecSpan2()const
     {
         return (m_dwSpan2>0);
     }
-    BOOL IsExecCount()const
+
+    inline BOOL IsExecCount()const
     {
         return m_iExecCount > 0;
     }
@@ -273,44 +299,51 @@ public: // abs
     **/
     // 执行时间点
     int GetExecTimeSpot(__out std::vector<QTime>& vTimes);
-    DWORD GetExecDate( );
-    CStdString GetXFiled()const
+
+    DWORD GetExecDate( )const ;
+    
+    inline CStdString GetXFiled()const
     {
         return m_sXFiledExp;
     }
-    CStdString GetRemindExp()const
+
+    inline CStdString GetRemindExp()const
     {
         return m_sExpRemind;
     }
-    CStdString GetWhenExp()const
+
+    inline CStdString GetWhenExp()const
     {
         return m_sExpWhen;
     }
-    BOOL GetWhenDoString(CStdString &sWhenDoDes);
+
+    BOOL GetWhenDoString(CStdString &sWhenDoDes)const;
 
 protected:
-    HANDLE GetTimerHandle()
+    inline HANDLE GetTimerHandle()const
     {
         return m_hTimerTask;
     }
-    ENUM_AUTOTASK_RUNNING_STATUS AbsTime_NextExecDate(__inout DWORD& dwDate);
+
+    ENUM_AUTOTASK_RUNNING_STATUS AbsTime_NextExecDate(__inout DWORD& dwDate)const;
+
     ENUM_AUTOTASK_RUNNING_STATUS _AbsTime_NextRightTimeFrom(__in const QTime&tmTest,
-            __in const QTime& tmExec,__inout DWORD &dwNextExecTime);
-    // 这两个函数用于检测绝对时间执行
-    // BOOL IsTheDate( const QTime& d );
-//     BOOL IsTheTime(WORD wTime);
-//     BOOL IsTheTime(const QTime& t);
+        __in const QTime& tmExec, __inout DWORD &dwNextExecTime) const;
+
     // 这个函数用于相对时间执行的辅助函数
     // 相对于tmX，找出大于等于tmTest的执行时间，放入到tmExec中
     ENUM_AUTOTASK_RUNNING_STATUS _RelateTime_CheckWith( const QTime& tmX,
-            const QTime& tmTest,__out QTime& tmExec);
+            const QTime& tmTest,__out QTime& tmExec) const;
 
 protected:
     inline BOOL IsInArrayX(DWORD dw)const;
+
     void ResetAllFiled();
 
     BOOL ParseExp(const CStdString& sExp);
+    
     BOOL ParseRelateExp(const CStdString& sExp);
+    
     BOOL ParseAbsoluteExp(const CStdString& sExp);
 
     // sExp: r=1;b=2;c=3
@@ -319,6 +352,7 @@ protected:
     //	sProp = r;
     //	sValue = 1;
     static BOOL _Parse(__inout CStdString&sExp ,__out WCHAR& sProp, __out CStdString& sValue);
+    
     // 200[s|m|h]
     // 200m = 200 * 60s;  cUnit = m;
     // 200h = 200 * 3600s	cUnit = h;
@@ -333,6 +367,7 @@ private:
     // 启动定时器的时候调用，以设定提前提示任务
     // tmExec 任务的执行时间
     BOOL SetRemindTimer( HANDLE hTimerQueue ,int nTaskID,const QTime& tmExec);
+    
     // 设置提示定时器表达式
     BOOL SetRemindExp(LPCWSTR pszRmdExp);
 private:

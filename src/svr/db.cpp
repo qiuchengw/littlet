@@ -47,3 +47,26 @@ bool db::_UserActivity( const CStdString& mac, EnumUserActivity active )
     return _ExecSQL_RetBOOL(sQ);
 }
 
+bool db::RequireFeedbackMsg(int i_page, int l_count, 
+    __out int &total, __out std::vector<UserFeed>& feeds)
+{
+    total = _ExecSQL_RetInt(L"SELECT COUNT(id) FROM tbl_feed");
+
+    CStdString sQ;
+    sQ.Format(L"SELECT * FROM tbl_feed LIMIT %2 OFFSET %3",
+        l_count, l_count * i_page);
+    SqlQuery q = ExecQuery(sQ);
+    while (!q.Eof())
+    {
+        UserFeed uf;
+        uf.mac_ = q.StrValue("mac");
+        uf.content_ = q.StrValue("content");
+        uf.contact_ = q.StrValue("contact");
+        uf.tm_ = q.DateTimeValue("crtime");
+        feeds.push_back(uf);
+
+        q.nextRow();
+    }
+    return true;
+}
+

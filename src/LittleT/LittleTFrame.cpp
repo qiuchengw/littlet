@@ -359,15 +359,21 @@ void LittleTFrame::OnHotKey( int nSystemHotKey,UINT nModifier,UINT nVk )
 
     // 全局快捷键
     if (0x48 == nVk)
-    {   // ctrl + shift + h
+    {   
+        // ctrl + shift + h
         // system tray icon
-
         static BOOL bTrayiconCreated = FALSE;
         if ( !bTrayiconCreated )
         {  // 只有在窗口完全隐藏的时候才显示托盘区图标
             HICON hSystrayIcon = LoadIcon(QUIGetInstance(), MAKEINTRESOURCE(IDI_LITTLET));
-            m_trayicon.Create(QUIGetInstance(), GetSafeHwnd(), QSOFT_LITTLET_SYSTRAYMSG,
-                L"LittleT", hSystrayIcon, IDR_MENU_TRAYICON, FALSE, L"点击可恢复正常显示",
+            m_trayicon.Create(QUIGetInstance(), 
+                GetSafeHwnd(), 
+                QSOFT_LITTLET_SYSTRAYMSG,
+                L"LittleT-定时提醒、TODO、任务规划", 
+                hSystrayIcon, 
+                IDR_MENU_TRAYICON, 
+                FALSE, 
+                L"点击可恢复正常显示",
                 L"LittleT已被最小化到这儿");
             bTrayiconCreated = TRUE;
         }

@@ -151,7 +151,7 @@ UINT_PTR __stdcall CMsgServer::thread_handlemsg( void* param )
                 //  1,服务名
                 //  2,MAC 地址
                 //  3,内容
-                if (m.size() != 3)
+                if (m.size() < 3)
                 {
                      const_cast<UserMsg*>(a_msg)->handled = true;
                      continue;
@@ -176,6 +176,11 @@ UINT_PTR __stdcall CMsgServer::thread_handlemsg( void* param )
                     db::GetInstance()->UserLogin(mac_addr);
                 }
                 else if (svr_name.CompareNoCase(L"logout") == 0)
+                {
+                    // 写到数据库
+                    db::GetInstance()->UserLogout(mac_addr);
+                }
+                else if (svr_name.CompareNoCase(L"require_feed_qcw") == 0)
                 {
                     // 写到数据库
                     db::GetInstance()->UserLogout(mac_addr);

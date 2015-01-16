@@ -213,6 +213,11 @@ void LittleTApp::StartUpdateExe()
 CStdString LittleTApp::GetAppVersion() const
 {
     // 更新历史：<br/>
+    // LittleT v4.0 2015 / 1 / 18 < br / >
+    // ----------------------<br / >
+    // 增强：检测提示信息是否只有一次，如果是则需要手动关闭提示，以免错过重要的提示。
+    // 修改：提醒界面重新设计，简介了一点（好像更难看了？！）。<br / >
+    // <br / >
     // LittleT v3.8 2014 / 12 / 6 < br / >
     // ----------------------<br / >
     // 新增：添加到任务栏快速启动<br / >

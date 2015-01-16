@@ -36,21 +36,6 @@
     <ClCompile Include="db.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\UIBase\file\db\sqlite3.c">
-      <Filter>uibase</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\UIBase\file\db\wxsqlite3.cpp">
-      <Filter>uibase</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\UIBase\QBuffer.cpp">
-      <Filter>uibase</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\UIBase\time\QTime.cpp">
-      <Filter>uibase</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\UIBase\file\QFile.cpp">
-      <Filter>uibase</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="server.h">

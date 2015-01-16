@@ -7,6 +7,7 @@
 #include "ProcessMan.h"
 #include "QTimerMan.h"
 #include "xtrace.h"
+#include "QAutoTask.h"
 
 static QTimerEventHandler       g_DefaultTimerEH;
 
@@ -123,29 +124,50 @@ QTimer::~QTimer(void)
 // 此函数执行流程让人容易迷糊。
 // 可以在纸上画一条横坐标，标出来3个时间点来清晰思路：提示时间，任务执行时间，现在时间
 // 移动现在时间就明白啦
-BOOL QTimer::SetRemindTimer( HANDLE hTimerQueue ,int nTaskID,const QTime& tmExec)
+BOOL QTimer::SetRemindTimer(HANDLE hTimerQueue, int nTaskID, const QTime& tmExec)
 {
     QTime tmNow = QTime::GetCurrentTime();
-    if ((tmExec - tmNow).GetTotalSeconds() < 5) 
+    if ((tmExec - tmNow).GetTotalSeconds() < 5)
     {
         // 距离任务执行时间太短了，就不提示了。
         return FALSE;
     }
 
+    QAutoTask* t = QAutoTaskMan::GetInstance()->GetTask(nTaskID);
+    if (nullptr == t)
+    {
+        ASSERT(FALSE);
+        return FALSE;
+    }
+
     WCHAR cUnit;
     int nA;
-    CStdString sSound,sMsg;
-    if (!QTimer::ParseRemindExp(m_sExpRemind,nA,cUnit,sSound,sMsg))
+    CStdString sSound, sMsg;
+    if (!QTimer::ParseRemindExp(m_sExpRemind, nA, cUnit, sSound, sMsg))
     {
         return FALSE;
     }
 
-    m_stTRP.nSeconds = QHelper::HowManySeconds(nA,cUnit);
+    m_stTRP.nSeconds = QHelper::HowManySeconds(nA, cUnit);
     ASSERT(m_stTRP.nSeconds > 0);
     m_stTRP.sSound = sSound;
     m_stTRP.sMsg = sMsg;
     m_stTRP.nTaskID = nTaskID;
     m_stTRP.tmExec = tmExec;
+
+    // 如果任务是提示信息，且在本次机器运行时间内不再执行下一次，
+    // 则提示框只能由用户关闭，以免错过了重要提醒
+    auto fix_seconds = [&]()
+    {
+        if (t->GetDoWhat() == AUTOTASK_DO_REMIND)
+        {
+            if (t->IsStartupAndLastExec())
+            {
+                // 倒计时设置为1天。足够了吧！
+                m_stTRP.nSeconds = 3600 * 24;
+            }
+        }
+    };
 
     // 何时应该提示时间
     QTime tmRemind = tmExec - QTimeSpan( (m_stTRP.nSeconds) / SECONDS_OF_DAY );
@@ -153,6 +175,8 @@ BOOL QTimer::SetRemindTimer( HANDLE hTimerQueue ,int nTaskID,const QTime& tmExec
     {   // 已经过了提示时间了
         // 应该立即提示
         m_stTRP.nSeconds = (tmExec - tmNow).GetTotalSeconds();   // 距离任务执行时间有多少秒
+        fix_seconds();
+
         if (NULL != m_pTEH)
         {
             m_pTEH->OnTimerReminderSetted(&m_stTRP);
@@ -167,6 +191,7 @@ BOOL QTimer::SetRemindTimer( HANDLE hTimerQueue ,int nTaskID,const QTime& tmExec
     {   // 距离提示时间还有5秒，太短啦，直接显示提示框吧
         // 但是倒计时应该加上这段时间
         m_stTRP.nSeconds += dwSecToRemind;
+        fix_seconds();
         if (NULL != m_pTEH)
         {
             m_pTEH->OnTimerReminderSetted(&m_stTRP);
@@ -175,6 +200,8 @@ BOOL QTimer::SetRemindTimer( HANDLE hTimerQueue ,int nTaskID,const QTime& tmExec
     }
 
     m_stTRP.nSeconds = QHelper::HowManySeconds(nA,cUnit);
+    fix_seconds();
+
     // 如果距离该提示的时间还足够长，那么需要创建一个定时器回调函数
     // 当回调发生时再向窗口发消息，通知显示提示窗口
     // 创建单次定时器来执行提示回调
@@ -233,7 +260,7 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::TestStart()
 	ENUM_AUTOTASK_RUNNING_STATUS eStatus;
 	while (true)
 	{
-		if ((eStatus = GetNextExecTimeFrom(tmBegin,m_tmNextExec))
+		if ((eStatus = GetNextExecTimeFrom(tmBegin, m_tmNextExec))
 			!= AUTOTASK_RUNNING_STATUS_OK)
 		{
 			break;
@@ -609,12 +636,13 @@ BOOL QTimer::_ParseToIntArray( __inout CStdString& sExp,__out ExArray<int> & ar 
 // }
 
 ENUM_AUTOTASK_RUNNING_STATUS QTimer::_RelateTime_CheckWith(
-	const QTime& tmX,const QTime& tmTest,__out QTime& tmExec)
+    const QTime& tmX, const QTime& tmTest, __out QTime& tmExec) const
 {
 	if (tmTest >= m_tmLifeEnd)
 	{
 		return AUTOTASK_RUNNING_STATUS_OVERDUE;
 	}
+
 	QTime tmFirstExec = tmX + QTimeSpan(GetExecSpanSeconds()/SECONDS_OF_DAY);
 	if (tmFirstExec <= tmTest) // 等于也算是错过了执行时间
 	{	// 错过了第一次执行时间
@@ -661,7 +689,7 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::_RelateTime_CheckWith(
 // tmTest 将被调整，毫秒级别将会忽略置为0
 ENUM_AUTOTASK_RUNNING_STATUS QTimer::GetNextExecTimeFrom( 
 	__inout QTime& tmTest,
-	__out QTime& tmExec )
+	__out QTime& tmExec ) const
 {
 	if (tmTest >= m_tmLifeEnd)
 		return AUTOTASK_RUNNING_STATUS_OVERDUE;	// 过期
@@ -745,9 +773,20 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::GetNextExecTimeFrom(
 	}
 }
 
+ENUM_AUTOTASK_RUNNING_STATUS QTimer::GetNextNextExecTime(__out QTime& tmExec) const
+{
+    if (!IsStarted())
+    {
+        return AUTOTASK_RUNNING_STATUS_NOTSTARTUP;
+    }
+
+    QTime tm_test = m_tmNextExec;
+    return GetNextExecTimeFrom(tm_test, tmExec);
+}
+
 //////////////////////////////////////////////////////////////////////////
 // AtDate
-ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)
+ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)const
 {
 	if (dwDate > m_tmLifeEnd.MakeDate())
 		return AUTOTASK_RUNNING_STATUS_OVERDUE;	// 过期
@@ -879,7 +918,7 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)
 //		如果不包含这样的时间，返回TASK_RUNNING_STATUS_TIMENOTMATCH
 // 如果tmExec的日期小于tmTest的日期，则是逻辑错误发生，返回TASK_RUNNING_STATUS_OVERDUE
 ENUM_AUTOTASK_RUNNING_STATUS QTimer::_AbsTime_NextRightTimeFrom(__in const QTime&tmTest,
-			__in const QTime& tmExec,__inout DWORD &dwNextExecTime)
+			__in const QTime& tmExec,__inout DWORD &dwNextExecTime)const
 {
 	ASSERT(!IsRelateTimer());
 	ASSERT(m_arTime.size());
@@ -958,6 +997,7 @@ int QTimer::GetExecTimeSpot(__out std::vector<QTime>& vTimes)
         ASSERT(FALSE);
         return 0;
     }
+
     vTimes.clear();
     for (int i = 0; i < m_arTime.size(); ++i)
     {
@@ -967,7 +1007,7 @@ int QTimer::GetExecTimeSpot(__out std::vector<QTime>& vTimes)
     return vTimes.size();
 }
 
-DWORD QTimer::GetExecDate(  )
+DWORD QTimer::GetExecDate(  ) const
 {
 	ASSERT(!IsRelateTimer());
 	if (m_arX.size())
@@ -977,7 +1017,7 @@ DWORD QTimer::GetExecDate(  )
 	return 0;
 }
 
-BOOL QTimer::GetRemindString(__out CStdString& sReminderDes)
+BOOL QTimer::GetRemindString(__out CStdString& sReminderDes)const
 {
 	int nA;
 	WCHAR cUnit;
@@ -1005,7 +1045,7 @@ DWORD QTimer::GetExecSpanSeconds2() const
 	return QHelper::HowManySeconds(m_dwSpan2,m_cSpanUnit2);
 }
 
-BOOL QTimer::GetWhenDoString(CStdString &when_des)
+BOOL QTimer::GetWhenDoString(CStdString &when_des)const
 {
 	CStdString time_part;
 	if (IsRelateTimer())

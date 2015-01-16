@@ -8,19 +8,19 @@ enum
     AUTOTASK_REMINDER_COUNTDOWN_TIMERID = 101,
 };
 
-class QSingleRmdDlg : public QDialog
+class LSingleRmdDlg : public QDialog
 {
     QUI_DECLARE_EVENT_MAP;
 
-    BEGIN_MSG_MAP_EX(QSingleRmdDlg)
+    BEGIN_MSG_MAP_EX(LSingleRmdDlg)
         MSG_WM_DESTROY(OnDestroy)
         MSG_WM_TIMER(OnTimer)
         CHAIN_MSG_MAP(QDialog)
     END_MSG_MAP()
 
 public:
-    QSingleRmdDlg(LPTASK_REMINDER_PARAM pRp = NULL);
-    ~QSingleRmdDlg(void);
+    LSingleRmdDlg(LPTASK_REMINDER_PARAM pRp = NULL);
+    ~LSingleRmdDlg(void);
 
     void SetRmdParam(LPTASK_REMINDER_PARAM pRP);
 
@@ -78,7 +78,7 @@ class LReminderBox
             m_bClosed = bClose;
         }
 
-        QSingleRmdDlg* GetRmdDlg()
+        LSingleRmdDlg* GetRmdDlg()
         {
             return &m_Dlg;
         }
@@ -98,7 +98,7 @@ class LReminderBox
             return m_pRmdP->nTaskID;
         }
     private:
-        QSingleRmdDlg       m_Dlg;
+        LSingleRmdDlg       m_Dlg;
         BOOL                m_bClosed;
         LPTASK_REMINDER_PARAM m_pRmdP;
     };
@@ -110,7 +110,7 @@ public:
     BOOL ShowReminderDlg(LPTASK_REMINDER_PARAM pRP);
     void RemoveReminderDlg(int nTaskID);
 
-    void RmdDlgDestroying(QSingleRmdDlg* pDlg);
+    void RmdDlgDestroying(LSingleRmdDlg* pDlg);
     // 事件的定时器改变了，可以关闭当前的提示对话框
     void OnEventTimerChanged( int nEventID );
     // 事件删除了

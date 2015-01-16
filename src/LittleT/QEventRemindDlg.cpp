@@ -9,11 +9,11 @@
 
 #pragma comment(lib,"Winmm.lib")
 
-QUI_BEGIN_EVENT_MAP(QSingleRmdDlg,QDialog)
-    BN_CLICKED_ID(L"btn_skip",&QSingleRmdDlg::OnClkDontExecThis)
+QUI_BEGIN_EVENT_MAP(LSingleRmdDlg,QDialog)
+    BN_CLICKED_ID(L"btn_skip",&LSingleRmdDlg::OnClkDontExecThis)
 QUI_END_EVENT_MAP()
 
-QSingleRmdDlg::QSingleRmdDlg( LPTASK_REMINDER_PARAM pRP )
+LSingleRmdDlg::LSingleRmdDlg( LPTASK_REMINDER_PARAM pRP )
     :QDialog(L"qabs:dlgs/rmddlg.htm")
 {
     m_pRP = pRP;
@@ -22,7 +22,7 @@ QSingleRmdDlg::QSingleRmdDlg( LPTASK_REMINDER_PARAM pRP )
 
 }
 
-QSingleRmdDlg::~QSingleRmdDlg( void )
+LSingleRmdDlg::~LSingleRmdDlg( void )
 {
 
     if (IsWindow())
@@ -35,19 +35,21 @@ QSingleRmdDlg::~QSingleRmdDlg( void )
     }
 }
 
-void QSingleRmdDlg::OnClkDontRemindAgain( HELEMENT hBtn )
+void LSingleRmdDlg::OnClkDontRemindAgain( HELEMENT hBtn )
 {
 
 }
 
-void QSingleRmdDlg::OnClkDontExecThis( HELEMENT hBtn )
+void LSingleRmdDlg::OnClkDontExecThis( HELEMENT hBtn )
 {
     QAutoTaskMan *pMan = QAutoTaskMan::GetInstance();
     if (pMan->JumpoverTaskThisExec(m_pRP->nTaskID))
     {
         // 转到LEvent上的
         QUISendCodeTo(LDatas::GetInstance()->GetViewEventPtr()->GetSafeHwnd(),
-            EVENTWND_NOTIFY_USERJUMPEVENTEXEC,(LPARAM)m_pRP->nTaskID);
+            EVENTWND_NOTIFY_USERJUMPEVENTEXEC,
+            (LPARAM)m_pRP->nTaskID);
+        
         // 关闭掉自己
         PostMessage(WM_CLOSE);
     }
@@ -57,24 +59,25 @@ void QSingleRmdDlg::OnClkDontExecThis( HELEMENT hBtn )
     }
 }
 
-void QSingleRmdDlg::OnDestroy()
+void LSingleRmdDlg::OnDestroy()
 {
     LReminderBox::GetInstance()->RmdDlgDestroying(this);
 }
 
-void QSingleRmdDlg::SetRmdParam( LPTASK_REMINDER_PARAM pRP )
+void LSingleRmdDlg::SetRmdParam( LPTASK_REMINDER_PARAM pRP )
 {
     m_pRP = pRP;
 
     if ( IsWindow() )
     {
+        // 如果只是执行一次的任务，则提示不自动关闭
         StartCountDown();
 
         RefreshRemindMessage();
     }
 }
 
-void QSingleRmdDlg::OnTimer( UINT nTimerID )
+void LSingleRmdDlg::OnTimer( UINT nTimerID )
 {
     if (AUTOTASK_REMINDER_COUNTDOWN_TIMERID == nTimerID)
     {
@@ -93,7 +96,7 @@ void QSingleRmdDlg::OnTimer( UINT nTimerID )
     SetMsgHandled(FALSE);
 }
 
-LRESULT QSingleRmdDlg::OnDocumentComplete()
+LRESULT LSingleRmdDlg::OnDocumentComplete()
 {
     if (NULL != m_pRP)
     {
@@ -109,23 +112,27 @@ LRESULT QSingleRmdDlg::OnDocumentComplete()
     return 0;
 }
 
-void QSingleRmdDlg::StartCountDown()
+void LSingleRmdDlg::StartCountDown()
 {
     if (NULL == m_pRP)
     {
         ASSERT(FALSE);
         return;
     }
-    // 也许是重用对话框，重新设置的数据，那么先停止之前的倒数定时器
-    KillTimer(AUTOTASK_REMINDER_COUNTDOWN_TIMERID);
 
-    // 重新启动倒数定时器
-    m_nCountDown = m_pRP->nSeconds;
+    if (0 < m_pRP->nSeconds)
+    {
+        // 也许是重用对话框，重新设置的数据，那么先停止之前的倒数定时器
+        KillTimer(AUTOTASK_REMINDER_COUNTDOWN_TIMERID);
 
-    SetTimer(AUTOTASK_REMINDER_COUNTDOWN_TIMERID, 1000, NULL);
+        // 重新启动倒数定时器
+        m_nCountDown = m_pRP->nSeconds;
+
+        SetTimer(AUTOTASK_REMINDER_COUNTDOWN_TIMERID, 1000, NULL);
+    }
 }
 
-void QSingleRmdDlg::RefreshRemindMessage()
+void LSingleRmdDlg::RefreshRemindMessage()
 {
     if (NULL == m_pRP)
     {
@@ -208,7 +215,7 @@ BOOL LReminderBox::ShowReminderDlg( LPTASK_REMINDER_PARAM pRP )
     p->SetRmdParam(pRP);
 
     // 对话框是否启动了
-    QSingleRmdDlg *pDlg = p->GetRmdDlg();
+    LSingleRmdDlg *pDlg = p->GetRmdDlg();
     if (   !pDlg->IsWindow()    // 如果没有，那么启动它 
         && !pDlg->Create(NULL,WS_POPUP|WS_VISIBLE,WS_EX_TOPMOST|WS_EX_TOOLWINDOW))
     {
@@ -230,7 +237,7 @@ void LReminderBox::RemoveAll()
     ASSERT(m_lstRmd.size() == 0);
 }
 
-void LReminderBox::RmdDlgDestroying( QSingleRmdDlg* pDlg )
+void LReminderBox::RmdDlgDestroying( LSingleRmdDlg* pDlg )
 {
     for ( RmdListItr i = m_lstRmd.begin(); i != m_lstRmd.end(); ++i)
     {
@@ -268,7 +275,7 @@ void LReminderBox::OnEventTimerChanged( int nEventID )
         if ( p->GetTaskID() == nEventID )
         {   
             // 如果对话框还在显示中，就关闭它
-            QSingleRmdDlg *pDlg = p->GetRmdDlg();
+            LSingleRmdDlg *pDlg = p->GetRmdDlg();
             if (pDlg->IsWindow())
             {
                 pDlg->PostMessage(WM_CLOSE);
