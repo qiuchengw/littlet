@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir>..\..\bin\$(Configuration)\</OutDir>
+    <IntDir>..\..\build\$(ProjectName)\$(Configuration)\</IntDir>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>F:\Code\VC\uibase-g\src\qui;F:\Code\VC\uibase-g\deps\wtl;d:\Program Files (x86)\Visual Leak Detector\include;F:\Code\VC\LittleT\deps;F:\Code\VC\LittleT\include;F:\Code\VC\LittleT\deps\zmq\include;F:\Code\VC\LittleT;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>F:\Code\VC\uibase-g\lib;F:\Code\VC\LittleT\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
