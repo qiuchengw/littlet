@@ -18,7 +18,7 @@ LittleTApp _Module;
 #include "LAboutDlg.h"
 #include "deps/FileVersion.hpp"
 #include "deps/app.h"
-#include "../../../UIBase/qstrex.h"
+#include "qstrex.h"
 
 BOOL LittleTApp::InitRun()
 {

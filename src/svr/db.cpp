@@ -59,10 +59,10 @@ bool db::RequireFeedbackMsg(int i_page, int l_count,
     while (!q.Eof())
     {
         UserFeed uf;
-        uf.mac_ = q.StrValue("mac");
-        uf.content_ = q.StrValue("content");
-        uf.contact_ = q.StrValue("contact");
-        uf.tm_ = q.DateTimeValue("crtime");
+        uf.mac_ = q.StrValue(L"mac");
+        uf.content_ = q.StrValue(L"content");
+        uf.contact_ = q.StrValue(L"contact");
+        uf.tm_ = q.DateTimeValue(L"crtime");
         feeds.push_back(uf);
 
         q.nextRow();

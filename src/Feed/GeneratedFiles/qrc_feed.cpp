@@ -1,29 +1,46 @@
 /****************************************************************************
 ** Resource object code
 **
-** Created by: The Resource Compiler for Qt version 5.3.1
+** Created by: The Resource Compiler for Qt version 5.4.1
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include <QtCore/qglobal.h>
+#ifdef QT_NAMESPACE
+#  define QT_RCC_PREPEND_NAMESPACE(name) ::QT_NAMESPACE::name
+#  define QT_RCC_MANGLE_NAMESPACE0(x) x
+#  define QT_RCC_MANGLE_NAMESPACE1(a, b) a##_##b
+#  define QT_RCC_MANGLE_NAMESPACE2(a, b) QT_RCC_MANGLE_NAMESPACE1(a,b)
+#  define QT_RCC_MANGLE_NAMESPACE(name) QT_RCC_MANGLE_NAMESPACE2( \
+        QT_RCC_MANGLE_NAMESPACE0(name), QT_RCC_MANGLE_NAMESPACE0(QT_NAMESPACE))
+#else
+#   define QT_RCC_PREPEND_NAMESPACE(name) name
+#   define QT_RCC_MANGLE_NAMESPACE(name) name
+#endif
 
-QT_BEGIN_NAMESPACE
+#ifdef QT_NAMESPACE
+namespace QT_NAMESPACE {
+#endif
 
-QT_END_NAMESPACE
+#ifdef QT_NAMESPACE
+}
+#endif
 
-
-int QT_MANGLE_NAMESPACE(qInitResources_feed)()
+int QT_RCC_MANGLE_NAMESPACE(qInitResources_feed)();
+int QT_RCC_MANGLE_NAMESPACE(qInitResources_feed)()
 {
     return 1;
 }
 
-Q_CONSTRUCTOR_FUNCTION(QT_MANGLE_NAMESPACE(qInitResources_feed))
-
-int QT_MANGLE_NAMESPACE(qCleanupResources_feed)()
+int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_feed)();
+int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_feed)()
 {
     return 1;
 }
 
-Q_DESTRUCTOR_FUNCTION(QT_MANGLE_NAMESPACE(qCleanupResources_feed))
-
+namespace {
+   struct initializer {
+       initializer() { QT_RCC_MANGLE_NAMESPACE(qInitResources_feed)(); }
+       ~initializer() { QT_RCC_MANGLE_NAMESPACE(qCleanupResources_feed)(); }
+   } dummy;
+}

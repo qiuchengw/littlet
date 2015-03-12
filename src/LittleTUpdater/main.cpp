@@ -18,11 +18,7 @@ using namespace std;
 // #ifndef _DEBUG
 // #define  _DEBUG   1
 // #endif
-#ifdef _DEBUG
-#pragma comment(lib, "quil_mtd")
-#else
-#pragma comment(lib, "quil_mt")
-#endif
+#pragma comment(lib, "qui.lib")
 
 BOOL IsFileExist(LPCTSTR pszFile)
 {

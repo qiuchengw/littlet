@@ -12,11 +12,7 @@
 #include "LittleTFrame.h"
 #include "AppHelper.h"
 
-#ifdef _DEBUG
-#pragma comment(lib, "quil_mtd.lib")
-#else
-#pragma comment(lib, "quil_mt.lib")
-#endif
+#pragma comment(lib, "qui.lib")
 
 class LittleTApp : public QApp
 {
