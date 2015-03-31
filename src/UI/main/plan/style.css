@@ -123,10 +123,10 @@ button[type="menu"].tools{
 }
 
 #id-plan-box{
-	width:*;height:*;
+	width:*;height:350px;
 	overflow-x:hidden;
 	overflow-y:auto;
-	height:calc(self.min-intrinsic-height());
+	vertical-scrollbar:vscrollbar;
 }
 
 /*计划名*/

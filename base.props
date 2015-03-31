@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <TopDir>$(SolutionDir)..\</TopDir>
+    <MyIntDir>$(SolutionDir)..\obj\$(Configuration)\$(ProjectName)\</MyIntDir>
+    <MyOutDir>$(SolutionDir)..\bin\$(Configuration)</MyOutDir>
+    <MyLibDir>$(SolutionDir)..\lib\</MyLibDir>
+    <MyDepsDir>$(SolutionDir)..\deps\</MyDepsDir>
+    <MyIncDir>$(SolutionDir)..\include\</MyIncDir>
+    <MySrcDir>$(SolutionDir)..\src\</MySrcDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(MyOutDir)\</OutDir>
+    <IntDir>$(MyIntDir)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>$(MyLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(MySrcDir);$(MyDepsDir)\wtl;$(TopDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="TopDir">
+      <Value>$(TopDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="MyIntDir">
+      <Value>$(MyIntDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="MyOutDir">
+      <Value>$(MyOutDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="MyLibDir">
+      <Value>$(MyLibDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="MyDepsDir">
+      <Value>$(MyDepsDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="MyIncDir">
+      <Value>$(MyIncDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="MySrcDir">
+      <Value>$(MySrcDir)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
