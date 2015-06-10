@@ -33,6 +33,8 @@ protected:
     void OnClkShowAll(HELEMENT he);
     void OnClkDelItem(HELEMENT he);
 
+    void OnSelColorSchemeChanged(HELEMENT he, HELEMENT );
+
     void OnClkPrev(HELEMENT he);
     void OnClkNext(HELEMENT he);
 

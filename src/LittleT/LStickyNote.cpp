@@ -12,12 +12,13 @@ QUI_BEGIN_EVENT_MAP(LStickyNoteWnd, _Base)
     BN_CLICKED_ID(L"btn_new", &LStickyNoteWnd::OnclkNewNote)
     BN_CLICKED_ID(L"btn_next", &LStickyNoteWnd::OnClkNext)
     BN_CLICKED_ID(L"btn_prev", &LStickyNoteWnd::OnClkPrev)
+    UNKNOWN_SELECTION_CHANGED_ID(L"color_scheme", &LStickyNoteWnd::OnSelColorSchemeChanged)
 QUI_END_EVENT_MAP()
 
 LStickyNoteWnd::LStickyNoteWnd(const TTodoTask& task)
     :taskid_(task.nID)
 {
-    m_sHtmlPath = L"qabs:dlgs/note.htm";
+    m_sHtmlPath = L"qabs:main/todo/note.htm";
 }
 
 void LStickyNoteWnd::OnclkNewNote(HELEMENT he) 
@@ -67,6 +68,7 @@ BOOL LStickyNoteWnd::UpdateItem(__in ETable& tbl)
 void LStickyNoteWnd::OnClose() 
 {
     // 如果不是退出就不关闭
+    SetMsgHandled(FALSE);
 }
 
 void LStickyNoteWnd::OnClkShowAll(HELEMENT he) 
@@ -77,7 +79,6 @@ void LStickyNoteWnd::OnClkFind(HELEMENT he)
 {
     
 }
-
 
 LRESULT LStickyNoteWnd::OnDocumentComplete() 
 {
@@ -117,6 +118,12 @@ void LStickyNoteWnd::OnKillFocus(HWND)
     
 }
 
+void LStickyNoteWnd::OnSelColorSchemeChanged(HELEMENT he, HELEMENT)
+{
+    GetRoot().SetBkgndColor(EColorPicker(he).GetColor());
+}
+
+//////////////////////////////////////////////////////////////////////////
 LStickyNoteWnd* StickyNoteMan::Create(const TTodoTask& t)
 {
     auto*db = QDBEvents::GetInstance();
@@ -124,8 +131,9 @@ LStickyNoteWnd* StickyNoteMan::Create(const TTodoTask& t)
 
     // 显示桌面便签
     LStickyNoteWnd* wnd = new LStickyNoteWnd(t);
-    wnd->Create();
-    wnd->ShowWindow(SW_SHOWNORMAL);
+    wnd->Create(NULL, WS_POPUP | WS_VISIBLE, WS_EX_TOOLWINDOW,
+        WS_QEX_WNDSHADOW | WS_QEX_THICKFRAME);
+    wnd->CenterWindow(::GetDesktopWindow());
     lst_.push_back(wnd);
 
     return wnd;

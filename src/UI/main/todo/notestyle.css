@@ -1,0 +1,26 @@
+﻿@font-face 
+{
+	font-family:mvboli;
+	src: url(qabs:raw/mvboli.ttf); /* "mv boli" */
+}
+
+
+popup#id_popup_todoitem{
+	flow:horizontal;
+	width:*;max-width:*;
+	height:50px;
+	border-spacing:2px;
+}
+
+.xpopup{
+	background-color:transparent;
+	background:url(qrel:images/popup-back.png) expand;
+	background-position:30px 30px 30px 150px;
+	/*debug*/
+//	padding:33 20 2 25px;
+	/*release*/
+	padding:18 20 14 25px;
+	vertical-align:middle;
+	margin-top:-10px;
+	border:none;
+}

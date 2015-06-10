@@ -2355,19 +2355,23 @@ widget.editor {
   richtext{ 
 		padding:0; 
 		background-color:window; background-image:none; 
-		behavior: ~ richtext-current-objects;
 		width:*; height:*; 
 		overflow-x:auto; overflow-y:auto; 
 		font: 10pt Verdana;
 		vertical-scrollbar:vscrollbar; 
 	}
 	
-  widget.toolbar { flow:horizontal-flow;background-color: @CTRL_BACK_NORMAL;
-	border-bottom:@BORDER_CTRL; padding:1px; }
+  widget.toolbar { 
+	flow:horizontal-flow;
+	background-color: @CTRL_BACK_NORMAL;
+	border-bottom:@BORDER_CTRL; 
+	padding:1px; 
+	}
 	
   widget.tb-button { font-family:tahoma arial;
 	behavior: clickable; padding:3px; width:20px; height:*; text-align:center;
-	vertical-align:middle; background: url(theme:toolbar-button-normal) stretch; }  widget.tb-button:disabled { background: url(theme:toolbar-button-disabled) stretch; color:threedshadow; }    
+	vertical-align:middle; background: url(theme:toolbar-button-normal) stretch; }  
+ widget.tb-button:disabled { background: url(theme:toolbar-button-disabled) stretch; color:threedshadow; }    
   widget.tb-button:disabled img { foreground-image-transformation: contrast-brightness-gamma(0.15,0.75,1.0); }    
   
   widget.tb-button:hover:not(:disabled)  { background: #E7F3FF #E7F3FF #A5D3FF #A5D3FF; }    
@@ -2376,7 +2380,8 @@ widget.editor {
   widget.tb-button:checked:hover:not(:disabled) { background: #E7F3FF #E7F3FF #A5D3FF #A5D3FF; }    
   
   widget.tb-button.h:not(:disabled) { color:threedshadow; }    
-  widget.tb-button.h:not(:disabled) b { color:windowtext; }      widget.toolbar > hr { width:0; height:*; margin: 3 2px; border: 1px solid; border-color: #fff #E5E5E5 #fff #838183; }    
+  widget.tb-button.h:not(:disabled) b { color:windowtext; }     
+  widget.toolbar > hr { width:0; height:*; margin: 3 2px; border: 1px solid; border-color: #fff #E5E5E5 #fff #838183; }
   
   widget.toolbar>widget[id="richtext-fontfamily"]{
 	value-changed!:self.parent().parent().$(richtext).setFontName(self:value);
