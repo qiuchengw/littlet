@@ -49,7 +49,7 @@ class LViewTodo : public LittleTView
 {
     BEGIN_MSG_MAP_EX(LViewTodo)
         MSG_WM_KEYDOWN(OnKeyDown)
-        MSG_WM_CLOSE(OnClose)
+        MSG_WM_DESTROY(OnDestroy)
         CHAIN_MSG_MAP(LittleTView)
     END_MSG_MAP()
 
@@ -65,7 +65,7 @@ public:
 
 protected:
     void OnKeyDown(UINT nChar,UINT nRepCnt,UINT nFlags);
-    void OnClose();
+    void OnDestroy();
 
     virtual LRESULT OnDocumentComplete() override;
 

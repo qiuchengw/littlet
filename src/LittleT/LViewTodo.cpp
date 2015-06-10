@@ -402,9 +402,11 @@ void LViewTodo::OnKeyDown( UINT nChar,UINT nRepCnt,UINT nFlags )
     SetMsgHandled(FALSE);
 }
 
-void LViewTodo::OnClose()
+void LViewTodo::OnDestroy()
 {
     StickyNoteMan::GetInstance()->Shutdown();
+
+    SetMsgHandled(FALSE);
 }
 
 LRESULT LViewTodo::OnDocumentComplete()
