@@ -2384,9 +2384,11 @@ widget.editor {
   widget.toolbar > hr { width:0; height:*; margin: 3 2px; border: 1px solid; border-color: #fff #E5E5E5 #fff #838183; }
   
   widget.toolbar>widget[id="richtext-fontfamily"]{
+	behavior:dropdown-select sysfontfamily;
 	value-changed!:self.parent().parent().$(richtext).setFontName(self:value);
    }
    widget.toolbar>widget[id="richtext-fontsize"]{
+	max-width:40px;width:40px;
 	value-changed!:self.parent().parent().$(richtext).setFontSize(self:value);
    }
    widget.toolbar>widget[id="richtext-fontcolor"]{

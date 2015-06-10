@@ -30,6 +30,27 @@ BOOL QDBEvents::TodoTask_GetAll( TodoTaskList &lst )
     return TodoTask_Read(L"SELECT * FROM tbl_todo",lst);
 }
 
+BOOL QDBEvents::TodoTask_GetAllStickyNote(TodoTaskList &lst)
+{
+    CStdString sql;
+    sql.Format(L"SELECT * FROM tbl_todo WHERE Flag<>0 AND Status=%d", TODO_STATUS_PROCESSING);
+    if (TodoTask_Read(sql, lst))
+    {
+        for (auto i = lst.begin(); i != lst.end();)
+        {
+            if (!_HasFlag((*i).nFlag, TODO_FLAG_STICKYNOTE))
+            {
+                i = lst.erase(i);
+            }
+            else
+            {
+                ++i;
+            }
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
 
 // BOOL QHelperMan::TodoTask_Get(BOOL bActiveAndDone,ENUM_TASK_STATUS eStatus,
 // 	BOOL bAllTimeTask,const QTime& tmBegin,const QTime& tmEnd,__out TodoTaskList &lst)

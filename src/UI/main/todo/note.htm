@@ -55,6 +55,16 @@
 				foreground-image:url(qabs:icons/add_16.png);
 			}
 			
+			#editor_msg,#editor_msg>*{
+				background:transparent;
+				border:none;
+			}
+			#editor_msg>.toolbar{
+				visibility:collapse;
+			}
+			#editor_msg[focus]>.toolbar{
+				visibility:visible;
+			}
 		</style>
 	</head>
 	<body #wc-top style="min-height:100px;min-width:150px;width:*;height:*;padding:2px;">
@@ -74,13 +84,13 @@
 			<widget .toolbar>
 				<widget .tb-button   command=richtext:strong  title="Strong emphasis"><b>B</b></widget>
 				<widget .tb-button   command=richtext:em  title="Emphasis"><i>I</i></widget>
-				<widget .tb-button   command=richtext:code  title="Code"><tt style="font-size:9px">code</tt></widget>
 				<hr/>      
 				<widget .tb-button   command=richtext:p  title="Paragraph"><b>P</b></widget>
-				<widget .tb-button.h command=richtext:h1 title="Header 1">H<b>1</b></widget>
-				<widget .tb-button.h command=richtext:h2 title="Header 2">H<b>2</b></widget>
-				<widget .tb-button.h command=richtext:h3 title="Header 3">H<b>3</b></widget>
-				<widget .tb-button.h command=richtext:h4 title="Header 4">H<b>4</b></widget>
+				<widget .tb-button.h command=richtext:h1>H<b>1</b></widget>
+				<widget .tb-button.h command=richtext:h2>H<b>2</b></widget>
+				<widget .tb-button.h command=richtext:h3>H<b>3</b></widget>
+				<widget .tb-button.h command=richtext:h4>H<b>4</b></widget>
+				<widget .tb-button.h command=richtext:h5>H<b>5</b></widget>
 				<hr/>      
 				<widget .tb-button command=richtext:pre title="Block of plain text, <pre>"><tt>pre</tt></b></widget>
 				<hr/>      
@@ -88,6 +98,9 @@
 				<widget .tb-button command=richtext:li-ol title="List item, unordered list"><img src="res:format-ol.png" /></widget>
 				<widget .tb-button command=richtext:indent-dec title="Increase level of list item or quote"><img src="res:format-indent-dec.png" /></widget>
 				<widget .tb-button command=richtext:indent-inc title="Decrease level of list item or un-quote"><img src="res:format-indent-inc.png" /></widget>
+				<hr/>
+				<widget type="select-dropdown" id="richtext-fontfamily" />
+				<widget type="colorpicker" id="richtext-fontcolor" />
 			</widget>
 			<richtext toolbar="widget.toolbar" name="html" content-style="content.css" allow-clipboard-images>
 				<p>Hello world!</p> 

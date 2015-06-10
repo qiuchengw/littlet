@@ -100,6 +100,7 @@ public:
     // 添加一个声音文件
     std::vector<CStdString> AddSoundFilePath(const CStdString& file);
 
+    
 public:
     void SetBreakFolder(LPCWSTR szFolder)
     {

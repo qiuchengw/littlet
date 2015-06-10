@@ -18,6 +18,7 @@ enum ENUM_TODOTASK_FLAG
 	TODO_FLAG_NEEDREMIND = 0x2, // 需要提前提示
     TODO_FLAG_HASEXECTIME = 0x4, // 需要提前提示
     TODO_FLAG_STICKYNOTE = 0x8, // 显示为便签
+    TODO_FLAG_ENCRYPTED = 0x10, // 数据已经加密
 };
 
 struct TCate
@@ -94,6 +95,8 @@ public:
 	BOOL TodoTask_GetUnfinished( TodoTaskList &lst );
     BOOL TodoTask_GetFinished( TodoTaskList &lst );
 	BOOL TodoTask_GetAll( TodoTaskList &lst );
+    BOOL TodoTask_GetAllStickyNote(TodoTaskList &lst);
+
 	int TodoTask_GetUnfinishNum( );
 	int TodoTask_GetFinishedNum( );
 	BOOL TodoTask_Get(int nID,__out TTodoTask &t);

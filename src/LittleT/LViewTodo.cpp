@@ -51,6 +51,9 @@ void LFormTodo::OnClkTaskChk( HELEMENT hBtn )
         }
 
         QDBEvents::GetInstance()->TodoTask_SetStatus(nID,TODO_STATUS_FINISH);
+
+        // 桌面便签可以删掉了。
+        StickyNoteMan::GetInstance()->Remove(nID);
     }
     else 
     {

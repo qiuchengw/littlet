@@ -14,9 +14,18 @@ class LStickyNoteWnd : public QFrame
 
     BEGIN_MSG_MAP_EX(LStickyNoteWnd)
         MSG_WM_KILLFOCUS(OnKillFocus)
+        MSG_WM_SETFOCUS(OnSetFocus)
         MSG_WM_CLOSE(OnClose)
         CHAIN_MSG_MAP(_Base)
     END_MSG_MAP()
+
+public:
+    inline int TaskID()const
+    {
+        return taskid_;
+    }
+
+    TTodoTask Task()const;
 
 private:
     LStickyNoteWnd(const TTodoTask& task);
@@ -42,6 +51,11 @@ protected:
 
     void OnClose();
     void OnKillFocus(HWND);
+    void OnSetFocus(HWND);
+
+    // 位置
+    void SaveWindowPos();
+    BOOL RestoreWindowPos();
 
 protected:
     TTodoTask* _ItemData(__in ETable& t)
@@ -51,9 +65,9 @@ protected:
 
     virtual LRESULT OnDocumentComplete();
 
-    ECtrl _Box()
+    inline ECtrl _Text()
     {
-        return GetCtrl("#box_item");
+        return GetCtrl("#editor_msg>richtext");
     }
 
     // bAtFirst 在最前插入
@@ -84,9 +98,12 @@ public:
     typedef std::list<LStickyNoteWnd*> LstStickyWnd;
 
     LStickyNoteWnd* Create(const TTodoTask& t);
+    void Remove(int taskid);
 
     void Startup();
     void Shutdown();
+
+    LStickyNoteWnd* Find(int taskid);
 
 private:
     LstStickyWnd        lst_;
