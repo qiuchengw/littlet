@@ -165,6 +165,13 @@ BOOL QDBEvents::TodoTask_Delete( int nID )
 	return _ExecSQL_RetBOOL(sQ);
 }
 
+BOOL QDBEvents::TodoTask_SetFlag(int nID, int flag)
+{
+    CStdString sQ;
+    sQ.Format(L"UPDATE tbl_todo SET flag=%d WHERE (ID=%d)", flag, nID);
+    return _ExecSQL_RetBOOL(sQ);
+}
+
 BOOL QDBEvents::TodoTask_IsDone(int nID)
 {
 	TTodoTask t;

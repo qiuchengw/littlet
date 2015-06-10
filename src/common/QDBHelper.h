@@ -16,7 +16,8 @@ enum ENUM_TODOTASK_FLAG
 {
 	TODO_FLAG_PLANRELATED = 0x1, // 和大计划相关联的任务
 	TODO_FLAG_NEEDREMIND = 0x2, // 需要提前提示
-	TODO_FLAG_HASEXECTIME = 0x4, // 需要提前提示
+    TODO_FLAG_HASEXECTIME = 0x4, // 需要提前提示
+    TODO_FLAG_STICKYNOTE = 0x8, // 显示为便签
 };
 
 struct TCate
@@ -96,6 +97,8 @@ public:
 	int TodoTask_GetUnfinishNum( );
 	int TodoTask_GetFinishedNum( );
 	BOOL TodoTask_Get(int nID,__out TTodoTask &t);
+    BOOL TodoTask_SetFlag(int nID, int flag);
+
 public:
 	//////////////////////////////////////////////////////////////////////////
 	// cate

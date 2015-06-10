@@ -177,6 +177,9 @@
     <ClInclude Include="..\..\deps\app.h">
       <Filter>deps</Filter>
     </ClInclude>
+    <ClInclude Include="LStickyNote.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LittleT.cpp">
@@ -292,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="..\..\deps\app.cpp">
       <Filter>deps</Filter>
+    </ClCompile>
+    <ClCompile Include="LStickyNote.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

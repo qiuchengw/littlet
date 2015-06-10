@@ -105,18 +105,25 @@ body{
 	color:@FONT_COLOR_ACTIVE;
 	behavior:clickable;
 }
-#todolist>table td[name="btn_todoitem_delete"]{
+#todolist>table td[name="btn_todoitem_delete"],
+#todolist>table td[name="btn_todoitem_stickynote"]{
 	visibility:collapse;
 	width:16px;
 	behavior:clickable;
 	font-family:marlett;
 	text-align:center;
 	vertical-align:middle;
+	foreground-position:center;
+	foreground-repeat:no-repeat;
 }
-#todolist>table:hover td[name="btn_todoitem_delete"]{ 
+#todolist>table:hover td[name="btn_todoitem_delete"],
+#todolist>table:hover td[name="btn_todoitem_stickynote"]{ 
 	visibility:visible;
 }
 
+#todolist>table td[name="btn_todoitem_stickynote"]{
+	foreground-image:url(qrel:images/note_16.png);
+}
 /*立即完成的倒计时*/
 #todolist>table#do_it{
 	height:60px;

@@ -45,13 +45,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\..\UIBase-g\deps\wtl;..\..\..\UIBase-g\src\qui;..\..\;..\..\deps;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\..\UIBase-g\deps\wtl;..\..\..\UIBase-g\src\qui;..\..\..\UIBase-g\src;..\..\;..\..\deps;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>..\..\lib;F:\Code\VC\uibase-g\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>..\..\..\UIBase-g\deps\wtl;..\..\..\UIBase-g\src\qui;..\..\;..\..\deps;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\..\UIBase-g\deps\wtl;..\..\..\UIBase-g\src\qui;..\..\..\UIBase-g\src;..\..\;..\..\deps;$(IncludePath)</IncludePath>
     <OutDir>..\..\bin\$(Configuration)\</OutDir>
     <IntDir>..\..\build\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -75,9 +75,7 @@
       </Command>
     </PreBuildEvent>
     <PreLinkEvent>
-      <Command>..\7za.exe u $(OutDir)\UI.ZIP ..\UI\* -r
-copy ..\..\..\UIBase\lib\*.lib ..\..\lib\*.lib 
-copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
+      <Command>..\7za.exe u $(OutDir)\UI.ZIP ..\UI\* -r</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,6 +145,7 @@ copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
     <ClInclude Include="LittleT.h" />
     <ClInclude Include="LittleTFrame.h" />
     <ClInclude Include="LittleTView.h" />
+    <ClInclude Include="LStickyNote.h" />
     <ClInclude Include="LViewEvent.h" />
     <ClInclude Include="LViewPlan.h" />
     <ClInclude Include="LViewTodo.h" />
@@ -189,6 +188,7 @@ copy ..\..\..\UIBase\lib\*.dll ..\..\dll\*.dll</Command>
     <ClCompile Include="LFormStage.cpp" />
     <ClCompile Include="LittleT.cpp" />
     <ClCompile Include="LittleTFrame.cpp" />
+    <ClCompile Include="LStickyNote.cpp" />
     <ClCompile Include="LViewEvent.cpp" />
     <ClCompile Include="LViewPlan.cpp" />
     <ClCompile Include="LViewTodo.cpp" />

@@ -24,6 +24,7 @@ protected:
     void FreshTaskItem(ECtrl& eGroup, ECtrl &eItem, TTodoTask* pTask);
 
     void OnClkDeleteTask(HELEMENT hBtn);
+    void OnClkStickyNote(HELEMENT hBtn);
     void OnClkTaskChk(HELEMENT hBtn);
     void OnClkPriority(HELEMENT );
     void OnClkTodoItem(HELEMENT );
@@ -48,6 +49,7 @@ class LViewTodo : public LittleTView
 {
     BEGIN_MSG_MAP_EX(LViewTodo)
         MSG_WM_KEYDOWN(OnKeyDown)
+        MSG_WM_CLOSE(OnClose)
         CHAIN_MSG_MAP(LittleTView)
     END_MSG_MAP()
 
@@ -63,6 +65,9 @@ public:
 
 protected:
     void OnKeyDown(UINT nChar,UINT nRepCnt,UINT nFlags);
+    void OnClose();
+
+    virtual LRESULT OnDocumentComplete() override;
 
 private:
     LFormTodo       m_formTodo;

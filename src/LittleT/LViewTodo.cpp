@@ -4,10 +4,12 @@
 #include "LDatas.h"
 #include "ui/WndHelper.h"
 #include "ui/QUIGlobal.h"
+#include "LStickyNote.h"
 
 QUI_BEGIN_EVENT_MAP(LFormTodo, QForm)
     BN_CLICKED_NAME(L"Chk_NoteTask", &LFormTodo::OnClkTaskChk)
     BN_CLICKED_NAME(L"btn_todoitem_delete", &LFormTodo::OnClkDeleteTask)
+    BN_CLICKED_NAME(L"btn_todoitem_stickynote", &LFormTodo::OnClkStickyNote)
     BN_CLICKED_NAME(L"item_todo", &LFormTodo::OnClkTodoItem)
     BN_CLICKED_NAME(L"item_doit", &LFormTodo::OnClkDoit)
     BN_CLICKED_ID(L"btn_plus5m", &LFormTodo::OnClkPlus5Minutes)
@@ -69,6 +71,19 @@ void LFormTodo::OnClkDeleteTask( HELEMENT hBtn )
     }
 }
 
+void LFormTodo::OnClkStickyNote(HELEMENT hBtn)
+{
+    ECtrl table = ECtrl(hBtn).select_parent(L"table", 4);
+    auto *db = QDBEvents::GetInstance();
+
+    int id = (int)table.GetData();
+    TTodoTask task_itm;
+    if (db->TodoTask_Get(id, task_itm))
+    {
+        StickyNoteMan::GetInstance()->Create(task_itm);
+    }
+}
+
 void LFormTodo::OnClkNewTask( HELEMENT hBtn )
 {
     ShowPopupBar(TTodoTask(),FALSE);
@@ -113,6 +128,7 @@ void LFormTodo::FreshTaskItem( ECtrl& eGroup, ECtrl &etable, TTodoTask* pTask )
         L"<td name=\"item_doit\" .qbtn/>"
         L"<td .item-todo name=\"item_todo\">%s</td>"
         L"<td><ul type=\"starbox\" name=\"star_Priority\" stars=\"3\" index=\"%d\" %s/></td>"
+        L"<td name=\"btn_todoitem_stickynote\" title=\"创建到桌面便签\"></td>"
         L"<td name=\"btn_todoitem_delete\">r</td>"
         L"</tr>",
         pTask->tmCreate.Format(L"%c"),      // 创建时间
@@ -384,6 +400,19 @@ void LViewTodo::OnKeyDown( UINT nChar,UINT nRepCnt,UINT nFlags )
         return;
     }
     SetMsgHandled(FALSE);
+}
+
+void LViewTodo::OnClose()
+{
+    StickyNoteMan::GetInstance()->Shutdown();
+}
+
+LRESULT LViewTodo::OnDocumentComplete()
+{
+    // 启动桌面便签
+    StickyNoteMan::GetInstance()->Startup();
+
+    return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////
