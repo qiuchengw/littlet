@@ -213,6 +213,11 @@ void LittleTApp::StartUpdateExe()
 CStdString LittleTApp::GetAppVersion() const
 {
     // 更新历史：<br/>
+    // LittleT v5.0 2015 / 6 / 11 < br / >
+    // ----------------------<br / >
+    // 增强：随机播放图片<br/>
+    // 新增：添加便签功能 <br / >
+    // <br / >
     // LittleT v4.0 2015 / 3 / 18 < br / >
     // ----------------------<br / >
     // 增强：检测提示信息是否只有一次，如果是则需要手动关闭提示，以免错过重要的提示。

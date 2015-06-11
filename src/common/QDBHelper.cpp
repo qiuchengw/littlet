@@ -161,7 +161,7 @@ BOOL QDBEvents::TodoTask_Edit(TTodoTask* pItem )
 	CStdString sQ;
 	sQ.Format(L"UPDATE tbl_todo SET Task='%s',Status=%d,Priority=%d"
 		L",CateID=%d,Flag=%d,ETime=%lf,udtime=%lf WHERE (ID=%d)",
-		SFHSQ(pItem->sTask),TODO_STATUS_PROCESSING,pItem->nPriority,
+		SFHSQ(pItem->sTask), pItem->eStatus,pItem->nPriority,
 		pItem->nCateID,
 		pItem->nFlag,
 		pItem->tmExec.SQLDateTime(),

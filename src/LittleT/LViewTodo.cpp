@@ -113,6 +113,13 @@ void LFormTodo::OnClkNewSticky(HELEMENT hBtn)
 void LFormTodo::InsertTask(ECtrl& eGroup, TTodoTask* pTask)
 {
     ASSERT(pTask != NULL);
+    if ((pTask->nFlag & TODO_FLAG_STICKYNOTE)
+        || (pTask->nFlag & TODO_FLAG_ENCRYPTED))
+    {
+        ASSERT(FALSE);
+        return;
+    }
+
     ECtrl etable = element::create("table");
     eGroup.insert(etable,0);
     etable.set_attribute("name",L"todoitem");
@@ -203,7 +210,8 @@ BOOL LFormTodo::ShowTask( ENUM_TODO_STATUS eStatus )
     ctlList.DeleteAllChild();
     for (auto& t : lst)
     {
-        if (!_HasFlag(t.nFlag, TODO_FLAG_STICKYNOTE))
+        if (!_HasFlag(t.nFlag, TODO_FLAG_STICKYNOTE)    // ∑«sticky
+            && !_HasFlag(t.nFlag, TODO_FLAG_ENCRYPTED)) // ∑«º”√‹
         {
             InsertTask(ctlList, &t);
         }

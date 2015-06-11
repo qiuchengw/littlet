@@ -286,7 +286,8 @@ LStickyNoteWnd* StickyNoteMan::Create(const TTodoTask& t)
 {
     auto*db = QDBEvents::GetInstance();
     db->TodoTask_SetFlag(t.nID, t.nFlag | TODO_FLAG_STICKYNOTE);
-
+    db->TodoTask_SetStatus(t.nID, TODO_STATUS_PROCESSING);
+    
     LStickyNoteWnd* wnd = Find(t.nID);
     if (nullptr == wnd)
     {
