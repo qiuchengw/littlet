@@ -4,6 +4,8 @@
 #include "LDatas.h"
 #include "ui/WndHelper.h"
 #include "ui/QUIGlobal.h"
+#include "ui/QConfig.h"
+
 #include "LStickyNote.h"
 
 QUI_BEGIN_EVENT_MAP(LFormTodo, QForm)
@@ -15,6 +17,7 @@ QUI_BEGIN_EVENT_MAP(LFormTodo, QForm)
     BN_CLICKED_ID(L"btn_plus5m", &LFormTodo::OnClkPlus5Minutes)
     BN_CLICKED_ID(L"btn_minus5m", &LFormTodo::OnClkMinus5Minutes)
     BN_CLICKED_ID(L"id_btn_newtodo", &LFormTodo::OnClkNewTask)
+    BN_CLICKED_ID(L"id_btn_newsticky", &LFormTodo::OnClkNewSticky)
     BN_CLICKED_ID(L"id_bar_ok", &LFormTodo::OnClkIdbarOK)
     BN_CLICKED_ID(L"id_bar_cancel", &LFormTodo::OnClkIdbarCancel)
     BN_CLICKED_ID(L"CHK_TODO_WAITING", &LFormTodo::OnTodoShow)
@@ -51,9 +54,6 @@ void LFormTodo::OnClkTaskChk( HELEMENT hBtn )
         }
 
         QDBEvents::GetInstance()->TodoTask_SetStatus(nID,TODO_STATUS_FINISH);
-
-        // 桌面便签可以删掉了。
-        StickyNoteMan::GetInstance()->Remove(nID);
     }
     else 
     {
@@ -67,10 +67,17 @@ void LFormTodo::OnClkTaskChk( HELEMENT hBtn )
 void LFormTodo::OnClkDeleteTask( HELEMENT hBtn )
 {
     ECtrl table = ECtrl(hBtn).select_parent(L"table",4);
-    if (QDBEvents::GetInstance()->TodoTask_Delete((int)table.GetData()))
+    int task_id = (int)table.GetData();
+    if (QDBEvents::GetInstance()->TodoTask_Delete(task_id))
     {
         table.destroy();
         RefreshTaskNum();
+
+        // 从config文件中去掉sticky相关的东西
+        auto* cfg = QUIGetConfig();
+        cfg->RemoveKey(L"StickyNote", CStdString::number(task_id));
+        cfg->RemoveKey(L"StickyNoteColor", CStdString::number(task_id));
+        cfg->RemoveKey(L"StickyNoteTop", CStdString::number(task_id));
     }
 }
 
@@ -84,12 +91,22 @@ void LFormTodo::OnClkStickyNote(HELEMENT hBtn)
     if (db->TodoTask_Get(id, task_itm))
     {
         StickyNoteMan::GetInstance()->Create(task_itm);
+
+        // 从列表中删除
+        table.destroy();
+        RefreshTaskNum();
     }
 }
 
 void LFormTodo::OnClkNewTask( HELEMENT hBtn )
 {
     ShowPopupBar(TTodoTask(),FALSE);
+}
+
+void LFormTodo::OnClkNewSticky(HELEMENT hBtn)
+{
+    TTodoTask t;
+    littlet::NewStickyNote(t);
 }
 
 // <table><tr><td><widget type="checkbox" /></td><td>hello wolrd!</td></tr></table>
@@ -184,9 +201,12 @@ BOOL LFormTodo::ShowTask( ENUM_TODO_STATUS eStatus )
     // 删除todoitem，但是不要删除do_it 这个table
     //ctlList.select_elements(&delete_todo_items(), L"table[name=\"todoitem\"]");
     ctlList.DeleteAllChild();
-    for (TodoTaskListItr itr = lst.begin(); itr != lst.end(); ++itr)
+    for (auto& t : lst)
     {
-        InsertTask(ctlList, &(*itr));
+        if (!_HasFlag(t.nFlag, TODO_FLAG_STICKYNOTE))
+        {
+            InsertTask(ctlList, &t);
+        }
     }
     return TRUE;
 }

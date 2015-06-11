@@ -41,7 +41,7 @@ BOOL QScreenWnd::_Show( LPCWSTR pszPicFolder, int nAlpha /*= 200*/,
         SetTimer(QSCREENWND_LIFETIMER_ID,QSCREENWND_LIFETIMER_PERIOD,NULL);
         // 自动循环播放图片
         m_nPeriodSec = max(2,nPicPeriod);   // 默认是最小2秒循环
-        int nPics = m_pic.LoadFolder(pszPicFolder);
+        int nPics = m_pic.LoadFolder(pszPicFolder, true);   // 随机乱序
         m_pic.HtmlayoutPlay(GetSafeHwnd(),L"file://" + _ImgPath(),
             m_nPeriodSec,TRUE,TRUE);
         if (nPics > 0)

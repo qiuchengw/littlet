@@ -4,6 +4,23 @@
 #include "common/QDBHelper.h"
 #include "ui/QConfig.h"
 
+
+namespace littlet
+{
+    LStickyNoteWnd* NewStickyNote(__out TTodoTask& t)
+    {
+        t.sTask = L"新便签";
+        t.nFlag = TODO_FLAG_STICKYNOTE;
+        t.nID = QDBEvents::GetInstance()->TodoTask_Add(&t);
+        t.nCateID = INVALID_ID;
+        t.nPriority = 1;
+        t.eStatus = TODO_STATUS_PROCESSING;
+
+        // 创建便签
+        return StickyNoteMan::GetInstance()->Create(t);
+    }
+}
+
 //////////////////////////////////////////////////////////////////////////
 QUI_BEGIN_EVENT_MAP(LStickyNoteWnd, _Base)
     BN_CLICKED_NAME(L"item_note", &LStickyNoteWnd::OnClkNoteItem)
@@ -11,8 +28,8 @@ QUI_BEGIN_EVENT_MAP(LStickyNoteWnd, _Base)
     BN_CLICKED_ID(L"btn_find", &LStickyNoteWnd::OnClkFind)
     BN_CLICKED_ID(L"btn_showall", &LStickyNoteWnd::OnClkShowAll)
     BN_CLICKED_ID(L"btn_new", &LStickyNoteWnd::OnclkNewNote)
-    BN_CLICKED_ID(L"btn_next", &LStickyNoteWnd::OnClkNext)
-    BN_CLICKED_ID(L"btn_prev", &LStickyNoteWnd::OnClkPrev)
+    BN_STATECHANGED_ID(L"chk_topmost", &LStickyNoteWnd::OnClkPinTop);
+    BN_CLICKED_ID(L"btn_close", &LStickyNoteWnd::OnClkClose)
     UNKNOWN_SELECTION_CHANGED_ID(L"color_scheme", &LStickyNoteWnd::OnSelColorSchemeChanged)
 QUI_END_EVENT_MAP()
 
@@ -24,7 +41,21 @@ LStickyNoteWnd::LStickyNoteWnd(const TTodoTask& task)
 
 void LStickyNoteWnd::OnclkNewNote(HELEMENT he) 
 {
-    ShowEditPane(TRUE);
+    TTodoTask t;
+    if (LStickyNoteWnd* w = littlet::NewStickyNote(t))
+    {
+        // 显示在自己旁边
+        CRect rc;
+        GetWindowRect(&rc);
+
+        CRect rc_dest;
+        w->GetWindowRect(&rc_dest);
+        CPoint pt_dest = rc.TopLeft();
+        pt_dest.Offset(40, 40);
+        rc_dest.MoveToXY(pt_dest);
+
+        w->MoveWindow(&rc_dest, FALSE);
+    }
 }
 
 void LStickyNoteWnd::OnClkDelItem(HELEMENT he) 
@@ -80,7 +111,7 @@ LRESULT LStickyNoteWnd::OnDocumentComplete()
         return 0;
     }
 
-    RestoreWindowPos();
+    RestoreSetting();
 
     TTodoTask task;
     if (QDBEvents::GetInstance()->TodoTask_Get(taskid_, task))
@@ -101,13 +132,33 @@ void LStickyNoteWnd::EditIt(__in TTodoTask* p)
 
 }
 
-void LStickyNoteWnd::OnClkPrev(HELEMENT he) 
+void LStickyNoteWnd::OnClkClose(HELEMENT he) 
 {
+    TTodoTask task = Task();
+    // 设置为已完成
+    task.eStatus = TODO_STATUS_FINISH;
+    // 关闭窗口认为去掉stick标志
+    _RemoveFlag(task.nFlag, TODO_FLAG_STICKYNOTE);
+
+    // 保存
+    QDBEvents::GetInstance()->TodoTask_Edit(&task);
+
+    // 关闭窗口
+    SendMessage(WM_CLOSE);
 }
 
-void LStickyNoteWnd::OnClkNext(HELEMENT he) 
+void LStickyNoteWnd::OnClkPinTop(HELEMENT he) 
 {
-    OnClkPrev(he);
+    if (ECheck(he).IsChecked())
+    {
+        SetWindowPos(HWND_TOPMOST, NULL, SWP_NOREDRAW | SWP_NOSIZE | SWP_NOMOVE);
+        QUIGetConfig()->SetValue(L"StickyNoteTop", CStdString::number(taskid_), L"1");
+    }
+    else
+    {
+        SetWindowPos(HWND_TOP, NULL, SWP_NOREDRAW | SWP_NOSIZE | SWP_NOMOVE);
+        QUIGetConfig()->SetValue(L"StickyNoteTop", CStdString::number(taskid_), L"0");
+    }
 }
 
 void LStickyNoteWnd::Show(BOOL bNew, BOOL bUseDate, QTime tmDate /*= QTime::GetCurrentTime() */) 
@@ -134,7 +185,10 @@ void LStickyNoteWnd::OnSetFocus(HWND)
 
 void LStickyNoteWnd::OnSelColorSchemeChanged(HELEMENT he, HELEMENT)
 {
-    GetRoot().SetBkgndColor(EColorPicker(he).GetColor());
+    CStdString cr = EColorPicker(he).GetColor();
+    GetBody().SetBkgndColor(cr);
+    // 保存背景色
+    QUIGetConfig()->SetValue(L"StickyNoteColor", CStdString::number(taskid_), cr);
 }
 
 TTodoTask LStickyNoteWnd::Task() const
@@ -165,19 +219,31 @@ void LStickyNoteWnd::SaveWindowPos()
         wp.rcNormalPosition.bottom);
 
     // write position to INI file
-    CStdString stask_id;
-    stask_id.Format(L"%d", taskid_);
-    QUIGetConfig()->SetValue(L"StickyNote", stask_id, tmp);
+    QUIGetConfig()->SetValue(L"StickyNote", CStdString::number(taskid_), tmp);
 }
 
-BOOL LStickyNoteWnd::RestoreWindowPos()
+BOOL LStickyNoteWnd::RestoreSetting()
 {
-    CStdString stask_id;
-    stask_id.Format(L"%d", taskid_);
-
     // read window position from INI file
     // MainWindow format =0,1,395,198,1012,642
-    CStdString sPos = QUIGetConfig()->GetValue(L"StickyNote", stask_id);
+    auto* cfg = QUIGetConfig();
+
+    // 背景色
+    CStdString scolor = cfg->GetValue(L"StickyNoteColor", CStdString::number(taskid_));
+    if (!scolor.IsEmpty())
+    {
+        GetBody().SetBkgndColor(scolor);
+    }
+
+    // topmost
+    if (cfg->GetValue(L"StickyNoteTop", CStdString::number(taskid_)) == L"1")
+    {
+        GetCtrl("#chk_topmost").SetCheck(TRUE);
+        SetWindowPos(HWND_TOPMOST, NULL, SWP_NOSIZE | SWP_NOMOVE | SWP_NOREDRAW);
+    }
+
+    // 位置
+    CStdString sPos = cfg->GetValue(L"StickyNote", CStdString::number(taskid_));
     if (sPos.IsEmpty())
     {
         CenterWindow(::GetDesktopWindow());
@@ -293,4 +359,3 @@ void StickyNoteMan::Remove(int taskid)
         p->SendMessage(WM_CLOSE);
     }
 }
-

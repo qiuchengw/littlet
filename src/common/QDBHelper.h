@@ -46,14 +46,14 @@ enum ENUM_TODO_STATUS
 
 struct TTodoTask
 {
-	int					nID;
-	int					nCateID;
-	int					nPriority;
-	int					nFlag;
+	int					nID = INVALID_ID;
+    int					nCateID = INVALID_ID;
+	int					nPriority = 1;
+	int					nFlag = 0;
 	CStdString				sTask;
-	QTime				tmCreate;
-	QTime				tmExec;
-	ENUM_TODO_STATUS	eStatus;
+	QTime				tmCreate = QTime::GetCurrentTime();
+	QTime				tmExec = QTime::GetCurrentTime();
+	ENUM_TODO_STATUS	eStatus = TODO_STATUS_PROCESSING;
 
 	BOOL IsDone()const { return (eStatus == TODO_STATUS_FINISH); };
 };

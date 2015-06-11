@@ -14,6 +14,7 @@ public:
 public:
     BOOL ShowTask( ENUM_TODO_STATUS eStatus );
     void OnClkNewTask( HELEMENT hBtn );
+    void OnClkNewSticky(HELEMENT hBtn);
 
 protected:
     //virtual LRESULT OnDocumentComplete();
@@ -40,7 +41,6 @@ protected:
     ECtrl _PopupBar() { return GetCtrl("#id_popup_todoitem"); };
     ECtrl _TodoList() { return GetCtrl("#todolist"); }
     void ShowPopupBar(TTodoTask &t,BOOL bEdit,HELEMENT he=NULL);
-
 private:
     ECtrl					m_eItemEdit;
 };

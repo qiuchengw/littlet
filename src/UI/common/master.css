@@ -169,7 +169,7 @@ button.with-icon{
 	foreground-position:4px center;
 	padding-left:22px;
 }
-.qbtn{
+.qchk,.qbtn{
 	width:18px; height:*;
 	color:white;
 	vertical-align:middle;
@@ -177,15 +177,19 @@ button.with-icon{
 	foreground-position:center;
 	behavior:clickable;
 }
-.qbtn:hover{
+.qchk,.qbtn:hover{
 	foreground-image-transformation: contrast-brightness-gamma(1, 0.5, 0.8);
 	//outline:@OUTLINE_STYLE_NORMAL;
 }
 
-.qbtn:hover{
+.qchk,.qbtn:hover{
 	foreground-image-transformation: contrast-brightness-gamma(1, 0.8, 1.2);
 	//outline:@OUTLINE_STYLE_ACTIVE;
 }
+.qchk{
+	behavior:check;
+}
+
 .color_button{
 	font:@FONT_NORMAL;
 	color:#555;
@@ -313,7 +317,6 @@ button[type="checkbox"]
 		font:@FONT_NORMAL;
 		height:system-small-icon-height; 
 		width:system-small-icon-width; 
-		min-height:18px;
 		min-height:18px;
 		behavior:check;
 		background:url(qabs:common/images/checkbox-normal.png) no-repeat;
@@ -2937,7 +2940,7 @@ widget[type="colorpicker"]{
 		height:16px; 
 		width:16px; 
 		padding:2px; 
-		border:@BORDER_CTRL;
+		/*border:@BORDER_CTRL;*/
 		background-color:black;
 		behavior:xcolorpicker;
 	}

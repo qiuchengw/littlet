@@ -11,6 +11,7 @@
 			
 			#wc-caption{
 				background-color:transparent;
+				border-spacing:6px;
 			}
 			
 			form#pswdlg
@@ -34,7 +35,8 @@
 				border-top:1px solid #444; 
 				padding:4px; 
 				text-align:right; 	
-			}    
+				color:white;
+			}
 			
 			div.shim /* background shim, spans whole view */
 			{
@@ -43,17 +45,37 @@
 				right:0;
 				bottom:0;
 				left:0;
-				background-color: rgba(0,0,0,0.5);
+				background-color: rgba(0,0,0,0.8);
+				color:white;
 			}
 
-			div#btn_pswd
-			{
+			div#btn_pswd{
 				foreground-image:url(qabs:main/images/lock_16.png);
 				click!: $1(form#pswdlg).show();
 			}
 			div#btn_new{
 				foreground-image:url(qabs:icons/add_16.png);
 			}
+			div#btn_close{
+				foreground-image:url(qabs:main/images/close_12.png);
+			}
+			#color_scheme{
+				border:none;
+				background-color:transparent;
+				foreground:url(qabs:icons/color_16.png) no-repeat center;
+			}
+			
+			#chk_topmost,
+			#chk_topmost:hover{ 
+				width:18px;height:18px;
+				padding:2px;
+				background-position:center;
+				background-image:url(qabs:common/images/pin_normal.png); 
+			}
+			#chk_topmost:checked,
+			#chk_topmost:checked:hover{
+				background-image:url(qabs:common/images/pin_top.png); 
+			}			
 			
 			#editor_msg,#editor_msg>*{
 				background:transparent;
@@ -67,43 +89,37 @@
 			}
 		</style>
 	</head>
-	<body #wc-top style="min-height:100px;min-width:150px;width:*;height:*;padding:2px;">
+	<body #wc-top style="min-height:120px;min-width:260px;width:*;height:*;padding:2px;">
 		<div #wc-caption>
 			<div .qbtn id="btn_new" />
 			<div #wc-title></div>
-			<widget type="colorpicker" #color_scheme />
+			<widget type="colorpicker" id="color_scheme" />
+			<widget type="checkbox" id="chk_topmost" />
 			<div .qbtn id="btn_pswd" />
-			<table sysbtn>
-				<tr>
-					<td xrole="CLOSE" accesskey="!ESCAPE" />
-				</tr>
-			</table>
+			<div .qbtn id="btn_close" title="设置为已完成并关闭" />
 		</div>
 		
 		<widget .editor id="editor_msg">
 			<widget .toolbar>
-				<widget .tb-button   command=richtext:strong  title="Strong emphasis"><b>B</b></widget>
-				<widget .tb-button   command=richtext:em  title="Emphasis"><i>I</i></widget>
-				<hr/>      
-				<widget .tb-button   command=richtext:p  title="Paragraph"><b>P</b></widget>
+				<widget .tb-button   command=richtext:strong><b>B</b></widget>
+				<widget .tb-button   command=richtext:em><i>I</i></widget>
+				<widget .tb-button   command=richtext:p><b>P</b></widget>
+				<widget .tb-button command=richtext:pre title="代码控们使用！"><b>C</b></widget>
 				<widget .tb-button.h command=richtext:h1>H<b>1</b></widget>
 				<widget .tb-button.h command=richtext:h2>H<b>2</b></widget>
 				<widget .tb-button.h command=richtext:h3>H<b>3</b></widget>
 				<widget .tb-button.h command=richtext:h4>H<b>4</b></widget>
 				<widget .tb-button.h command=richtext:h5>H<b>5</b></widget>
-				<hr/>      
-				<widget .tb-button command=richtext:pre title="Block of plain text, <pre>"><tt>pre</tt></b></widget>
-				<hr/>      
-				<widget .tb-button command=richtext:li-ul title="List item, unordered list"><img src="res:format-ul.png" /></widget>
-				<widget .tb-button command=richtext:li-ol title="List item, unordered list"><img src="res:format-ol.png" /></widget>
-				<widget .tb-button command=richtext:indent-dec title="Increase level of list item or quote"><img src="res:format-indent-dec.png" /></widget>
-				<widget .tb-button command=richtext:indent-inc title="Decrease level of list item or un-quote"><img src="res:format-indent-inc.png" /></widget>
-				<hr/>
+				<widget .tb-button command=richtext:li-ul ><img src="res:format-ul.png" /></widget>
+				<widget .tb-button command=richtext:li-ol><img src="res:format-ol.png" /></widget>
+				<widget .tb-button command=richtext:indent-dec><img src="res:format-indent-dec.png" /></widget>
+				<widget .tb-button command=richtext:indent-inc><img src="res:format-indent-inc.png" /></widget>
 				<widget type="select-dropdown" id="richtext-fontfamily" />
-				<widget type="colorpicker" id="richtext-fontcolor" />
+				<widget type="colorpicker" id="richtext-fontcolor" style="margin-left:6px;width:20px;height:20px;" />
 			</widget>
+			
 			<richtext toolbar="widget.toolbar" name="html" content-style="content.css" allow-clipboard-images>
-				<p>Hello world!</p> 
+				
 			</richtext>
 		</widget>
 		

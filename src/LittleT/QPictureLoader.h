@@ -5,6 +5,8 @@
 #include "../common/ConstValues.h"
 #include "AppHelper.h"
 #include "ui/QUIMgr.h"
+#include <chrono>
+#include <random>
 
 class QPictureLoader
 {
@@ -15,12 +17,16 @@ public:
 		m_nIdx = -1;
 		m_bRecycle = FALSE;
 	}
+
 	/*
 	 *	扫描文件夹下的图像文件（*.jpg,*.png）
-	 ×	-return
-			扫描的文件数目
+	 *	-return
+	 *		扫描的文件数目
+     *
+     *   shuffle    是否乱序
+     *
 	 */
-	int LoadFolder(__in LPCWSTR szFolder)
+	int LoadFolder(__in LPCWSTR szFolder, bool shuffle)
 	{
 		StopAutoPlayTimer();
 
@@ -41,6 +47,12 @@ public:
 		std::copy(lst.begin(),lst.end(),
 			std::back_insert_iterator<std::vector<tstring> >(m_list));
 
+        if (shuffle)
+        {
+            unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+            std::shuffle(m_list.begin(), m_list.end(), std::default_random_engine(seed));
+        }
 		return GetFileCount();
 	}
 

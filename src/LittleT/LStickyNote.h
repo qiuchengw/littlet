@@ -3,7 +3,14 @@
 #include <list>
 #include "ui/QFrame.h"
 
+class LStickyNoteWnd;
 struct TTodoTask;
+
+namespace littlet
+{
+    LStickyNoteWnd* NewStickyNote(__out TTodoTask&);
+}
+
 class LStickyNoteWnd : public QFrame
 {
     typedef QFrame _Base;
@@ -44,8 +51,8 @@ protected:
 
     void OnSelColorSchemeChanged(HELEMENT he, HELEMENT );
 
-    void OnClkPrev(HELEMENT he);
-    void OnClkNext(HELEMENT he);
+    void OnClkClose(HELEMENT he);
+    void OnClkPinTop(HELEMENT he);
 
     void ShowEditPane(BOOL bShow , TTodoTask* p = nullptr);
 
@@ -55,7 +62,7 @@ protected:
 
     // Œª÷√
     void SaveWindowPos();
-    BOOL RestoreWindowPos();
+    BOOL RestoreSetting();
 
 protected:
     TTodoTask* _ItemData(__in ETable& t)
