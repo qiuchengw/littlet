@@ -205,9 +205,26 @@ BOOL QDBEvents::TodoTask_IsDone(int nID)
 
 int QDBEvents::TodoTask_GetUnfinishNum()
 {
-	CStdString sQ;
-	sQ.Format(L"SELECT COUNT(ID) FROM tbl_todo WHERE (Status=%d)",TODO_STATUS_PROCESSING);
-	return _ExecSQL_RetInt(sQ);
+    CStdString sql;
+    TodoTaskList lst;
+    sql.Format(L"SELECT * FROM tbl_todo WHERE Status=%d", TODO_STATUS_PROCESSING);
+    if (TodoTask_Read(sql, lst))
+    {
+        int r = 0;
+        for (auto i : lst)
+        {
+            if (!_HasFlag(i.nFlag, TODO_FLAG_STICKYNOTE))
+            {
+                r++;
+            }
+        }
+        return r;
+    }
+    return 0;
+
+// 	CStdString sQ;
+// 	sQ.Format(L"SELECT COUNT(ID) FROM tbl_todo WHERE (Status=%d)",TODO_STATUS_PROCESSING);
+// 	return _ExecSQL_RetInt(sQ);
 }
 
 int QDBEvents::TodoTask_GetFinishedNum()
