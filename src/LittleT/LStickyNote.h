@@ -64,6 +64,8 @@ protected:
     void SaveWindowPos();
     BOOL RestoreSetting();
 
+    void SetTopMost(bool top);
+
 protected:
     TTodoTask* _ItemData(__in ETable& t)
     {

@@ -147,18 +147,19 @@ void LStickyNoteWnd::OnClkClose(HELEMENT he)
     SendMessage(WM_CLOSE);
 }
 
+void LStickyNoteWnd::SetTopMost(bool top)
+{
+    ModifyStyleEx(0, WS_EX_TOPMOST);
+
+    GetCtrl("#chk_topmost").SetCheck(top);
+    WTL::CRect rc(0, 0, 0, 0);
+    SetWindowPos(top ? HWND_TOPMOST : HWND_NOTOPMOST, &rc, SWP_SHOWWINDOW | SWP_NOREDRAW | SWP_NOSIZE | SWP_NOMOVE);
+    QUIGetConfig()->SetValue(L"StickyNoteTop", CStdString::number(taskid_), top ? L"1" : L"0");
+}
+
 void LStickyNoteWnd::OnClkPinTop(HELEMENT he) 
 {
-    if (ECheck(he).IsChecked())
-    {
-        SetWindowPos(HWND_TOPMOST, NULL, SWP_NOREDRAW | SWP_NOSIZE | SWP_NOMOVE);
-        QUIGetConfig()->SetValue(L"StickyNoteTop", CStdString::number(taskid_), L"1");
-    }
-    else
-    {
-        SetWindowPos(HWND_TOP, NULL, SWP_NOREDRAW | SWP_NOSIZE | SWP_NOMOVE);
-        QUIGetConfig()->SetValue(L"StickyNoteTop", CStdString::number(taskid_), L"0");
-    }
+    SetTopMost(ECheck(he).IsChecked());
 }
 
 void LStickyNoteWnd::Show(BOOL bNew, BOOL bUseDate, QTime tmDate /*= QTime::GetCurrentTime() */) 
@@ -238,8 +239,7 @@ BOOL LStickyNoteWnd::RestoreSetting()
     // topmost
     if (cfg->GetValue(L"StickyNoteTop", CStdString::number(taskid_)) == L"1")
     {
-        GetCtrl("#chk_topmost").SetCheck(TRUE);
-        SetWindowPos(HWND_TOPMOST, NULL, SWP_NOSIZE | SWP_NOMOVE | SWP_NOREDRAW);
+        SetTopMost(true);
     }
 
     // Œª÷√
