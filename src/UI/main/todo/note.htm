@@ -59,6 +59,9 @@
 			div#btn_close{
 				foreground-image:url(qabs:main/images/close_12.png);
 			}
+			div#btn_editor{
+				foreground-image:url(qabs:main/images/font_16.png);
+			}
 			#color_scheme{
 				border:none;
 				background-color:transparent;
@@ -91,10 +94,11 @@
 	</head>
 	<body #wc-top style="min-height:120px;min-width:260px;width:*;height:*;padding:2px;">
 		<div #wc-caption>
-			<div .qbtn id="btn_new" />
+			<div .qbtn id="btn_new" title="新建便签" />
 			<div #wc-title></div>
-			<widget type="colorpicker" id="color_scheme" />
-			<widget type="checkbox" id="chk_topmost" />
+			<div .qbtn id="btn_editor" title="字体编辑" />
+			<widget type="colorpicker" id="color_scheme" title="便签颜色" />
+			<widget type="checkbox" id="chk_topmost" title="置顶/取消置顶"  />
 			<!--
 			<div .qbtn id="btn_pswd" />
 			-->
@@ -112,10 +116,10 @@
 				<widget .tb-button.h command=richtext:h3>H<b>3</b></widget>
 				<widget .tb-button.h command=richtext:h4>H<b>4</b></widget>
 				<widget .tb-button.h command=richtext:h5>H<b>5</b></widget>
-				<widget .tb-button command=richtext:li-ul ><img src="res:format-ul.png" /></widget>
+				<widget .tb-button command=richtext:li-ul><img src="res:format-ul.png" /></widget>
 				<widget .tb-button command=richtext:li-ol><img src="res:format-ol.png" /></widget>
-				<widget .tb-button command=richtext:indent-dec><img src="res:format-indent-dec.png" /></widget>
-				<widget .tb-button command=richtext:indent-inc><img src="res:format-indent-inc.png" /></widget>
+				<widget .tb-button command=richtext:indent-dec accesskey="TAB"><img src="res:format-indent-dec.png" /></widget>
+				<widget .tb-button command=richtext:indent-inc accesskey="!TAB"><img src="res:format-indent-inc.png" /></widget>
 				<widget type="select-dropdown" id="richtext-fontfamily" />
 				<!-- <widget type="colorpicker" id="richtext-fontcolor" style="margin-left:6px;width:20px;height:20px;" /> -->
 			</widget>

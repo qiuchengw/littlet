@@ -23,9 +23,9 @@ class LStickyNoteWnd : public QFrame
         MSG_WM_KILLFOCUS(OnKillFocus)
         MSG_WM_SETFOCUS(OnSetFocus)
         MSG_WM_CLOSE(OnClose)
+        // MSG_WM_KEYUP(OnKeyDown)
         CHAIN_MSG_MAP(_Base)
     END_MSG_MAP()
-
 public:
     inline int TaskID()const
     {
@@ -46,7 +46,7 @@ protected:
     void OnclkNewNote(HELEMENT he);
     void OnClkNoteItem(HELEMENT he);
     void OnClkFind(HELEMENT he);
-    void OnClkShowAll(HELEMENT he);
+    void OnClkFontEditor(HELEMENT he);
     void OnClkDelItem(HELEMENT he);
 
     void OnSelColorSchemeChanged(HELEMENT he, HELEMENT );
@@ -59,6 +59,7 @@ protected:
     void OnClose();
     void OnKillFocus(HWND);
     void OnSetFocus(HWND);
+    void OnKeyDown(TCHAR ch, UINT n, UINT r);
 
     // Œª÷√
     void SaveWindowPos();
@@ -113,6 +114,9 @@ public:
     void Shutdown();
 
     LStickyNoteWnd* Find(int taskid);
+
+    LStickyNoteWnd* PrevSibling(LStickyNoteWnd* p);
+    LStickyNoteWnd* NextSibling(LStickyNoteWnd* p);
 
 private:
     LstStickyWnd        lst_;

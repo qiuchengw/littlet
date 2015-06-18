@@ -2371,9 +2371,15 @@ widget.editor {
 	padding:1px; 
 	}
 	
-  widget.tb-button { font-family:tahoma arial;
-	behavior: clickable; padding:3px; width:20px; height:*; text-align:center;
-	vertical-align:middle; background: url(theme:toolbar-button-normal) stretch; }  
+  widget.tb-button { 
+	font-family:tahoma arial;
+	behavior: clickable; 
+	padding:3px; width:20px; 
+	height:*; 
+	text-align:center;
+	vertical-align:middle; 
+	background: url(theme:toolbar-button-normal) stretch; 
+	}  
  widget.tb-button:disabled { background: url(theme:toolbar-button-disabled) stretch; color:threedshadow; }    
   widget.tb-button:disabled img { foreground-image-transformation: contrast-brightness-gamma(0.15,0.75,1.0); }    
   

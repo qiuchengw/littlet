@@ -3,6 +3,7 @@
 #include "LStickyNote.h"
 #include "common/QDBHelper.h"
 #include "ui/QConfig.h"
+#include "ui/WndHelper.h"
 
 
 namespace littlet
@@ -26,7 +27,7 @@ QUI_BEGIN_EVENT_MAP(LStickyNoteWnd, _Base)
     BN_CLICKED_NAME(L"item_note", &LStickyNoteWnd::OnClkNoteItem)
     BN_CLICKED_NAME(L"del_item", &LStickyNoteWnd::OnClkDelItem)
     BN_CLICKED_ID(L"btn_find", &LStickyNoteWnd::OnClkFind)
-    BN_CLICKED_ID(L"btn_showall", &LStickyNoteWnd::OnClkShowAll)
+    BN_CLICKED_ID(L"btn_editor", &LStickyNoteWnd::OnClkFontEditor)
     BN_CLICKED_ID(L"btn_new", &LStickyNoteWnd::OnclkNewNote)
     BN_STATECHANGED_ID(L"chk_topmost", &LStickyNoteWnd::OnClkPinTop);
     BN_CLICKED_ID(L"btn_close", &LStickyNoteWnd::OnClkClose)
@@ -94,8 +95,13 @@ void LStickyNoteWnd::OnClose()
     SetMsgHandled(FALSE);
 }
 
-void LStickyNoteWnd::OnClkShowAll(HELEMENT he) 
+void LStickyNoteWnd::OnClkFontEditor(HELEMENT he) 
 {
+    ECtrl ctl = GetCtrl("#editor_msg");
+    if (ctl.IsHasAttribute("focus"))
+        ctl.remove_attribute("focus");
+    else
+        ctl.set_attribute("focus", L"1");
 }
 
 void LStickyNoteWnd::OnClkFind(HELEMENT he) 
@@ -172,8 +178,6 @@ void LStickyNoteWnd::ShowAndEdit(TTodoTask* p)
 
 void LStickyNoteWnd::OnKillFocus(HWND)
 {
-    GetCtrl("#editor_msg").remove_attribute("focus");
-
     TTodoTask task = Task();
     task.sTask = _Text().get_value().to_string();
     QDBEvents::GetInstance()->TodoTask_Edit(&task);
@@ -181,7 +185,6 @@ void LStickyNoteWnd::OnKillFocus(HWND)
 
 void LStickyNoteWnd::OnSetFocus(HWND)
 {
-    GetCtrl("#editor_msg").set_attribute("focus", L"1");
 }
 
 void LStickyNoteWnd::OnSelColorSchemeChanged(HELEMENT he, HELEMENT)
@@ -281,6 +284,35 @@ BOOL LStickyNoteWnd::RestoreSetting()
     return TRUE;
 }
 
+void LStickyNoteWnd::OnKeyDown(TCHAR ch, UINT n, UINT r)
+{
+    if (GetKeyState(VK_TAB) & 0x8000)
+    {
+        if (GetKeyState(VK_CONTROL) & 0x8000)
+        {
+            LStickyNoteWnd* p = nullptr;
+            if (GetKeyState(VK_SHIFT) & 0x8000)
+            {
+                // 向前
+                p = StickyNoteMan::GetInstance()->PrevSibling(this);
+            }
+            else
+            {
+                // 向后
+                p = StickyNoteMan::GetInstance()->NextSibling(this);
+            }
+            if ((nullptr != p) && (p != this))
+            {
+                quibase::SetForegroundWindowInternal(p->GetSafeHwnd());
+                p->SetFocus();
+            }
+            return;
+        }
+    }
+
+    SetMsgHandled(FALSE);
+}
+
 //////////////////////////////////////////////////////////////////////////
 LStickyNoteWnd* StickyNoteMan::Create(const TTodoTask& t)
 {
@@ -359,4 +391,34 @@ void StickyNoteMan::Remove(int taskid)
     {
         p->SendMessage(WM_CLOSE);
     }
+}
+
+LStickyNoteWnd* StickyNoteMan::PrevSibling(LStickyNoteWnd* p)
+{
+    auto i = std::find(lst_.begin(), lst_.end(), p);
+    if (i == lst_.end())
+    {
+        return nullptr;
+    }
+
+    if (i == lst_.begin())
+    {
+        return lst_.back();
+    }
+    return *--i;
+}
+
+LStickyNoteWnd* StickyNoteMan::NextSibling(LStickyNoteWnd* p)
+{
+    auto i = std::find(lst_.begin(), lst_.end(), p);
+    if (i == lst_.end())
+    {
+        return nullptr;
+    }
+
+    if (p == lst_.back())
+    {
+        return lst_.front();
+    }
+    return *++i;
 }
