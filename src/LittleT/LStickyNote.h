@@ -23,9 +23,11 @@ class LStickyNoteWnd : public QFrame
         MSG_WM_KILLFOCUS(OnKillFocus)
         MSG_WM_SETFOCUS(OnSetFocus)
         MSG_WM_CLOSE(OnClose)
-        // MSG_WM_KEYUP(OnKeyDown)
+        MSG_WM_TIMER(OnTimer)
+        MSG_WM_KEYDOWN(OnKeyDown)  // 这个为啥会造成字体设置按钮不可用？
         CHAIN_MSG_MAP(_Base)
     END_MSG_MAP()
+
 public:
     inline int TaskID()const
     {
@@ -37,17 +39,12 @@ public:
 private:
     LStickyNoteWnd(const TTodoTask& task);
 
-    void EditIt(__in TTodoTask* p);
-    void Show(BOOL bNew, BOOL bUseDate, QTime tmDate = QTime::GetCurrentTime() );
-    void ShowAndEdit( TTodoTask* p );
-
 protected:
-    void NewIt();
     void OnclkNewNote(HELEMENT he);
     void OnClkNoteItem(HELEMENT he);
     void OnClkFind(HELEMENT he);
     void OnClkFontEditor(HELEMENT he);
-    void OnClkDelItem(HELEMENT he);
+    void OnStrikeText(HELEMENT he);
 
     void OnSelColorSchemeChanged(HELEMENT he, HELEMENT );
 
@@ -59,6 +56,7 @@ protected:
     void OnClose();
     void OnKillFocus(HWND);
     void OnSetFocus(HWND);
+    void OnTimer(UINT);
     void OnKeyDown(TCHAR ch, UINT n, UINT r);
 
     // 位置
@@ -75,9 +73,14 @@ protected:
 
     virtual LRESULT OnDocumentComplete();
 
-    inline ECtrl _Text()
+    inline EEdit _Text()
     {
         return GetCtrl("#editor_msg>richtext");
+    }
+
+    inline ECombobox _Font()
+    {
+        return GetCtrl("#editor_msg #richtext-fontfamily");
     }
 
     // bAtFirst 在最前插入
@@ -112,6 +115,7 @@ public:
 
     void Startup();
     void Shutdown();
+    void ShowAll();
 
     LStickyNoteWnd* Find(int taskid);
 

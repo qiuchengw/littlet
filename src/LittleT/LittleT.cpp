@@ -129,34 +129,41 @@ void LittleTApp::CheckUpdaterExe()
 
 BOOL LittleTApp::CheckUpdate()
 {
-    QBuffer* pBuf = NULL;
-    if (!QUIMgr::GetInstance()->LoadData(L"qabs:url.x", (QView*)nullptr, pBuf))
-    {
-        XMsgBox::ErrorMsgBox(L"版本太低啦 -_-!");
-    }
+//     QBuffer* pBuf = NULL;
+//     if (!QUIMgr::GetInstance()->LoadData(L"qabs:url.x", (QView*)nullptr, pBuf))
+//     {
+//         XMsgBox::ErrorMsgBox(L"版本太低啦 -_-!");
+//     }
+// 
+//     if (NULL != pBuf)
+//     {
+//         // 去掉前3个字节的文件编码，剩下的就是文件内容了
+//         DWORD dw;
+//         pBuf->Read((PBYTE)&dw, 3);
+//         CStdString sLines = ATL::CA2WEX<256>((char*)pBuf->GetBuffer());
+//         CStdString sUrl = sLines, sRefer;
+//         int idx = sLines.Find(L';');
+//         if (-1 != idx)
+//         {
+//             sUrl = sLines.Left(idx);
+//             sRefer = sLines.Mid(idx+1);
+//         }
+//         // 启动自动更新检查
+//         _Url url_updation;
+//         url_updation.url_ = sUrl;
+//         url_updation.domain_ = sRefer;
+//         // 每5个小时检查一次更新
+//        return QAutoUpdater::GetInstance()->Startup(url_updation, _Url(), 4*60);
+// //        return QAutoUpdater::GetInstance()->Startup();
+//      }
+//    return FALSE;
 
-    if (NULL != pBuf)
-    {
-        // 去掉前3个字节的文件编码，剩下的就是文件内容了
-        DWORD dw;
-        pBuf->Read((PBYTE)&dw, 3);
-        CStdString sLines = ATL::CA2WEX<256>((char*)pBuf->GetBuffer());
-        CStdString sUrl = sLines, sRefer;
-        int idx = sLines.Find(L';');
-        if (-1 != idx)
-        {
-            sUrl = sLines.Left(idx);
-            sRefer = sLines.Mid(idx+1);
-        }
-        // 启动自动更新检查
-        _Url url_updation;
-        url_updation.url_ = sUrl;
-        url_updation.domain_ = sRefer;
-        // 每5个小时检查一次更新
-       return QAutoUpdater::GetInstance()->Startup(url_updation, _Url(), 4*60);
-//        return QAutoUpdater::GetInstance()->Startup();
-     }
-     return FALSE;
+    // 启动自动更新检查
+    _Url url_updation;
+    url_updation.url_ = L"http://www.jiubaibu.com/appcast/littlet/littlet.asp";
+    url_updation.domain_ = "http://www.jiubaibu.com";
+    // 每2个小时检查一次更新
+    return QAutoUpdater::GetInstance()->Startup(url_updation, _Url(), 2 * 60);
 }
 
 LittleTApp::~LittleTApp()
@@ -190,7 +197,9 @@ void LittleTApp::StartUpdateExe()
     CStdString sUpdateExe = sCurDir + L"LittleTUpdater.exe";
     if (!quibase::IsFileExist(sUpdateExe))
     {
-        XMsgBox::ErrorMsgBox(L"更新程序不见了！你都干啥了？ -_-!");
+        ::MessageBox(NULL, L"更新程序不见了！请重新下载完整程序 -_-!", L"错误", MB_OK);
+        // 不要使用下面这句，会造成崩溃
+        // XMsgBox::ErrorMsgBox(L"更新程序不见了！您都干啥了？请重新下载完整程序 -_-!");
         return;
     }
 
@@ -213,6 +222,11 @@ void LittleTApp::StartUpdateExe()
 CStdString LittleTApp::GetAppVersion() const
 {
     // 更新历史：<br/>
+    // LittleT v5.1 2015 / 7 / 8 < br / >
+    // ----------------------<br / >
+    // 增强：便签功能Tab键缩进<br / >
+    // 增强：便签功能Ctrl + [Shift] + Tab进行便签导航<br / >
+    // <br / >
     // LittleT v5.0 2015 / 6 / 11 < br / >
     // ----------------------<br / >
     // 增强：随机播放图片<br/>
@@ -353,7 +367,6 @@ CStdString LittleTApp::GetAppVersion() const
 
 //////////////////////////////////////////////////////////////////////////
 LittleTConfig _Config;
-
 
 std::vector<CStdString> LittleTConfig::GetHistorySoundFile()
 {

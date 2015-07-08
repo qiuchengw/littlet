@@ -10,7 +10,7 @@ namespace littlet
 {
     LStickyNoteWnd* NewStickyNote(__out TTodoTask& t)
     {
-        t.sTask = L"新便签";
+        t.sTask = L"Ctrl+[Shift]+Tab 可导航所有便签";
         t.nFlag = TODO_FLAG_STICKYNOTE;
         t.nID = QDBEvents::GetInstance()->TodoTask_Add(&t);
         t.nCateID = INVALID_ID;
@@ -25,7 +25,7 @@ namespace littlet
 //////////////////////////////////////////////////////////////////////////
 QUI_BEGIN_EVENT_MAP(LStickyNoteWnd, _Base)
     BN_CLICKED_NAME(L"item_note", &LStickyNoteWnd::OnClkNoteItem)
-    BN_CLICKED_NAME(L"del_item", &LStickyNoteWnd::OnClkDelItem)
+    BN_CLICKED_NAME(L"btn_strikeline", &LStickyNoteWnd::OnStrikeText)
     BN_CLICKED_ID(L"btn_find", &LStickyNoteWnd::OnClkFind)
     BN_CLICKED_ID(L"btn_editor", &LStickyNoteWnd::OnClkFontEditor)
     BN_CLICKED_ID(L"btn_new", &LStickyNoteWnd::OnclkNewNote)
@@ -59,8 +59,10 @@ void LStickyNoteWnd::OnclkNewNote(HELEMENT he)
     }
 }
 
-void LStickyNoteWnd::OnClkDelItem(HELEMENT he) 
+void LStickyNoteWnd::OnStrikeText(HELEMENT he) 
 {
+//     _Text().xcall(,)
+//     _Text().ReplaceSelection()
 }
 
 void LStickyNoteWnd::OnClkNoteItem(HELEMENT he) 
@@ -98,10 +100,16 @@ void LStickyNoteWnd::OnClose()
 void LStickyNoteWnd::OnClkFontEditor(HELEMENT he) 
 {
     ECtrl ctl = GetCtrl("#editor_msg");
-    if (ctl.IsHasAttribute("focus"))
-        ctl.remove_attribute("focus");
+    if (ctl.IsHasAttribute("xfocus"))
+    {
+        ctl.remove_attribute("xfocus");
+    }
     else
-        ctl.set_attribute("focus", L"1");
+    {
+        // 必须加这句，否则toolbar上的按钮都不起作用了
+        GetCtrl("#editor_msg>.toolbar").SetFocus();
+        ctl.set_attribute("xfocus", L"1");
+    }
 }
 
 void LStickyNoteWnd::OnClkFind(HELEMENT he) 
@@ -119,23 +127,18 @@ LRESULT LStickyNoteWnd::OnDocumentComplete()
 
     RestoreSetting();
 
+    _Font().SelectItem_Text(L"宋体");
+
     TTodoTask task;
     if (QDBEvents::GetInstance()->TodoTask_Get(taskid_, task))
     {
         _Text().SetValue(task.sTask);
     }
 
+    // 每隔一秒钟扫描一次，将窗口显示出来
+    SetTimer(0x005, 1000);
+
     return 0;
-}
-
-void LStickyNoteWnd::NewIt() 
-{
-    OnclkNewNote(NULL);
-}
-
-void LStickyNoteWnd::EditIt(__in TTodoTask* p) 
-{
-
 }
 
 void LStickyNoteWnd::OnClkClose(HELEMENT he) 
@@ -168,23 +171,31 @@ void LStickyNoteWnd::OnClkPinTop(HELEMENT he)
     SetTopMost(ECheck(he).IsChecked());
 }
 
-void LStickyNoteWnd::Show(BOOL bNew, BOOL bUseDate, QTime tmDate /*= QTime::GetCurrentTime() */) 
-{
-}
-
-void LStickyNoteWnd::ShowAndEdit(TTodoTask* p) 
-{
-}
-
 void LStickyNoteWnd::OnKillFocus(HWND)
 {
     TTodoTask task = Task();
     task.sTask = _Text().get_value().to_string();
     QDBEvents::GetInstance()->TodoTask_Edit(&task);
+
+    SetShadowSize(2);
+
+    SetMsgHandled(FALSE);
 }
 
 void LStickyNoteWnd::OnSetFocus(HWND)
 {
+    _Text().SetFocus();
+    // 输入光标移动到最后一个字符
+    _Text().SelectText(0xFFFF);
+    // 某些时候，光标不是移动到字符后面，而是移动到边缘，这个时候是无法
+    // 输入数据的。不清楚是什么原因。
+    _Text().SimulateKeybordEvent(VK_LEFT);
+
+    // 阴影颜色
+    SetShadowColor(0xE80A4B);
+    SetShadowSize(4);
+
+    SetMsgHandled(FALSE);
 }
 
 void LStickyNoteWnd::OnSelColorSchemeChanged(HELEMENT he, HELEMENT)
@@ -308,7 +319,16 @@ void LStickyNoteWnd::OnKeyDown(TCHAR ch, UINT n, UINT r)
             }
             return;
         }
+        EEdit(_Text()).ReplaceSelection(L"    ", 4);
+        return;
     }
+
+    SetMsgHandled(FALSE);
+}
+
+void LStickyNoteWnd::OnTimer(UINT)
+{
+    StickyNoteMan::GetInstance()->ShowAll();
 
     SetMsgHandled(FALSE);
 }
@@ -325,7 +345,7 @@ LStickyNoteWnd* StickyNoteMan::Create(const TTodoTask& t)
     {
         // 显示桌面便签
         wnd = new LStickyNoteWnd(t);
-        wnd->Create(NULL, WS_POPUP | WS_VISIBLE, WS_EX_TOOLWINDOW,
+        wnd->Create(GetDesktopWindow(), WS_POPUP | WS_VISIBLE, WS_EX_TOOLWINDOW,
             WS_QEX_WNDSHADOW | WS_QEX_THICKFRAME);
         
         lst_.push_back(wnd);
@@ -421,4 +441,15 @@ LStickyNoteWnd* StickyNoteMan::NextSibling(LStickyNoteWnd* p)
         return lst_.front();
     }
     return *++i;
+}
+
+void StickyNoteMan::ShowAll()
+{
+    for (LStickyNoteWnd* p : lst_)
+    {
+        if (p->IsWindow() && !p->IsWindowVisible())
+        {
+            p->ShowWindow(SW_SHOW);
+        }
+    }
 }

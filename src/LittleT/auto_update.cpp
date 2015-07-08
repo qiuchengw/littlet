@@ -5,6 +5,7 @@
 #include "crypt/QDataEnDe.h"
 #include "include/misc.h"
 #include "deps/inet/WinHttpClient.h"
+#include <atlconv.h>
 
 //////////////////////////////////////////////////////////////////////////
 QAutoUpdater::QAutoUpdater(void)
@@ -27,8 +28,6 @@ VOID CALLBACK QAutoUpdater::CheckUpdateCallback(
 
     // 登录通知
     littlet::SendWebRequest(L"login", L"with-in-update");
-
-//    pThis->CheckBaseData();
 }
 
 BOOL QAutoUpdater::CheckUpdate( )
@@ -52,23 +51,6 @@ BOOL QAutoUpdater::CheckUpdate( )
     delete p;
     return FALSE;
 }
-
-// BOOL QAutoUpdater::CheckBaseData( )
-// {
-//     _Download_Param *p = new _Download_Param(TASK_TYPE_UPDATION);
-//     p->sURL = url_basedata_.url_;
-//     p->sRefer = url_basedata_.domain_;
-//     p->pData = this;
-//     HANDLE hThread = (HANDLE)_beginthreadex(NULL,0, 
-//         &QAutoUpdater::thread_download,p,0,NULL);
-//     if (hThread > 0)
-//     {
-//         CloseHandle(hThread);
-//         return TRUE;
-//     }
-//     delete p;
-//     return FALSE;
-// }
 
 BOOL IsHigherVersion(CStdString& sVer, BOOL IsUpdation)
 {
@@ -107,22 +89,22 @@ BOOL updation_ExtractVerAndUrl(__in CStdString& sHtml, __out CStdString& sVersio
     sVersion = sHtml.Mid(ib, ie-ib);
 
     // file
-    sHtml = sHtml.Mid(ie);
-    ib = sHtml.Find(L"--begin--");
-    if (-1 == ib)
-        return FALSE;
-    ib = sHtml.Find(L"real_src",ib);
-    if (-1 == ib)
-        return FALSE;
-    ib += 8;
-    ie = sHtml.Find(L"&amp;", ib);
-    if (-1 == ie)
-        return FALSE;
-    sFileUrl = sHtml.Mid(ib, ie-ib);
-    ib = sFileUrl.Find(L"http://");
-    if (-1 == ib)
-        return FALSE;
-    sFileUrl = sFileUrl.Mid(ib);
+//     sHtml = sHtml.Mid(ie);
+//     ib = sHtml.Find(L"--begin--");
+//     if (-1 == ib)
+//         return FALSE;
+//     ib = sHtml.Find(L"real_src",ib);
+//     if (-1 == ib)
+//         return FALSE;
+//     ib += 8;
+//     ie = sHtml.Find(L"&amp;", ib);
+//     if (-1 == ie)
+//         return FALSE;
+//     sFileUrl = sHtml.Mid(ib, ie-ib);
+//     ib = sFileUrl.Find(L"http://");
+//     if (-1 == ib)
+//         return FALSE;
+    sFileUrl = "http://www.jiubaibu.com/appcast/littlet/littlet_latest.zip"; // sFileUrl.Mid(ib);
     return TRUE;
 }
 
@@ -131,93 +113,98 @@ BOOL basedata_ExtractVerAndUrl(__in CStdString& sHtml, __out CStdString& sVersio
 {
     // 这段代码真恶心啊，不会正则表达式啊
     // version
-    int ib = sHtml.Find(L"[[[ver:");
-    if (-1 == ib)
-        return FALSE;
-    ib += 7;
-    int ie = sHtml.Find(L"]]]", ib);
-    if (-1 == ie)
-        return FALSE;
-    sVersion = sHtml.Mid(ib, ie-ib);
-
-    // file
-    sHtml = sHtml.Mid(ie);
-    ib = sHtml.Find(L"--begin--");
-    if (-1 == ib)
-        return FALSE;
-    ib = sHtml.Find(L"real_src",ib);
-    if (-1 == ib)
-        return FALSE;
-    ib += 8;
-    ie = sHtml.Find(L"&amp;", ib);
-    if (-1 == ie)
-        return FALSE;
-    sFileUrl = sHtml.Mid(ib, ie-ib);
-    ib = sFileUrl.Find(L"http://");
-    if (-1 == ib)
-        return FALSE;
-    sFileUrl = sFileUrl.Mid(ib);
-    return TRUE;
+//     int ib = sHtml.Find(L"[[[ver:");
+//     if (-1 == ib)
+//         return FALSE;
+//     ib += 7;
+//     int ie = sHtml.Find(L"]]]", ib);
+//     if (-1 == ie)
+//         return FALSE;
+//     sVersion = sHtml.Mid(ib, ie-ib);
+// 
+//     // file
+//     sHtml = sHtml.Mid(ie);
+//     ib = sHtml.Find(L"--begin--");
+//     if (-1 == ib)
+//         return FALSE;
+//     ib = sHtml.Find(L"real_src",ib);
+//     if (-1 == ib)
+//         return FALSE;
+//     ib += 8;
+//     ie = sHtml.Find(L"&amp;", ib);
+//     if (-1 == ie)
+//         return FALSE;
+//     sFileUrl = sHtml.Mid(ib, ie-ib);
+//     ib = sFileUrl.Find(L"http://");
+//     if (-1 == ib)
+//         return FALSE;
+//     sFileUrl = sFileUrl.Mid(ib);
+//     return TRUE;
+    return FALSE;
 }
 
 BOOL DecryptPictureData(__in QBuffer& bufEncrypt, __out QBuffer& bufData)
 {
-    DWORD dwPicSize = bufEncrypt.GetBufferLen();
-    if (dwPicSize < 2048)
-    {
-        return FALSE;
-    }
-
-    // 最后写入20个字节，顺序如下
-    // 密钥在图像数据中的偏移
-    DWORD dwOffset;
-    bufEncrypt.ReadLast((BYTE*)&dwOffset,sizeof(DWORD));
-    // 密钥长度
-    DWORD dwKeyLen;
-    bufEncrypt.ReadLast((BYTE*)&dwKeyLen,sizeof(DWORD));
-    // 图像大小
-    bufEncrypt.ReadLast((BYTE*)&dwPicSize,sizeof(DWORD));
-    // 加密后的数据长度
-    DWORD dwEncrypDataLen;
-    bufEncrypt.ReadLast((BYTE*)&dwEncrypDataLen,sizeof(DWORD));
-    // 原始数据长度
-    DWORD dwOriginLen;
-    bufEncrypt.ReadLast((BYTE*)&dwOriginLen,sizeof(DWORD));
-
-    if (!bufData.AllocBuffer(dwEncrypDataLen))
-    {
-        return FALSE;
-    }
-    if (!bufData.Write(bufEncrypt.GetBuffer(dwPicSize),dwEncrypDataLen))
-    {
-        // eInfo.SetText(L"读取数据错误");
-        return FALSE;
-    }
-
-    QDataEnDe ende;
-    if (!ende.SetCodeData(bufEncrypt.GetBuffer(dwOffset),dwKeyLen))
-    {
-        return FALSE;
-        // eInfo.SetText(L"设置密码数据失败");
-    }
-    if (!ende.DecryptData(bufData))
-    {
-        // eInfo.SetText(L"解密数据失败!");
-        return FALSE;
-    }
-
-    // eInfo.SetText(L"全部搞定啦！已经保存为：" + sFileName);
-    return TRUE;
+    ASSERT(FALSE);
+    return FALSE;
+//     DWORD dwPicSize = bufEncrypt.GetBufferLen();
+//     if (dwPicSize < 2048)
+//     {
+//         return FALSE;
+//     }
+// 
+//     // 最后写入20个字节，顺序如下
+//     // 密钥在图像数据中的偏移
+//     DWORD dwOffset;
+//     bufEncrypt.ReadLast((BYTE*)&dwOffset,sizeof(DWORD));
+//     // 密钥长度
+//     DWORD dwKeyLen;
+//     bufEncrypt.ReadLast((BYTE*)&dwKeyLen,sizeof(DWORD));
+//     // 图像大小
+//     bufEncrypt.ReadLast((BYTE*)&dwPicSize,sizeof(DWORD));
+//     // 加密后的数据长度
+//     DWORD dwEncrypDataLen;
+//     bufEncrypt.ReadLast((BYTE*)&dwEncrypDataLen,sizeof(DWORD));
+//     // 原始数据长度
+//     DWORD dwOriginLen;
+//     bufEncrypt.ReadLast((BYTE*)&dwOriginLen,sizeof(DWORD));
+// 
+//     if (!bufData.AllocBuffer(dwEncrypDataLen))
+//     {
+//         return FALSE;
+//     }
+//     if (!bufData.Write(bufEncrypt.GetBuffer(dwPicSize),dwEncrypDataLen))
+//     {
+//         // eInfo.SetText(L"读取数据错误");
+//         return FALSE;
+//     }
+// 
+//     QDataEnDe ende;
+//     if (!ende.SetCodeData(bufEncrypt.GetBuffer(dwOffset),dwKeyLen))
+//     {
+//         return FALSE;
+//         // eInfo.SetText(L"设置密码数据失败");
+//     }
+//     if (!ende.DecryptData(bufData))
+//     {
+//         // eInfo.SetText(L"解密数据失败!");
+//         return FALSE;
+//     }
+// 
+//     // eInfo.SetText(L"全部搞定啦！已经保存为：" + sFileName);
+//     return TRUE;
 }
 
 BOOL DecryptUpdateFile(__in QBuffer& bufEncrypt, __in const CStdString& sSavePath)
 {
-    QBuffer bufData;
-    if (DecryptPictureData(bufEncrypt, bufData))
-    {
-        return (bufData.FileWrite(sSavePath));
-    }
-    return FALSE;
+    return bufEncrypt.FileWrite(sSavePath);
+
+//     QBuffer bufData;
+//     if (DecryptPictureData(bufEncrypt, bufData))
+//     {
+//         return (bufData.FileWrite(sSavePath));
+//     }
+//     return FALSE;
 }
 
 UINT_PTR __stdcall QAutoUpdater::thread_download( void* pparam )
@@ -247,8 +234,8 @@ UINT_PTR __stdcall QAutoUpdater::thread_download( void* pparam )
         if (!cl.SendHttpRequest())
             continue;
 
-        // 下载数据了
-        CStdString sHtml = cl.GetResponseContent().c_str();
+        // 下载数据了，这个其实是乱码，但是能找到所要的信息就好了 。
+        CStdString sHtml = cl.GetResponseContent(); 
         if (p->IsUpdationTask())
         {
             // 自动更新
@@ -357,27 +344,4 @@ BOOL QAutoUpdater::Startup( __in _Url& urlUpdation,
 }
 
 BOOL QAutoUpdater::updating_;
-
-// BOOL QAutoUpdater::Startup( __in DWORD dwCheckPeriod /*= 30*/ )
-// {
-//     if (NULL != m_hTimer)
-//     {
-//         ASSERT(FALSE);  
-//         return TRUE;
-//     }
-// 
-// //     QUIConnectCenter*pCC = QUIConnectCenter::GetInstance();
-// // 
-// //     if (pCC->GetUpdationUrl(url_updation_) 
-// //         && pCC->GetUserUrl(url_basedata_))
-//     {
-//         dwCheckPeriod = max(10, dwCheckPeriod);
-//         
-//         // 启动15秒的时候先检查一次更新
-//         return CreateTimerQueueTimer(&m_hTimer, NULL, CheckUpdateCallback, this,
-//             15 * 1000, dwCheckPeriod * 60 * 1000, WT_EXECUTEDEFAULT);
-//     }
-//     return FALSE;
-// }
-
 

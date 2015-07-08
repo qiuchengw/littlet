@@ -78,18 +78,24 @@
 			#chk_topmost:checked,
 			#chk_topmost:checked:hover{
 				background-image:url(qabs:common/images/pin_top.png); 
-			}			
+			}
 			
 			#editor_msg,#editor_msg>*{
 				background:transparent;
 				border:none;
 			}
+			
 			#editor_msg>.toolbar{
 				visibility:collapse;
 			}
-			#editor_msg[focus]>.toolbar{
+			#editor_msg[xfocus]>.toolbar{
 				visibility:visible;
 			}
+			/*
+			#btn_strikeline{
+				click!: inp = $1(richtext#the_editor),
+				inp.replaceSelection("<b>"+inp.selectionText()+"</b>");
+			}*/
 		</style>
 	</head>
 	<body #wc-top style="min-height:120px;min-width:260px;width:*;height:*;padding:2px;">
@@ -110,6 +116,7 @@
 				<widget .tb-button   command=richtext:strong><b>B</b></widget>
 				<widget .tb-button   command=richtext:em><i>I</i></widget>
 				<widget .tb-button   command=richtext:p><b>P</b></widget>
+				<!-- <widget .tb-button id="btn_strikeline"><b style="text-decoration:overline">S</b></widget> -->
 				<widget .tb-button command=richtext:pre title="代码控们使用！"><b>C</b></widget>
 				<widget .tb-button.h command=richtext:h1>H<b>1</b></widget>
 				<widget .tb-button.h command=richtext:h2>H<b>2</b></widget>
@@ -118,14 +125,15 @@
 				<widget .tb-button.h command=richtext:h5>H<b>5</b></widget>
 				<widget .tb-button command=richtext:li-ul><img src="res:format-ul.png" /></widget>
 				<widget .tb-button command=richtext:li-ol><img src="res:format-ol.png" /></widget>
-				<widget .tb-button command=richtext:indent-dec accesskey="TAB"><img src="res:format-indent-dec.png" /></widget>
-				<widget .tb-button command=richtext:indent-inc accesskey="!TAB"><img src="res:format-indent-inc.png" /></widget>
+				<widget .tb-button command=richtext:indent-dec><img src="res:format-indent-dec.png" /></widget>
+				<widget .tb-button command=richtext:indent-inc><img src="res:format-indent-inc.png" /></widget>
+				<!--
 				<widget type="select-dropdown" id="richtext-fontfamily" />
-				<!-- <widget type="colorpicker" id="richtext-fontcolor" style="margin-left:6px;width:20px;height:20px;" /> -->
+				<widget type="colorpicker" id="richtext-fontcolor" style="margin-left:6px;width:20px;height:20px;" /> -->
 			</widget>
 			
-			<richtext toolbar="widget.toolbar" name="html" content-style="content.css" allow-clipboard-images>
-				
+			<richtext toolbar="widget.toolbar" id="the_editor" name="html" content-style="content.css" allow-clipboard-images>
+
 			</richtext>
 		</widget>
 		
