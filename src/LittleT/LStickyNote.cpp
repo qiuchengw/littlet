@@ -192,7 +192,7 @@ void LStickyNoteWnd::OnSetFocus(HWND)
     _Text().SimulateKeybordEvent(VK_LEFT);
 
     // “ı”∞—’…´
-    SetShadowColor(0xE80A4B);
+    // SetShadowColor(0xE80A4B);
     SetShadowSize(4);
 
     SetMsgHandled(FALSE);
