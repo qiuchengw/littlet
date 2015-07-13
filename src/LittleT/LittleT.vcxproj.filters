@@ -19,9 +19,6 @@
     <Filter Include="common">
       <UniqueIdentifier>{45bd65da-6c17-4003-86a5-d878e3d0a581}</UniqueIdentifier>
     </Filter>
-    <Filter Include="uibase">
-      <UniqueIdentifier>{e4476bf5-cefc-4480-a937-29e449d4a94d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="userfeed">
       <UniqueIdentifier>{ab304cfd-3932-45a2-93cf-6bcef6e9b23f}</UniqueIdentifier>
     </Filter>

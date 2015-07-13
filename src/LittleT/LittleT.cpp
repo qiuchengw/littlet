@@ -222,7 +222,11 @@ void LittleTApp::StartUpdateExe()
 CStdString LittleTApp::GetAppVersion() const
 {
     // 更新历史：<br/>
-    // LittleT v5.1 2015 / 7 / 8 < br / >
+    // LittleT v5.3 2015 / 7 / 15 < br / >
+    // ----------------------<br / >
+    // 增强：支持多显示器<br / >
+    // <br / >
+    // LittleT v5.2 2015 / 7 / 8 < br / >
     // ----------------------<br / >
     // 增强：便签功能Tab键缩进<br / >
     // 增强：便签功能Ctrl + [Shift] + Tab进行便签导航<br / >
