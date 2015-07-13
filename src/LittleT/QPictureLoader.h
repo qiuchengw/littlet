@@ -49,9 +49,7 @@ public:
 
         if (shuffle)
         {
-            unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-
-            std::shuffle(m_list.begin(), m_list.end(), std::default_random_engine(seed));
+            ShuffleOrders();
         }
 		return GetFileCount();
 	}
@@ -156,8 +154,19 @@ public:
     {
         StopAutoPlayTimer();
     }
+
+    /*
+    *	Ëæ»úÂÒÐòÍ¼Æ¬Ë³Ðò
+    */
+    void ShuffleOrders()
+    {
+        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+        std::shuffle(m_list.begin(), m_list.end(), std::default_random_engine(seed));
+    }
+
 protected:
-	
+
     BOOL SetAutoPlayTimer(int nSec)
 	{
 		StopAutoPlayTimer();

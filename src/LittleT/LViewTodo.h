@@ -25,6 +25,10 @@ protected:
     void FreshTaskItem(ECtrl& eGroup, ECtrl &eItem, TTodoTask* pTask);
 
     void OnClkDeleteTask(HELEMENT hBtn);
+    // 拖动的形式删除元素
+    void OnDropDeleteTask(HELEMENT target, HELEMENT src, HELEMENT dragging);
+    bool _onDeleteTask(int taskid);
+
     void OnClkStickyNote(HELEMENT hBtn);
     void OnClkTaskChk(HELEMENT hBtn);
     void OnClkPriority(HELEMENT );
@@ -36,6 +40,7 @@ protected:
     void OnClkIdbarOK(HELEMENT );
     void OnClkIdbarCancel(HELEMENT );
     void OnTodoShow(HELEMENT he);
+
     void RefreshTaskNum();
 
     ECtrl _PopupBar() { return GetCtrl("#id_popup_todoitem"); };

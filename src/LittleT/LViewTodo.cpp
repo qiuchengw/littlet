@@ -23,6 +23,7 @@ QUI_BEGIN_EVENT_MAP(LFormTodo, QForm)
     BN_CLICKED_ID(L"CHK_TODO_WAITING", &LFormTodo::OnTodoShow)
     BN_CLICKED_ID(L"CHK_TODO_FINISHED", &LFormTodo::OnTodoShow)
     BN_STATECHANGED_NAME(L"star_Priority", &LFormTodo::OnClkPriority)
+    DROP_NAME(L"todoitem", &LFormTodo::OnDropDeleteTask)
 QUI_END_EVENT_MAP()
 
 LFormTodo::~LFormTodo(void)
@@ -68,9 +69,25 @@ void LFormTodo::OnClkDeleteTask( HELEMENT hBtn )
 {
     ECtrl table = ECtrl(hBtn).select_parent(L"table",4);
     int task_id = (int)table.GetData();
-    if (QDBEvents::GetInstance()->TodoTask_Delete(task_id))
+    if (_onDeleteTask(task_id))
     {
         table.destroy();
+    }
+}
+
+void LFormTodo::OnDropDeleteTask(HELEMENT target, HELEMENT src, HELEMENT dragging)
+{
+    int task_id = (int)ECtrl(src).GetData();
+    if (_onDeleteTask(task_id))
+    {
+        // ...
+    }
+}
+
+bool LFormTodo::_onDeleteTask(int task_id)
+{
+    if (QDBEvents::GetInstance()->TodoTask_Delete(task_id))
+    {
         RefreshTaskNum();
 
         // 从config文件中去掉sticky相关的东西
@@ -78,7 +95,10 @@ void LFormTodo::OnClkDeleteTask( HELEMENT hBtn )
         cfg->RemoveKey(L"StickyNote", CStdString::number(task_id));
         cfg->RemoveKey(L"StickyNoteColor", CStdString::number(task_id));
         cfg->RemoveKey(L"StickyNoteTop", CStdString::number(task_id));
+
+        return true;
     }
+    return false;
 }
 
 void LFormTodo::OnClkStickyNote(HELEMENT hBtn)

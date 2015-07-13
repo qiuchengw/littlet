@@ -10,7 +10,9 @@ namespace littlet
 {
     LStickyNoteWnd* NewStickyNote(__out TTodoTask& t)
     {
-        t.sTask = L"Ctrl+[Shift]+Tab 可导航所有便签";
+        t.sTask = L"<html><head>u{color:gray; text-decoration:overline;}</head>"
+            L"<body>Ctrl+Tab导航便签</body>"
+            L"</html>";
         t.nFlag = TODO_FLAG_STICKYNOTE;
         t.nID = QDBEvents::GetInstance()->TodoTask_Add(&t);
         t.nCateID = INVALID_ID;
@@ -132,7 +134,9 @@ LRESULT LStickyNoteWnd::OnDocumentComplete()
     TTodoTask task;
     if (QDBEvents::GetInstance()->TodoTask_Get(taskid_, task))
     {
-        _Text().SetValue(task.sTask);
+        _Text().xcall("loadHTML", task.sTask);
+        _Text().SelectText();
+//        auto yyy = _Text().GetSelection(0, 0xffff, true);
     }
 
     // 每隔一秒钟扫描一次，将窗口显示出来

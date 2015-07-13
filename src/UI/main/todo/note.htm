@@ -91,6 +91,7 @@
 			#editor_msg[xfocus]>.toolbar{
 				visibility:visible;
 			}
+			
 			/*
 			#btn_strikeline{
 				click!: inp = $1(richtext#the_editor),
@@ -100,6 +101,8 @@
 	</head>
 	<body #wc-top style="min-height:120px;min-width:260px;width:*;height:*;padding:2px;">
 		<div #wc-caption>
+			<style>u{color:red;}</style>
+			<u>hello</u>
 			<div .qbtn id="btn_new" title="新建便签" />
 			<div #wc-title></div>
 			<div .qbtn id="btn_editor" title="字体编辑" />
@@ -116,6 +119,8 @@
 				<widget .tb-button   command=richtext:strong><b>B</b></widget>
 				<widget .tb-button   command=richtext:em><i>I</i></widget>
 				<widget .tb-button   command=richtext:p><b>P</b></widget>
+				<widget .tb-button   command=richtext:u><b>U</b></widget>
+				
 				<!-- <widget .tb-button id="btn_strikeline"><b style="text-decoration:overline">S</b></widget> -->
 				<widget .tb-button command=richtext:pre title="代码控们使用！"><b>C</b></widget>
 				<widget .tb-button.h command=richtext:h1>H<b>1</b></widget>
