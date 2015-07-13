@@ -225,6 +225,7 @@ CStdString LittleTApp::GetAppVersion() const
     // LittleT v5.3 2015 / 7 / 15 < br / >
     // ----------------------<br / >
     // 增强：支持多显示器<br / >
+    // 增强：去掉微博连接
     // <br / >
     // LittleT v5.2 2015 / 7 / 8 < br / >
     // ----------------------<br / >
