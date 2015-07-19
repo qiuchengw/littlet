@@ -152,26 +152,25 @@
 
 
 /*垃圾箱*/
-.trash{
+#trashbox{
+	visibility:collapse;
 	accept-drop: selector(div.events>table); /* accept drop of items only from carts */ 
 	drop: recycle; /* delete element on drop */
-	width:*;height:*;
-	padding:2 10 2 22px;
-	foreground:url(qabs:icons/delete_16.png) no-repeat;
-	foreground-position:4px center;
-	vertical-align:middle;
-	color:#444;
-	margin-right:5px;
+	width:100px;height:128px;
+	background:url(qabs:main/images/trashbox.png) no-repeat;
+	background-position:center;
+	opacity:0.5;
+	position:fixed;
+	right:0;
+	bottom:45px;
 }
 
 /* dragging operation is in effect and this element is the active target */  
-.trash:drop-target{
-	background-color:#ED5F28;
-	border-color:#D15224;
+#trashbox:drop-target{
+	visibility:visible;
 }
 
 /* dragging operation is in effect and this element is the active target and dragged element is over this one */  
-.trash:drag-over{
-	background-color:#F227CB;
-	border-color:#B41C98;
+#trashbox:drag-over{
+	opacity:1.0;
 }

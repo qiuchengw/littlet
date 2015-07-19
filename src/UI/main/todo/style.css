@@ -28,12 +28,12 @@ body{
 	accept-drop: selector(#todolist>table); /* accept drop of items only from carts */ 
 	drop: recycle; /* delete element on drop */
 	width:100px;height:128px;
-	background:url(qrel:images/trashbox.png) no-repeat;
+	background:url(qabs:main/images/trashbox.png) no-repeat;
 	background-position:center;
 	opacity:0.5;
 	position:fixed;
 	right:0;
-	bottom:35px;
+	bottom:45px;
 }
 
 /* dragging operation is in effect and this element is the active target */  
