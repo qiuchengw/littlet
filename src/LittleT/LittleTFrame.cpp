@@ -13,6 +13,7 @@
 #include "LAboutDlg.h"
 #include "include/misc.h"
 #include "deps/app.h"
+#include "LStickyNote.h"
 
 struct _APPMODE_2_TABIDX
 {
@@ -340,6 +341,7 @@ BOOL LittleTFrame::ConfigHotKey(BOOL bConfig)
         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL | MOD_SHIFT, 0x4A);  // j
         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL | MOD_SHIFT, 0x4B);  // k
         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL | MOD_SHIFT, 0x4C);  // l
+        RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL | MOD_SHIFT, 0x4D);  // m
     }
     else
     {
@@ -436,6 +438,12 @@ void LittleTFrame::OnHotKey( int nSystemHotKey,UINT nModifier,UINT nVk )
             littlet::EnterAppMode(APP_MODE_PLAN);
             m_viewPlan.OnClkNewPlan(NULL);
 
+            break;
+        }
+    case 0x4D:  // m
+        {
+            // 显示所有的便签
+            StickyNoteMan::GetInstance()->ShowAll();
             break;
         }
     }

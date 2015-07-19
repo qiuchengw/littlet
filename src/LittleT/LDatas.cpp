@@ -43,7 +43,7 @@ namespace littlet
                 }
             }
         }
-        else if (0x4E == nChar)
+        else if (0x4E == nChar) // N
         {
             switch (littlet::GetAppMode())
             {

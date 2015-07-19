@@ -23,7 +23,6 @@ class LStickyNoteWnd : public QFrame
         MSG_WM_KILLFOCUS(OnKillFocus)
         MSG_WM_SETFOCUS(OnSetFocus)
         MSG_WM_CLOSE(OnClose)
-        MSG_WM_TIMER(OnTimer)
         MSG_WM_KEYDOWN(OnKeyDown)  // 这个为啥会造成字体设置按钮不可用？
         CHAIN_MSG_MAP(_Base)
     END_MSG_MAP()
@@ -56,7 +55,6 @@ protected:
     void OnClose();
     void OnKillFocus(HWND);
     void OnSetFocus(HWND);
-    void OnTimer(UINT);
     void OnKeyDown(TCHAR ch, UINT n, UINT r);
 
     // 位置

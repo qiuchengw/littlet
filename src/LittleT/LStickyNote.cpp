@@ -136,11 +136,7 @@ LRESULT LStickyNoteWnd::OnDocumentComplete()
     {
         _Text().xcall("loadHTML", task.sTask);
         _Text().SelectText();
-//        auto yyy = _Text().GetSelection(0, 0xffff, true);
     }
-
-    // 每隔一秒钟扫描一次，将窗口显示出来
-    SetTimer(0x005, 1000);
 
     return 0;
 }
@@ -330,13 +326,6 @@ void LStickyNoteWnd::OnKeyDown(TCHAR ch, UINT n, UINT r)
     SetMsgHandled(FALSE);
 }
 
-void LStickyNoteWnd::OnTimer(UINT)
-{
-    StickyNoteMan::GetInstance()->ShowAll();
-
-    SetMsgHandled(FALSE);
-}
-
 //////////////////////////////////////////////////////////////////////////
 LStickyNoteWnd* StickyNoteMan::Create(const TTodoTask& t)
 {
@@ -451,9 +440,10 @@ void StickyNoteMan::ShowAll()
 {
     for (LStickyNoteWnd* p : lst_)
     {
-        if (p->IsWindow() && !p->IsWindowVisible())
+        if (p->IsWindow() /*&& !p->IsWindowVisible()*/)
         {
             p->ShowWindow(SW_SHOW);
+            p->BringWindowToTop();
         }
     }
 }
