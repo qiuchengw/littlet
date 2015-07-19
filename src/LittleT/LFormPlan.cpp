@@ -126,13 +126,12 @@ void LFormPlan::RefreshPlanItem(ETable &tblPlan)
 
     CStdString sHtml;
     sHtml.Format(
-        L"<tr> <td .plan-title>%s</td> </tr>"   // 计划名
-        L"<tr> <td .plan-des>%s</td> </tr>" // 计划描述
-        L"<tr> <td .plan-time>[%s] - [%s] </td> </tr>",  // 周期 
+        L"<tr> <td .plan-title>%s</td> <td .plan-time>[%s - %s]</td></tr>"   // 计划名，周期
+        L"<tr> <td .plan-des colspan=2>%s</td> </tr>", // 计划描述
         pPlan->Plan(),
-        pPlan->Des(),
-        pPlan->BeginTime().Format(L"%x"),
-        pPlan->EndTime().Format(L"%x"));
+        pPlan->BeginTime().Format(L"%Y/%m/%d"),
+        pPlan->EndTime().Format(L"%Y/%m/%d"),
+        pPlan->Des());
     tblPlan.SetHtml(sHtml);
 }
 

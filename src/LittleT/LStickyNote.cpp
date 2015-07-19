@@ -186,12 +186,12 @@ void LStickyNoteWnd::OnKillFocus(HWND)
 
 void LStickyNoteWnd::OnSetFocus(HWND)
 {
-    _Text().SetFocus();
     // 输入光标移动到最后一个字符
     _Text().SelectText(0xFFFF);
     // 某些时候，光标不是移动到字符后面，而是移动到边缘，这个时候是无法
     // 输入数据的。不清楚是什么原因。
     _Text().SimulateKeybordEvent(VK_LEFT);
+    _Text().SetFocus();
 
     // 阴影颜色
     // SetShadowColor(0xE80A4B);

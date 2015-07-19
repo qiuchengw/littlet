@@ -22,7 +22,6 @@
 @const OUTLINE_STYLE_NORMAL:glow gray 2px 2px;
 @const OUTLINE_STYLE_ACTIVE:glow gray 4px 4px;
 @const CTRL_HEIGHT:24px;
-@const BACK_CHECKED_COLOR:#E5E0E0;
 
 hr.vert{
 	height:*;
@@ -137,17 +136,17 @@ table[name="plan-item"]{
 	background-color:white;
 	border-bottom:@BORDER;
 	behavior:switch;
-//	click!:self.$1p(popup)::visibility = "hidden";
 }
-table[name="plan-item"]:checked{
-	background-color:@BACK_CHECKED_COLOR;
+
+table[name="plan-item"]:checked {
 	background:url(qrel:images/red_dot.png) repeat-y;
-	backgrouns-position:0 0;
+	background-color:#FAF0D1;
 }
+
 table[name="plan-item"] td{
 	white-space:nowrap;
 	vertical-align:middle;
-	padding:2 2 2 6px;
+	padding:2 2 2 4px;
 	text-overflow:ellipsis;
 }
 table[name="plan-item"] td.icon{
@@ -163,7 +162,7 @@ table[name="plan-item"] td.plan-title{
 table[name="plan-item"] td.plan-des{
 	color:#aaa;
 	font:normal 9pt "宋体";
-	padding-left:30px;
+	padding-left:6px;
 }
 table[name="plan-item"] td.plan-time{
 	text-align:right;
