@@ -10,9 +10,7 @@ namespace littlet
 {
     LStickyNoteWnd* NewStickyNote(__out TTodoTask& t)
     {
-        t.sTask = L"<html><head>u{color:gray; text-decoration:overline;}</head>"
-            L"<body>Ctrl+Tabµº∫Ω±„«©</body>"
-            L"</html>";
+        t.sTask = L"Ctrl+Tabµº∫Ω±„«©";
         t.nFlag = TODO_FLAG_STICKYNOTE;
         t.nID = QDBEvents::GetInstance()->TodoTask_Add(&t);
         t.nCateID = INVALID_ID;
@@ -134,8 +132,12 @@ LRESULT LStickyNoteWnd::OnDocumentComplete()
     TTodoTask task;
     if (QDBEvents::GetInstance()->TodoTask_Get(taskid_, task))
     {
-        _Text().xcall("loadHTML", task.sTask);
-        _Text().SelectText();
+        CStdString real_txt;
+        real_txt.Format(L"<html>"
+            L"<head><style type='text/css'>u{color:gray; text-decoration:line-through;}</style></head>"
+            L"<body>%s</body>"
+            L"</html>", task.sTask);
+        _Text().SetText(real_txt);
     }
 
     return 0;
@@ -174,7 +176,7 @@ void LStickyNoteWnd::OnClkPinTop(HELEMENT he)
 void LStickyNoteWnd::OnKillFocus(HWND)
 {
     TTodoTask task = Task();
-    task.sTask = _Text().get_value().to_string();
+    task.sTask = _Text().GetText();
     QDBEvents::GetInstance()->TodoTask_Edit(&task);
 
     SetShadowSize(2);

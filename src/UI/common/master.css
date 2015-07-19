@@ -699,12 +699,7 @@ widget[type="richtext"]
 	{ 
 		color:graytext; 
 		vertical-align:top;
-	}
-	
-	u{
-		color:gray;
-		text-decoration:line-through;
-	}
+	}	
 }
 
 textarea:disabled, 
@@ -2403,12 +2398,6 @@ widget.editor {
    widget.toolbar>widget[id="richtext-fontcolor"]{
 	value-changed!:self.parent().parent().$(richtext).setFontColor(self.value);
    }
-   
-	u{
-		color:gray;
-		text-decoration:line-through;
-	}
-
 } 
 
 /**************************/
