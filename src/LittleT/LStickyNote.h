@@ -26,7 +26,6 @@ class LStickyNoteWnd : public QFrame
         MSG_WM_KEYDOWN(OnKeyDown)  // 这个为啥会造成字体设置按钮不可用？
         CHAIN_MSG_MAP(_Base)
     END_MSG_MAP()
-
 public:
     inline int TaskID()const
     {
@@ -37,6 +36,8 @@ public:
 
 private:
     LStickyNoteWnd(const TTodoTask& task);
+
+    bool SearchText(const CStdString& txt)const;
 
 protected:
     void OnclkNewNote(HELEMENT he);
@@ -50,7 +51,8 @@ protected:
     void OnClkClose(HELEMENT he);
     void OnClkPinTop(HELEMENT he);
 
-    void ShowEditPane(BOOL bShow , TTodoTask* p = nullptr);
+    void OnClkSearchCancel(HELEMENT he);
+    void OnClkSearchOK(HELEMENT he);
 
     void OnClose();
     void OnKillFocus(HWND);
@@ -62,6 +64,8 @@ protected:
     BOOL RestoreSetting();
 
     void SetTopMost(bool top);
+    void ShowSearchBar();
+
 
 protected:
     TTodoTask* _ItemData(__in ETable& t)
@@ -71,9 +75,14 @@ protected:
 
     virtual LRESULT OnDocumentComplete();
 
-    inline EEdit _Text()
+    inline EEdit _Text()const
     {
         return GetCtrl("#editor_msg>richtext");
+    }
+
+    inline EPopup _SearchBar()const
+    {
+        return GetCtrl("#id_popup_todoitem");
     }
 
     inline ECombobox _Font()
@@ -119,6 +128,13 @@ public:
 
     LStickyNoteWnd* PrevSibling(LStickyNoteWnd* p);
     LStickyNoteWnd* NextSibling(LStickyNoteWnd* p);
+
+    /*
+     *	搜索
+     */
+    LStickyNoteWnd* SearchNext(LStickyNoteWnd* cur_win);
+public:
+    CStdString      s_search_;
 
 private:
     LstStickyWnd        lst_;

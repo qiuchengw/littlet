@@ -137,6 +137,7 @@
     <ClInclude Include="..\common\QTimerMan.h" />
     <ClInclude Include="..\common\Worker.h" />
     <ClInclude Include="feed\Feedback.h" />
+    <ClInclude Include="html\xh_scanner.h" />
     <ClInclude Include="LAboutDlg.h" />
     <ClInclude Include="LAddTask.h" />
     <ClInclude Include="LDatas.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="..\common\Worker.cpp" />
     <ClCompile Include="auto_update.cpp" />
     <ClCompile Include="feed\Feedback.cpp" />
+    <ClCompile Include="html\xh_scanner.cpp" />
     <ClCompile Include="LAboutDlg.cpp" />
     <ClCompile Include="LAddTask.cpp" />
     <ClCompile Include="LDatas.cpp" />

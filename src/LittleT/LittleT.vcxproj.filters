@@ -31,6 +31,9 @@
     <Filter Include="deps\db">
       <UniqueIdentifier>{21270f94-4bae-44d7-9eab-53458c22a759}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\html_scanner">
+      <UniqueIdentifier>{6ee564b4-0f89-4663-bc94-64ee4d0a2931}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -177,6 +180,9 @@
     <ClInclude Include="LStickyNote.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="html\xh_scanner.h">
+      <Filter>Source Files\html_scanner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LittleT.cpp">
@@ -295,6 +301,9 @@
     </ClCompile>
     <ClCompile Include="LStickyNote.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="html\xh_scanner.cpp">
+      <Filter>Source Files\html_scanner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

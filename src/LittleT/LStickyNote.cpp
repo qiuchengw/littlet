@@ -4,6 +4,8 @@
 #include "common/QDBHelper.h"
 #include "ui/QConfig.h"
 #include "ui/WndHelper.h"
+#include "ui/QUIDlgs.h"
+#include "html/xh_scanner.h"
 
 
 namespace littlet
@@ -30,7 +32,8 @@ QUI_BEGIN_EVENT_MAP(LStickyNoteWnd, _Base)
     BN_CLICKED_ID(L"btn_editor", &LStickyNoteWnd::OnClkFontEditor)
     BN_CLICKED_ID(L"btn_new", &LStickyNoteWnd::OnclkNewNote)
     BN_STATECHANGED_ID(L"chk_topmost", &LStickyNoteWnd::OnClkPinTop);
-    BN_CLICKED_ID(L"btn_close", &LStickyNoteWnd::OnClkClose)
+    BN_CLICKED_ID(L"id_bar_ok", &LStickyNoteWnd::OnClkSearchOK)
+    BN_CLICKED_ID(L"id_bar_cancel", &LStickyNoteWnd::OnClkSearchCancel)
     UNKNOWN_SELECTION_CHANGED_ID(L"color_scheme", &LStickyNoteWnd::OnSelColorSchemeChanged)
 QUI_END_EVENT_MAP()
 
@@ -68,10 +71,6 @@ void LStickyNoteWnd::OnStrikeText(HELEMENT he)
 void LStickyNoteWnd::OnClkNoteItem(HELEMENT he) 
 {
     // 编辑
-}
-
-void LStickyNoteWnd::ShowEditPane(BOOL bShow, TTodoTask* p) 
-{
 }
 
 ETable LStickyNoteWnd::AddItem(__in TTodoTask* p, __in BOOL bAtFirst) 
@@ -297,8 +296,30 @@ BOOL LStickyNoteWnd::RestoreSetting()
     return TRUE;
 }
 
+void LStickyNoteWnd::ShowSearchBar()
+{
+    HTMLayoutShowPopup(_SearchBar(), _Text(), 2);
+
+    EEdit ctlInput = _SearchBar().find_first("#id_search");
+    ctlInput.SetFocus();
+}
+
 void LStickyNoteWnd::OnKeyDown(TCHAR ch, UINT n, UINT r)
 {
+    if ((GetKeyState(VK_CONTROL) & 0x8000)
+        && (0x46 == ch)) // // F
+    {
+        ShowSearchBar();
+        return;
+    }
+
+    if (GetKeyState(VK_F3) & 0x8000)
+    {
+        // 搜索
+        StickyNoteMan::GetInstance()->SearchNext(this);
+        return;
+    }
+
     if (GetKeyState(VK_TAB) & 0x8000)
     {
         if (GetKeyState(VK_CONTROL) & 0x8000)
@@ -326,6 +347,84 @@ void LStickyNoteWnd::OnKeyDown(TCHAR ch, UINT n, UINT r)
     }
 
     SetMsgHandled(FALSE);
+}
+
+bool LStickyNoteWnd::SearchText(const CStdString& txt)const
+{
+    if (txt.IsEmpty())
+    {
+        ASSERT(FALSE);
+        return false;
+    }
+
+    auto Html2Txt = [](CStdString html)->CStdString
+    {
+        struct str_istream : public markup::instream
+        {
+            const wchar_t* p;
+            const wchar_t* end;
+            str_istream(const wchar_t* src) : p(src), end(src + wcslen(src)) {}
+            virtual wchar_t get_char() { return p < end ? *p++ : 0; }
+        };
+
+        html.Replace(L"\r\n", L"");
+        str_istream si(html.c_str());
+        markup::scanner sc(si);
+        
+        CStdString ret;
+        while (true)
+        {
+            bool finished = false; 
+            switch (sc.get_token())
+            {
+            case markup::scanner::TT_ERROR:
+            case markup::scanner::TT_EOF: finished = true; break;
+
+            case markup::scanner::TT_TAG_END:   // 
+            case markup::scanner::TT_WORD:
+            case markup::scanner::TT_WORD:
+            case markup::scanner::TT_SPACE: ret += sc.get_value(); break;
+            }
+
+            if (finished)
+                break;
+        }
+        ret.Replace(L"\r\n ", L"");
+        ret.Replace(L"\n", L"");
+        return ret;
+    };
+
+    int i_start = -1, i_end = -1;
+    _Text().GetSelection(i_start, i_end);
+    
+    CStdString s_txt = Html2Txt(_Text().GetText());
+    i_start = s_txt.find(txt, i_end);
+    if (-1 != i_start)
+    {
+        // 先取消选中
+        _Text().SelectText(0xffff);
+        _Text().SelectText(i_start, i_start + txt.length());
+        // _Text().SelectText(8,9);
+        return true;
+    }
+    return false;
+}
+
+void LStickyNoteWnd::OnClkSearchCancel(HELEMENT he)
+{
+    ::HTMLayoutHidePopup(_SearchBar());
+}
+
+void LStickyNoteWnd::OnClkSearchOK(HELEMENT he)
+{
+    EEdit ctlInput = _SearchBar().find_first("#id_search");
+    ctlInput.SetFocus();
+
+    auto* man = StickyNoteMan::GetInstance();
+    man->s_search_ = ctlInput.GetText();
+    man->SearchNext(this);
+
+    ::HTMLayoutHidePopup(_SearchBar());
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -448,4 +547,38 @@ void StickyNoteMan::ShowAll()
             p->BringWindowToTop();
         }
     }
+}
+
+LStickyNoteWnd* StickyNoteMan::SearchNext(LStickyNoteWnd* cur_win)
+{
+    if (s_search_.IsEmpty())
+    {
+        return nullptr;
+    }
+
+    auto FuncSearch = [=](LstStickyWnd::iterator ib, LstStickyWnd::iterator ie)->LStickyNoteWnd*
+    {
+        for (ib; ib != ie; ++ib)
+        {
+            LStickyNoteWnd* p = *ib;
+            if (p->SearchText(s_search_))
+            {
+                p->ShowWindow(true);
+                p->SetFocus();
+
+                // 找到了
+                return p;
+            }
+        }
+        // 失败了！
+        return nullptr;
+    };
+
+    auto i = std::find(lst_.begin(), lst_.end(), cur_win);
+    // 后半段找
+    if (LStickyNoteWnd* p = FuncSearch(i, lst_.end()))
+        return p;
+    
+    // 前半段找
+    return FuncSearch(lst_.begin(), i);
 }

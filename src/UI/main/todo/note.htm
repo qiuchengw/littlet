@@ -1,6 +1,7 @@
 ﻿<html>
 	<head>
 		<link rel="stylesheet" href="qabs:style.css" type="text/css" />
+		<link rel="stylesheet" href="qrel:style.css" type="text/css" />
 		<link rel="stylesheet" href="qabs:notestyle.css" type="text/css" />
 		<style type="text/css">
 			p{
@@ -91,7 +92,6 @@
 			#editor_msg[xfocus]>.toolbar{
 				visibility:visible;
 			}
-			
 		</style>
 	</head>
 	<body #wc-top style="min-height:120px;min-width:260px;width:*;height:*;padding:5px;">
@@ -106,7 +106,11 @@
 			-->
 			<div .qbtn id="btn_close" title="设置为已完成并关闭" />
 		</div>
-		
+		<popup #id_popup_todoitem .xpopup>
+			<input type="text" id="id_search" style="width:*;" maxlength="20" novalue="请输入搜索关键字……" />
+			<button id="id_bar_ok" accesskey="!RETURN" style="visibility:collapse;" />
+			<button id="id_bar_cancel" accesskey="!ESCAPE" style="visibility:collapse;" />
+		</popup>
 		<widget .editor id="editor_msg">
 			<widget .toolbar>
 				<widget .tb-button   command=richtext:strong><b>B</b></widget>
