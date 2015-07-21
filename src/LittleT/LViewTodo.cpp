@@ -13,6 +13,7 @@ QUI_BEGIN_EVENT_MAP(LFormTodo, QForm)
     BN_CLICKED_NAME(L"btn_todoitem_delete", &LFormTodo::OnClkDeleteTask)
     BN_CLICKED_NAME(L"btn_todoitem_stickynote", &LFormTodo::OnClkStickyNote)
     BN_CLICKED_NAME(L"item_todo", &LFormTodo::OnClkTodoItem)
+    BN_CLICKED_NAME(L"item_endtime", &LFormTodo::OnClkTodoItem)
     BN_CLICKED_NAME(L"item_doit", &LFormTodo::OnClkDoit)
     BN_CLICKED_ID(L"btn_plus5m", &LFormTodo::OnClkPlus5Minutes)
     BN_CLICKED_ID(L"btn_minus5m", &LFormTodo::OnClkMinus5Minutes)
@@ -130,7 +131,7 @@ void LFormTodo::OnClkNewSticky(HELEMENT hBtn)
 }
 
 // <table><tr><td><widget type="checkbox" /></td><td>hello wolrd!</td></tr></table>
-void LFormTodo::InsertTask(ECtrl& eGroup, TTodoTask* pTask)
+void LFormTodo::InsertTask(ECtrl& eGroup, TTodoTask* pTask, int idx)
 {
     ASSERT(pTask != NULL);
     if ((pTask->nFlag & TODO_FLAG_STICKYNOTE)
@@ -141,7 +142,7 @@ void LFormTodo::InsertTask(ECtrl& eGroup, TTodoTask* pTask)
     }
 
     ECtrl etable = element::create("table");
-    eGroup.insert(etable,0);
+    eGroup.insert(etable, (idx <= -1) ? 0 : idx);
     etable.set_attribute("name",L"todoitem");
 
     FreshTaskItem(eGroup,etable,pTask);
@@ -156,7 +157,16 @@ void LFormTodo::FreshTaskItem( ECtrl& eGroup, ECtrl &etable, TTodoTask* pTask )
     }
 
     etable.SetData((LPVOID)pTask->nID);
-    CStdString str;
+
+    CStdString s_endtime;
+    if (_HasFlag(pTask->nFlag, TODO_FLAG_HASENDTIME))
+    {
+        QTime tm_now = QTime::GetCurrentTime();
+        s_endtime.Format(L"<td .item-endtime name='item_endtime' %s>%s</td>",
+            (tm_now <= pTask->tmExec) ? L".good" : L".overdue",
+            pTask->tmExec.Format(L"%Y/%m/%d %H:%M"));
+    }
+
 //     str.Format(L"<tr><td .item-exec><widget type=\"checkbox\" name=\"Chk_NoteTask\" %s>"
 //         L"<b.gray>%s</b></widget></td><td .item-todo name=\"item_todo\">%s</td>"
 //         L"<td .item-creat>%s</td>"
@@ -170,16 +180,19 @@ void LFormTodo::FreshTaskItem( ECtrl& eGroup, ECtrl &etable, TTodoTask* pTask )
 //         pTask->tmCreate.Format(L"%Y/%m/%d %H:%M"),
 //         pTask->nPriority,
 //         (pTask->eStatus == TODO_STATUS_FINISH)?L"disabled":L"");
+    CStdString str;
     str.Format(L"<tr title=\"创建于:%s\">"
         L"<td .item-exec><widget type=\"checkbox\" name=\"Chk_NoteTask\" %s /></td>"
+        L"%s"   // 结束时间
         L"<td name=\"item_doit\" .qbtn/>"
         L"<td .item-todo name=\"item_todo\">%s</td>"
-        L"<td><ul type=\"starbox\" name=\"star_Priority\" stars=\"3\" index=\"%d\" %s/></td>"
+        L"<td><ul type=\"starbox\" name=\"star_Priority\" stars=\"4\" index=\"%d\" %s/></td>"
         L"<td name=\"btn_todoitem_stickynote\" title=\"创建到桌面便签\"></td>"
         L"<td name=\"btn_todoitem_delete\">r</td>"
         L"</tr>",
         pTask->tmCreate.Format(L"%c"),      // 创建时间
         (pTask->eStatus == TODO_STATUS_FINISH)?L"checked":L"",
+        s_endtime,
         pTask->sTask,
         pTask->nPriority,
         (pTask->eStatus == TODO_STATUS_FINISH)?L"disabled":L"");
@@ -194,9 +207,17 @@ void LFormTodo::FreshTaskItem( ECtrl& eGroup, ECtrl &etable, TTodoTask* pTask )
 void LFormTodo::OnClkPriority( HELEMENT he)
 {
     EStarBox eStarBox(he);
-    ECtrl eTable = eStarBox.select_parent("table",4);
-    int nID = (int)(eTable.GetData());
-    QDBEvents::GetInstance()->TodoTask_SetPriority(nID,eStarBox.GetCurSel());
+    ETable eTable = eStarBox.select_parent("table",4);
+
+    TTodoTask t_task = _TaskOfItem(eTable);
+    t_task.nPriority = eStarBox.GetCurSel();
+    QDBEvents::GetInstance()->TodoTask_SetPriority((int)(eTable.GetData()), t_task.nPriority);
+
+    // 删除，重新排序
+    eTable.destroy();
+
+    // 插入到新的地方
+    InsertTask(_TodoList(), &t_task, FindFirstLessEqual(t_task.nPriority));
 }
 
 BOOL LFormTodo::ShowTask( ENUM_TODO_STATUS eStatus )
@@ -210,23 +231,13 @@ BOOL LFormTodo::ShowTask( ENUM_TODO_STATUS eStatus )
     else if (TODO_STATUS_PROCESSING == eStatus)
         pMgr->TodoTask_GetUnfinished(lst);
 
-//     class delete_todo_items : public htmlayout::dom::callback
-//     {
-//     public:
-//          // return false to continue enumeration
-//          virtual bool on_element(HELEMENT he)
-//          {
-//              ECtrl item(he);
-//              ASSERT(wcseqi(item.get_attribute("name"), L"todoitem"));
-//              item.destroy();
-// 
-//              return false;
-//          }
-//     };
+    // 优先级从小到大排序
+    std::stable_sort(lst.begin(), lst.end(), [](const TTodoTask& a, const TTodoTask& b)->bool
+    {
+        return a.nPriority < b.nPriority;
+    });
 
     ECtrl ctlList = _TodoList();
-    // 删除todoitem，但是不要删除do_it 这个table
-    //ctlList.select_elements(&delete_todo_items(), L"table[name=\"todoitem\"]");
     ctlList.DeleteAllChild();
     for (auto& t : lst)
     {
@@ -269,9 +280,9 @@ void LFormTodo::ShowPopupBar( TTodoTask &t,BOOL bEdit,HELEMENT he )
     // 模式设置
     if (bEdit)
     {
-//         ECheckBox(bar.find_first("#id_bar_hasexectime")).SetCheck(_HasFlag(t.nFlag,TODO_FLAG_HASEXECTIME));
-//         EDate(bar.find_first("#id_bar_date")).SetDate(t.tmExec);
-//         ETime(bar.find_first("#id_bar_time")).SetTime(t.tmExec);
+        ECheck(bar.find_first("#id_bar_hasexectime")).SetCheck(_HasFlag(t.nFlag, TODO_FLAG_HASENDTIME));
+        EDate(bar.find_first("#id_bar_date")).SetDate(t.tmExec);
+        ETime(bar.find_first("#id_bar_time")).SetTime(t.tmExec);
         ctlInput.SetText(t.sTask);
 
 //      ECombobox(bar.find_first("#id_bar_cate")).SelectItem_ItemData((LPVOID)t.nCateID);
@@ -282,7 +293,9 @@ void LFormTodo::ShowPopupBar( TTodoTask &t,BOOL bEdit,HELEMENT he )
     }
     else
     {
-//         ECheckBox(bar.find_first("#id_bar_hasexectime")).SetCheck(FALSE);
+        ECheck(bar.find_first("#id_bar_hasexectime")).SetCheck(FALSE);
+        EDate(bar.find_first("#id_bar_date")).SetDate(QTime::GetCurrentTime());
+        ETime(bar.find_first("#id_bar_time")).SetTime(QTime::GetCurrentTime());
         ctlInput.SetText(L"");
 //        ECtrl(bar.find_first("#id_bar_ok")).SetText(L"添加");
         bar.set_attribute("edit",L"false");
@@ -299,12 +312,13 @@ void LFormTodo::OnClkIdbarOK( HELEMENT )
 
     TTodoTask t;
     t.nFlag = 0;
-//     if (ECheckBox(bar.find_first("#id_bar_hasexectime")).IsChecked())
-//     {
-//         _AddFlg(t.nFlag,TODO_FLAG_HASEXECTIME);
-//         t.tmExec = EDate(bar.find_first("#id_bar_date")).GetDate();
-//         t.tmExec.SetTime(ETime(bar.find_first("#id_bar_time")).GetTime());
-//     }
+    t.tmExec = QTime::GetCurrentTime();
+    if (ECheck(bar.find_first("#id_bar_hasexectime")).IsChecked())
+    {
+        _AddFlag(t.nFlag, TODO_FLAG_HASENDTIME);
+        t.tmExec = EDate(bar.find_first("#id_bar_date")).GetDate();
+        t.tmExec.SetTime(ETime(bar.find_first("#id_bar_time")).GetTime());
+    }
     t.sTask = EEdit(bar.find_first("#id_bar_todo")).GetText();
     t.sTask = t.sTask.Trim();
     if (t.sTask.IsEmpty())
@@ -431,6 +445,26 @@ void LFormTodo::OnClkMinus5Minutes( HELEMENT )
     ETable tblCountdown = _TodoList().find_first("table#do_it");
     ETextCountdown tcd = tblCountdown.find_first("#td_countdown");
     tcd.Decrease(5 * 60);
+}
+
+TTodoTask LFormTodo::_TaskOfItem(const ETable& tbl)
+{
+    TTodoTask t_task;
+    QDBEvents::GetInstance()->TodoTask_Get((int)(tbl.GetData()), t_task);
+    return t_task;
+}
+
+int LFormTodo::FindFirstLessEqual(int nPiority)
+{
+    ECtrl lst = _TodoList();
+    for (int i = 0; i < lst.children_count(); ++i)
+    {
+        if (_TaskOfItem(ETable(lst.child(i))).nPriority <= nPiority)
+        {
+            return i;
+        }
+    }
+    return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////

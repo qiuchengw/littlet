@@ -12,11 +12,18 @@ typedef std::vector<QIdea*> IdeaVec;
 typedef IdeaVec::iterator IdeaVecItr;
 
 // 即时任务管理器
+enum ENUM_TODOTASK_TYPE
+{
+    TODOTASK_TYPE_TODO = 1,
+    TODOTASK_TYPE_STICKNOTE = 2,
+    TODOTASK_TYPE_ALL = 4,
+};
+
 enum ENUM_TODOTASK_FLAG
 {
 	TODO_FLAG_PLANRELATED = 0x1, // 和大计划相关联的任务
 	TODO_FLAG_NEEDREMIND = 0x2, // 需要提前提示
-    TODO_FLAG_HASEXECTIME = 0x4, // 需要提前提示
+    TODO_FLAG_HASENDTIME = 0x4, // 有结束日期
     TODO_FLAG_STICKYNOTE = 0x8, // 显示为便签
     TODO_FLAG_ENCRYPTED = 0x10, // 数据已经加密
 };
@@ -159,9 +166,9 @@ protected:
 		__out QTime&tmEnd, __out CStdString &sWhenExp,
 		__out CStdString &sRemindExp,__out CStdString &sXFiled );
 protected:
-	BOOL TodoTask_Read( LPCWSTR szSQL ,__out TodoTaskList & lst);
-	BOOL _TodoTask(SqlQuery &q ,__out TTodoTask&t);
-	BOOL _Cate(SqlQuery &q,__out TCate &c);
+    BOOL TodoTask_Read(LPCWSTR szSQL, ENUM_TODOTASK_TYPE t_type, __out TodoTaskList & lst);
+    BOOL _TodoTask(SqlQuery &q, ENUM_TODOTASK_TYPE t_type, __out TTodoTask&t);
+    BOOL _Cate(SqlQuery &q, __out TCate &c);
 };
 
 

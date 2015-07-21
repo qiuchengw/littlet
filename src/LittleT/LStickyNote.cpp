@@ -380,8 +380,8 @@ bool LStickyNoteWnd::SearchText(const CStdString& txt)const
             case markup::scanner::TT_ERROR:
             case markup::scanner::TT_EOF: finished = true; break;
 
-            case markup::scanner::TT_TAG_END:   // 
-            case markup::scanner::TT_WORD:
+//             case markup::scanner::TT_TAG_END:   // 
+//             case markup::scanner::TT_WORD:
             case markup::scanner::TT_WORD:
             case markup::scanner::TT_SPACE: ret += sc.get_value(); break;
             }

@@ -75,8 +75,27 @@ body{
 	line-height:22px; 
 	padding:4px;	
 }
+#todolist>table td.item-endtime{
+	width:100px;
+}
+#todolist>table td.item-endtime{
+	color:white;
+	behavior:clickable;
+	font:normal 12px Arial;
+}
+#todolist>table td.item-endtime.good{
+	background-color:#52B95D;
+}
+#todolist>table td.item-endtime.overdue{
+	background-color:#EC6D51;
+}
+#todolist>table[done] td.item-endtime{
+	background-color:#A1ACBD;
+}
+
 #todolist>table td.item-exec{
 	width:1px;
+	padding:0;
 }
 #todolist>table td.item-exec>[type="checkbox"]
 {

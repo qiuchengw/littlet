@@ -21,7 +21,7 @@ protected:
     virtual void OnAttach();
     
     BOOL RefreshTasks();
-    void InsertTask(ECtrl& eGroup, TTodoTask* pTask);
+    void InsertTask(ECtrl& eGroup, TTodoTask* pTask, int idx = -1);
     void FreshTaskItem(ECtrl& eGroup, ECtrl &eItem, TTodoTask* pTask);
 
     void OnClkDeleteTask(HELEMENT hBtn);
@@ -46,6 +46,12 @@ protected:
     ECtrl _PopupBar() { return GetCtrl("#id_popup_todoitem"); };
     ECtrl _TodoList() { return GetCtrl("#todolist"); }
     void ShowPopupBar(TTodoTask &t,BOOL bEdit,HELEMENT he=NULL);
+
+    TTodoTask _TaskOfItem(const ETable& tbl);
+
+    // 从上到下找到第一个优先级小于等于nPiority的索引
+    int FindFirstLessEqual(int nPiority);
+
 private:
     ECtrl					m_eItemEdit;
 };
