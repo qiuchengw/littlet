@@ -71,11 +71,11 @@ BOOL QDBEvents::TodoTask_GetAllStickyNote(TodoTaskList &lst)
 // 	return ReadTasks(sQ,lst);
 // }
 
-BOOL QDBEvents::TodoTask_Get(int nID, __out TTodoTask &t)
+BOOL QDBEvents::TodoTask_Get(int nID, ENUM_TODOTASK_TYPE t_type, __out TTodoTask &t)
 {
     CStdString sQ;
     sQ.Format(L"SELECT * FROM tbl_todo WHERE (ID=%d)", nID);
-    return _TodoTask(ExecQuery(sQ), TODOTASK_TYPE_TODO, t);
+    return _TodoTask(ExecQuery(sQ), t_type, t);
 }
 
 BOOL QDBEvents::_TodoTask(SqlQuery &q, ENUM_TODOTASK_TYPE t_type, __out TTodoTask&t)
@@ -197,7 +197,7 @@ BOOL QDBEvents::TodoTask_SetFlag(int nID, int flag)
 BOOL QDBEvents::TodoTask_IsDone(int nID)
 {
     TTodoTask t;
-    if (TodoTask_Get(nID, t))
+    if (TodoTask_Get(nID,  t))
     {
         return t.IsDone();
     }

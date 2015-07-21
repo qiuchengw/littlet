@@ -10,7 +10,7 @@
 
 QUI_BEGIN_EVENT_MAP(LFormTodo, QForm)
     BN_CLICKED_NAME(L"Chk_NoteTask", &LFormTodo::OnClkTaskChk)
-    BN_CLICKED_NAME(L"btn_todoitem_delete", &LFormTodo::OnClkDeleteTask)
+    // BN_CLICKED_NAME(L"btn_todoitem_delete", &LFormTodo::OnClkDeleteTask)
     BN_CLICKED_NAME(L"btn_todoitem_stickynote", &LFormTodo::OnClkStickyNote)
     BN_CLICKED_NAME(L"item_todo", &LFormTodo::OnClkTodoItem)
     BN_CLICKED_NAME(L"item_endtime", &LFormTodo::OnClkTodoItem)
@@ -109,7 +109,7 @@ void LFormTodo::OnClkStickyNote(HELEMENT hBtn)
 
     int id = (int)table.GetData();
     TTodoTask task_itm;
-    if (db->TodoTask_Get(id, task_itm))
+    if (db->TodoTask_Get(id, TODOTASK_TYPE_TODO, task_itm))
     {
         StickyNoteMan::GetInstance()->Create(task_itm);
 
@@ -159,40 +159,25 @@ void LFormTodo::FreshTaskItem( ECtrl& eGroup, ECtrl &etable, TTodoTask* pTask )
     etable.SetData((LPVOID)pTask->nID);
 
     CStdString s_endtime;
-    if (_HasFlag(pTask->nFlag, TODO_FLAG_HASENDTIME))
-    {
-        QTime tm_now = QTime::GetCurrentTime();
-        s_endtime.Format(L"<td .item-endtime name='item_endtime' %s>%s</td>",
-            (tm_now <= pTask->tmExec) ? L".good" : L".overdue",
-            pTask->tmExec.Format(L"%Y/%m/%d %H:%M"));
-    }
+//     if (_HasFlag(pTask->nFlag, TODO_FLAG_HASENDTIME))
+//     {
+//         QTime tm_now = QTime::GetCurrentTime();
+//         s_endtime.Format(L"<td .item-endtime name='item_endtime' %s>%s</td>",
+//             (tm_now <= pTask->tmExec) ? L".good" : L".overdue",
+//             pTask->tmExec.Format(L"%Y/%m/%d %H:%M"));
+//     }
 
-//     str.Format(L"<tr><td .item-exec><widget type=\"checkbox\" name=\"Chk_NoteTask\" %s>"
-//         L"<b.gray>%s</b></widget></td><td .item-todo name=\"item_todo\">%s</td>"
-//         L"<td .item-creat>%s</td>"
-//         L"<td><ul type=\"starbox\" name=\"star_Priority\" stars=\"5\" index=\"%d\" %s/></td>"
-//         L"<td .btn name=\"btn_todoitem_delete\" /></tr>",
-//         (pTask->eStatus == TODO_STATUS_FINISH)?L"checked":L"",
-//         (_HasFlag(pTask->nFlag,TODO_FLAG_HASEXECTIME))
-//         ?(pTask->tmExec.Format(L"%Y/%m/%d %H:%M"))
-//         :(L"<b.gray>无执行时间</b>"),
-//         pTask->sTask,
-//         pTask->tmCreate.Format(L"%Y/%m/%d %H:%M"),
-//         pTask->nPriority,
-//         (pTask->eStatus == TODO_STATUS_FINISH)?L"disabled":L"");
     CStdString str;
     str.Format(L"<tr title=\"创建于:%s\">"
         L"<td .item-exec><widget type=\"checkbox\" name=\"Chk_NoteTask\" %s /></td>"
-        L"%s"   // 结束时间
         L"<td name=\"item_doit\" .qbtn/>"
         L"<td .item-todo name=\"item_todo\">%s</td>"
-        L"<td><ul type=\"starbox\" name=\"star_Priority\" stars=\"4\" index=\"%d\" %s/></td>"
         L"<td name=\"btn_todoitem_stickynote\" title=\"创建到桌面便签\"></td>"
-        L"<td name=\"btn_todoitem_delete\">r</td>"
+        // L"<td name=\"btn_todoitem_delete\">r</td>"
+        L"<td><ul type=\"starbox\" name=\"star_Priority\" stars=\"4\" index=\"%d\" %s/></td>"
         L"</tr>",
         pTask->tmCreate.Format(L"%c"),      // 创建时间
         (pTask->eStatus == TODO_STATUS_FINISH)?L"checked":L"",
-        s_endtime,
         pTask->sTask,
         pTask->nPriority,
         (pTask->eStatus == TODO_STATUS_FINISH)?L"disabled":L"");
@@ -280,9 +265,9 @@ void LFormTodo::ShowPopupBar( TTodoTask &t,BOOL bEdit,HELEMENT he )
     // 模式设置
     if (bEdit)
     {
-        ECheck(bar.find_first("#id_bar_hasexectime")).SetCheck(_HasFlag(t.nFlag, TODO_FLAG_HASENDTIME));
-        EDate(bar.find_first("#id_bar_date")).SetDate(t.tmExec);
-        ETime(bar.find_first("#id_bar_time")).SetTime(t.tmExec);
+//         ECheck(bar.find_first("#id_bar_hasexectime")).SetCheck(_HasFlag(t.nFlag, TODO_FLAG_HASENDTIME));
+//         EDate(bar.find_first("#id_bar_date")).SetDate(t.tmExec);
+//         ETime(bar.find_first("#id_bar_time")).SetTime(t.tmExec);
         ctlInput.SetText(t.sTask);
 
 //      ECombobox(bar.find_first("#id_bar_cate")).SelectItem_ItemData((LPVOID)t.nCateID);
@@ -293,9 +278,9 @@ void LFormTodo::ShowPopupBar( TTodoTask &t,BOOL bEdit,HELEMENT he )
     }
     else
     {
-        ECheck(bar.find_first("#id_bar_hasexectime")).SetCheck(FALSE);
-        EDate(bar.find_first("#id_bar_date")).SetDate(QTime::GetCurrentTime());
-        ETime(bar.find_first("#id_bar_time")).SetTime(QTime::GetCurrentTime());
+//         ECheck(bar.find_first("#id_bar_hasexectime")).SetCheck(FALSE);
+//         EDate(bar.find_first("#id_bar_date")).SetDate(QTime::GetCurrentTime());
+//         ETime(bar.find_first("#id_bar_time")).SetTime(QTime::GetCurrentTime());
         ctlInput.SetText(L"");
 //        ECtrl(bar.find_first("#id_bar_ok")).SetText(L"添加");
         bar.set_attribute("edit",L"false");
@@ -313,12 +298,12 @@ void LFormTodo::OnClkIdbarOK( HELEMENT )
     TTodoTask t;
     t.nFlag = 0;
     t.tmExec = QTime::GetCurrentTime();
-    if (ECheck(bar.find_first("#id_bar_hasexectime")).IsChecked())
-    {
-        _AddFlag(t.nFlag, TODO_FLAG_HASENDTIME);
-        t.tmExec = EDate(bar.find_first("#id_bar_date")).GetDate();
-        t.tmExec.SetTime(ETime(bar.find_first("#id_bar_time")).GetTime());
-    }
+//     if (ECheck(bar.find_first("#id_bar_hasexectime")).IsChecked())
+//     {
+//         _AddFlag(t.nFlag, TODO_FLAG_HASENDTIME);
+//         t.tmExec = EDate(bar.find_first("#id_bar_date")).GetDate();
+//         t.tmExec.SetTime(ETime(bar.find_first("#id_bar_time")).GetTime());
+//     }
     t.sTask = EEdit(bar.find_first("#id_bar_todo")).GetText();
     t.sTask = t.sTask.Trim();
     if (t.sTask.IsEmpty())
@@ -365,7 +350,7 @@ void LFormTodo::OnClkTodoItem( HELEMENT he)
     if (!pDB->TodoTask_IsDone(nID))
     {
         TTodoTask t;
-        if (QDBEvents::GetInstance()->TodoTask_Get(nID,t))
+        if (QDBEvents::GetInstance()->TodoTask_Get(nID, TODOTASK_TYPE_TODO, t))
         {
             ShowPopupBar(t,TRUE,m_eItemEdit);
         }
@@ -450,7 +435,7 @@ void LFormTodo::OnClkMinus5Minutes( HELEMENT )
 TTodoTask LFormTodo::_TaskOfItem(const ETable& tbl)
 {
     TTodoTask t_task;
-    QDBEvents::GetInstance()->TodoTask_Get((int)(tbl.GetData()), t_task);
+    QDBEvents::GetInstance()->TodoTask_Get((int)(tbl.GetData()), TODOTASK_TYPE_TODO, t_task);
     return t_task;
 }
 

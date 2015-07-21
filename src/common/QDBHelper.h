@@ -106,7 +106,7 @@ public:
 
 	int TodoTask_GetUnfinishNum( );
 	int TodoTask_GetFinishedNum( );
-	BOOL TodoTask_Get(int nID,__out TTodoTask &t);
+    BOOL TodoTask_Get(int nID, ENUM_TODOTASK_TYPE t_type, __out TTodoTask &t);
     BOOL TodoTask_SetFlag(int nID, int flag);
 
 public:

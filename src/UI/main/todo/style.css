@@ -84,7 +84,7 @@ body{
 	font:normal 12px Arial;
 }
 #todolist>table td.item-endtime.good{
-	background-color:#52B95D;
+	background-color:#55B25D;
 }
 #todolist>table td.item-endtime.overdue{
 	background-color:#EC6D51;

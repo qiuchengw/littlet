@@ -29,6 +29,7 @@ QUI_BEGIN_EVENT_MAP(LStickyNoteWnd, _Base)
     BN_CLICKED_NAME(L"item_note", &LStickyNoteWnd::OnClkNoteItem)
     BN_CLICKED_NAME(L"btn_strikeline", &LStickyNoteWnd::OnStrikeText)
     BN_CLICKED_ID(L"btn_find", &LStickyNoteWnd::OnClkFind)
+    BN_CLICKED_ID(L"btn_close", &LStickyNoteWnd::OnClkClose)
     BN_CLICKED_ID(L"btn_editor", &LStickyNoteWnd::OnClkFontEditor)
     BN_CLICKED_ID(L"btn_new", &LStickyNoteWnd::OnclkNewNote)
     BN_STATECHANGED_ID(L"chk_topmost", &LStickyNoteWnd::OnClkPinTop);
@@ -129,7 +130,7 @@ LRESULT LStickyNoteWnd::OnDocumentComplete()
     _Font().SelectItem_Text(L"宋体");
 
     TTodoTask task;
-    if (QDBEvents::GetInstance()->TodoTask_Get(taskid_, task))
+    if (QDBEvents::GetInstance()->TodoTask_Get(taskid_, TODOTASK_TYPE_STICKNOTE ,task))
     {
         CStdString real_txt;
         real_txt.Format(L"<html>"
@@ -144,14 +145,8 @@ LRESULT LStickyNoteWnd::OnDocumentComplete()
 
 void LStickyNoteWnd::OnClkClose(HELEMENT he) 
 {
-    TTodoTask task = Task();
-    // 设置为已完成
-    task.eStatus = TODO_STATUS_FINISH;
-    // 关闭窗口认为去掉stick标志
-    _RemoveFlag(task.nFlag, TODO_FLAG_STICKYNOTE);
-
-    // 保存
-    QDBEvents::GetInstance()->TodoTask_Edit(&task);
+    // 关闭窗口认为删除任务
+    QDBEvents::GetInstance()->TodoTask_Delete(Task().nID);
 
     // 关闭窗口
     SendMessage(WM_CLOSE);
@@ -210,7 +205,7 @@ void LStickyNoteWnd::OnSelColorSchemeChanged(HELEMENT he, HELEMENT)
 TTodoTask LStickyNoteWnd::Task() const
 {
     TTodoTask task;
-    QDBEvents::GetInstance()->TodoTask_Get(TaskID(), task);
+    QDBEvents::GetInstance()->TodoTask_Get(TaskID(), TODOTASK_TYPE_STICKNOTE, task);
     return task;
 }
 
