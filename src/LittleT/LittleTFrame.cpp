@@ -337,6 +337,7 @@ BOOL LittleTFrame::ConfigHotKey(BOOL bConfig)
 //         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL, 0x4E);  // ctrl + tab
 
         // 全局快捷键
+        // RegisterHotKey(hWnd, m_idAtom, MOD_WIN, 0x44);
         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL | MOD_SHIFT, 0x48);
         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL | MOD_SHIFT, 0x4A);  // j
         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL | MOD_SHIFT, 0x4B);  // k
@@ -358,6 +359,9 @@ void LittleTFrame::OnHotKey( int nSystemHotKey,UINT nModifier,UINT nVk )
 {
     if (!_HasFlag(nModifier,MOD_CONTROL) || !_HasFlag(nModifier,MOD_SHIFT))
         return; // ctrl + shift
+
+//     if (_HasFlag(nModifier, MOD_WIN) && (0x44 == nVk))
+//         return; // 不处理WIN + D
 
     // 全局快捷键
     if (0x48 == nVk)

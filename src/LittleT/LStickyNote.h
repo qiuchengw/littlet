@@ -64,8 +64,9 @@ protected:
     BOOL RestoreSetting();
 
     void SetTopMost(bool top);
-    void ShowSearchBar();
+    bool IsTopMost()const;
 
+    void ShowSearchBar();
 
 protected:
     TTodoTask* _ItemData(__in ETable& t)

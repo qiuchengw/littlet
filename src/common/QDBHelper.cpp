@@ -197,7 +197,7 @@ BOOL QDBEvents::TodoTask_SetFlag(int nID, int flag)
 BOOL QDBEvents::TodoTask_IsDone(int nID)
 {
     TTodoTask t;
-    if (TodoTask_Get(nID,  t))
+    if (TodoTask_Get(nID, TODOTASK_TYPE_ALL, t))
     {
         return t.IsDone();
     }

@@ -44,7 +44,7 @@ LStickyNoteWnd::LStickyNoteWnd(const TTodoTask& task)
     m_sHtmlPath = L"qabs:main/todo/note.htm";
 }
 
-void LStickyNoteWnd::OnclkNewNote(HELEMENT he) 
+void LStickyNoteWnd::OnclkNewNote(HELEMENT) 
 {
     TTodoTask t;
     if (LStickyNoteWnd* w = littlet::NewStickyNote(t))
@@ -160,6 +160,11 @@ void LStickyNoteWnd::SetTopMost(bool top)
     WTL::CRect rc(0, 0, 0, 0);
     SetWindowPos(top ? HWND_TOPMOST : HWND_NOTOPMOST, &rc, SWP_SHOWWINDOW | SWP_NOREDRAW | SWP_NOSIZE | SWP_NOMOVE);
     QUIGetConfig()->SetValue(L"StickyNoteTop", CStdString::number(taskid_), top ? L"1" : L"0");
+}
+
+bool LStickyNoteWnd::IsTopMost()const
+{
+    return GetExStyle() & WS_EX_TOPMOST;
 }
 
 void LStickyNoteWnd::OnClkPinTop(HELEMENT he) 
@@ -301,11 +306,18 @@ void LStickyNoteWnd::ShowSearchBar()
 
 void LStickyNoteWnd::OnKeyDown(TCHAR ch, UINT n, UINT r)
 {
-    if ((GetKeyState(VK_CONTROL) & 0x8000)
-        && (0x46 == ch)) // // F
+    if (GetKeyState(VK_CONTROL) & 0x8000) // CTRL
     {
-        ShowSearchBar();
-        return;
+        switch (ch)
+        {
+        case 0x46:  // F
+            ShowSearchBar();
+            return;
+
+        case 0x4E:  // N
+            OnclkNewNote(NULL);
+            return;
+        }
     }
 
     if (GetKeyState(VK_F3) & 0x8000)
@@ -330,6 +342,7 @@ void LStickyNoteWnd::OnKeyDown(TCHAR ch, UINT n, UINT r)
                 // 向后
                 p = StickyNoteMan::GetInstance()->NextSibling(this);
             }
+
             if ((nullptr != p) && (p != this))
             {
                 quibase::SetForegroundWindowInternal(p->GetSafeHwnd());
@@ -538,8 +551,12 @@ void StickyNoteMan::ShowAll()
     {
         if (p->IsWindow() /*&& !p->IsWindowVisible()*/)
         {
+            bool is_top = p->IsTopMost();
+            // 如果不将其设置为topmost的风格，那么LittleT处于后台运行（非激活状态）
+            // 是不能将这些窗口带到最上层的
+            p->SetTopMost(true);
             p->ShowWindow(SW_SHOW);
-            p->BringWindowToTop();
+            p->SetTopMost(is_top);  
         }
     }
 }
