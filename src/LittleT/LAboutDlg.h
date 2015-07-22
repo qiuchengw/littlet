@@ -35,6 +35,19 @@ private:
     CStdString     m_sZipFile; // updater file
 };
 
+// ÎÄµµ
+class LDocDlg : public QDialog
+{
+public:
+    LDocDlg(LPCWSTR szFile);
+
+protected:
+    virtual LRESULT OnDocumentComplete();
+
+private:
+    CStdString  m_sFile;
+};
+
 // setting dialog
 class  LSettingDlg : public QDialog
 {

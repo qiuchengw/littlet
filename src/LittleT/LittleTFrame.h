@@ -74,6 +74,7 @@ protected:
     void OnClkAbout(HELEMENT);
     void OnClkSetting(HELEMENT);
     void OnClkMyWeibo(HELEMENT);
+    void OnClkDocLink(HELEMENT);
     void OnClkFeedback(HELEMENT);
     void OnClkCheckUpdation( HELEMENT );
 

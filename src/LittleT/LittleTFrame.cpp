@@ -65,6 +65,7 @@ QUI_BEGIN_EVENT_MAP(LittleTFrame,QFrame)
     BN_CLICKED_ID(L"a-about", &LittleTFrame::OnClkAbout)
     BN_CLICKED_ID(L"a-setting", &LittleTFrame::OnClkSetting)
     BN_CLICKED_ID(L"a-weibo", &LittleTFrame::OnClkMyWeibo)
+    BN_CLICKED_ID(L"a-doc", &LittleTFrame::OnClkDocLink)
     BN_CLICKED_ID(L"btn_feedback", &LittleTFrame::OnClkFeedback)
     BN_CLICKED_ID(L"btn_check_update", &LittleTFrame::OnClkCheckUpdation)
 QUI_END_EVENT_MAP()
@@ -709,6 +710,11 @@ void LittleTFrame::OnClkSetting( HELEMENT )
 void LittleTFrame::OnClkMyWeibo(HELEMENT)
 {
     quibase::VisitWebsiteWithDefaultBrowser(L"http://t.qq.com/qiuchengw_");    
+}
+
+void LittleTFrame::OnClkDocLink(HELEMENT)
+{
+    LDocDlg(L"readme.txt").DoModal();
 }
 
 void LittleTFrame::OnClkFeedback( HELEMENT )

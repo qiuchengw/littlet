@@ -58,6 +58,28 @@ LRESULT LUpdateInfoDlg::OnDocumentComplete()
     return 0;
 }
 
+
+//////////////////////////////////////////////////////////////////////////
+LDocDlg::LDocDlg(LPCWSTR szFile)
+    :QDialog(L"qabs:misc/update.htm")
+{
+    m_sFile = szFile;
+}
+
+LRESULT LDocDlg::OnDocumentComplete()
+{
+    SetTitle(L"ÎÄµµ");
+
+    GetCtrl("[xrole=\"OK\"]").ShowCtrl(SHOW_MODE_COLLAPSE);
+    GetCtrl("[xrole=\"Cancel\"]").ShowCtrl(SHOW_MODE_COLLAPSE);
+
+    QBuffer bufTxt;
+    bufTxt.FileRead(m_sFile);
+    GetCtrl("#box-content").set_html(bufTxt.GetBuffer(), bufTxt.GetBufferLen());
+
+    return 0;
+}
+
 //////////////////////////////////////////////////////////////////////////
 QUI_BEGIN_EVENT_MAP(LSettingDlg, QDialog)
     BN_CLICKED_ID(L"chk_cmn_autorun", &LSettingDlg::OnCmnChkAutoRun)
