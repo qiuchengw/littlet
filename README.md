@@ -1,7 +1,71 @@
+# LittleT
 
+**注意：本项目已不再维护，代码开源，仅供技术交流。**
+
+> `LittleT 是一个界面小清新，集任务跟踪、事件提醒、TODO 列表为一体的windows桌面端工具软件。`
+
+- 任务跟踪
+- 事件提醒
+- TODO列表
+- 桌面便签
+
+## 运行截图
+
+简介: [CSDN - blog post](https://blog.csdn.net/qiuchengw/article/details/19910779)
+
+ ![main](https://raw.githubusercontent.com/qiuchengw/littlet/master/screenshot/main.png)
+ ![main](https://raw.githubusercontent.com/qiuchengw/littlet/master/screenshot/set.jpg)
+
+<table>
+	<tr>
+		<td><img src="https://raw.githubusercontent.com/qiuchengw/littlet/master/screenshot/todo.png" width="300" height="500" /></td>
+		<td><img src="https://raw.githubusercontent.com/qiuchengw/littlet/master/screenshot/plan.png" width="300" height="500" /></td>
+	</tr>
+</table>
+
+## 项目目录结构
+```sh
+├─deps     # 依赖
+├─include  # 公用头文件
+└─src
+    ├─common  # LittleT 项目的业务逻辑文件，UI无关
+    ├─LittleT # LittleT 界面相关文件
+    ├─LittleTShell  # Shell 工具，支持从命令行创建任务、todo等
+    ├─LittleTUpdater # 自动更新
+    ├─svr       # 服务端，统计用户人数，以及用户意见反馈等
+    └─UI        # UI资源，需要使用quipacker工具进行加密打包： https://github.com/qiuchengw/quipacker
 ```
-#!c++
 
+## 编译说明
+
+**说明：此项目依赖的`UIBase`已全新重构为`QUI`项目，但是此项目并未进行更新，所以编译会有问题。** 
+
+所有UIBase代码都在最新的[QUI](https://github.com/qiuchengw/qui)项目内了，所以对工程加以修改是可以编译的。
+
+步骤：
+1. 编译qui项目
+2. 编译此项目（仅LittleT即可），shell和服务端可以不用编译。
+3. 使用[uipacker](https://github.com/qiuchengw/quipacker) 打包`UI`目录
+4. 完成
+
+## 你可能感兴趣的一些技术点
+1. [HTMLayout](https://terrainformatica.com/a-homepage-section/htmlayout/)
+2. 基于WTL和HTMLayout的GUI库：[QUI - https://github.com/qiuchengw/qui](https://github.com/qiuchengw/qui)
+3. 逻辑表达式定时器： [cron - https://github.com/qiuchengw/cron](https://github.com/qiuchengw/cron)
+
+
+## 关于
+
+> 作者：[qiuchengw - 漂的人](https://piaode.ren) 
+> 
+> 微信：qiuchengw （欢迎技术交流） 
+> 
+> 邮箱：qiuchengw@qq.com
+
+
+## 版本发布历史
+
+```html
 更新历史：<br/>
 
 LittleT v3.3 2013/10/28<br/>
