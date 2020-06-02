@@ -25,3 +25,7 @@ Release
 /dll
 /UIP
 
+*.db
+*.opendb
+*.db-shm
+*.db-wal
