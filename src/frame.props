@@ -2,12 +2,16 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <UIBase>$(TopDir)\..\uibase-g\</UIBase>
+    <UIBase>$(TopDir)\..\qui\</UIBase>
+    <MyToolsDir>$(TopDir)\tools\</MyToolsDir>
   </PropertyGroup>
-  <PropertyGroup />
+  <PropertyGroup>
+    <LibraryPath>$(MyLibDir);$(UIBase)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(UIBase)\src\;$(UIBase)\;$(UIBase)\deps;$(UIBase)\deps\wtl;$(MyDepsDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(MyIncDir);$(UIBase)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MyIncDir);$(UIBase)\src;$(UIBase)\deps;$(UIBase)\deps\wtl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(MyLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -20,6 +24,9 @@
   <ItemGroup>
     <BuildMacro Include="UIBase">
       <Value>$(UIBase)</Value>
+    </BuildMacro>
+    <BuildMacro Include="MyToolsDir">
+      <Value>$(MyToolsDir)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

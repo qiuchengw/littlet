@@ -4,7 +4,9 @@
 #define SS_NO_CONVERSION
 
 #ifdef _DEBUG
+#ifdef _ENABLE_VLD
 #include <vld.h>
+#endif
 #endif
 
 #include <WinSock2.h>

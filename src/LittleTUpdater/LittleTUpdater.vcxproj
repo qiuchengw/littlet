@@ -50,8 +50,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\..\..\UIBase\wtl;..\..\..\UIBase;..\..\;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\lib;$(LibraryPath)</LibraryPath>
     <IntDir>..\..\build\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>..\..\bin\$(Configuration)\</OutDir>
   </PropertyGroup>

@@ -45,15 +45,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\..\UIBase-g\deps\wtl;..\..\..\UIBase-g\src\qui;..\..\..\UIBase-g\src;..\..\;..\..\deps;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>..\..\lib;F:\Code\VC\uibase-g\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>..\..\..\UIBase-g\deps\wtl;..\..\..\UIBase-g\src\qui;..\..\..\UIBase-g\src;..\..\;..\..\deps;$(IncludePath)</IncludePath>
-    <OutDir>..\..\bin\$(Configuration)\</OutDir>
-    <IntDir>..\..\build\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -76,8 +70,11 @@
       </Command>
     </PreBuildEvent>
     <PreLinkEvent>
-      <Command>..\7za.exe u $(OutDir)\UI.ZIP ..\UI\* -r</Command>
+      <Command>$(MyToolsDir)\7za.exe u $(OutDir)\UI.ZIP ..\UI\* -r</Command>
     </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy $(UIBase)\lib\*.dll $(MyOutDir)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -103,9 +100,11 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <PreLinkEvent>
-      <Command>
-      </Command>
+      <Command>$(MyToolsDir)\7za.exe u $(OutDir)\UI.ZIP ..\UI\* -r</Command>
     </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>copy $(UIBase)\lib\*.dll $(MyOutDir)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="icon1.ico" />
