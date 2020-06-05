@@ -29,3 +29,4 @@ Release
 *.opendb
 *.db-shm
 *.db-wal
+*.user
