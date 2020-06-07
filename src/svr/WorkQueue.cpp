@@ -1,4 +1,4 @@
-#include "WorkQueue.h"
+﻿#include "WorkQueue.h"
 #include <assert.h>
 
 typedef struct _THREAD_CONTEXT

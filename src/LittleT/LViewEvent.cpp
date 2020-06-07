@@ -1,4 +1,4 @@
-#include "LViewEvent.h"
+ï»¿#include "LViewEvent.h"
 #include "../common/LittleTUIcmn.h"
 #include "../common/QAutoTask.h"
 #include "../common/QDBHelper.h"
@@ -74,7 +74,7 @@ void LViewEvent::AddEvent( QAutoTask* pTask )
 
 void LViewEvent::OnClkDeleteEvent( HELEMENT hBtn )
 {
-    if (XMsgBox::YesNoMsgBox(L"È·¶¨ÒªÉ¾³ıÈÎÎñÂğ£¿") != IDYES)
+    if (XMsgBox::YesNoMsgBox(L"ç¡®å®šè¦åˆ é™¤ä»»åŠ¡å—ï¼Ÿ") != IDYES)
         return ;
 
     ECtrl eTable = ECtrl(hBtn).select_parent(L"table",4);
@@ -100,14 +100,14 @@ void LViewEvent::RefreshEventList()
     QAutoTask* pTask = NULL;
     for (AutoTaskList::iterator itr = lst.begin(); itr != lst.end(); ++itr)
     {
-        // ÔİÍ£ºóÔÙÆô¶¯£¬Ë¢ĞÂÈÎÎñ
+        // æš‚åœåå†å¯åŠ¨ï¼Œåˆ·æ–°ä»»åŠ¡
         (*itr)->Pause();
         (*itr)->Startup();
         (*itr)->Run();
 //        eStatus = pTask->GetLastStartStatus();
 //         if (AUTOTASK_RUNNING_STATUS_OVERDUE == eStatus)
 //         {
-//             // É¾³ı¹ıÆÚÈÎÎñ
+//             // åˆ é™¤è¿‡æœŸä»»åŠ¡
 //             QUIPostCodeToMainWnd(MWND_NOTIFY_AUTOTASKOVERDUEDELETE,(LPARAM)pTask->ID());
 //         }
 //         else
@@ -170,7 +170,7 @@ void LViewEvent::OnClkPlayOrPauseEvent( HELEMENT hBtn )
     { //
         if (!pTask->Pause())
         {
-            eItem.ShowTooltip(L"²»ÄÜÔİÍ£ÈÎÎñ£¬ÉÔºóÔÙÊÔÏÂ");
+            eItem.ShowTooltip(L"ä¸èƒ½æš‚åœä»»åŠ¡ï¼Œç¨åå†è¯•ä¸‹");
         }
         else
         {
@@ -185,15 +185,15 @@ void LViewEvent::OnClkPlayOrPauseEvent( HELEMENT hBtn )
             {
             case AUTOTASK_RUNNING_STATUS_OVERDUE:
                 {
-                    // TODO: ¸üĞÂ¹ıÆÚÈÎÎñÏÔÊ¾
+                    // TODO: æ›´æ–°è¿‡æœŸä»»åŠ¡æ˜¾ç¤º
                     QUIPostCodeToMainWnd(MWND_NOTIFY_AUTOTASKOVERDUE,(LPARAM)pTask->ID());
 
                     break;
                 }
 //             case AUTOTASK_RUNNING_STATUS_BADTIMER:
 //                 {
-//                     // ÕâÖÖÇé¿ö²»Ó¦¸Ã³öÏÖ
-//                     if (XMsgBox::YesNoMsgBox(L"¶¨Ê±Æ÷ÎŞĞ§£¬ÊÇ·ñÖØĞÂÉèÖÃ£¿") == IDYES)
+//                     // è¿™ç§æƒ…å†µä¸åº”è¯¥å‡ºç°
+//                     if (XMsgBox::YesNoMsgBox(L"å®šæ—¶å™¨æ— æ•ˆï¼Œæ˜¯å¦é‡æ–°è®¾ç½®ï¼Ÿ") == IDYES)
 //                     {
 //                         QExecTimeDlg ETDlg;
 //                         if (ETDlg.DoModal() == IDYES)
@@ -207,7 +207,7 @@ void LViewEvent::OnClkPlayOrPauseEvent( HELEMENT hBtn )
         }
         else
         {
-            // Æô¶¯ÁË
+            // å¯åŠ¨äº†
             QUIPostCodeToMainWnd(MWND_NOTIFY_AUTOTASKSTART,(LPARAM)pTask->ID());
         }
     }
@@ -221,7 +221,7 @@ void LViewEvent::OnClkEditEvent( HELEMENT hBtn )
     QAutoTask *pTask = reinterpret_cast<QAutoTask*>(eItem.GetData());
     BOOL bNeedStart = FALSE;
     if (pTask->IsStartup())
-    { // ÔÚ±à¼­ÈÎÎñÆÚ¼äÔİÍ£ÈÎÎñ
+    { // åœ¨ç¼–è¾‘ä»»åŠ¡æœŸé—´æš‚åœä»»åŠ¡
         pTask->Pause();
         bNeedStart = TRUE;
         RefreshEventItem(eItem);
@@ -252,7 +252,7 @@ void LViewEvent::RefreshEventItem(ECtrl &eItem)
 //     case AUTOTASK_RUNNING_STATUS_OVERDUE:
 //         {
 // //             eItem.destroy();
-// //             // É¾³ı¹ıÆÚÈÎÎñ
+// //             // åˆ é™¤è¿‡æœŸä»»åŠ¡
 // //             QUIPostCodeToMainWnd(MWND_NOTIFY_AUTOTASKOVERDUEDELETE,(LPARAM)pTask->ID());
 //             return;
 //         }
@@ -300,14 +300,14 @@ void LViewEvent::RefreshEventItem(ECtrl &eItem)
 //         <tr>
 //              <td rowspan=2 etype="tip" />
 //              <td .time>12:30</td>
-//              <td .event colspan=2>ÕâÊÇ²âÊÔÒ³Ãæ</td>
+//              <td .event colspan=2>è¿™æ˜¯æµ‹è¯•é¡µé¢</td>
 //         </tr>
 //         <tr>
 //              <td .date>2013/12/30</td>
 //              <td .btns>
-//                  <div .btn name="btn_edit" title="±à¼­" />
-//                  <div .btn name="btn_del" title="É¾³ı" />
-//                  <div .btn name="btn_disable" title="½ûÖ¹Ö´ĞĞ" />
+//                  <div .btn name="btn_edit" title="ç¼–è¾‘" />
+//                  <div .btn name="btn_del" title="åˆ é™¤" />
+//                  <div .btn name="btn_disable" title="ç¦æ­¢æ‰§è¡Œ" />
 //              </td>
 //         </tr>
 //     </table>
@@ -316,16 +316,16 @@ void LViewEvent::RefreshEventItem(ECtrl &eItem)
     sHtml.Format(
         L"<tr>"
         L"   <td rowspan=2 etype=\"%s\" />"       // event type
-        L"   <td .time>%s</td>"     // Ö´ĞĞÊ±¼ä
-        L"   <td .event colspan=2>%s</td>" // %s Ö´ĞĞÈÎÎñÃèÊö,
+        L"   <td .time>%s</td>"     // æ‰§è¡Œæ—¶é—´
+        L"   <td .event colspan=2>%s</td>" // %s æ‰§è¡Œä»»åŠ¡æè¿°,
         L"</tr>"
         L"<tr>"
-        L"   <td .date>%s</td>" // %s Ö´ĞĞÈÕÆÚ 2013/12/30
+        L"   <td .date>%s</td>" // %s æ‰§è¡Œæ—¥æœŸ 2013/12/30
         L"   <td .lifend>%s</td>"
         L"   <td .btns>"
-        L"      <div .btn name=\"btn_edit\" title=\"±à¼­\" />"
-        L"      <div .btn name=\"btn_del\" title=\"É¾³ı\" />"
-//        L"      <div .btn name=\"btn_disable\" title=\"½ûÖ¹Ö´ĞĞ\" />"
+        L"      <div .btn name=\"btn_edit\" title=\"ç¼–è¾‘\" />"
+        L"      <div .btn name=\"btn_del\" title=\"åˆ é™¤\" />"
+//        L"      <div .btn name=\"btn_disable\" title=\"ç¦æ­¢æ‰§è¡Œ\" />"
         L"   </td>"
         L"</tr>", // %s Reminder Flag
         sEType,
@@ -362,7 +362,7 @@ void LViewEvent::OnClkEnableEventReminder( HELEMENT hBtn )
     }
     else
     {
-        eItem.ShowTooltip(L"²Ù×÷Î´Íê³É£¬Ò²ĞíÖ®Ç°Ã»ÓĞÉè¶¨ÌáÊ¾Æ÷¡£");
+        eItem.ShowTooltip(L"æ“ä½œæœªå®Œæˆï¼Œä¹Ÿè®¸ä¹‹å‰æ²¡æœ‰è®¾å®šæç¤ºå™¨ã€‚");
     }
 }
 
@@ -390,10 +390,10 @@ void LViewEvent::SelectEventItem(QAutoTask *pTask)
     HELEMENT hItem = _FindEventItem(pTask);
     if (NULL != hItem)
     {
-        // Ñ¡ÖĞĞÂµÄ
+        // é€‰ä¸­æ–°çš„
         ECtrl eItem(hItem);
         eItem.SetCheck(TRUE,TRUE);
-        // ¹ö¶¯µÀ×îÉÏÃæ
+        // æ»šåŠ¨é“æœ€ä¸Šé¢
         eItem.scroll_to_view(true);
     }
 }
@@ -444,24 +444,24 @@ void LViewEvent::OnNotifyJumpOverExec( LPARAM lp )
     QAutoTask* pTask = QAutoTaskMan::GetInstance()->GetTask((int)lp);
     if (NULL != pTask)
     {
-        // Ñ¡ÖĞ
+        // é€‰ä¸­
         SelectEventItem(pTask); 
 
-        // Ë¢ĞÂ
+        // åˆ·æ–°
         ETable tblItem(_FindEventItem(pTask));
         if (tblItem.is_valid())
         {
             RefreshEventItem(tblItem);
         }
-        // ÌáÊ¾
+        // æç¤º
 //         if (tblItem.visible())
 //         {
 //             QString sTip;
-//             sTip.Format(L"ÔÚ<b .yellow>[%s]</b>Ìø¹ıÒ»´ÎÈÎÎñÖ´ĞĞ",
+//             sTip.Format(L"åœ¨<b .yellow>[%s]</b>è·³è¿‡ä¸€æ¬¡ä»»åŠ¡æ‰§è¡Œ",
 //                 QTime::GetCurrentTime().Format(L"%c"));
 //             tblItem.ShowTooltip(sTip);
 //         }
-        // Í¨ÖªÖ÷´°¿ÚË¢ĞÂ×îÏÂ´ÎÖ´ĞĞÊ±¼ä
+        // é€šçŸ¥ä¸»çª—å£åˆ·æ–°æœ€ä¸‹æ¬¡æ‰§è¡Œæ—¶é—´
         QUIPostCodeToMainWnd(MWND_NOTIFY_AUTOTASKSTART,lp);
     }
 }
@@ -493,7 +493,7 @@ void LViewEvent::AutoSelect()
         int nChild = ctlList.children_count();
         if (nChild > 0)
         {
-            eItem = ctlList.child(0);  // Ñ¡ÔñÖĞ¼äµÄÄÇÒ»¸ö
+            eItem = ctlList.child(0);  // é€‰æ‹©ä¸­é—´çš„é‚£ä¸€ä¸ª
             eItem.SetCheck(TRUE,FALSE);
 //             eItem.scroll_to_view();
         }

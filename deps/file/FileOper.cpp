@@ -1,4 +1,4 @@
-#include "fileoper.h"
+ï»¿#include "fileoper.h"
 #include <tchar.h>
 #include <strsafe.h>
 #include <cassert>
@@ -293,7 +293,7 @@ void CWinPath::ExpandNormalizedPathName()
 	this->ExpandAsAccessiblePath();
 
 	if (-1 != m_strPath.Find(L'~', 0))
-	{   // ½öÔÚ±ØÒªµÄÊ±ºòÕ¹¿ª³É³¤Â·¾¶
+	{   // ä»…åœ¨å¿…è¦çš„æ—¶å€™å±•å¼€æˆé•¿è·¯å¾„
 		CWinPathApi::ExpandLongPathName(m_strPath);
 	}
 

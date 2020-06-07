@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "QTimer.h"
 #include "ConstValues.h"
@@ -43,13 +43,13 @@ public:
     }
 
     /*
-     *	ÊÇ·ñÊÇÒÑ¾­Æô¶¯£¬²¢ÇÒÊÇ×îºóÒ»´ÎÖ´ĞĞÈÎÎñ
-     *      ÒÔÏÂ±êÖ¾·µ»Øtrue£º
+     *	æ˜¯å¦æ˜¯å·²ç»å¯åŠ¨ï¼Œå¹¶ä¸”æ˜¯æœ€åä¸€æ¬¡æ‰§è¡Œä»»åŠ¡
+     *      ä»¥ä¸‹æ ‡å¿—è¿”å›trueï¼š
      *
      */
     BOOL IsStartupAndLastExec() const;
 
-    // ÊÇ·ñÆôÓÃ¶¨Ê±Æ÷
+    // æ˜¯å¦å¯ç”¨å®šæ—¶å™¨
     BOOL EnableReminder(BOOL bEnable=TRUE);
 
     BOOL IsReminderEnabled()const ;
@@ -118,14 +118,14 @@ public:
     BOOL Edit( LPCWSTR szTask,ENUM_AUTOTASK_DOWHAT eDo,int nFlag );
 
     // Run
-    // Èç¹û²»¾ßÓĞPause±êÖ¾£¬¾ÍStartup
+    // å¦‚æœä¸å…·æœ‰Pauseæ ‡å¿—ï¼Œå°±Startup
     BOOL Run();
 
-    // Æô¶¯ºÍÔİÍ£ÈÎÎñ
+    // å¯åŠ¨å’Œæš‚åœä»»åŠ¡
     BOOL Startup();
 
     BOOL Pause();
-    // Ìø¹ı´Ë´ÎÈÎÎñµÄÖ´ĞĞ£¬Ö±½Óµ½ÏÂÒ»´ÎÖ´ĞĞÊ±¼äÖ´ĞĞ
+    // è·³è¿‡æ­¤æ¬¡ä»»åŠ¡çš„æ‰§è¡Œï¼Œç›´æ¥åˆ°ä¸‹ä¸€æ¬¡æ‰§è¡Œæ—¶é—´æ‰§è¡Œ
     BOOL JumpoverThisExec();
 
     CStdString GetLastStartStatusDes()const;
@@ -137,7 +137,7 @@ public:
 
     BOOL SetDoWhat( ENUM_AUTOTASK_DOWHAT eDo ,LPCWSTR szTask);
 
-    // ÈÎÎñ¸ü¸Äºó¸Ä¶¯µ½Êı¾İ¿â
+    // ä»»åŠ¡æ›´æ”¹åæ”¹åŠ¨åˆ°æ•°æ®åº“
 //	BOOL Update();
     ENUM_AUTOTASK_EXECFLAG GetExecFlag()const;
 
@@ -146,23 +146,23 @@ public:
     CStdString GetRemindString()const;
 
 protected:
-    // ¶¨Ê±Æ÷Ö´ĞĞÁË
+    // å®šæ—¶å™¨æ‰§è¡Œäº†
     BOOL TaskFired();
     
-    // ´Ëº¯ÊıÓÃÓÚ½«flag±£´æµ½Êı¾İ¿âÖĞ
+    // æ­¤å‡½æ•°ç”¨äºå°†flagä¿å­˜åˆ°æ•°æ®åº“ä¸­
     BOOL FlagChanged();
 
 private:
-    int					m_nID;			// ÈÎÎñID
+    int					m_nID;			// ä»»åŠ¡ID
     ENUM_AUTOTASK_DOWHAT	m_eDoWhat;			//
     QTimer*				m_pTimer;
-    ENUM_AUTOTASK_RUNNING_STATUS	m_eLastStatus; // ×îºóÒ»´Îµ÷ÓÃStartµÄ×´Ì¬
+    ENUM_AUTOTASK_RUNNING_STATUS	m_eLastStatus; // æœ€åä¸€æ¬¡è°ƒç”¨Startçš„çŠ¶æ€
     int					m_nFlag;
     CStdString				m_sTask;
     QTime				m_tmCreate;
 
 private:
-    DWORD				m_nRunningFlag;	//ÔËĞĞÆÚ×´Ì¬±êÖ¾
+    DWORD				m_nRunningFlag;	//è¿è¡ŒæœŸçŠ¶æ€æ ‡å¿—
 };
 
 typedef std::list<QAutoTask*> AutoTaskList;
@@ -182,32 +182,32 @@ public:
     int GetOverdueTaskCount();
     BOOL DeleteTask( QAutoTask* pTask );
     QAutoTask* AddTask( LPCWSTR szTask,int nTimerID, ENUM_AUTOTASK_DOWHAT eDo,int nFlag );
-    // ´ÓÊı¾İ¿âÖĞ¶ÁÈ¡µÄÒÑÓĞÈÎÎñ
+    // ä»æ•°æ®åº“ä¸­è¯»å–çš„å·²æœ‰ä»»åŠ¡
     QAutoTask* GetTask(int nID);
     BOOL SetTaskTimer(QAutoTask* pTask,QTimer* pTimer);
 
     BOOL Startup();
     void GetTaskList(AutoTaskList &lst);
-    // ÊÇ·ñÆôÓÃ×Ô¶¯ÈÎÎñµÄÌáÊ¾ÏûÏ¢
+    // æ˜¯å¦å¯ç”¨è‡ªåŠ¨ä»»åŠ¡çš„æç¤ºæ¶ˆæ¯
     BOOL EnableTaskReminder(int nTaskID,BOOL bEnable=TRUE);
     BOOL IsTaskReminderEnabled( int nTaskID );
-    // Ìø¹ıÈÎÎñµÄ´Ë´ÎÖ´ĞĞ£¬µ½ÏÂÒ»´ÎÖ´ĞĞ
+    // è·³è¿‡ä»»åŠ¡çš„æ­¤æ¬¡æ‰§è¡Œï¼Œåˆ°ä¸‹ä¸€æ¬¡æ‰§è¡Œ
     BOOL JumpoverTaskThisExec(INT nTaskID);
-    // »ñÈ¡×î¾İµ±Ç°×î½üÖ´ĞĞµÄÈÎÎñ
+    // è·å–æœ€æ®å½“å‰æœ€è¿‘æ‰§è¡Œçš„ä»»åŠ¡
     QAutoTask* GetMostCloseExecute();
-    // Task ¹ıÆÚÁË
+    // Task è¿‡æœŸäº†
     void TaskOverdue(QAutoTask* pTask);
-    // ¹ıÆÚÈÎÎñÖØÖÃ
+    // è¿‡æœŸä»»åŠ¡é‡ç½®
     BOOL ResetOverdueTask(QAutoTask* pTask);
 
-    /** ´´½¨Ò»¸öĞÂµÄ×Ô¶¯ÈÎÎñ
+    /** åˆ›å»ºä¸€ä¸ªæ–°çš„è‡ªåŠ¨ä»»åŠ¡
      *	return:
-     *      QAutoTask*    ´´½¨ºÃµÄÈÎÎñÖ¸Õë
+     *      QAutoTask*    åˆ›å»ºå¥½çš„ä»»åŠ¡æŒ‡é’ˆ
      *	params:
      *		-[in]
      *
      *		-[out]
-     *          sError      ´íÎóĞÅÏ¢
+     *          sError      é”™è¯¯ä¿¡æ¯
     **/
     QAutoTask* NewAutoTask( ENUM_AUTOTASK_DOWHAT nDoWhat,
                             const CStdStringW& sDoWhatParam, const CStdStringW& sWhenDo,

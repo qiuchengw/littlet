@@ -1,4 +1,4 @@
-#include "LViewPlan.h"
+ï»¿#include "LViewPlan.h"
 #include "LDatas.h"
 #include "LFormPlan.h"
 #include "ui/QUIGlobal.h"
@@ -60,13 +60,13 @@ LRESULT LViewPlan::OnDocumentComplete()
 }
 
 //////////////////////////////////////////////////////////////////////////
-// ¸÷ÖÖÑ¡Ôñ±ä»¯
+// å„ç§é€‰æ‹©å˜åŒ–
 void LViewPlan::OnPlanSelectChanged( HELEMENT he )
 {
 //     QPlan *pPlan = m_formPlan.GetCurrentPlan();
 //     m_formStage.SetPlan(pPlan);
 // 
-//     // ÔÚÕâ¶ùË¢ĞÂplanµÄÊıÄ¿(²»ºÃ£¬µ«ÊÇ·½±ã)
+//     // åœ¨è¿™å„¿åˆ·æ–°plançš„æ•°ç›®(ä¸å¥½ï¼Œä½†æ˜¯æ–¹ä¾¿)
 //     NotifyPlanNumChanged();
 
     OnPlanSelect((LPARAM)m_formPlan.GetCurrentPlan());
@@ -79,7 +79,7 @@ void LViewPlan::OnPlanSelect( LPARAM lParam )
 
     m_formStage.SetPlan(pPlan);
 
-    // ÔÚÕâ¶ùË¢ĞÂplanµÄÊıÄ¿(²»ºÃ£¬µ«ÊÇ·½±ã)
+    // åœ¨è¿™å„¿åˆ·æ–°plançš„æ•°ç›®(ä¸å¥½ï¼Œä½†æ˜¯æ–¹ä¾¿)
     NotifyPlanNumChanged();
 }
 
@@ -108,21 +108,21 @@ void LViewPlan::RefreshCurrentGoal()
 //     else
 //     {
 //         ECtrl ctl = ctlGoal.find_first("#id-goal");
-//         ctl.SetText(L"¡¾Ã»ÓĞÄ¿±ê²»ÊÇÉÏ½øÇàÄê¡¿");
+//         ctl.SetText(L"ã€æ²¡æœ‰ç›®æ ‡ä¸æ˜¯ä¸Šè¿›é’å¹´ã€‘");
 // //         ctl = ctlGoal.find_first("#id-goalitem-checked");
 // //         ctl.SetText(L"-");
 //         ctl = GetCtrl("#id-goal-des");
-//         ctl.SetText(L"¿ìÀ´Ìí¼ÓÒ»¸öÄ¿±ê°É^_^");
+//         ctl.SetText(L"å¿«æ¥æ·»åŠ ä¸€ä¸ªç›®æ ‡å§^_^");
 //     }
 }
 
-// Ñ¡ÖĞÒ»¸ögoalÊ±£¬ÏÔÊ¾ÆäÏÂµÄgoal-item
+// é€‰ä¸­ä¸€ä¸ªgoalæ—¶ï¼Œæ˜¾ç¤ºå…¶ä¸‹çš„goal-item
 void LViewPlan::OnClkGoalCtl( HELEMENT he )
 {
 }
 
 //////////////////////////////////////////////////////////////////////////
-// stage Ìí¼Ó¡¢É¾³ı¡¢±ä»¯
+// stage æ·»åŠ ã€åˆ é™¤ã€å˜åŒ–
 void LViewPlan::OnStageAdded( LPARAM lParam )
 {
 }
@@ -139,17 +139,17 @@ void LViewPlan::OnStageSelChanged( LPARAM lParam )
 }
 
 //////////////////////////////////////////////////////////////////////////
-// goal Ìí¼ÓºÍÉ¾³ı
+// goal æ·»åŠ å’Œåˆ é™¤
 void LViewPlan::OnGoalAdded( LPARAM lParam )
 {
-    // ÏÔÊ¾goal
+    // æ˜¾ç¤ºgoal
     //ShowGoalPane(TRUE);
     m_formStage.RefreshCurrentStageItem();
 }
 
 void LViewPlan::OnGoalDeleted( LPARAM lParam )
 {
-    // ÏÔÊ¾goal
+    // æ˜¾ç¤ºgoal
     //ShowGoalPane(TRUE);
     m_formStage.RefreshCurrentStageItem();
 }
@@ -160,7 +160,7 @@ void LViewPlan::OnGoalSelChanged( LPARAM lParam )
 }
 
 //////////////////////////////////////////////////////////////////////////
-// goalitem Ìí¼Ó¡¢É¾³ı¡¢×´Ì¬¸Ä±ä
+// goalitem æ·»åŠ ã€åˆ é™¤ã€çŠ¶æ€æ”¹å˜
 void LViewPlan::OnGoalSubitemAdded( LPARAM lParam )
 {
     QGoalItem *pGoalItem = reinterpret_cast<QGoalItem*>(lParam);
@@ -183,7 +183,7 @@ void LViewPlan::OnGoalSubitemStatusChanged( LPARAM lParam )
     ASSERT(NULL != pGoalItem);
     m_formGoal.GoalSubItemStatusChanged(pGoalItem);
 
-    // Ë¢ĞÂµ±Ç°µÄgoalÏÔÊ¾
+    // åˆ·æ–°å½“å‰çš„goalæ˜¾ç¤º
     RefreshCurrentGoal();
 }
 

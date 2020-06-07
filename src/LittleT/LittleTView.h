@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "ui/QView.h"
 #include "ui/QUIGlobal.h"

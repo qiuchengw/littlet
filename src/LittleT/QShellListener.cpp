@@ -1,4 +1,4 @@
-#include "QShellListener.h"
+ï»¿#include "QShellListener.h"
 #include "../common/LittleTcmn.h"
 #include "XTrace.h"
 #include "stdstring.h"
@@ -43,17 +43,17 @@ UINT_PTR __stdcall QShellListener::ListenThread( void* parm )
         // connects, a thread is created to handle communications 
         // with that client, and the loop is repeated. 
         HANDLE hPipe = CreateNamedPipe( LITTLET_SHELL_PIPLENAME, PIPE_ACCESS_DUPLEX,       // read/write access 
-            PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT,  // ÖØµş£¬×èÈû£¬ÏûÏ¢£¬¶ÁÄ£Ê½£¬
-            1, // Ö»Òª´´½¨Ò»¸öÃüÃû¹ÜµÀ 
+            PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT,  // é‡å ï¼Œé˜»å¡ï¼Œæ¶ˆæ¯ï¼Œè¯»æ¨¡å¼ï¼Œ
+            1, // åªè¦åˆ›å»ºä¸€ä¸ªå‘½åç®¡é“ 
             G_LITTLET_SHELL_PIPEL_BUFFER_SIZE,                  // output buffer size 
             G_LITTLET_SHELL_PIPEL_BUFFER_SIZE,                  // input buffer size 
             0,                        // client time-out 
             NULL);                    // default security attribute 
         if (hPipe == INVALID_HANDLE_VALUE) 
         {
-            if (iTry++ > 3)   // ³¢ÊÔ´´½¨3´Î£¬Èç¹û¶¼´íÎóµÄ»°£¬ÍË³ö
+            if (iTry++ > 3)   // å°è¯•åˆ›å»º3æ¬¡ï¼Œå¦‚æœéƒ½é”™è¯¯çš„è¯ï¼Œé€€å‡º
             {
-                //MessageBox(NULL,L"½ø³ÌÍ¨ĞÅ´íÎó£¬½«²»ÄÜÊ¹ÓÃShell½ø³Ì´´½¨×Ô¶¯ÈÎÎñ£¡");
+                //MessageBox(NULL,L"è¿›ç¨‹é€šä¿¡é”™è¯¯ï¼Œå°†ä¸èƒ½ä½¿ç”¨Shellè¿›ç¨‹åˆ›å»ºè‡ªåŠ¨ä»»åŠ¡ï¼");
                 return 0;
             }
             break;
@@ -70,9 +70,9 @@ UINT_PTR __stdcall QShellListener::ListenThread( void* parm )
                                 : (GetLastError() == ERROR_PIPE_CONNECTED); 
             if (fConnected) 
             { 
-                // Shell½ø³ÌÁ¬½ÓÁË
+                // Shellè¿›ç¨‹è¿æ¥äº†
                 TRACE(L"--->Shell Connected\n");
-                // ´¦ÀíÁ¬½Ó
+                // å¤„ç†è¿æ¥
                 pThis->HandleShellConnected(hPipe);
             } 
             else
@@ -80,7 +80,7 @@ UINT_PTR __stdcall QShellListener::ListenThread( void* parm )
                 TRACE(L"--->Wait shell Connect Failed!\n");
                 // The client could not connect, so close the pipe. 
                 CloseHandle(hPipe); 
-                // ¹Ø±ÕÍ¨µÀ£¬ÔÙÀ´Ò»´Î
+                // å…³é—­é€šé“ï¼Œå†æ¥ä¸€æ¬¡
                 break;
             }
         } 
@@ -102,13 +102,13 @@ BOOL QShellListener::HandleShellConnected(HANDLE hPipe)
         &cbBytesRead, // number of bytes read 
         NULL);        // not overlapped I/O 
     if ( !fSuccess || (cbBytesRead == 0)) 
-        return FALSE;  // ¶Á´íÎó
+        return FALSE;  // è¯»é”™è¯¯
 
-    // ´¦ÀíÊı¾İ
+    // å¤„ç†æ•°æ®
     CStdString sReply;
     HandleShellRequest(szBufRequest, cbBytesRead, sReply);
 
-    // »Ø¸´ÇëÇó
+    // å›å¤è¯·æ±‚
     ReplyShellRequest(hPipe, sReply);
 
     return TRUE;

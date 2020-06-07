@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "BaseType.h"
 
@@ -7,7 +7,7 @@
 #include <map>
 #include "time/QTime.h"
 
-// ÃüÃûÔ¼¶¨£º
+// å‘½åçº¦å®šï¼š
 // struct T - data struct
 // class D - data class
 // class C - UI class
@@ -24,7 +24,7 @@ enum
     INVALID_ID_VAL = -1,
 };
 
-// ËùÓĞµÄÊı¾İ¿â±í¶ÔÓ¦µÄÊı¾İ½á¹¹¶¼±ØĞë¼Ì³Ğ×Ô´Ë½á¹¹
+// æ‰€æœ‰çš„æ•°æ®åº“è¡¨å¯¹åº”çš„æ•°æ®ç»“æ„éƒ½å¿…é¡»ç»§æ‰¿è‡ªæ­¤ç»“æ„
 struct IDataItem
 {
 public:
@@ -33,18 +33,18 @@ public:
         m_nID = INVALID_ID;
     }
 
-    // Êı¾İÏîID
+    // æ•°æ®é¡¹ID
     int      m_nID;
-    // Êı¾İÏî´´½¨Ê±¼ä
+    // æ•°æ®é¡¹åˆ›å»ºæ—¶é—´
     QTime       m_tmCreation;
 
-    // É¾³ı
+    // åˆ é™¤
     virtual void OnDelete() 
     {
    
     }
 
-    // ÒÆ³ı
+    // ç§»é™¤
     virtual void OnRemove()
     {
 
@@ -60,7 +60,7 @@ public:
         return m_tmCreation;
     }
 
-    // bWithTime    ÊÇ·ñÓĞtime
+    // bWithTime    æ˜¯å¦æœ‰time
     CStdString CreationTimeDes(BOOL bWithTime = FALSE)
     {
         if (bWithTime)
@@ -69,7 +69,7 @@ public:
             return CreationTime().Format(L"%Y/%m/%d");
     }
 
-    // ×Ô¶¨Òå¸ñÊ½
+    // è‡ªå®šä¹‰æ ¼å¼
     CStdString CreationTimeDes(LPCWSTR szFormat)
     {
         return CreationTime().Format(szFormat);

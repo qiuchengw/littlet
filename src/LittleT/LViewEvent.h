@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "LittleTView.h"
 #include "../common/ConstValues.h"
@@ -32,7 +32,7 @@ protected:
     void OnAutoTaskFired(QAutoTask* pTask);
 
     void AddEvent(QAutoTask* pTask);
-    // ÌáÇ°ÌáÊ¾×´Ì¬±ä»¯ÁË¡£
+    // æå‰æç¤ºçŠ¶æ€å˜åŒ–äº†ã€‚
     void FreshEventReminderFlag( QAutoTask* pTask );
 
     void RefreshEventItem(QAutoTask *pTask);
@@ -40,7 +40,7 @@ protected:
     void SelectEventItem(QAutoTask *pTask);
 
     void OnCmdSelectEventItem(LPARAM lp);
-    // Ìø¹ıÈÎÎñ
+    // è·³è¿‡ä»»åŠ¡
     void OnNotifyJumpOverExec(LPARAM lp);
 
     void OnMouseLeaveEventList(HELEMENT );
@@ -77,7 +77,7 @@ protected:
     {
         return GetCtrl("#popup_eventitem");
     }
-    // ×Ô¶¯Ñ¡ÔñÒ»¸öÏîÄ¿
+    // è‡ªåŠ¨é€‰æ‹©ä¸€ä¸ªé¡¹ç›®
     void AutoSelect();
 
     void OnKeyDown(UINT nChar,UINT nRepCnt,UINT nFlags);

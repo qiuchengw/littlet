@@ -1,4 +1,4 @@
-#include "LMainWnd.h"
+﻿#include "LMainWnd.h"
 
 QFrame* LMainWnd::CreateRealWnd(HWND hWndParent)
 {

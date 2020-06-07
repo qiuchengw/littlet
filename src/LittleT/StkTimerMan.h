@@ -1,10 +1,10 @@
-#pragma once
+﻿#pragma once
 
 //////////////////////////////////////////////////////////////////////////
-// һ���޴��ڵĶ�ʱ��ʵ��
-// ʹ�÷�����
-//		1������ȫ�ֺ��� ��StkSetTimer���趨��ʱ��
-//		2������ȫ�ֺ��� ��StkKillTimer��ɾ����ʱ��
+// 一个无窗口的定时器实现
+// 使用方法：
+//		1，调用全局函数 【StkSetTimer】设定定时器
+//		2，调用全局函数 【StkKillTimer】删除定时器
 //////////////////////////////////////////////////////////////////////////
 
 #include <Windows.h>
@@ -41,24 +41,24 @@ public:
 	{
 		if (NULL != m_hTimerQueue)
 		{
-			// ���ɾ����־�����ȴ�����ִ�еĻص���ɣ���������
+			// 标记删除标志，不等待正在执行的回调完成，立即返回
 			DeleteTimerQueueEx(m_hTimerQueue,NULL);
             m_hTimerQueue = NULL;
 		}
 	}
 
 public:
-	/** �趨��ʱ����MSDN��By default, the callback function is queued to a non-I/O worker thread.
+	/** 设定定时器，MSDN：By default, the callback function is queued to a non-I/O worker thread.
 	 *	-return:	
-	 *			HANDLE		����ɹ������ض�ʱ����������ʧ�ܣ�����NULL
-	 *						�൱�ڴ��ڣ�HWND����ʱ����WM_TIMER���Ķ�ʱ��ID
+	 *			HANDLE		如果成功，返回定时器句柄。如果失败，返回NULL
+	 *						相当于窗口（HWND）定时器（WM_TIMER）的定时器ID
 	 *	-params:	
-	 *		-[in]	dwMillsec	��ʱ���������λ���� ��ms��
-	 *				pCallback	�ص�����������ԭ��Ϊ��
+	 *		-[in]	dwMillsec	定时器间隔，单位毫秒 （ms）
+	 *				pCallback	回调函数，函数原型为：
 	 *					VOID CALLBACK WaitOrTimerCallback(
 								 __in  PVOID lpParameter,
 								 __in  BOOLEAN TimerOrWaitFired );
-					pData	�ص�������������ʱ�򣬴���ĵ�һ������ֵ���������ԭ��
+					pData	回调函数被激发的时候，传入的第一个参数值，见上面的原型
 	 **/
 	HANDLE SetTimer(DWORD dwMillsec,WAITORTIMERCALLBACK pCallback,LPVOID pData)
 	{
@@ -83,7 +83,7 @@ public:
             }
             __except(EXCEPTION_CONTINUE_EXECUTION)
             {
-                // �ڶ�ʱ���ص���ִ��ɾ����ʱ�������п��ܻ�����쳣
+                // 在定时器回调中执行删除定时器操作有可能会产生异常
                 //....
             }
 		}
@@ -93,32 +93,32 @@ private:
 	HANDLE	m_hTimerQueue;
 };
 
-/** �趨��ʱ����MSDN��By default, the callback function is queued to a non-I/O worker thread.
+/** 设定定时器，MSDN：By default, the callback function is queued to a non-I/O worker thread.
 	*	-return:	
-	*			HANDLE		����ɹ������ض�ʱ����������ʧ�ܣ�����NULL
-	*						�൱�ڴ��ڣ�HWND����ʱ����WM_TIMER���Ķ�ʱ��ID
+	*			HANDLE		如果成功，返回定时器句柄。如果失败，返回NULL
+	*						相当于窗口（HWND）定时器（WM_TIMER）的定时器ID
 	*	-params:	
-	*		-[in]	dwMillsec	��ʱ���������λ���� ��ms��
-	*				pCallback	�ص�����������ԭ��Ϊ��
+	*		-[in]	dwMillsec	定时器间隔，单位毫秒 （ms）
+	*				pCallback	回调函数，函数原型为：
 	*					VOID CALLBACK WaitOrTimerCallback(
 								__in  PVOID lpParameter,
 								__in  BOOLEAN TimerOrWaitFired );
-				pData	�ص�������������ʱ�򣬴���ĵ�һ������ֵ���������ԭ��
+				pData	回调函数被激发的时候，传入的第一个参数值，见上面的原型
 	**/
 inline HANDLE StkSetTimer(DWORD dwMillsec,WAITORTIMERCALLBACK pCallback,LPVOID pData=NULL)
 {
 	return StkTimerMan::GetInstance()->SetTimer(dwMillsec,pCallback,pData);
 }
 
-/** ɾ����ʱ��������ص�����ִ��
+/** 删除定时器，如果回调正在执行
 	 *	-params:	
-	 *		-[in]	hTimer	��ҪKill�Ķ�ʱ�����
-	 *						��������Ҫȷ���˾��ΪSetTimer���õķ���ֵ
+	 *		-[in]	hTimer	需要Kill的定时器句柄
+	 *						！！！需要确保此句柄为SetTimer调用的返回值
 	 *						
 	 *				bWaitForComplete	
-	 *					�˲���ָʾ���ô˺�����ʱ���Ƿ�ȴ��Ѽ����Ļص�����ٷ���
-	 *					���ΪTRUE����ô�˺����������ȴ��ص���ɺ󷵻�
-	 *					���ΪFALSE��������������
+	 *					此参数指示调用此函数的时候是否等待已激发的回调完成再返回
+	 *					如果为TRUE，那么此函数阻塞，等待回调完成后返回
+	 *					如果为FALSE，函数立即返回
 	 **/
 inline void StkKillTimer(HANDLE hTimer,BOOL bWaitForComplete=FALSE)
 {

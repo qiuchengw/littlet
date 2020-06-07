@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
 #include "LittleTcmn.h"
 
-// Ê¹ÓÃÑÕÉ«°´Å¥
+// ä½¿ç”¨é¢œè‰²æŒ‰é’®
 #ifndef QUI_USE_COLORBTN
 #   define QUI_USE_COLORBTN
 #endif

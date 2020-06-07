@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "BaseType.h"
 #include <windows.h> 
@@ -6,7 +6,7 @@
 #include <tchar.h>
 #include <strsafe.h>
 
-// ¼àÌıLittleTShellµÄ¹ÜµÀÏûÏ¢
+// ç›‘å¬LittleTShellçš„ç®¡é“æ¶ˆæ¯
 
 class QShellListener
 {
@@ -18,37 +18,37 @@ class QShellListener
 public:
     QShellListener(void);
 
-    // Æô¶¯¼àÌı
+    // å¯åŠ¨ç›‘å¬
     BOOL Startup();
     
-    // ¹Ø±Õ¼àÌı
+    // å…³é—­ç›‘å¬
     BOOL Shutdown();
 
 protected:
-    // ÓÀ¾ÃÏß³Ì£¬ÔÚ³ÌĞòÔËĞĞÆÚ¼äÒ»Ö±¼àÌı
+    // æ°¸ä¹…çº¿ç¨‹ï¼Œåœ¨ç¨‹åºè¿è¡ŒæœŸé—´ä¸€ç›´ç›‘å¬
     static UINT_PTR __stdcall ListenThread(void* parm);
    
-    /** ´¦ÀíShell·¢¹ıÀ´µÄÏûÏ¢
+    /** å¤„ç†Shellå‘è¿‡æ¥çš„æ¶ˆæ¯
      *	return
-     *      TRUE    ÏûÏ¢±»³É¹¦´¦Àí
+     *      TRUE    æ¶ˆæ¯è¢«æˆåŠŸå¤„ç†
      *	param
      *		-[in]
-     *          pMsg        ÏûÏ¢
-     *          nLen        ÏûÏ¢³¤¶È
+     *          pMsg        æ¶ˆæ¯
+     *          nLen        æ¶ˆæ¯é•¿åº¦
      *		-[out]	
-     *          sReply      ·¢¸øShellµÄ»Ø¸´
+     *          sReply      å‘ç»™Shellçš„å›å¤
     **/
     BOOL HandleShellRequest(__in wchar_t* pMsg, __in DWORD nLen, __out CStdString& sReply);
-    /** »Ø¸´ShellµÄÇëÇó
+    /** å›å¤Shellçš„è¯·æ±‚
      *	return
-     *      TRUE    ³É¹¦»Ø¸´
+     *      TRUE    æˆåŠŸå›å¤
      *	param
      *		-[in]
-     *          hPipe   ¹ÜµÀ
-     *          sPeply  ÏûÏ¢
+     *          hPipe   ç®¡é“
+     *          sPeply  æ¶ˆæ¯
     **/
     BOOL ReplyShellRequest(__in HANDLE hPipe, __in const CStdString& sReply);
-    /** Shell Á¬½Óµ½Pipe
+    /** Shell è¿æ¥åˆ°Pipe
      *	return
      *	param
      *		-[in]

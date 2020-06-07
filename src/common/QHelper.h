@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <list>
 #include <algorithm>
@@ -14,40 +14,40 @@ public:
 	static CStdString GetTimeUnitString(WCHAR cUnit);
 	static DWORD HowManySeconds( int nX,WCHAR cUnit );
 
-	// »ñÈ¡Ò»¸öÎ¨Ò»µÄ×Ö·û´®
+	// è·å–ä¸€ä¸ªå”¯ä¸€çš„å­—ç¬¦ä¸²
 	static CStdString UniqueString();
 
-	// t2 - t1 µÄ²îÖµ£¬Ïà¾àµÄÃëÊı
+	// t2 - t1 çš„å·®å€¼ï¼Œç›¸è·çš„ç§’æ•°
 	static DWORD TimeSpan(WORD t1,WORD t2);
 
-	// ·µ»Øt1 + dwSecs ÃëµÃµ½µÄÊ±¼äÖµ£¬
-	// Èç¹û³¬¹ıÁË23£º59 ,bOverflow ÎªÕæ 
+	// è¿”å›t1 + dwSecs ç§’å¾—åˆ°çš„æ—¶é—´å€¼ï¼Œ
+	// å¦‚æœè¶…è¿‡äº†23ï¼š59 ,bOverflow ä¸ºçœŸ 
 	static WORD TimePlus(WORD t1,DWORD dwSecs,BOOL &bOverflow);
-	// ½áºÏDateºÍTime
+	// ç»“åˆDateå’ŒTime
 	static QTime CombineDateTime(DWORD dwDate,WORD wTime);
 
     static BOOL ParseInt(__in const CStdStringW& src, __out int& nT);
 
     static CStdString MakeReleateExp( ENUM_AUTOTASK_EXECFLAG eExec,
-        int nSpan, wchar_t cUnit,   // Ïà¶ÔÓÚeExecÒ»¶¨Ê±¼ä
-        int nSpan1 = 0, wchar_t cUnit1 = L's', // È»ºó¼ä¸ô£¬ 0 ÎªÎŞ¼ä¸ô
-        int nExecCount = 0); // ×Ü¹²ÄÜÖ´ĞĞµÄ´ÎÊı, 0Îª²»ÏŞÖÆ
+        int nSpan, wchar_t cUnit,   // ç›¸å¯¹äºeExecä¸€å®šæ—¶é—´
+        int nSpan1 = 0, wchar_t cUnit1 = L's', // ç„¶åé—´éš”ï¼Œ 0 ä¸ºæ— é—´éš”
+        int nExecCount = 0); // æ€»å…±èƒ½æ‰§è¡Œçš„æ¬¡æ•°, 0ä¸ºä¸é™åˆ¶
 
     static BOOL MakeAbsExp(ENUM_AUTOTASK_EXECFLAG eFlag,QTime& tmB, QTime& tmE, 
-            StringArray& arDatePots, /* Ö´ĞĞÈÕÆÚµã */ StringArray& arTimePots, 
+            StringArray& arDatePots, /* æ‰§è¡Œæ—¥æœŸç‚¹ */ StringArray& arTimePots, 
             __out CStdString& sResultExp, __out CStdString& sError);
 
     static CStdString MakeRemindExp( int nA, WCHAR cAUnit, const CStdString&sSound,const CStdString&sMsg );
 
-    /** 10h£¬10s£¬10m ÕâÑùµÄÊ±¼ä¸ñÊ½½âÎö
+    /** 10hï¼Œ10sï¼Œ10m è¿™æ ·çš„æ—¶é—´æ ¼å¼è§£æ
      *	return:
-     *      TRUE    Êı¾İ¸ñÊ½ÕıÈ·
+     *      TRUE    æ•°æ®æ ¼å¼æ­£ç¡®
      *	params:
      *		-[in]
-     *          src     ±»½âÎöµÄ×Ö·û´®
+     *          src     è¢«è§£æçš„å­—ç¬¦ä¸²
      *		-[out]
-     *          nT      Êı×Ö²¿·Ö
-     *          cUnit   µ¥Î»²¿·Ö
+     *          nT      æ•°å­—éƒ¨åˆ†
+     *          cUnit   å•ä½éƒ¨åˆ†
     **/
     static BOOL ParseUnitTime(__in const CStdStringW& src, __out int &nT, __out wchar_t& cUnit);
 };

@@ -1,4 +1,4 @@
-#include "LittleTFrame.h"
+ï»¿#include "LittleTFrame.h"
 
 #include "feed/Feedback.h"
 #include "AppHelper.h"
@@ -84,7 +84,7 @@ LittleTFrame::~LittleTFrame(void)
 void LittleTFrame::OnClose()
 {
     if (    m_bIsCloseForUpdate 
-        || (XMsgBox::YesNoMsgBox(L"È·¶¨ÍË³ö³ÌĞò£¿") == IDYES) )
+        || (XMsgBox::YesNoMsgBox(L"ç¡®å®šé€€å‡ºç¨‹åºï¼Ÿ") == IDYES) )
     {
         SetMsgHandled(FALSE);
 
@@ -94,15 +94,15 @@ void LittleTFrame::OnClose()
 
 //        LDesktopTodo::GetInstance()->PostMessage(WM_CLOSE);
 
-        // ¼ÇÂ¼´°¿ÚÎ»ÖÃ
+        // è®°å½•çª—å£ä½ç½®
         QUIGetApp()->SaveWindowPos();
-        // ÍË³ö
+        // é€€å‡º
         PostQuitMessage(0);
 
-        // Òş²Ø×Ô¼º
+        // éšè—è‡ªå·±
         ShowWindow(SW_HIDE);
 
-        // ÍË³öÍ¨Öª
+        // é€€å‡ºé€šçŸ¥
         // littlet::SendWebRequest(L"logout", L"bye bye! black bird!");
     }
 
@@ -125,21 +125,21 @@ QView* LittleTFrame::CustomControlCreate( HELEMENT he )
 
 LRESULT LittleTFrame::OnDocumentComplete()
 {
-    // ok, ÒÑ¾­Æô¶¯ÁË£¬ÆäËû½ø³Ì¿ÉÒÔ¹ıÀ´Í¨ĞÅÁË
-    // ×Ô¶¯¿¿±ßÒş²Ø
+    // ok, å·²ç»å¯åŠ¨äº†ï¼Œå…¶ä»–è¿›ç¨‹å¯ä»¥è¿‡æ¥é€šä¿¡äº†
+    // è‡ªåŠ¨é è¾¹éšè—
     wnd_autohide_.RegisterAutoHide(GetSafeHwnd(), CAutoHideWnd::ALIGN_ALL, 10, 1);
 
-    // ³õÊ¼»¯°æ±¾
+    // åˆå§‹åŒ–ç‰ˆæœ¬
     SetTitle(CStdString(L"LittleT v") + QUIGetAppVersion());  
 
     QTime tmStartup = QProcessMan::GetSystemStartupTime();
-    GetCtrl("#bar_status").SetText(tmStartup.Format(L"ÏµÍ³Æô¶¯ÓÚ£º%X"));
+    GetCtrl("#bar_status").SetText(tmStartup.Format(L"ç³»ç»Ÿå¯åŠ¨äºï¼š%X"));
 
     ConfigHotKey(TRUE); 
     
     littlet::EnterAppMode(APP_MODE_EVENTS);
 
-    // Ë¢ĞÂÊ£ÓàÎ´Íê³ÉµÄtodo¸öÊı
+    // åˆ·æ–°å‰©ä½™æœªå®Œæˆçš„todoä¸ªæ•°
     OnTodoTaskStatusChanged(0);
 
     m_bStartup = TRUE;
@@ -163,7 +163,7 @@ void LittleTFrame::OnEventStatusChanged( LPARAM lParam )
 {
     RefreshEventNum();
 
-    // Ë¢ĞÂ×î½üµÄÒªÖ´ĞĞµÄÈÎÎñ
+    // åˆ·æ–°æœ€è¿‘çš„è¦æ‰§è¡Œçš„ä»»åŠ¡
     RefreshHeader();
 }
 
@@ -246,7 +246,7 @@ void LittleTFrame::OnEventToggleReminder( LPARAM lParam )
 {
     QAutoTask *pTask = QAutoTaskMan::GetInstance()->GetTask((int)lParam);
     if ((NULL != pTask) && !(pTask->IsReminderEnabled()))
-    {   // ²»ÈÃÌáÊ¾ÁË
+    {   // ä¸è®©æç¤ºäº†
         LReminderBox::GetInstance()->RemoveReminderDlg(pTask->ID());
     }
 }
@@ -265,8 +265,8 @@ namespace littlet
     public:
         virtual void exec()
         {
-            if (IDYES == XMsgBox::YesNoMsgBox(L"¼´½«¹Ø»ú£¬ÊÇ·ñÈ¡Ïû£¿",
-                L"¹Ø»úÈ·ÈÏ£¡", 30, XMsgBox::ID_MSGBOX_BTN_NO))
+            if (IDYES == XMsgBox::YesNoMsgBox(L"å³å°†å…³æœºï¼Œæ˜¯å¦å–æ¶ˆï¼Ÿ",
+                L"å…³æœºç¡®è®¤ï¼", 30, XMsgBox::ID_MSGBOX_BTN_NO))
             {
                 quibase::PreventSystemShutdown();
             }
@@ -285,25 +285,25 @@ void LittleTFrame::OnEventFired( LPARAM lp )
 
     switch (pTask->GetDoWhat())
     {
-    case AUTOTASK_DO_REMIND:// = 2, // ÌáÊ¾ĞÅÏ¢
+    case AUTOTASK_DO_REMIND:// = 2, // æç¤ºä¿¡æ¯
         {
             break;
         }
-    case AUTOTASK_DO_SYSSHUTDOWN:// = 4,  // ¹Ø»ú
+    case AUTOTASK_DO_SYSSHUTDOWN:// = 4,  // å…³æœº
         {
             wchar_t szMsg[128] = {0};
-            WTL::SecureHelper::strcpy_x(szMsg,128, L"LittleTÇëÇó¹Ø»ú");
+            WTL::SecureHelper::strcpy_x(szMsg,128, L"LittleTè¯·æ±‚å…³æœº");
             quibase::ShutdownComputer(FALSE, szMsg, 30);
 
             htmlayout::queue_hl::push(new littlet::abort_shutdown, GetSafeHwnd());
 
             break;
         }
-//     case AUTOTASK_DO_SYSREBOOT: // = 5,  // ÖØÆô
+//     case AUTOTASK_DO_SYSREBOOT: // = 5,  // é‡å¯
 //         {
 //             break;
 //         }
-    case AUTOTASK_DO_BREAKAMOMENT: // = 5,  // ĞİÏ¢Ò»»á¶ù
+    case AUTOTASK_DO_BREAKAMOMENT: // = 5,  // ä¼‘æ¯ä¸€ä¼šå„¿
         {
             LittleTConfig *pcfg = (LittleTConfig*)QUIGetConfig();
             QScreenWnd::Show(pcfg->GetPicFolder(),pcfg->GetPicAlpha(),
@@ -313,9 +313,9 @@ void LittleTFrame::OnEventFired( LPARAM lp )
         }
     default:break;
     }
-    // ÈÃview Event ´¦ÀíÊÂ¼ş 
+    // è®©view Event å¤„ç†äº‹ä»¶ 
     m_viewEvent.OnAutoTaskFired(pTask);
-    // Ë¢ĞÂ×îÏÂ´ÎÖ´ĞĞÊ±¼ä
+    // åˆ·æ–°æœ€ä¸‹æ¬¡æ‰§è¡Œæ—¶é—´
     RefreshHeader();
 }
 
@@ -333,11 +333,11 @@ BOOL LittleTFrame::ConfigHotKey(BOOL bConfig)
             return FALSE;
         }   
 
-        // ±¾µØ¿ì½İ¼ü
+        // æœ¬åœ°å¿«æ·é”®
 //         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL, 0x4E);  // ctrl + n
 //         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL, 0x4E);  // ctrl + tab
 
-        // È«¾Ö¿ì½İ¼ü
+        // å…¨å±€å¿«æ·é”®
         // RegisterHotKey(hWnd, m_idAtom, MOD_WIN, 0x44);
         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL | MOD_SHIFT, 0x48);
         RegisterHotKey(hWnd, m_idAtom, MOD_CONTROL | MOD_SHIFT, 0x4A);  // j
@@ -362,32 +362,32 @@ void LittleTFrame::OnHotKey( int nSystemHotKey,UINT nModifier,UINT nVk )
         return; // ctrl + shift
 
 //     if (_HasFlag(nModifier, MOD_WIN) && (0x44 == nVk))
-//         return; // ²»´¦ÀíWIN + D
+//         return; // ä¸å¤„ç†WIN + D
 
-    // È«¾Ö¿ì½İ¼ü
+    // å…¨å±€å¿«æ·é”®
     if (0x48 == nVk)
     {   
         // ctrl + shift + h
         // system tray icon
         static BOOL bTrayiconCreated = FALSE;
         if ( !bTrayiconCreated )
-        {  // Ö»ÓĞÔÚ´°¿ÚÍêÈ«Òş²ØµÄÊ±ºò²ÅÏÔÊ¾ÍĞÅÌÇøÍ¼±ê
+        {  // åªæœ‰åœ¨çª—å£å®Œå…¨éšè—çš„æ—¶å€™æ‰æ˜¾ç¤ºæ‰˜ç›˜åŒºå›¾æ ‡
             HICON hSystrayIcon = LoadIcon(QUIGetInstance(), MAKEINTRESOURCE(IDI_LITTLET));
             m_trayicon.Create(QUIGetInstance(), 
                 GetSafeHwnd(), 
                 QSOFT_LITTLET_SYSTRAYMSG,
-                L"LittleT-¶¨Ê±ÌáĞÑ¡¢TODO¡¢ÈÎÎñ¹æ»®", 
+                L"LittleT-å®šæ—¶æé†’ã€TODOã€ä»»åŠ¡è§„åˆ’", 
                 hSystrayIcon, 
                 IDR_MENU_TRAYICON, 
                 FALSE, 
-                L"µã»÷¿É»Ö¸´Õı³£ÏÔÊ¾",
-                L"LittleTÒÑ±»×îĞ¡»¯µ½Õâ¶ù");
+                L"ç‚¹å‡»å¯æ¢å¤æ­£å¸¸æ˜¾ç¤º",
+                L"LittleTå·²è¢«æœ€å°åŒ–åˆ°è¿™å„¿");
             bTrayiconCreated = TRUE;
         }
 
-        if (_HasFlag(GetStyle(),WS_VISIBLE))    // ÕıÔÚÏÔÊ¾ÄØ
+        if (_HasFlag(GetStyle(),WS_VISIBLE))    // æ­£åœ¨æ˜¾ç¤ºå‘¢
         {
-            // Òş²ØÖ®
+            // éšè—ä¹‹
 //            m_trayicon.MinimizeToTray(GetSafeHwnd());
             ShowWindow(SW_HIDE);
             m_trayicon.ShowIcon();
@@ -422,7 +422,7 @@ void LittleTFrame::OnHotKey( int nSystemHotKey,UINT nModifier,UINT nVk )
     {
     case 0x4A:      // j
         {
-            // ĞÂ×Ô¶¯ÈÎÎñ
+            // æ–°è‡ªåŠ¨ä»»åŠ¡
             littlet::EnterAppMode(APP_MODE_EVENTS);
             m_viewEvent.OnClkNewEvent(NULL);
 
@@ -430,8 +430,8 @@ void LittleTFrame::OnHotKey( int nSystemHotKey,UINT nModifier,UINT nVk )
         }
     case 0x4B:  // k
         {
-            // ĞÂtodoÈÎÎñ
-            // ×ªµ½todoÈÎÎñÄ£Ê½
+            // æ–°todoä»»åŠ¡
+            // è½¬åˆ°todoä»»åŠ¡æ¨¡å¼
             littlet::EnterAppMode(APP_MODE_TODO);
             m_viewTodo.OnClkNewTask(NULL);
 
@@ -439,7 +439,7 @@ void LittleTFrame::OnHotKey( int nSystemHotKey,UINT nModifier,UINT nVk )
         }
     case 0x4C:  // l
         {
-            // ¼Æ»®Ä£Ê½
+            // è®¡åˆ’æ¨¡å¼
             littlet::EnterAppMode(APP_MODE_PLAN);
             m_viewPlan.OnClkNewPlan(NULL);
 
@@ -447,7 +447,7 @@ void LittleTFrame::OnHotKey( int nSystemHotKey,UINT nModifier,UINT nVk )
         }
     case 0x4D:  // m
         {
-            // ÏÔÊ¾ËùÓĞµÄ±ãÇ©
+            // æ˜¾ç¤ºæ‰€æœ‰çš„ä¾¿ç­¾
             StickyNoteMan::GetInstance()->ShowAll();
             break;
         }
@@ -540,21 +540,21 @@ LRESULT LittleTFrame::OnAppVersionCheck( UINT uMsg,
     }
     else
     {
-        // µ¯³ö¶Ô»°¿ò£¬Ñ¯ÎÊÓÃ»§ÊÇ·ñ´òËã¸üĞÂ
-        // 2013/6/18 v2.9 ²»ÔÙÑ¯ÎÊ£¬¾²Ä¬¸üĞÂ
-        // 2014/11/12 v4.0 ²»ÔÙÑ­»·£¬Ö±½Ó¸üĞÂ
+        // å¼¹å‡ºå¯¹è¯æ¡†ï¼Œè¯¢é—®ç”¨æˆ·æ˜¯å¦æ‰“ç®—æ›´æ–°
+        // 2013/6/18 v2.9 ä¸å†è¯¢é—®ï¼Œé™é»˜æ›´æ–°
+        // 2014/11/12 v4.0 ä¸å†å¾ªç¯ï¼Œç›´æ¥æ›´æ–°
 //        if (LUpdateInfoDlg(p->sParam).DoModal() == IDOK)
-//         if (XMsgBox::YesNoMsgBox(L"Ó¦ÓÃ³ÌĞò¸üĞÂÒÑ¾­ÏÂÔØ£¬ÊÇ·ñ¸üĞÂ£¿<br/>"
-//                 L"·ÅĞÄ°É£¬²»»á³¬¹ı10ÃëÖÓ£¡") == IDYES)
+//         if (XMsgBox::YesNoMsgBox(L"åº”ç”¨ç¨‹åºæ›´æ–°å·²ç»ä¸‹è½½ï¼Œæ˜¯å¦æ›´æ–°ï¼Ÿ<br/>"
+//                 L"æ”¾å¿ƒå§ï¼Œä¸ä¼šè¶…è¿‡10ç§’é’Ÿï¼") == IDYES)
         {
-            // Æô¶¯¸üĞÂ³ÌĞò
+            // å¯åŠ¨æ›´æ–°ç¨‹åº
             m_bIsCloseForUpdate = TRUE;
             m_sUpdateFile = p->sParam;
             PostMessage(WM_CLOSE);
         }
     }
     
-    // ÊÍ·Å²ÎÊıÄÚ´æ
+    // é‡Šæ”¾å‚æ•°å†…å­˜
     if (p->ShouldIDeleteThis())
     {
         QUIReleaseUserMsgParam(p);
@@ -584,10 +584,10 @@ LRESULT LittleTFrame::OnComputerPowerChanged( DWORD dwEvent, DWORD )
     if (   (PBT_APMRESUMEAUTOMATIC == dwEvent)  // windows vista or higher
         || (PBT_APMRESUMECRITICAL == dwEvent) ) // windows xp
     {
-        // Ë¢ĞÂ×Ô¶¯ÈÎÎñ¡£
+        // åˆ·æ–°è‡ªåŠ¨ä»»åŠ¡ã€‚
         m_viewEvent.RefreshEventList();
 
-        // Ö»Ë¢ĞÂEventListÃ²ËÆÃ»ÓĞ¸üĞÂHeader
+        // åªåˆ·æ–°EventListè²Œä¼¼æ²¡æœ‰æ›´æ–°Header
         RefreshHeader();
     }
     return TRUE;
@@ -598,10 +598,10 @@ LRESULT LittleTFrame::OnSysTrayMessage( UINT uMsg, WPARAM wParam,
 {
     if (LOWORD(lParam) == WM_LBUTTONUP)
     {
-        // ÏÔÊ¾´°¿Ú
+        // æ˜¾ç¤ºçª—å£
         // ShowWindow(SW_RESTORE);
 
-        // Èç¹ûÊÇÍ£¿¿Òş²Ø×ÅµÄ£¬ÏÔÊ¾Ò»ÏÂ
+        // å¦‚æœæ˜¯åœé éšè—ç€çš„ï¼Œæ˜¾ç¤ºä¸€ä¸‹
         CRect rc;
         if (GetWindowRect(&rc))
         {
@@ -618,7 +618,7 @@ LRESULT LittleTFrame::OnSysTrayMessage( UINT uMsg, WPARAM wParam,
         }
         MoveWindow(&rc);
 
-        // Òş²Øtrayicon
+        // éšè—trayicon
         m_trayicon.HideIcon();
     }
     return m_trayicon.OnTrayNotification(wParam, lParam);
@@ -653,7 +653,7 @@ LRESULT LittleTFrame::OnCopyData( HWND hWnd, PCOPYDATASTRUCT pps )
     }
 
     if (LITTLET_SHELL_COMMANDCODE_ADDAUTOTASK == pps->dwData)
-    { // Ìí¼Ó×Ô¶¯ÈÎÎñ
+    { // æ·»åŠ è‡ªåŠ¨ä»»åŠ¡
         LP_LittleTShell_CopyData_Param p = 
             reinterpret_cast<LP_LittleTShell_CopyData_Param>(pps->lpData);
         if (NULL == p)
@@ -672,7 +672,7 @@ LRESULT LittleTFrame::OnCopyData( HWND hWnd, PCOPYDATASTRUCT pps )
         }
         else
         {
-            WTL::SecureHelper::strcpy_x(p->szResult, 256, L"×Ô¶¯ÈÎÎñÒÑ¾­´´½¨");
+            WTL::SecureHelper::strcpy_x(p->szResult, 256, L"è‡ªåŠ¨ä»»åŠ¡å·²ç»åˆ›å»º");
             m_viewEvent.NewEventAdd(pTask);
         }
     }
@@ -726,9 +726,9 @@ void LittleTFrame::OnClkCheckUpdation( HELEMENT )
 {
     if ( QAutoUpdater::GetInstance()->CheckUpdate())
     {
-        XMsgBox::OkMsgBox(L"<b .red>ÕıÔÚ¼ì²é¡­¡­</b><br/>"
-            L"ÓĞ¸üĞÂ»á×Ô¶¯¸üĞÂ£¬<br/>Ã»ÓĞ¾Í²»ÌáÊ¾ÄúÁË",
-            L"¼ì²é¸üĞÂ", 6);
+        XMsgBox::OkMsgBox(L"<b .red>æ­£åœ¨æ£€æŸ¥â€¦â€¦</b><br/>"
+            L"æœ‰æ›´æ–°ä¼šè‡ªåŠ¨æ›´æ–°ï¼Œ<br/>æ²¡æœ‰å°±ä¸æç¤ºæ‚¨äº†",
+            L"æ£€æŸ¥æ›´æ–°", 6);
     }
 }
 
@@ -738,16 +738,16 @@ LRESULT LittleTFrame::OnSideVisibleChanged(UINT uMsg, WPARAM wParam, LPARAM lPar
     // 
     // The Shell will remove a window's button from the taskbar only if the window's style supports visible taskbar buttons.If you want to dynamically change a window's style to one that doesn't support visible taskbar buttons, you must hide the window first(by calling ShowWindow with SW_HIDE), change the window style, and then show the window.
 
-    // ±ØĞëµÃÏÈÒş²Ø£¬ÔÙÏÔÊ¾£¬²ÅÄÜÈÃwx_ex_toolwindow ÉúĞ§
+    // å¿…é¡»å¾—å…ˆéšè—ï¼Œå†æ˜¾ç¤ºï¼Œæ‰èƒ½è®©wx_ex_toolwindow ç”Ÿæ•ˆ
     ShowWindow(SW_HIDE);
     if (lParam)
     {
-        // ÏÔÊ¾ÁË
+        // æ˜¾ç¤ºäº†
         ModifyStyleEx(WS_EX_TOOLWINDOW, WS_EX_APPWINDOW);
     }
     else
     {
-        // Òş²ØÁË
+        // éšè—äº†
         ModifyStyleEx(WS_EX_APPWINDOW,  WS_EX_TOOLWINDOW | WS_EX_TOPMOST,
             SWP_NOACTIVATE | SWP_NOREDRAW);
     }

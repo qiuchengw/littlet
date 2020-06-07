@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "BaseType.h"
 #include "QBuffer.h"
@@ -24,24 +24,24 @@ inline CStdString __BasedataCacheFile()
     return quibase::GetModulePath() + BASEDATA_CACHE_FILE;
 }
 
-/** ¸üĞÂÓ¦ÓÃ³ÌĞòÎÄ¼ş
+/** æ›´æ–°åº”ç”¨ç¨‹åºæ–‡ä»¶
 *	return:
-*      ÎŞ·µ»Ø
+*      æ— è¿”å›
 *	params:
 *		-[in]
-*          wParam      1£¬ÓĞ¸üĞÂ£¬ 0£¬µ±Ç°ÎŞ¸üĞÂ
-*          lParam      µ±wParam==0£¬´ËÓòÒ²Îª0 
-*                        wParam==1£¬´ËÓòÎªLPQUI_USERMSGPARAM£¬
+*          wParam      1ï¼Œæœ‰æ›´æ–°ï¼Œ 0ï¼Œå½“å‰æ— æ›´æ–°
+*          lParam      å½“wParam==0ï¼Œæ­¤åŸŸä¹Ÿä¸º0 
+*                        wParam==1ï¼Œæ­¤åŸŸä¸ºLPQUI_USERMSGPARAMï¼Œ
 *  -----------------------------------------
-*          LPQUI_USERMSGPARAM ÓòµÄÖµÎª£º
-*                      wParam  1£º¸üĞÂ³É¹¦
-*                              0£º¸üĞÂÊ§°Ü
-*                      lParam  1£ºbaseData ¸üĞÂ
-*                              0£ºÓ¦ÓÃ³ÌĞò¸üĞÂ
-*                      sParam  ÒÑÏÂÔØµÄ¸üĞÂÎÄ¼şÂ·¾¶
-*                      bFreeIt TRUE    ½ÓÊÕÕßÓ¦¸ÃÉ¾³ıÕâ¸öÊı¾İ
+*          LPQUI_USERMSGPARAM åŸŸçš„å€¼ä¸ºï¼š
+*                      wParam  1ï¼šæ›´æ–°æˆåŠŸ
+*                              0ï¼šæ›´æ–°å¤±è´¥
+*                      lParam  1ï¼šbaseData æ›´æ–°
+*                              0ï¼šåº”ç”¨ç¨‹åºæ›´æ–°
+*                      sParam  å·²ä¸‹è½½çš„æ›´æ–°æ–‡ä»¶è·¯å¾„
+*                      bFreeIt TRUE    æ¥æ”¶è€…åº”è¯¥åˆ é™¤è¿™ä¸ªæ•°æ®
 *		-[out]
-*      ÎŞÊä³ö
+*      æ— è¾“å‡º
 **/
 DECLARE_USER_MESSAGE(QSOFT_MSG_UPDATEAPP);
 
@@ -61,23 +61,23 @@ class QAutoUpdater
 public:
     QAutoUpdater(void);
 
-    /** Æô¶¯×Ô¶¯¸üĞÂ³ÌĞò
+    /** å¯åŠ¨è‡ªåŠ¨æ›´æ–°ç¨‹åº
     *	return:
-    *      TRUE    Æô¶¯³É¹¦
+    *      TRUE    å¯åŠ¨æˆåŠŸ
     *	params:
     *		-[in]
-    *          dwCheckPeriod   ¼ì²é¸üĞÂµÄÆµÂÊ£¬µ¥Î»Ê±¼ä£¨·Ö£©
-    *                          ×îĞ¡¼ì²éÆµÂÊÎª10·ÖÖÓ
-    *          sURL            ÍøÂçµØÖ·
-    *          szRefer         ÆÆ½â·ÀµÁÁ´ ÈçÉèÖÃ£ºhttp://www.sina.com£¬
+    *          dwCheckPeriod   æ£€æŸ¥æ›´æ–°çš„é¢‘ç‡ï¼Œå•ä½æ—¶é—´ï¼ˆåˆ†ï¼‰
+    *                          æœ€å°æ£€æŸ¥é¢‘ç‡ä¸º10åˆ†é’Ÿ
+    *          sURL            ç½‘ç»œåœ°å€
+    *          szRefer         ç ´è§£é˜²ç›—é“¾ å¦‚è®¾ç½®ï¼šhttp://www.sina.comï¼Œ
     *
     **/
     BOOL Startup(__in _Url& urlUpdation, __in _Url& urlBaseData, __in DWORD dwCheckPeriod = 30);
 
-    /** Òì²½·½Ê½¼ì²é³ÌĞò¸üĞÂ.
-    *      Èç¹ûÆô¶¯¼ì²é³É¹¦£¬¼ì²é½áÊøºó½«»áÏò³ÌĞòµÄÖ÷´°¿Ú·¢ËÍÒ»¸öQSOFT_MSG_UPDATEAPPÏûÏ¢
+    /** å¼‚æ­¥æ–¹å¼æ£€æŸ¥ç¨‹åºæ›´æ–°.
+    *      å¦‚æœå¯åŠ¨æ£€æŸ¥æˆåŠŸï¼Œæ£€æŸ¥ç»“æŸåå°†ä¼šå‘ç¨‹åºçš„ä¸»çª—å£å‘é€ä¸€ä¸ªQSOFT_MSG_UPDATEAPPæ¶ˆæ¯
     *	return:
-    *      TRUE    Æô¶¯³É¹¦
+    *      TRUE    å¯åŠ¨æˆåŠŸ
     **/
     BOOL CheckUpdate( );
 
@@ -88,7 +88,7 @@ protected:
         TASK_TYPE_BASEDATA = 2,
     };
 
-    // ÏÂÔØÏß³Ì»Øµ÷º¯Êı
+    // ä¸‹è½½çº¿ç¨‹å›è°ƒå‡½æ•°
     struct _Download_Param 
     {
         _Download_Param (ENUM_TASK_TYPE t)
@@ -100,7 +100,7 @@ protected:
         CStdString sURL;	// in
         CStdString sRefer;	// in
         LPVOID	pData; // in
-        QBuffer	bufDown;	// out ÏÂÔØµÄÊı¾İ
+        QBuffer	bufDown;	// out ä¸‹è½½çš„æ•°æ®
 
         inline BOOL IsUpdationTask()const
         {
@@ -108,17 +108,17 @@ protected:
         }
 
     private:
-        ENUM_TASK_TYPE type_;   // ÈÎÎñÀàĞÍ
+        ENUM_TASK_TYPE type_;   // ä»»åŠ¡ç±»å‹
     };
-    /** ÏÂÔØÊı¾İµÄÏß³Ì
+    /** ä¸‹è½½æ•°æ®çš„çº¿ç¨‹
     *	params:
     *		-[in]
     *          param            _Download_Param* 
     **/
     static UINT_PTR __stdcall thread_download(void* param);
 private:
-    HANDLE              m_hTimer;   // ¼ì²é¸üĞÂµÄÊ±¼ä¶¨Ê±Æ÷
+    HANDLE              m_hTimer;   // æ£€æŸ¥æ›´æ–°çš„æ—¶é—´å®šæ—¶å™¨
     _Url        url_updation_;
-    static BOOL        updating_;  // ÕıÔÚ¼ì²é¸üĞÂ
+    static BOOL        updating_;  // æ­£åœ¨æ£€æŸ¥æ›´æ–°
 };
 

@@ -1,4 +1,4 @@
-#include "QResIconsDlg.h"
+ï»¿#include "QResIconsDlg.h"
 #include "../common/LittleTUIcmn.h"
 #include "../common/ConstValues.h"
 #include "../common/QDBRes.h"
@@ -36,7 +36,7 @@ LRESULT QResIconsDlg::OnDocumentComplete()
     CStdString sIconDir = ((LittleTConfig*)QUIGetConfig())->GetIconsDir();
 
     QResMan* pMan = QResMan::GetInstance();
-    // °ÑiconsÄ¿Â¼ÏÂµÄËùÓÐÎÄ¼þ¶¼É¨Ãè½øÀ´
+    // æŠŠiconsç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶éƒ½æ‰«æè¿›æ¥
     VecFileData vfd;
     QResMan::GetInstance()->GetDataItems(vfd, DBFILE_TYPE_THUMBICON);
     for (VecFileData::iterator i = vfd.begin(); i != vfd.end(); ++i)
@@ -71,29 +71,29 @@ void QResIconsDlg::OnAddNewIcon(HELEMENT he)
 		return;
 	}
 
-    // ×ª»»imageµ½¹Ì¶¨´óÐ¡µÄËõÂÔÍ¼
+    // è½¬æ¢imageåˆ°å›ºå®šå¤§å°çš„ç¼©ç•¥å›¾
     QImgProcess qIP;
     if ( !qIP.OpenFile(sImg) )
     {
-        XMsgBox::ErrorMsgBox(sImg + L"²»ÄÜ´ò¿ªÍ¼ÏñÎÄ¼þ");
+        XMsgBox::ErrorMsgBox(sImg + L"ä¸èƒ½æ‰“å¼€å›¾åƒæ–‡ä»¶");
         return;
     }
     Gdiplus::Image* pThumb = qIP.CreateThumb(ICON_THUMB_WIDTH, ICON_THUMB_HEIGHT, FALSE);
     if (NULL == pThumb)
     {
-        XMsgBox::ErrorMsgBox(L"×ª»»Í¼ÏñÊ§°Ü");
+        XMsgBox::ErrorMsgBox(L"è½¬æ¢å›¾åƒå¤±è´¥");
         qIP.Close();
         return;
     }
 
-    // ±£´æÕâ¸öÐ¡ËõÂÔÍ¼
+    // ä¿å­˜è¿™ä¸ªå°ç¼©ç•¥å›¾
     CStdString sExt = quibase::CPath(sImg).GetExtension();
     CStdString sTmpFile = 
         ((LittleTConfig*)QUIGetConfig())->GetIconsDir() 
         + L"__temp__" + sExt;
     if ( !qIP.SaveIamge(pThumb, sTmpFile) )
     {
-        XMsgBox::ErrorMsgBox(L"±£´æËõÂÔÍ¼Ê§°Ü!");
+        XMsgBox::ErrorMsgBox(L"ä¿å­˜ç¼©ç•¥å›¾å¤±è´¥!");
         delete pThumb;
         qIP.Close();
         return;
@@ -101,7 +101,7 @@ void QResIconsDlg::OnAddNewIcon(HELEMENT he)
     delete pThumb;
     qIP.Close();
 
-    // ½«Õâ¸öËõÂÔÍ¼Ð´Èëµ½Êý¾Ý¿â
+    // å°†è¿™ä¸ªç¼©ç•¥å›¾å†™å…¥åˆ°æ•°æ®åº“
     TFileData tfd;
     tfd.bufData.FileRead(sTmpFile);
     tfd.eType = DBFILE_TYPE_THUMBICON;
@@ -111,15 +111,15 @@ void QResIconsDlg::OnAddNewIcon(HELEMENT he)
     tfd.sExt = sExt.Mid(1);
     if ( !QResMan::GetInstance()->AddData( tfd ) )
     {
-        XMsgBox::ErrorMsgBox(L"icon Êý¾ÝÌí¼ÓÊ§°Ü");
+        XMsgBox::ErrorMsgBox(L"icon æ•°æ®æ·»åŠ å¤±è´¥");
         return;
     }
 
-    // ¸ÄÐ´ËõÂÔÍ¼µÄÃû×Ö
+    // æ”¹å†™ç¼©ç•¥å›¾çš„åå­—
     CStdString sDest = QResMan::GetInstance()->GetDBResFilePath(tfd);
     ASSERT(!sDest.IsEmpty());
     MoveFile(sTmpFile, sDest);
 
-    // Ìí¼Óµ½icon box
+    // æ·»åŠ åˆ°icon box
     AddIcon(tfd.nID, sDest);
 }

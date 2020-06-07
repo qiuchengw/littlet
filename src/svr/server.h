@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <winsock2.h>
 #include <windows.h>
@@ -33,9 +33,9 @@ struct UserMsg
 typedef std::list<UserMsg*> Msgs;
 
 /**
- *	·şÎñÆ÷½ø³Ì
- *      1£¬½ÓÊÕÓÃ»§Òâ¼û·´À¡
- *      2£¬½ÓÊÕ×Ô¶¯ÉÏ´«µÄbug£¨todo£©
+ *	æœåŠ¡å™¨è¿›ç¨‹
+ *      1ï¼Œæ¥æ”¶ç”¨æˆ·æ„è§åé¦ˆ
+ *      2ï¼Œæ¥æ”¶è‡ªåŠ¨ä¸Šä¼ çš„bugï¼ˆtodoï¼‰
  *
 **/
 class CMsgServer
@@ -44,15 +44,15 @@ public:
     CMsgServer(void);
     ~CMsgServer(void);
 
-    // Æô¶¯·şÎñ
+    // å¯åŠ¨æœåŠ¡
     int Startup();
 
 protected:
-    // Êı¾İ´¦ÀíÏß³Ì
+    // æ•°æ®å¤„ç†çº¿ç¨‹
     static UINT_PTR __stdcall thread_handlemsg(void* param);
 
 private:
-    // Òâ¼û½ÓÊÕÏß³Ì
+    // æ„è§æ¥æ”¶çº¿ç¨‹
     zmq::context_t  ctx_;
 };
 

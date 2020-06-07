@@ -1,4 +1,4 @@
-#include "LFormStage.h"
+ï»¿#include "LFormStage.h"
 #include "../common/LittleTUIcmn.h"
 #include "LFormGoal.h"
 #include "QResIconsDlg.h"
@@ -145,22 +145,22 @@ void LFormStage::RefreshStageItem( ETable &tblStage )
 //     sHtml.Format(
 //         L"<tr>"
 //         L"  <td id=\"stage-title\"  colspan=2>%s</td>"       // %s, stage title
-//         L"  <td id=\"stage-goalnum\" .number-text>%d</td>"    // %s Î´Íê³ÉµÄgoal
+//         L"  <td id=\"stage-goalnum\" .number-text>%d</td>"    // %s æœªå®Œæˆçš„goal
 //         L"</tr>"
 //         L"<tr>"
 //         L"  <td .prgs-time><progress red id=\"prgs-stage-time\" value=\"%d\" /></td>"  // %d: progress;
-//         L"  <td .time-text>%s</td>" // %s %s %s,ÓÃÊ±£¬ begin / end time
+//         L"  <td .time-text>%s</td>" // %s %s %s,ç”¨æ—¶ï¼Œ begin / end time
 //         L"</tr>"
 //         L"<tr>"
 //         L"  <td .prgs-prgs><progress id=\"prgs-stage-time\" value=\"%d\" /></td>"
-//         L"  <td .time-text>%s</td>" // %s ½øĞĞ¶È
+//         L"  <td .time-text>%s</td>" // %s è¿›è¡Œåº¦
 //         L"</tr>"
 // //        L"  <td>"
 // //         L"      <widget type=\"button-menu\" name=\"stage-menu\" with-icon>"
 // //         L"          <menu>"
-// //         L"              <li name=\"mi-stage-newstage\">Ìí¼Ó</li>"
-// //         L"              <li name=\"mi-stage-edit\">ĞŞ¸Ä</li>"
-// //         L"              <li name=\"mi-stage-delete\">É¾³ı</li>"
+// //         L"              <li name=\"mi-stage-newstage\">æ·»åŠ </li>"
+// //         L"              <li name=\"mi-stage-edit\">ä¿®æ”¹</li>"
+// //         L"              <li name=\"mi-stage-delete\">åˆ é™¤</li>"
 // //         L"          </menu>"
 // //         L"      </widget>"
 // //        L"  </td>"
@@ -177,14 +177,14 @@ BOOL LFormStage::SelectStageItem(__in ETable tblStage)
 {
     if ( !tblStage.is_valid() )
     {   
-        // ÎŞĞ§µÄ»°£¬Ñ¡ÖĞµÚÒ»¸öÏîÄ¿
+        // æ— æ•ˆçš„è¯ï¼Œé€‰ä¸­ç¬¬ä¸€ä¸ªé¡¹ç›®
         tblStage = _CurrentStageItem();
         if (!tblStage.is_valid())
         {
             ECtrl tblStageBox = _StageBox();
             if (tblStageBox.children_count())
             {
-                // Ñ¡ÖĞµÚÒ»¸ö
+                // é€‰ä¸­ç¬¬ä¸€ä¸ª
                 tblStage = tblStageBox.child(0);
                 tblStage.SetCheck(TRUE,TRUE);
             }
@@ -274,7 +274,7 @@ void LFormStage::OnMenuItemClkNewGoal( HELEMENT, EMenuItem mi )
 //             QUIPostCodeTo(GetSafeHwnd(), VIEWPLAN_NOTIFY_GOALADDED,
 //                 (LPARAM)&(GDlg.m_NewGoal));
 // 
-//             // Ë¢ĞÂµ±Ç°ÏÔÊ¾µÄstage
+//             // åˆ·æ–°å½“å‰æ˜¾ç¤ºçš„stage
 //             RefreshStageItem(_CurrentStageItem());
 //         }
 //     }
@@ -300,8 +300,8 @@ void LFormStage::OnMenuItemClkDelete( HELEMENT, EMenuItem mi )
     {
         CStdString sTip;
         sTip.Format(
-            L"È·¶¨ÒªÉ¾³ı½×¶Î¡¾%s¡¿Âğ£¿<br />ÆäÏÂÓĞ¡¾%d¡¿¸öÄ¿±ê¡£<br />"
-            L"<b .red>É¾³ıºó²»¿ÉÒÔ»Ö¸´</b>",
+            L"ç¡®å®šè¦åˆ é™¤é˜¶æ®µã€%sã€‘å—ï¼Ÿ<br />å…¶ä¸‹æœ‰ã€%dã€‘ä¸ªç›®æ ‡ã€‚<br />"
+            L"<b .red>åˆ é™¤åä¸å¯ä»¥æ¢å¤</b>",
             pStage->Stage(), pStage->GetGoalNum());
         if (XMsgBox::YesNoMsgBox(sTip) == IDYES)
         {
@@ -309,7 +309,7 @@ void LFormStage::OnMenuItemClkDelete( HELEMENT, EMenuItem mi )
 
             if (DeleteStage(pStage))
             {
-                // ¸æËßÉÏ¼¶
+                // å‘Šè¯‰ä¸Šçº§
                 QUIPostCodeTo(GetSafeHwnd(), VIEWPLAN_NOTIFY_STAGEDELETED, 
                     (LPARAM)nStageID);
             }
@@ -331,7 +331,7 @@ BOOL LFormStage::DeleteStage( QStage* pStage )
                 delete pStage;
                 m_stages.erase(i);
 
-                // Èç¹ûÈ·ÊµÉ¾µôÁË£¬ÄÇÃ´ÖØĞÂÑ¡Ôñµ±Ç°stage
+                // å¦‚æœç¡®å®åˆ æ‰äº†ï¼Œé‚£ä¹ˆé‡æ–°é€‰æ‹©å½“å‰stage
                 SelectStageItem();
 
                 return TRUE;
@@ -346,7 +346,7 @@ void LFormStage::OnMenuItemClkNewStage( HELEMENT, EMenuItem mi )
 {
     if (NULL == m_pPlan)
     {
-        XMsgBox::OkMsgBox(L"ÇëĞÂ½¨Ò»¸ö¼Æ»®");
+        XMsgBox::OkMsgBox(L"è¯·æ–°å»ºä¸€ä¸ªè®¡åˆ’");
         return ;
     }
 
@@ -448,13 +448,13 @@ BOOL LStageDlg::CheckDate(__out QTime &tmBegin,__out QTime &tmEnd)
 //     {
 //         if ( tmBegin.CompareDate(m_pStageInout->BeginTime()) < 0 )
 //         {
-//             XMsgBox::OkMsgBox(L"ÆğÊ¼Ê±¼ä²»ÄÜ±ÈÔ­À´µÄÊ±¼ä»¹Ğ¡°¡£¡");
+//             XMsgBox::OkMsgBox(L"èµ·å§‹æ—¶é—´ä¸èƒ½æ¯”åŸæ¥çš„æ—¶é—´è¿˜å°å•Šï¼");
 //             return FALSE;
 //         }
 // 
 //         if (tmBegin > tmEnd)
 //         {
-//             XMsgBox::OkMsgBox(L"ÇëÉè¶¨Ò»¸öÕıÈ·µÄÈÎÎñÖÜÆÚ");
+//             XMsgBox::OkMsgBox(L"è¯·è®¾å®šä¸€ä¸ªæ­£ç¡®çš„ä»»åŠ¡å‘¨æœŸ");
 //             return FALSE;
 //         }
 //     }
@@ -462,7 +462,7 @@ BOOL LStageDlg::CheckDate(__out QTime &tmBegin,__out QTime &tmEnd)
 //     {
 //         if ((tmBegin.CompareDate(tmNow) < 0) || (tmBegin >= tmEnd))
 //         {
-//             XMsgBox::OkMsgBox(L"ÇëÉè¶¨Ò»¸öÕıÈ·µÄÈÎÎñÖÜÆÚ");
+//             XMsgBox::OkMsgBox(L"è¯·è®¾å®šä¸€ä¸ªæ­£ç¡®çš„ä»»åŠ¡å‘¨æœŸ");
 //             return FALSE;
 //         }
 //     }
@@ -485,10 +485,10 @@ BOOL LStageDlg::OnDefaultButton( INT_PTR nBtn )
     sStage = sStage.Trim();
     if (sStage.IsEmpty())
     {
-        XMsgBox::OkMsgBox(L"½×¶ÎÃû²»ÄÜÎª¿Õ");
+        XMsgBox::OkMsgBox(L"é˜¶æ®µåä¸èƒ½ä¸ºç©º");
         return FALSE;
     }
-    // ĞèÒª²âÊÔ
+    // éœ€è¦æµ‹è¯•
     BOOL bOK = FALSE;
     if (m_bEditMode)
     {
@@ -511,7 +511,7 @@ BOOL LStageDlg::OnDefaultButton( INT_PTR nBtn )
 
     if (!bOK)
     {
-        XMsgBox::ErrorMsgBox(L"²Ù×÷Ê§°Ü£¡ÇëÖØÊÔ.");
+        XMsgBox::ErrorMsgBox(L"æ“ä½œå¤±è´¥ï¼è¯·é‡è¯•.");
         return FALSE;
     }
     else
@@ -534,7 +534,7 @@ BOOL LStageDlg::CheckMemberParameters()
     }
     if ( !bOK )
     {
-        XMsgBox::ErrorMsgBox(L"Êı¾İ´íÎó£¬²Ù×÷Ê§°Ü!");
+        XMsgBox::ErrorMsgBox(L"æ•°æ®é”™è¯¯ï¼Œæ“ä½œå¤±è´¥!");
     }
     return bOK;
 }
@@ -554,7 +554,7 @@ LRESULT LStageDlg::OnDocumentComplete()
     }
 
     if ( !m_bEditMode && (NULL != m_pPlan))
-    {   // stageÖÜÆÚÄ¬ÈÏÉèÖÃÎªplanµÄÖÜÆÚ
+    {   // stageå‘¨æœŸé»˜è®¤è®¾ç½®ä¸ºplançš„å‘¨æœŸ
         EDate(GetCtrl("#date_begin")).SetDate(m_pPlan->BeginTime());
         EDate(GetCtrl("#date_end")).SetDate(m_pPlan->EndTime());
         m_nIconID = INVALID_ID;

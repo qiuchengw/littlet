@@ -1,4 +1,4 @@
-#include "QEventRemindDlg.h"
+ï»¿#include "QEventRemindDlg.h"
 #include "../common/QAutoTask.h"
 #include "../common/LittleTUIcmn.h"
 #include "../common/ConstValues.h"
@@ -45,17 +45,17 @@ void LSingleRmdDlg::OnClkDontExecThis( HELEMENT hBtn )
     QAutoTaskMan *pMan = QAutoTaskMan::GetInstance();
     if (pMan->JumpoverTaskThisExec(m_pRP->nTaskID))
     {
-        // ×ªµ½LEventÉÏµÄ
+        // è½¬åˆ°LEventä¸Šçš„
         QUISendCodeTo(LDatas::GetInstance()->GetViewEventPtr()->GetSafeHwnd(),
             EVENTWND_NOTIFY_USERJUMPEVENTEXEC,
             (LPARAM)m_pRP->nTaskID);
         
-        // ¹Ø±Õµô×Ô¼º
+        // å…³é—­æ‰è‡ªå·±
         PostMessage(WM_CLOSE);
     }
     else
     {
-        ECtrl(hBtn).ShowTooltip(L"ÎŞ·¨Ìø¹ı´Ë´ÎÈÎÎñ£¡");
+        ECtrl(hBtn).ShowTooltip(L"æ— æ³•è·³è¿‡æ­¤æ¬¡ä»»åŠ¡ï¼");
     }
 }
 
@@ -70,7 +70,7 @@ void LSingleRmdDlg::SetRmdParam( LPTASK_REMINDER_PARAM pRP )
 
     if ( IsWindow() )
     {
-        // Èç¹ûÖ»ÊÇÖ´ĞĞÒ»´ÎµÄÈÎÎñ£¬ÔòÌáÊ¾²»×Ô¶¯¹Ø±Õ
+        // å¦‚æœåªæ˜¯æ‰§è¡Œä¸€æ¬¡çš„ä»»åŠ¡ï¼Œåˆ™æç¤ºä¸è‡ªåŠ¨å…³é—­
         StartCountDown();
 
         RefreshRemindMessage();
@@ -82,7 +82,7 @@ void LSingleRmdDlg::OnTimer( UINT nTimerID )
     if (AUTOTASK_REMINDER_COUNTDOWN_TIMERID == nTimerID)
     {
         if ( --m_nCountDown <= 0 )
-        {   // ÈÎÎñÖ´ĞĞÁË£¬¿ÉÒÔ¹Ø±Õ¶Ô»°¿òÁË
+        {   // ä»»åŠ¡æ‰§è¡Œäº†ï¼Œå¯ä»¥å…³é—­å¯¹è¯æ¡†äº†
             KillTimer(AUTOTASK_REMINDER_COUNTDOWN_TIMERID);
             PostMessage(WM_CLOSE);
         }
@@ -122,10 +122,10 @@ void LSingleRmdDlg::StartCountDown()
 
     if (0 < m_pRP->nSeconds)
     {
-        // Ò²ĞíÊÇÖØÓÃ¶Ô»°¿ò£¬ÖØĞÂÉèÖÃµÄÊı¾İ£¬ÄÇÃ´ÏÈÍ£Ö¹Ö®Ç°µÄµ¹Êı¶¨Ê±Æ÷
+        // ä¹Ÿè®¸æ˜¯é‡ç”¨å¯¹è¯æ¡†ï¼Œé‡æ–°è®¾ç½®çš„æ•°æ®ï¼Œé‚£ä¹ˆå…ˆåœæ­¢ä¹‹å‰çš„å€’æ•°å®šæ—¶å™¨
         KillTimer(AUTOTASK_REMINDER_COUNTDOWN_TIMERID);
 
-        // ÖØĞÂÆô¶¯µ¹Êı¶¨Ê±Æ÷
+        // é‡æ–°å¯åŠ¨å€’æ•°å®šæ—¶å™¨
         m_nCountDown = m_pRP->nSeconds;
 
         SetTimer(AUTOTASK_REMINDER_COUNTDOWN_TIMERID, 1000, NULL);
@@ -189,16 +189,16 @@ BOOL LReminderBox::ShowReminderDlg( LPTASK_REMINDER_PARAM pRP )
     CheckRmdList();
 
     ST_RMDDLG *p = NULL;
-    // Ã¿¸öEventÔÚÍ¬Ê±Ö»ÄÜÏÔÊ¾Ò»¸öÌáÊ¾¶Ô»°¿ò
-    // ²éÕÒÏÖÔÚÊÇ·ñÕıÔÚÏÔÊ¾ÖĞ
+    // æ¯ä¸ªEventåœ¨åŒæ—¶åªèƒ½æ˜¾ç¤ºä¸€ä¸ªæç¤ºå¯¹è¯æ¡†
+    // æŸ¥æ‰¾ç°åœ¨æ˜¯å¦æ­£åœ¨æ˜¾ç¤ºä¸­
     BOOL bExist = FALSE;
     for ( RmdListItr i = m_lstRmd.begin(); i != m_lstRmd.end(); ++i)
     {
         p = *i;
         if ( p->GetRmdParam()->nTaskID == pRP->nTaskID )
         {   
-            // Èç¹û¶Ô»°¿ò»¹ÔÚÏÔÊ¾ÖĞ
-            // ÖØÓÃÕâ¸öÊı¾İ
+            // å¦‚æœå¯¹è¯æ¡†è¿˜åœ¨æ˜¾ç¤ºä¸­
+            // é‡ç”¨è¿™ä¸ªæ•°æ®
             p->SetClose(FALSE);
             bExist = TRUE;
             break;
@@ -211,17 +211,17 @@ BOOL LReminderBox::ShowReminderDlg( LPTASK_REMINDER_PARAM pRP )
         m_lstRmd.push_back(p);
     }
 
-    // ÉèÖÃĞÂµÄ²ÎÊı
+    // è®¾ç½®æ–°çš„å‚æ•°
     p->SetRmdParam(pRP);
 
-    // ¶Ô»°¿òÊÇ·ñÆô¶¯ÁË
+    // å¯¹è¯æ¡†æ˜¯å¦å¯åŠ¨äº†
     LSingleRmdDlg *pDlg = p->GetRmdDlg();
-    if (   !pDlg->IsWindow()    // Èç¹ûÃ»ÓĞ£¬ÄÇÃ´Æô¶¯Ëü 
+    if (   !pDlg->IsWindow()    // å¦‚æœæ²¡æœ‰ï¼Œé‚£ä¹ˆå¯åŠ¨å®ƒ 
         && !pDlg->Create(NULL,WS_POPUP|WS_VISIBLE,WS_EX_TOPMOST|WS_EX_TOOLWINDOW))
     {
         return FALSE;
     }
-    // ¶Ô»°¿òÒÑ¾­´´½¨£¬ÏÔÊ¾Ö®
+    // å¯¹è¯æ¡†å·²ç»åˆ›å»ºï¼Œæ˜¾ç¤ºä¹‹
     pDlg->ShowWindow(SW_SHOW);
 
     return TRUE;
@@ -274,7 +274,7 @@ void LReminderBox::OnEventTimerChanged( int nEventID )
         p = *i;
         if ( p->GetTaskID() == nEventID )
         {   
-            // Èç¹û¶Ô»°¿ò»¹ÔÚÏÔÊ¾ÖĞ£¬¾Í¹Ø±ÕËü
+            // å¦‚æœå¯¹è¯æ¡†è¿˜åœ¨æ˜¾ç¤ºä¸­ï¼Œå°±å…³é—­å®ƒ
             LSingleRmdDlg *pDlg = p->GetRmdDlg();
             if (pDlg->IsWindow())
             {

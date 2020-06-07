@@ -1,4 +1,4 @@
-#ifndef misc_h__
+ï»¿#ifndef misc_h__
 #define misc_h__
 
 #include "stdstring.h"
@@ -6,14 +6,14 @@
 namespace littlet
 {
     /**
-     *	Òì²½µÄÍøÂçÇëÇó	
+     *	å¼‚æ­¥çš„ç½‘ç»œè¯·æ±‚	
      *
-     *  name    ·şÎñÃû£º login / logout / feed
-     *  bAsync  TRUE    Òì²½ÍøÂç
+     *  name    æœåŠ¡åï¼š login / logout / feed
+     *  bAsync  TRUE    å¼‚æ­¥ç½‘ç»œ
     **/
     bool SendWebRequest(const CStdString& name, const CStdString& content, BOOL bAsync = TRUE);
 
-    // mac µØÖ·
+    // mac åœ°å€
     bool GetMACAddress(CStdString& mac_addr);
 }
 

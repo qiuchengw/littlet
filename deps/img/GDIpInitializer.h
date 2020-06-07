@@ -1,4 +1,4 @@
-#ifndef GDIpInitializer_h__
+ï»¿#ifndef GDIpInitializer_h__
 #define GDIpInitializer_h__
 
 #pragma once
@@ -35,7 +35,7 @@ class CGDIpInitializer
 	}
 
 public:
-    // ·ÇÏß³Ì°²È«µÄº¯Êı
+    // éçº¿ç¨‹å®‰å…¨çš„å‡½æ•°
     static CGDIpInitializer* Get()
     {
         static CGDIpInitializer _inst;

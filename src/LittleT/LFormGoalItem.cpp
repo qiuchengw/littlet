@@ -1,4 +1,4 @@
-#include "LFormGoalItem.h"
+ï»¿#include "LFormGoalItem.h"
 #include "../common/LittleTUIcmn.h"
 #include "ui/QUIGlobal.h"
 
@@ -145,7 +145,7 @@ void LFormGoalItem::OnClkDeleteItem( HELEMENT he )
     VecGoalItemItr iFind = std::find(
         m_goalitems.begin(), m_goalitems.end(), pGoalItem);
     ASSERT(iFind != m_goalitems.end());
-    if (XMsgBox::YesNoMsgBox(L"È·¶¨É¾³ıÂğ£¿") == IDYES)
+    if (XMsgBox::YesNoMsgBox(L"ç¡®å®šåˆ é™¤å—ï¼Ÿ") == IDYES)
     {
         if (m_pGoal->DeleteItem(pGoalItem))
         {
@@ -232,7 +232,7 @@ void LFormGoalItem::CreateForm( ECtrl& cParent, int iPostion ,QGoal *pGoal)
     CStdString sHtml = 
         L"<div id=\"id-goalitem-box-wrapper\">"
         L"  <popup #id_popup_goalitem .xpopup>"
-        L"      <input type=\"text\" id=\"id_bar_goalitem\" style=\"width:*;\" maxlength=\"50\" novalue=\"Ğ¡Ä¿±ê£º\" />"
+        L"      <input type=\"text\" id=\"id_bar_goalitem\" style=\"width:*;\" maxlength=\"50\" novalue=\"å°ç›®æ ‡ï¼š\" />"
         L"      <button id=\"id_bar_ok\" accesskey=\"!RETURN\" style=\"visibility:collapse;\" />"
         L"      <button id=\"id_bar_cancel\" accesskey=\"!ESCAPE\" style=\"visibility:collapse;\" />"
         L"  </popup>"
@@ -277,7 +277,7 @@ BOOL LGoalitemWidget::CheckDate(__out QTime &tmBegin,__out QTime &tmEnd)
 //     QTime tmNow = QTime::GetCurrentTime();
 //     if ((tmBegin.CompareDate(tmNow) < 0) || (tmBegin >= tmEnd))
 //     {
-//         XMsgBox::OkMsgBox(L"ÇëÉè¶¨Ò»¸öÕıÈ·µÄÈÎÎñÖÜÆÚ");
+//         XMsgBox::OkMsgBox(L"è¯·è®¾å®šä¸€ä¸ªæ­£ç¡®çš„ä»»åŠ¡å‘¨æœŸ");
 //         return FALSE;
 //     }
 //     return TRUE;
@@ -296,7 +296,7 @@ BOOL LGoalitemWidget::CheckMemberParameters()
     }
     if ( !bOK )
     {
-        GetRoot().ShowTooltip(L"Êı¾İ´íÎó£¬²Ù×÷Ê§°Ü!");
+        GetRoot().ShowTooltip(L"æ•°æ®é”™è¯¯ï¼Œæ“ä½œå¤±è´¥!");
     }
     return bOK;
 }
@@ -314,11 +314,11 @@ void LGoalitemWidget::OnClkIdbarOK( HELEMENT )
     CStdString sGoalItem = ctlInput.GetText().Trim();
     if (sGoalItem.IsEmpty())
     {
-        ctlInput.ShowTooltip(L"²»ÄÜÎª¿Õ");
+        ctlInput.ShowTooltip(L"ä¸èƒ½ä¸ºç©º");
         return;
     }
 
-    // ĞèÒª²âÊÔ
+    // éœ€è¦æµ‹è¯•
     BOOL bOK = FALSE;
     if (m_bEditMode)
     {
@@ -336,7 +336,7 @@ void LGoalitemWidget::OnClkIdbarOK( HELEMENT )
     }
     if (!bOK)
     {
-        GetRoot().ShowTooltip(L"²Ù×÷Ê§°Ü£¡ÇëÖØÊÔ.");
+        GetRoot().ShowTooltip(L"æ“ä½œå¤±è´¥ï¼è¯·é‡è¯•.");
         return ;
     }
     HTMLayoutHidePopup(GetRoot());
@@ -375,7 +375,7 @@ void LGoalitemWidget::Show(HELEMENT he)
     ECtrl r = GetRoot();
     ECtrl ctl = r.find_first("#id_bar_goalitem");
     EEdit ctlInput = GetCtrl("#id_bar_goalitem");
-    // Ä£Ê½ÉèÖÃ
+    // æ¨¡å¼è®¾ç½®
     if (m_bEditMode)
     {
         ctlInput.SetText(m_pGoalItemInout->Item());
@@ -391,12 +391,12 @@ void LGoalitemWidget::Show(HELEMENT he)
     HTMLayoutShowPopup(GetRoot(), he, 2);
 }
 
-//´´½¨ÆÕÍ¨¿ì½İ·½Ê½
+//åˆ›å»ºæ™®é€šå¿«æ·æ–¹å¼
 // BOOL CModieDlg::fnCreateLink ( )
 // {
 //     LPCSTR pszPath,pszLink;
-//     pszPath="C:\123.exe";//Ä¿±ê³ÌĞòÃû
-//     pszLink="c:\\123.url";//¿ì½İ·½Ê½Ãû
+//     pszPath="C:\123.exe";//ç›®æ ‡ç¨‹åºå
+//     pszLink="c:\\123.url";//å¿«æ·æ–¹å¼å
 //     HRESULT hres=NULL;
 //     IShellLink * psl ;
 //     IPersistFile* ppf ;
@@ -405,15 +405,15 @@ void LGoalitemWidget::Show(HELEMENT he)
 // 
 //     if(NULL ==hres)        return FALSE ;
 // 
-//     psl->SetPath(pszPath) ;//ÉèÖÃÂ·¾¶
-//     psl->SetHotkey(MAKEWORD('A',HOTKEYF_CONTROL)) ;  //ÉèÖÃ¿ì½İ¼ü¡¢ÈÈ¼ü
-//     hres = psl -> QueryInterface( IID_IPersistFile,    (void**)&ppf);//»ñÈ¡IPersistFile½Ó¿Ú
+//     psl->SetPath(pszPath) ;//è®¾ç½®è·¯å¾„
+//     psl->SetHotkey(MAKEWORD('A',HOTKEYF_CONTROL)) ;  //è®¾ç½®å¿«æ·é”®ã€çƒ­é”®
+//     hres = psl -> QueryInterface( IID_IPersistFile,    (void**)&ppf);//è·å–IPersistFileæ¥å£
 //     if(NULL ==hres)        return FALSE ;
 //     MultiByteToWideChar(CP_ACP,0,pszLink,-1,wsz,MAX_PATH);
-//     hres = ppf -> Save( pszLink, STGM_READWRITE) ;//±£´æ¿ì½İ·½Ê½
-//     ppf->Release();//ÊÍ·ÅIPersistFileºÍIShellLink½Ó¿Ú
+//     hres = ppf -> Save( pszLink, STGM_READWRITE) ;//ä¿å­˜å¿«æ·æ–¹å¼
+//     ppf->Release();//é‡Šæ”¾IPersistFileå’ŒIShellLinkæ¥å£
 //     psl->Release();
-//     // Í¨ÖªSHELL±ä»¯
-//     SHChangeNotify( ....) ;//´ÓÂÔ£¬¾ßÌå¿ÉÒÔ²Î¿¼¸Ãº¯Êı¶¨Òå£¬Ò»°ã´´½¨ºóÍ¨Öª±¾Ä¿Â¼ºÍ¸¸Ä¿Â¼¼´¿É¡£
+//     // é€šçŸ¥SHELLå˜åŒ–
+//     SHChangeNotify( ....) ;//ä»ç•¥ï¼Œå…·ä½“å¯ä»¥å‚è€ƒè¯¥å‡½æ•°å®šä¹‰ï¼Œä¸€èˆ¬åˆ›å»ºåé€šçŸ¥æœ¬ç›®å½•å’Œçˆ¶ç›®å½•å³å¯ã€‚
 //     return TRUE;
 // }

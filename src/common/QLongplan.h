@@ -1,14 +1,14 @@
-#pragma once
+ï»¿#pragma once
 
 #include "BaseType.h"
 #include "time/QTime.h"
 #include "../common/ConstValues.h"
 #include "../common/QDBRes.h"
 
-// sIDÊÇÒÔ×Ö·û¡®;¡¯·Ö¸îµÄÈç£º 1;2;5;8
-// ½«1;2;3;8 ½âÎöÎªÕûÊıÊı×é·µ»Ø
+// sIDæ˜¯ä»¥å­—ç¬¦â€˜;â€™åˆ†å‰²çš„å¦‚ï¼š 1;2;5;8
+// å°†1;2;3;8 è§£æä¸ºæ•´æ•°æ•°ç»„è¿”å›
 BOOL ParseID(const CStdString&sID,__out ExArray<int> &vi);
-// ·µ»ØĞÎÊ½£º1;2;3;8
+// è¿”å›å½¢å¼ï¼š1;2;3;8
 CStdString MakeIDS(__in ExArray<int> &vi);
 
 
@@ -22,7 +22,7 @@ enum ENUM_GOAL_STATUS
 
 enum ENUM_GOALITEM_STATUS
 {
-    GOALITEM_STATUS_NOTSET = -1,    // ÓÃÓÚ¶ÁÈ¡goalitemµÄÊ±ºò£¬¶ÁÈ¡È«²¿ÀàĞÍ
+    GOALITEM_STATUS_NOTSET = -1,    // ç”¨äºè¯»å–goalitemçš„æ—¶å€™ï¼Œè¯»å–å…¨éƒ¨ç±»å‹
 	GOALITEM_STATUS_WAITING = 0,  //
 	GOALITEM_STATUS_GAIN,
 };
@@ -64,15 +64,15 @@ public:
 
 public:
     BOOL Edit(const CStdString& sItem, QTime tmBegin, QTime tmEnd);
-    // É¾³ı×Ô¼º
+    // åˆ é™¤è‡ªå·±
     BOOL Delete();
 
-    /** ÉèÖÃ×´Ì¬
+    /** è®¾ç½®çŠ¶æ€
      *	return:
-     *      TRUE        ³É¹¦
+     *      TRUE        æˆåŠŸ
      *	params:
      *		-[in]
-     *          bChecked    Íê³É
+     *          bChecked    å®Œæˆ
     **/
     BOOL CheckIt(BOOL bChecked = TRUE);
 
@@ -95,7 +95,7 @@ private:
 typedef std::vector<QGoalItem*> VecGoalItem;
 typedef VecGoalItem::iterator VecGoalItemItr;
 
-// ½×¶ÎÄ¿±ê
+// é˜¶æ®µç›®æ ‡
 class LGoalDlg;
 class QGoal
 {
@@ -116,7 +116,7 @@ public:
 	inline QTime CreationTime()const { return m_tmCreate; }
 	BOOL AddItem(__inout QGoalItem &gi);
 	BOOL DeleteItem(QGoalItem *gi);
-	// eStatus ÎªNOTSET Ôò»ñÈ¡È«²¿
+	// eStatus ä¸ºNOTSET åˆ™è·å–å…¨éƒ¨
 	BOOL GetAllItems(__out VecGoalItem &vgi,ENUM_GOALITEM_STATUS eStatus = GOALITEM_STATUS_NOTSET);
 	int GetGoalItemNum();
 	int GetGoalItemUnfinishedNum();
@@ -124,11 +124,11 @@ public:
 
 public:
     BOOL EditGoal( const CStdString& sGoal, const CStdString& sDes);
-    // É¾³ı×Ô¼º£¬ÆäÏÂµÄgoalitemÒ²»á±»É¾³ı
+    // åˆ é™¤è‡ªå·±ï¼Œå…¶ä¸‹çš„goalitemä¹Ÿä¼šè¢«åˆ é™¤
     BOOL Delete();
-    // É¾³ıgoal item
+    // åˆ é™¤goal item
     BOOL DeleteGoalitem(QGoalItem* pGoalitem);
-    // ·µ»ØµÄÊı¾İ±ØĞëÊ¹ÓÃdeleteÉ¾³ı
+    // è¿”å›çš„æ•°æ®å¿…é¡»ä½¿ç”¨deleteåˆ é™¤
     QGoalItem* AddGoalItem( __in const QGoalItem &gi );
 public:
 	CStdString				m_sGoal;
@@ -145,7 +145,7 @@ private:
 typedef std::vector<QGoal*> VecGoal;
 typedef VecGoal::iterator VecGoalItr;
 
-// ½×¶Î
+// é˜¶æ®µ
 enum ENUM_STAGE_STATUS
 {
 	STAGE_STATUS_WORKING,
@@ -181,35 +181,35 @@ public:
     int GetWorkingGoalNum();
 	int GetKonwledgeNum(); 
 	// ret:0-100
-	int GetStageProcess();  // ½×¶Î½øÕ¹
+	int GetStageProcess();  // é˜¶æ®µè¿›å±•
 	// ret:0-100
-	int GetTimeProcess();  // ¹æ»®µÄÈÕÆÚ½øÕ¹
-	// ret: 0Äê3ÔÂ2Ìì
-	CStdString GetTimeFlee();  // ´Ó¼Æ»®¿ªÊ¼µ½ÏÖÔÚÒÑ¾­¹ıÈ¥ÁË¶à¾Ã
+	int GetTimeProcess();  // è§„åˆ’çš„æ—¥æœŸè¿›å±•
+	// ret: 0å¹´3æœˆ2å¤©
+	CStdString GetTimeFlee();  // ä»è®¡åˆ’å¼€å§‹åˆ°ç°åœ¨å·²ç»è¿‡å»äº†å¤šä¹…
 
 	int GetAllGoals(__out VecGoal &vg);
 
 public:
-    // ·µ»ØµÄÊı¾İ±ØĞëÊ¹ÓÃdeleteÉ¾³ı
+    // è¿”å›çš„æ•°æ®å¿…é¡»ä½¿ç”¨deleteåˆ é™¤
     QGoal* AddGoal( __in const QGoal& g );
 
-    // É¾³ı×Ô¼º
+    // åˆ é™¤è‡ªå·±
     BOOL Delete();
 
-    // É¾³ıÏÂÃæµÄgoal
+    // åˆ é™¤ä¸‹é¢çš„goal
     BOOL DeleteGoal(QGoal *pGoal);
 
     // edit
     BOOL Edit(const CStdString& sStage, const CStdString& sDes, QTime tmBegin, QTime tmEnd);
 
 public:
-	int		m_nPlanID;	// ËùÊô³¤ÆÚ¼Æ»®ID
+	int		m_nPlanID;	// æ‰€å±é•¿æœŸè®¡åˆ’ID
     int     m_nIconID;  // icon id
 	LONG	m_nFlag;
-	CStdString	m_sStage;		// ½×¶Î¼Æ»®ÃèÊö Èç£º¼ªËû-¡·»ù´¡Á·Ï°
-	CStdString m_sDes;		// ¸½¼ÓÃèÊö£¬
-	QTime	m_tmBegin;		// ¿ªÊ¼Ê±¼ä
-	QTime	m_tmEnd;		// ½áÊøÊ±¼ä
+	CStdString	m_sStage;		// é˜¶æ®µè®¡åˆ’æè¿° å¦‚ï¼šå‰ä»–-ã€‹åŸºç¡€ç»ƒä¹ 
+	CStdString m_sDes;		// é™„åŠ æè¿°ï¼Œ
+	QTime	m_tmBegin;		// å¼€å§‹æ—¶é—´
+	QTime	m_tmEnd;		// ç»“æŸæ—¶é—´
 	ENUM_STAGE_STATUS	m_eStatus;
 
 private:
@@ -221,21 +221,21 @@ private:
 typedef std::vector<QStage*> VecStage;
 typedef VecStage::iterator VecStageItr;
 
-// ³É¼¨
+// æˆç»©
 struct TAchievement 
 {
 	int			nID;
-	int			nParentID;	// ËùÊô
-	CStdString		sAchievement;	// ÎÄ±¾ÃèÊö		
-	CStdString		sAttachment;	// ¸½¼şIDÁĞ±í£» ĞÎÈç "2;4;35;"		
+	int			nParentID;	// æ‰€å±
+	CStdString		sAchievement;	// æ–‡æœ¬æè¿°		
+	CStdString		sAttachment;	// é™„ä»¶IDåˆ—è¡¨ï¼› å½¢å¦‚ "2;4;35;"		
 };
 
 enum ENUM_PLAN_STATUS
 {
-	PLAN_STATUS_OK	= 0,	// ½øĞĞÖĞ
-	PLAN_STATUS_PAUSE = 1,		// ÔİÍ£
-	PLAN_STATUS_ABORT = 2,		// ·ÅÆú
-	PLAN_STATUS_FINISH = 3,		// Íê³É
+	PLAN_STATUS_OK	= 0,	// è¿›è¡Œä¸­
+	PLAN_STATUS_PAUSE = 1,		// æš‚åœ
+	PLAN_STATUS_ABORT = 2,		// æ”¾å¼ƒ
+	PLAN_STATUS_FINISH = 3,		// å®Œæˆ
 };
 
 class LPlanDlg;
@@ -252,7 +252,7 @@ public:
 
 public:
 	/**
-	 * @brief	:	»ñµÃÈÎÎñ¸ú×ÙÁĞ±í
+	 * @brief	:	è·å¾—ä»»åŠ¡è·Ÿè¸ªåˆ—è¡¨
 	 */
 // 	QLongPlanTrackList* GetTaskTrackList();
 // 
@@ -265,9 +265,9 @@ public:
 	inline int ID()const { return m_nID; }
 	inline int IconID()const { return m_nIconID; }
     inline CStdString IconPath()const;
-	inline LONG Flag()const { return m_nFlag;}		// ÈÎÎñ±êÖ¾
-	inline QTime BeginTime()const { return m_tmBegin;}		// ÈÎÎñÖÜÆÚ¿ªÊ¼ÉúĞ§Ê±¼ä
-	inline QTime EndTime()const { return m_tmEnd; }		// ÈÎÎñÖÜÆÚ£¬Ô¤ÆÚ½áÊøÊ±¼ä
+	inline LONG Flag()const { return m_nFlag;}		// ä»»åŠ¡æ ‡å¿—
+	inline QTime BeginTime()const { return m_tmBegin;}		// ä»»åŠ¡å‘¨æœŸå¼€å§‹ç”Ÿæ•ˆæ—¶é—´
+	inline QTime EndTime()const { return m_tmEnd; }		// ä»»åŠ¡å‘¨æœŸï¼Œé¢„æœŸç»“æŸæ—¶é—´
 	inline CStdString Plan()const { return m_sPlan; }		// 
 	inline CStdString Des()const { return m_sDes; }			// 
 	inline QTime CreationTime()const { return m_tmCreate; }
@@ -280,24 +280,24 @@ public:
 	int GetAllStage(__out VecStage & vs);
 
 	// ret:0-100
-	int GetPlanProcess();  // ½×¶Î½øÕ¹
+	int GetPlanProcess();  // é˜¶æ®µè¿›å±•
 	// ret:0-100
-	int GetTimeProcess();  // ¹æ»®µÄÈÕÆÚ½øÕ¹
-	// ret: 0Äê3ÔÂ2Ìì
-	CStdString GetTimeFlee();  // ´Ó¼Æ»®¿ªÊ¼µ½ÏÖÔÚÒÑ¾­¹ıÈ¥ÁË¶à¾Ã
+	int GetTimeProcess();  // è§„åˆ’çš„æ—¥æœŸè¿›å±•
+	// ret: 0å¹´3æœˆ2å¤©
+	CStdString GetTimeFlee();  // ä»è®¡åˆ’å¼€å§‹åˆ°ç°åœ¨å·²ç»è¿‡å»äº†å¤šä¹…
 
 public:
-    /** Ìí¼ÓÒ»¸östage
+    /** æ·»åŠ ä¸€ä¸ªstage
      *	return:
-     *      QStage* Ö¸Õë£¬±ØĞëÊ¹ÓÃdeleteÉ¾³ı
+     *      QStage* æŒ‡é’ˆï¼Œå¿…é¡»ä½¿ç”¨deleteåˆ é™¤
      *	params:
      *		-[in]
-     *          s       Êı¾İ
+     *          s       æ•°æ®
      *
     **/
     QStage* AddStage(const QStage &s);
 
-    // É¾³ı×Ô¼º
+    // åˆ é™¤è‡ªå·±
     BOOL Delete();
 
     BOOL Edit(const CStdString& sPlan, const CStdString& sDes, QTime tmBegin, QTime tmEnd);
@@ -305,26 +305,26 @@ public:
     BOOL DeleteStage(QStage *pStage);
 
 protected:
-	// ¹ÒÆğÈÎÎñ
+	// æŒ‚èµ·ä»»åŠ¡
 	BOOL HungupTask();
 	BOOL IsRunning()const ;
 
 public:
-	LONG		m_nFlag;		// ÈÎÎñ±êÖ¾
-	QTime		m_tmBegin;		// ÈÎÎñÖÜÆÚ¿ªÊ¼ÉúĞ§Ê±¼ä
-	QTime		m_tmEnd;		// ÈÎÎñÖÜÆÚ£¬Ô¤ÆÚ½áÊøÊ±¼ä
+	LONG		m_nFlag;		// ä»»åŠ¡æ ‡å¿—
+	QTime		m_tmBegin;		// ä»»åŠ¡å‘¨æœŸå¼€å§‹ç”Ÿæ•ˆæ—¶é—´
+	QTime		m_tmEnd;		// ä»»åŠ¡å‘¨æœŸï¼Œé¢„æœŸç»“æŸæ—¶é—´
 	CStdString		m_sPlan;		// 
 	CStdString		m_sDes;			// 
-	int			m_nIconID;		// ¹ØÁªµÄÍ¼±ê
+	int			m_nIconID;		// å…³è”çš„å›¾æ ‡
 
 private:
 	int			m_nID;
-	QTime		m_tmCreate;		// ´´½¨Ê±¼ä
-	QTime		m_tmFinish;		// Êµ¼ÊÍê³É/·ÅÆúµÄÊ±¼ä
-	QTime		m_tmUpdate;		// ÈÎÎñ×îºó¸üĞÂÊ±¼ä
-	ENUM_PLAN_STATUS	m_eStatus;	// ÈÎÎñ×´Ì¬
+	QTime		m_tmCreate;		// åˆ›å»ºæ—¶é—´
+	QTime		m_tmFinish;		// å®é™…å®Œæˆ/æ”¾å¼ƒçš„æ—¶é—´
+	QTime		m_tmUpdate;		// ä»»åŠ¡æœ€åæ›´æ–°æ—¶é—´
+	ENUM_PLAN_STATUS	m_eStatus;	// ä»»åŠ¡çŠ¶æ€
 
-//	ENUM_TASK_RUNNING_STATUS	m_eRunning;	// ÈÎÎñÔËĞĞ×´Ì¬
+//	ENUM_TASK_RUNNING_STATUS	m_eRunning;	// ä»»åŠ¡è¿è¡ŒçŠ¶æ€
 //	QLongPlanTrackList*	m_pTrackList;
 };
 
@@ -341,12 +341,12 @@ class QPlanMan
 public:
     BOOL Startup();
    
-    /** Ìí¼ÓÒ»¸ö¼Æ»®
+    /** æ·»åŠ ä¸€ä¸ªè®¡åˆ’
      *	return:
-     *      TRUE        ³É¹¦
+     *      TRUE        æˆåŠŸ
      *	params:
      *		-[in]
-     *          plan       ¼Æ»®Êı¾İ
+     *          plan       è®¡åˆ’æ•°æ®
      *
     **/
     QPlan* AddPlan( __in QPlan plan );
@@ -360,7 +360,7 @@ public:
         return &m_plans;
     }
 
-    // »ñÈ¡µ±Ç°½øĞĞÖĞµÄ¼Æ»®ÊıÄ¿
+    // è·å–å½“å‰è¿›è¡Œä¸­çš„è®¡åˆ’æ•°ç›®
     int GetWorkingPlanNum();
 protected:
     VecPlanItr FindPlan(int nID);

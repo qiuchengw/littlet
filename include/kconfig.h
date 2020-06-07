@@ -1,4 +1,4 @@
-#ifndef kconfig_h__
+ï»¿#ifndef kconfig_h__
 #define kconfig_h__
 
 #include "deps/rjson/inc.h"
@@ -17,7 +17,7 @@ typedef QString String;
 
 #pragma message("compile kconfig.h with pure c++")
 
-// Ê¹ÓÃstd::string
+// ä½¿ç”¨std::string
 #ifndef RAPIDJSON_HAS_STDSTRING
 #   define RAPIDJSON_HAS_STDSTRING 1
 #endif
@@ -89,7 +89,7 @@ public:
         return jv_;
     }
 
-    // Êı×éÀàĞÍµÄÖµÊ¹ÓÃ
+    // æ•°ç»„ç±»å‹çš„å€¼ä½¿ç”¨
     inline KConfigValue& PushBack(KConfigValue* v);
 
     virtual String GetConfig()
@@ -122,8 +122,8 @@ public:
 #endif
 
     /**
-    *	ÔÚ±£´æÅäÖÃµÄ¹ı³ÌÖĞ»áÉú³Évalue
-    *      ĞèÒªÍ¨¹ı´Ë·½·¨Éú³É
+    *	åœ¨ä¿å­˜é…ç½®çš„è¿‡ç¨‹ä¸­ä¼šç”Ÿæˆvalue
+    *      éœ€è¦é€šè¿‡æ­¤æ–¹æ³•ç”Ÿæˆ
     *
     **/
     inline KConfigValue* NewValue(rapidjson::Type typ = rapidjson::kObjectType)
@@ -173,10 +173,10 @@ protected:
     rapidjson::Value*   jv_;
 
 private:
-    // ±£ÁôËùÓĞµÄvalue
+    // ä¿ç•™æ‰€æœ‰çš„value
     std::vector<KConfigValue*> values_;
 
-    // ÎÄµµ
+    // æ–‡æ¡£
     KConfig* cfg_;
 };
 
@@ -195,7 +195,7 @@ public:
 
         cfg_ = this;
 
-        // Ä¬ÈÏ¿Õ
+        // é»˜è®¤ç©º
         doc()->Parse<0>("{}");
     }
 
@@ -218,7 +218,7 @@ protected:
     }
 
 public:
-    // ĞÂµÄÊµÀı£¬ĞèÒªÊ¹ÓÃDeleteInstÉ¾³ıÖ®
+    // æ–°çš„å®ä¾‹ï¼Œéœ€è¦ä½¿ç”¨DeleteInståˆ é™¤ä¹‹
 //     static KConfig* NewInst()
 //     {
 //         return new KConfig;
@@ -229,7 +229,7 @@ public:
 //         delete cfg;
 //     }
 
-    // µ±Ç°ÅäÖÃÏÂµÄ×ÓÅäÖÃ£¬ÎŞĞèÊÖ¶¯É¾³ı
+    // å½“å‰é…ç½®ä¸‹çš„å­é…ç½®ï¼Œæ— éœ€æ‰‹åŠ¨åˆ é™¤
 //     QConfig* NewSubConfig()
 //     {
 //         QConfig* c = new QConfig;
@@ -268,7 +268,7 @@ KConfigValue& KConfigValue::AddMember(const String& name, _typ val)
 {
     static_assert(!std::is_pointer<_typ>::value, "can't be pointer type!");
 
-    // _typ ²»ÄÜÊÇvalue£¬config
+    // _typ ä¸èƒ½æ˜¯valueï¼Œconfig
     jv_->AddMember(_utf8_str(name), rapidjson::Value(val), cfg_->GetAlloctor());
 
     return *this;

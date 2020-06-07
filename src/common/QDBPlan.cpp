@@ -1,4 +1,4 @@
-#include "QDBPlan.h"
+ï»¿#include "QDBPlan.h"
 #include "QLongplan.h"
 
 BOOL QDBPlan::Startup()
@@ -103,8 +103,8 @@ BOOL QDBPlan::AddStage( int nPlanID,QStage *s )
 
 BOOL QDBPlan::DeleteStage( int nStageID )
 {
-    // É¾³ıÆäÏÂµÄgoalµÄÂß¼­Ó¦¸ÃÓÉÉÏ²ãÀ´×ö¡£
-    // Èç¹ûÏÂÃæ»¹ÓĞgoal£¬ÄÇÃ´É¾³ıÊ§°Ü
+    // åˆ é™¤å…¶ä¸‹çš„goalçš„é€»è¾‘åº”è¯¥ç”±ä¸Šå±‚æ¥åšã€‚
+    // å¦‚æœä¸‹é¢è¿˜æœ‰goalï¼Œé‚£ä¹ˆåˆ é™¤å¤±è´¥
     CStdString sQ;
     sQ.Format(L"SELECT COUNT(ID) FROM tbl_goal WHERE (StageID=%d)", nStageID);
     if (_ExecSQL_RetInt(sQ) <= 0)
@@ -276,8 +276,8 @@ BOOL QDBPlan::EditGoal( int nGoalID, const CStdString& sGoal, const CStdString& 
 
 BOOL QDBPlan::DeleteGoal( int nGoalID )
 {
-    // É¾³ıÆäÏÂµÄgoalitemµÄÂß¼­Ó¦¸ÃÓÉÉÏ²ãÀ´×ö¡£
-    // Èç¹ûÏÂÃæ»¹ÓĞgoalitem£¬ÄÇÃ´É¾³ıÊ§°Ü
+    // åˆ é™¤å…¶ä¸‹çš„goalitemçš„é€»è¾‘åº”è¯¥ç”±ä¸Šå±‚æ¥åšã€‚
+    // å¦‚æœä¸‹é¢è¿˜æœ‰goalitemï¼Œé‚£ä¹ˆåˆ é™¤å¤±è´¥
     CStdString sQ;
     sQ.Format(L"SELECT COUNT(ID) FROM tbl_goalitem WHERE (GoalID=%d)", nGoalID);
     if (_ExecSQL_RetInt(sQ) <= 0)

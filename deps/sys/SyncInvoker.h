@@ -1,4 +1,4 @@
-#ifndef __SYNCINVOKE_H__
+ï»¿#ifndef __SYNCINVOKE_H__
 #define __SYNCINVOKE_H__
 
 #include "atlbase.h"
@@ -113,7 +113,7 @@ namespace SyncInvoker
 	};
 }
 
-// retVal µ÷ÓÃµÄ·µ»ØÖµ
+// retVal è°ƒç”¨çš„è¿”å›žå€¼
 #define SyncInvoke(cls, method, param, retVal) \
 { \
 	SyncInvoker::CSyncCall<cls> syncCall; \

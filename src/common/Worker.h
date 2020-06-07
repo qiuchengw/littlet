@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <queue>
 #include "BaseType.h"
@@ -17,7 +17,7 @@ typedef struct WORK_PARAM
 		return *this;
 	}
 	ENUM_WORK_TYPE		eWorkType;
-	LPARAM				lParam;		// º¬Òå¸ù¾İ eWorkType ¶ø¶¨
+	LPARAM				lParam;		// å«ä¹‰æ ¹æ® eWorkType è€Œå®š
 	LPVOID				pData;		// 
 	BOOL				bHandled;	// has done this work?
 }*LPWORK_PARAM;
@@ -35,15 +35,15 @@ class QWorker
 public:
 	QWorker();
 
-	// Æô¶¯Worker Ïß³Ì
+	// å¯åŠ¨Worker çº¿ç¨‹
 	BOOL Startup();
 
-	// ÖÕÖ¹Ïß³Ì
+	// ç»ˆæ­¢çº¿ç¨‹
 	void EndWorker();
 	void DoWork(LPWORK_PARAM pWork);
 
 protected:
-	// WorkerÏß³Ì
+	// Workerçº¿ç¨‹
 	static unsigned __stdcall WorkerThread( void* pArguments );
 	static DWORD WINAPI QWorkItem(LPVOID lpParameter);
 

@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ui/QFrame.h"
 
 #pragma comment(lib, "libzmq.lib")
 
-// ÓÃ»§Òâ¼û·´À¡ÏµÍ³
-//  1> Ê¹ÓÃhttp·¢ËÍÊı¾İµ½web·şÎñÆ÷
-//  /// 2> Ê¹ÓÃsmtp+SSL·¢ËÍÊı¾İµ½email·şÎñÆ÷
+// ç”¨æˆ·æ„è§åé¦ˆç³»ç»Ÿ
+//  1> ä½¿ç”¨httpå‘é€æ•°æ®åˆ°webæœåŠ¡å™¨
+//  /// 2> ä½¿ç”¨smtp+SSLå‘é€æ•°æ®åˆ°emailæœåŠ¡å™¨
 class QUserFeedbackWnd : public QFrame
 {
     QUI_DECLARE_EVENT_MAP;
@@ -24,8 +24,8 @@ public:
     QUserFeedbackWnd(void);
     
     /*
-     *	sSubject    Ö÷Ìâ
-     *  sSenderName ·¢ËÍ·½Ãû×Ö
+     *	sSubject    ä¸»é¢˜
+     *  sSenderName å‘é€æ–¹åå­—
      *  
      */
     static BOOL Show(const CStdString& sSubject = L"USER FEEDBACK:",
@@ -44,15 +44,15 @@ protected:
 
     void OnMouseupTxtFeed(MOUSE_PARAMS &);
 
-    // Òì²½·½Ê½Postµ½ÍøÂç
+    // å¼‚æ­¥æ–¹å¼Poståˆ°ç½‘ç»œ
     LRESULT AsyncWebPost(LPVOID);
 
-    // ¼Ù×°ÊÇÔÚ·¢ËÍÖĞ
+    // å‡è£…æ˜¯åœ¨å‘é€ä¸­
     LRESULT AsyncFakeSend(LPVOID);
 
     enum SENDFEEDBACK_RESULT
     {
-        SENDFEEDBACK_RESULT_MAXSENDREACHED = -2,    // ´ïµ½Ã¿Ìì×î¶àÄÜ·¢ËÍµÄ·´¿¹ÊıÄ¿
+        SENDFEEDBACK_RESULT_MAXSENDREACHED = -2,    // è¾¾åˆ°æ¯å¤©æœ€å¤šèƒ½å‘é€çš„åæŠ—æ•°ç›®
         SENDFEEDBACK_RESULT_FAIL = -1,
         SENDFEEDBACK_RESULT_OK = 0,
         SENDFEEDBACK_RESULT_NOCLIENTMAIL,
@@ -62,20 +62,20 @@ protected:
     CStdString FormatSendResult(SENDFEEDBACK_RESULT s);
 
     /**
-     *	·¢ËÍ·´À¡
+     *	å‘é€åé¦ˆ
      *
      *	@param
      *		-[in]
-     *          sFeedback       Òâ¼û
+     *          sFeedback       æ„è§
     **/
     SENDFEEDBACK_RESULT SendFeedback( __in const CStdString& sFeedback);
     
     BOOL CheckMaxFeedbackReached();
 
-    // ¼ÓÒ»·¢ËÍ¼ÇÂ¼
+    // åŠ ä¸€å‘é€è®°å½•
     void IncreaseFeedback();
 
-    // ±¸·İÎ´·¢ËÍµÄÊı¾İ
+    // å¤‡ä»½æœªå‘é€çš„æ•°æ®
     BOOL BackupFeedback();
 
     BOOL RestoreFeedback();
@@ -97,7 +97,7 @@ protected:
     CStdString MakeContent(const CStdString& sTxt, const CStdString& sMail);
 
 private:    
-    int         max_feed_;  // Ã¿Ìì×î¶àÄÜ·¢ËÍ¶àÉÙ·´À¡
+    int         max_feed_;  // æ¯å¤©æœ€å¤šèƒ½å‘é€å¤šå°‘åé¦ˆ
     CStdString     feed_content_;
     CStdString     sender_name_;
 };

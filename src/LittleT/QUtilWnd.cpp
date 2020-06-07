@@ -1,4 +1,4 @@
-#include "QUtilWnd.h"
+ï»¿#include "QUtilWnd.h"
 #include "ui/wndhelper.h"
 
 QScreenWnd::QScreenWnd()
@@ -30,24 +30,24 @@ BOOL QScreenWnd::_Show( LPCWSTR pszPicFolder, int nAlpha /*= 200*/,
         quibase::MoveToFullScreen(GetSafeHwnd());
 
         m_nLifeSec = max(nSeconds,QSCREENWND_MIN_LIFESEC);
-        // ±³¾°É«
+        // èƒŒæ™¯è‰²
         m_ctlPic = (HELEMENT)GetCtrl("#div_pic");
         m_ctlPic.SetBkgndColor(COLORREF2HtmlColor(crBk));
         GetBody().SetBkgndColor(COLORREF2HtmlColor(crBk));
         m_ctlPic.SetFrgndImage(_ImgPath());
-        // Í¸Ã÷¶È
+        // é€æ˜åº¦
         SetLayeredWindowAttributes(m_hWnd,0,nAlpha,LWA_ALPHA);
-        // ³¬Ê±×Ô¶¯¹Ø±Õ
+        // è¶…æ—¶è‡ªåŠ¨å…³é—­
         SetTimer(QSCREENWND_LIFETIMER_ID,QSCREENWND_LIFETIMER_PERIOD,NULL);
-        // ×Ô¶¯Ñ­»·²¥·ÅÍ¼Æ¬
-        m_nPeriodSec = max(2,nPicPeriod);   // Ä¬ÈÏÊÇ×îĞ¡2ÃëÑ­»·
-        int nPics = m_pic.LoadFolder(pszPicFolder, true);   // Ëæ»úÂÒĞò
+        // è‡ªåŠ¨å¾ªç¯æ’­æ”¾å›¾ç‰‡
+        m_nPeriodSec = max(2,nPicPeriod);   // é»˜è®¤æ˜¯æœ€å°2ç§’å¾ªç¯
+        int nPics = m_pic.LoadFolder(pszPicFolder, true);   // éšæœºä¹±åº
         m_pic.ShuffleOrders();
         m_pic.HtmlayoutPlay(GetSafeHwnd(),L"file://" + _ImgPath(),
             m_nPeriodSec,TRUE,TRUE);
         if (nPics > 0)
         {
-            // ²¥·Å×îºóÒ»¸ö
+            // æ’­æ”¾æœ€åä¸€ä¸ª
             OnPlayerTimerFired(nPics - 1);
         }
         SetForegroundWindow(GetSafeHwnd());
@@ -61,7 +61,7 @@ void QScreenWnd::OnPlayerTimerFired( LPARAM lp )
     m_pic.PlayPicture((int)lp);
     
     m_ctlPic.SetCheck(TRUE);
-    // ¶¯»­
+    // åŠ¨ç”»
     m_iAnimation = m_nPeriodSec * 1000 / QSCREENWND_ANIMATIONTIMER_PERIOD;
     SetTimer(QSCREENWND_ANIMATIONTIMER_ID,QSCREENWND_ANIMATIONTIMER_PERIOD,NULL);
 }
@@ -90,11 +90,11 @@ void QScreenWnd::OnClose()
 {
     if (m_nLifeSec <= 0)
     {
-        // ¹Ø±Õ
+        // å…³é—­
         m_pic.StopPlay();
         SetMsgHandled(FALSE);
     }
-    // ÉúÃüÆÚÃ»ÓĞ½áÊø²»¹Ø±Õ
+    // ç”Ÿå‘½æœŸæ²¡æœ‰ç»“æŸä¸å…³é—­
 }
 
 void QScreenWnd::OnKeyDown( TCHAR ch, UINT ,UINT )

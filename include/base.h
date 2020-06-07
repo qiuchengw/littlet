@@ -1,12 +1,12 @@
-#ifndef base_h__
+ï»¿#ifndef base_h__
 #define base_h__
 
 #include <functional>
 
 /**
- *  ×ÊÔ´¹ÜÀí£º ÉêÇëºÍÊÍ·Å±£»¤  
+ *  èµ„æºç®¡ç†ï¼š ç”³è¯·å’Œé‡Šæ”¾ä¿æŠ¤  
  *
- *  ÊµÏÖÕªÂ¼×Ô£ºC++ÂŞ¸¡¹¬
+ *  å®ç°æ‘˜å½•è‡ªï¼šC++ç½—æµ®å®«
  *
  *      http://mindhacks.cn/2012/08/27/modern-cpp-practices/
  *  

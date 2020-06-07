@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "resource.h"
 
@@ -37,14 +37,14 @@ public:
 
 protected:
     void StartUpdateExe();
-    // ¿´¿´"¸üĞÂ³ÌĞò¡°ÓĞÃ»ÓĞ¸üĞÂ
+    // çœ‹çœ‹"æ›´æ–°ç¨‹åºâ€œæœ‰æ²¡æœ‰æ›´æ–°
     void CheckUpdaterExe();
 
 private:
     //    LMainWnd    m_MainFrm;
     LittleTFrame    m_frame;
 
-    // Ö÷´°¿Ú´´½¨ÆğÀ´ºó£¬´´½¨Õâ¸öÊÂ¼ş£¬´Ëºó¿ÉÒÔÓÃÓÚºÍÆäËû½ø³ÌÍ¨ĞÅ
+    // ä¸»çª—å£åˆ›å»ºèµ·æ¥åï¼Œåˆ›å»ºè¿™ä¸ªäº‹ä»¶ï¼Œæ­¤åå¯ä»¥ç”¨äºå’Œå…¶ä»–è¿›ç¨‹é€šä¿¡
     HANDLE      m_hEventMainWnd;
 };
 
@@ -54,50 +54,50 @@ private:
 class LittleTConfig : public QUIConfig
 {
 public:
-    // ĞİÏ¢Ò»»á¶ùµÄÄ¬ÈÏ²¥·ÅÎÄ¼şÄ¿Â¼
+    // ä¼‘æ¯ä¸€ä¼šå„¿çš„é»˜è®¤æ’­æ”¾æ–‡ä»¶ç›®å½•
     CStdString  GetPicFolder()
     {
         CStdString sRet = GetValue(L"setting",L"pic_folder");
         if (sRet.Find(L':') == -1)
-        {   // Ïà¶ÔÂ·¾¶£¬×ª»»Îª¾ø¶ÔÂ·¾¶
+        {   // ç›¸å¯¹è·¯å¾„ï¼Œè½¬æ¢ä¸ºç»å¯¹è·¯å¾„
             return quibase::GetModulePath() + sRet;
         }
         return sRet;
     }
-    // ĞİÏ¢Ò»»á¶ùµÄÄ¬ÈÏ²¥·ÅÎÄ¼ş¼ä¸ôÊ±¼ä
+    // ä¼‘æ¯ä¸€ä¼šå„¿çš„é»˜è®¤æ’­æ”¾æ–‡ä»¶é—´éš”æ—¶é—´
     int GetPicSec()
     {
         return GetIntValue(L"setting",L"pic_sec");
     }
 
-    // ĞİÏ¢Ò»»á¶ùµÄÄ¬ÈÏÏÔÊ¾Ê±¼ä
+    // ä¼‘æ¯ä¸€ä¼šå„¿çš„é»˜è®¤æ˜¾ç¤ºæ—¶é—´
     int GetBreakSec()
     {
         return GetIntValue(L"setting",L"break_sec");
     }
     
-    // ĞİÏ¢Ò»»á¶ùµÄÄ¬ÈÏÍ¸Ã÷¶È
+    // ä¼‘æ¯ä¸€ä¼šå„¿çš„é»˜è®¤é€æ˜åº¦
     int GetPicAlpha()
     {
         return GetIntValue(L"setting",L"pic_alpha");
     }
 
-    // ĞİÏ¢Ò»»á¶ùµÄÄ¬ÈÏ±³¾°É«
+    // ä¼‘æ¯ä¸€ä¼šå„¿çš„é»˜è®¤èƒŒæ™¯è‰²
     DWORD GetPicBkcolor()
     {
         return GetIntValue(L"setting",L"pic_bkcolor");
     }
 
-    // »ñÈ¡Í¼±êËõÂÔÍ¼µÄÄ¿Â¼
+    // è·å–å›¾æ ‡ç¼©ç•¥å›¾çš„ç›®å½•
     CStdString GetIconsDir()
     {
         return quibase::GetModulePath() + L"icons/";
     }
 
-    // ÀúÊ·Ê¹ÓÃ¹ıµÄÉùÒôÎÄ¼ş
+    // å†å²ä½¿ç”¨è¿‡çš„å£°éŸ³æ–‡ä»¶
     std::vector<CStdString> GetHistorySoundFile();
 
-    // Ìí¼ÓÒ»¸öÉùÒôÎÄ¼ş
+    // æ·»åŠ ä¸€ä¸ªå£°éŸ³æ–‡ä»¶
     std::vector<CStdString> AddSoundFilePath(const CStdString& file);
 
     

@@ -1,4 +1,4 @@
-#pragma warning(disable:4244 4018)
+ï»¿#pragma warning(disable:4244 4018)
 
 #include "QTimer.h"
 #include <Shlwapi.h>
@@ -18,7 +18,7 @@ static QTimerEventHandler       g_DefaultTimerEH;
 	{
 		QTime tmNow = QTime::GetCurrentTime();
 		CStdString str;
-		str.Format(L"¡¾%s¡¿ Éè¶¨ÁËÌáĞÑ¶¨Ê±Æ÷£¬¡¾%s¡¿ Ê±¼äÖ´ĞĞ\n",
+		str.Format(L"ã€%sã€‘ è®¾å®šäº†æé†’å®šæ—¶å™¨ï¼Œã€%sã€‘ æ—¶é—´æ‰§è¡Œ\n",
 			tmNow.Format(L"%c"),tmRemind.Format(L"%c"));
 		TRACE(str);
 	}
@@ -31,38 +31,38 @@ static QTimerEventHandler       g_DefaultTimerEH;
 #endif
 
 VOID CALLBACK TaskCallback(__in PVOID lpParameter,__in BOOLEAN TimerOrWaitFired);
-// ×Ô¶¯ÈÎÎñÌáÇ°ÌáÊ¾µÄµÄ»Øµ÷º¯Êı
+// è‡ªåŠ¨ä»»åŠ¡æå‰æç¤ºçš„çš„å›è°ƒå‡½æ•°
 VOID CALLBACK TaskRemindCallback(__in PVOID lpParameter,__in BOOLEAN TimerOrWaitFired);
 
 CStdString GetRunningStatusDescription( ENUM_AUTOTASK_RUNNING_STATUS eStatus )
 {
 	switch(eStatus)
 	{
-	case AUTOTASK_RUNNING_STATUS_BADTIMER://-2://	// ²»ÄÜ½âÎötimer±í´ïÊ½
-        return L"ÎŞĞ§µÄ¶¨Ê±Æ÷";
-	case AUTOTASK_RUNNING_STATUS_APPERROR://-1://	// Ó¦ÓÃ³ÌĞò³öÏÖÁË´íÎó
-        return L"Ó¦ÓÃ³ÌĞò´íÎó";
-	case AUTOTASK_RUNNING_STATUS_OK://0://	// ÈÎÎñÕı³£Æô¶¯
-        return L"Ò»ÇĞÕı³£";
-	case AUTOTASK_RUNNING_STATUS_NOTSTARTUP://1://	// ÈÎÎñ»¹Î´Æô¶¯
-        return L"ÈÎÎñ»¹Î´Æô¶¯";
-	case AUTOTASK_RUNNING_STATUS_PAUSED: // ÔİÍ£ÖĞ
-        return L"ÈÎÎñÔİÍ£";
-	case AUTOTASK_RUNNING_STATUS_OVERDUE://	// ÈÎÎñ¹ıÆÚÁË
-        return L"ÈÎÎñ¹ıÆÚ";
-	case AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT://	// ĞèÒªÏÂ´Î»úÆ÷ÖØÆô£¬ÈÎÎñ²ÅÖ´ĞĞ
-        return L"ÏÂ´Î¿ª»úÖ´ĞĞ";
-	case AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT:	// ĞèÒª³ÌĞòÖØÆô£¬ÈÎÎñ²ÅÖ´ĞĞ
-        return L"ÏÂ´ÎÆô¶¯³ÌĞòÔËĞĞ";
-	case AUTOTASK_RUNNING_STATUS_BASEDONEXETERNALPROG://	// ÒÀÀµµÄÍâ²¿³ÌĞò²¢Ã»ÓĞÔËĞĞ
-        return L"ÒÀÀµµÄÍâ²¿³ÌĞò²¢Ã»ÓĞÔËĞĞ";
+	case AUTOTASK_RUNNING_STATUS_BADTIMER://-2://	// ä¸èƒ½è§£ætimerè¡¨è¾¾å¼
+        return L"æ— æ•ˆçš„å®šæ—¶å™¨";
+	case AUTOTASK_RUNNING_STATUS_APPERROR://-1://	// åº”ç”¨ç¨‹åºå‡ºç°äº†é”™è¯¯
+        return L"åº”ç”¨ç¨‹åºé”™è¯¯";
+	case AUTOTASK_RUNNING_STATUS_OK://0://	// ä»»åŠ¡æ­£å¸¸å¯åŠ¨
+        return L"ä¸€åˆ‡æ­£å¸¸";
+	case AUTOTASK_RUNNING_STATUS_NOTSTARTUP://1://	// ä»»åŠ¡è¿˜æœªå¯åŠ¨
+        return L"ä»»åŠ¡è¿˜æœªå¯åŠ¨";
+	case AUTOTASK_RUNNING_STATUS_PAUSED: // æš‚åœä¸­
+        return L"ä»»åŠ¡æš‚åœ";
+	case AUTOTASK_RUNNING_STATUS_OVERDUE://	// ä»»åŠ¡è¿‡æœŸäº†
+        return L"ä»»åŠ¡è¿‡æœŸ";
+	case AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT://	// éœ€è¦ä¸‹æ¬¡æœºå™¨é‡å¯ï¼Œä»»åŠ¡æ‰æ‰§è¡Œ
+        return L"ä¸‹æ¬¡å¼€æœºæ‰§è¡Œ";
+	case AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT:	// éœ€è¦ç¨‹åºé‡å¯ï¼Œä»»åŠ¡æ‰æ‰§è¡Œ
+        return L"ä¸‹æ¬¡å¯åŠ¨ç¨‹åºè¿è¡Œ";
+	case AUTOTASK_RUNNING_STATUS_BASEDONEXETERNALPROG://	// ä¾èµ–çš„å¤–éƒ¨ç¨‹åºå¹¶æ²¡æœ‰è¿è¡Œ
+        return L"ä¾èµ–çš„å¤–éƒ¨ç¨‹åºå¹¶æ²¡æœ‰è¿è¡Œ";
 		//////////////////////////////////////////////////////////////////////////
-		// ¾ø¶ÔÊ±¼ä
-	case AUTOTASK_RUNNING_STATUS_TIMENOTMATCH://	// ÎŞ¿ÉÖ´ĞĞµÄÊ±¼äÆ¥Åä
-        return L"ÎŞ¿ÉÖ´ĞĞµÄÊ±¼äÆ¥Åä";
-	case AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC://	// ËäÈ»ÈÎÎñÎ´¹ıÆÚ£¬µ«ÊÇÓàÏÂµÄÊ±¼äÀï£¬ÈÎÎñ¶¼Ã»ÓĞ»ú»áÔÙÖ´ĞĞÁË
-        return L"ÈÎÎñÃ»ÓĞ»ú»áÔÙÖ´ĞĞ";
-	default: return L"Î´Öª±êÖ¾";
+		// ç»å¯¹æ—¶é—´
+	case AUTOTASK_RUNNING_STATUS_TIMENOTMATCH://	// æ— å¯æ‰§è¡Œçš„æ—¶é—´åŒ¹é…
+        return L"æ— å¯æ‰§è¡Œçš„æ—¶é—´åŒ¹é…";
+	case AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC://	// è™½ç„¶ä»»åŠ¡æœªè¿‡æœŸï¼Œä½†æ˜¯ä½™ä¸‹çš„æ—¶é—´é‡Œï¼Œä»»åŠ¡éƒ½æ²¡æœ‰æœºä¼šå†æ‰§è¡Œäº†
+        return L"ä»»åŠ¡æ²¡æœ‰æœºä¼šå†æ‰§è¡Œ";
+	default: return L"æœªçŸ¥æ ‡å¿—";
 	}
 }
 
@@ -70,37 +70,37 @@ CStdString GetExecFlagText( ENUM_AUTOTASK_EXECFLAG eFlag )
 {
 	switch (eFlag)
 	{
-	case AUTOTASK_EXEC_NOTSET: // 0,	// Î´ÉèÖÃ
-		return L"Î´ÉèÖÃ";
-		// Ïà¶ÔÊ±¼ä
-	case AUTOTASK_EXEC_AFTERSYSBOOT: // 0x00000001,	// ÏµÍ³Æô¶¯
-		return L"ÏµÍ³Æô¶¯";
-	case AUTOTASK_EXEC_AFTERTASKSTART : // 0x00000002,	// ÈÎÎñÆô¶¯ 
-        return L"ÈÎÎñÆô¶¯ºó";
-	case AUTOTASK_EXEC_AFTERMINDERSTART : // 0x00000004,// ±¾³ÌĞòÆô¶¯
-        return L"±¾³ÌĞòÆô¶¯";
-	case AUTOTASK_EXEC_AFTERPROGSTART : // 0x00000008,// Íâ²¿³ÌĞòÆô¶¯
-        return L"Ïà¶ÔÓÚÍâ²¿³ÌĞòÆô¶¯";
-	case AUTOTASK_EXEC_AFTERPROGEXIT : // 0x00000010,// Íâ²¿³ÌĞòÍË³ö
-        return L"Ïà¶ÔÓÚÍâ²¿³ÌĞòÍË³ö";
-		// ¾ø¶ÔÊ±¼ä±ê¼Ç
-    case AUTOTASK_EXEC_ATDATE : // 0x00010000,	// ¾ø¶ÔÈÕÆÚ 2011/11/11
-        return L"ÈÕÆÚ";
-	case AUTOTASK_EXEC_ATYEARDAY : // 0x00010000,	// ¶à¸öÈÕÆÚ 2011/11/11
-        return L"Ã¿ÄêµÄÄ³Ìì";
-	case AUTOTASK_EXEC_ATDAILY : // 0x00020000,	// Ã¿¸ôxÌì
-        return L"Ã¿¸ôxÌì";
-	case AUTOTASK_EXEC_ATMONTHDAY : // 0x00040000,	// Ã¿ÔÂµÄxºÅ 
-        return L"Ã¿ÔÂµÄxºÅ";
-	case AUTOTASK_EXEC_ATWEEKDAY : // 0x00080000,	// Ã¿ÔÂµÄxÖÜ x[ËùÓĞÖÜ|µÚÒ»ÖÜ|¡£¡£|µÚ4ÖÜ]
-        return L"Ã¿ÔÂµÄxÖÜ";
+	case AUTOTASK_EXEC_NOTSET: // 0,	// æœªè®¾ç½®
+		return L"æœªè®¾ç½®";
+		// ç›¸å¯¹æ—¶é—´
+	case AUTOTASK_EXEC_AFTERSYSBOOT: // 0x00000001,	// ç³»ç»Ÿå¯åŠ¨
+		return L"ç³»ç»Ÿå¯åŠ¨";
+	case AUTOTASK_EXEC_AFTERTASKSTART : // 0x00000002,	// ä»»åŠ¡å¯åŠ¨ 
+        return L"ä»»åŠ¡å¯åŠ¨å";
+	case AUTOTASK_EXEC_AFTERMINDERSTART : // 0x00000004,// æœ¬ç¨‹åºå¯åŠ¨
+        return L"æœ¬ç¨‹åºå¯åŠ¨";
+	case AUTOTASK_EXEC_AFTERPROGSTART : // 0x00000008,// å¤–éƒ¨ç¨‹åºå¯åŠ¨
+        return L"ç›¸å¯¹äºå¤–éƒ¨ç¨‹åºå¯åŠ¨";
+	case AUTOTASK_EXEC_AFTERPROGEXIT : // 0x00000010,// å¤–éƒ¨ç¨‹åºé€€å‡º
+        return L"ç›¸å¯¹äºå¤–éƒ¨ç¨‹åºé€€å‡º";
+		// ç»å¯¹æ—¶é—´æ ‡è®°
+    case AUTOTASK_EXEC_ATDATE : // 0x00010000,	// ç»å¯¹æ—¥æœŸ 2011/11/11
+        return L"æ—¥æœŸ";
+	case AUTOTASK_EXEC_ATYEARDAY : // 0x00010000,	// å¤šä¸ªæ—¥æœŸ 2011/11/11
+        return L"æ¯å¹´çš„æŸå¤©";
+	case AUTOTASK_EXEC_ATDAILY : // 0x00020000,	// æ¯éš”xå¤©
+        return L"æ¯éš”xå¤©";
+	case AUTOTASK_EXEC_ATMONTHDAY : // 0x00040000,	// æ¯æœˆçš„xå· 
+        return L"æ¯æœˆçš„xå·";
+	case AUTOTASK_EXEC_ATWEEKDAY : // 0x00080000,	// æ¯æœˆçš„xå‘¨ x[æ‰€æœ‰å‘¨|ç¬¬ä¸€å‘¨|ã€‚ã€‚|ç¬¬4å‘¨]
+        return L"æ¯æœˆçš„xå‘¨";
 
 		//////////////////////////////////////////////////////////////////////////
-	case AUTOTASK_EXEC_RELATE_EXECANDTHEN : // 0x01000000,	// Ïà¶ÔÊ±¼äÖ®ºóÔÙ´ÎÖ´ĞĞ¶à´Î¼ä¸ô
-        return L"Ïà¶ÔÊ±¼äÖ®ºóÔÙ´ÎÖ´ĞĞ¶à´Î¼ä¸ô";
+	case AUTOTASK_EXEC_RELATE_EXECANDTHEN : // 0x01000000,	// ç›¸å¯¹æ—¶é—´ä¹‹åå†æ¬¡æ‰§è¡Œå¤šæ¬¡é—´éš”
+        return L"ç›¸å¯¹æ—¶é—´ä¹‹åå†æ¬¡æ‰§è¡Œå¤šæ¬¡é—´éš”";
 	}
     ASSERT(FALSE);
-	return L"GetExecFlagText->Î´Öª²ÎÊı";
+	return L"GetExecFlagText->æœªçŸ¥å‚æ•°";
 }
 
 QTimer::QTimer()
@@ -121,15 +121,15 @@ QTimer::~QTimer(void)
     ASSERT(!IsStarted());
 }
 
-// ´Ëº¯ÊıÖ´ĞĞÁ÷³ÌÈÃÈËÈİÒ×ÃÔºı¡£
-// ¿ÉÒÔÔÚÖ½ÉÏ»­Ò»Ìõºá×ø±ê£¬±ê³öÀ´3¸öÊ±¼äµãÀ´ÇåÎúË¼Â·£ºÌáÊ¾Ê±¼ä£¬ÈÎÎñÖ´ĞĞÊ±¼ä£¬ÏÖÔÚÊ±¼ä
-// ÒÆ¶¯ÏÖÔÚÊ±¼ä¾ÍÃ÷°×À²
+// æ­¤å‡½æ•°æ‰§è¡Œæµç¨‹è®©äººå®¹æ˜“è¿·ç³Šã€‚
+// å¯ä»¥åœ¨çº¸ä¸Šç”»ä¸€æ¡æ¨ªåæ ‡ï¼Œæ ‡å‡ºæ¥3ä¸ªæ—¶é—´ç‚¹æ¥æ¸…æ™°æ€è·¯ï¼šæç¤ºæ—¶é—´ï¼Œä»»åŠ¡æ‰§è¡Œæ—¶é—´ï¼Œç°åœ¨æ—¶é—´
+// ç§»åŠ¨ç°åœ¨æ—¶é—´å°±æ˜ç™½å•¦
 BOOL QTimer::SetRemindTimer(HANDLE hTimerQueue, int nTaskID, const QTime& tmExec)
 {
     QTime tmNow = QTime::GetCurrentTime();
     if ((tmExec - tmNow).GetTotalSeconds() < 5)
     {
-        // ¾àÀëÈÎÎñÖ´ĞĞÊ±¼äÌ«¶ÌÁË£¬¾Í²»ÌáÊ¾ÁË¡£
+        // è·ç¦»ä»»åŠ¡æ‰§è¡Œæ—¶é—´å¤ªçŸ­äº†ï¼Œå°±ä¸æç¤ºäº†ã€‚
         return FALSE;
     }
 
@@ -155,26 +155,26 @@ BOOL QTimer::SetRemindTimer(HANDLE hTimerQueue, int nTaskID, const QTime& tmExec
     m_stTRP.nTaskID = nTaskID;
     m_stTRP.tmExec = tmExec;
 
-    // Èç¹ûÈÎÎñÊÇÌáÊ¾ĞÅÏ¢£¬ÇÒÔÚ±¾´Î»úÆ÷ÔËĞĞÊ±¼äÄÚ²»ÔÙÖ´ĞĞÏÂÒ»´Î£¬
-    // ÔòÌáÊ¾¿òÖ»ÄÜÓÉÓÃ»§¹Ø±Õ£¬ÒÔÃâ´í¹ıÁËÖØÒªÌáĞÑ
+    // å¦‚æœä»»åŠ¡æ˜¯æç¤ºä¿¡æ¯ï¼Œä¸”åœ¨æœ¬æ¬¡æœºå™¨è¿è¡Œæ—¶é—´å†…ä¸å†æ‰§è¡Œä¸‹ä¸€æ¬¡ï¼Œ
+    // åˆ™æç¤ºæ¡†åªèƒ½ç”±ç”¨æˆ·å…³é—­ï¼Œä»¥å…é”™è¿‡äº†é‡è¦æé†’
     auto fix_seconds = [&]()
     {
         if (t->GetDoWhat() == AUTOTASK_DO_REMIND)
         {
             if (t->IsStartupAndLastExec())
             {
-                // µ¹¼ÆÊ±ÉèÖÃÎª1Ìì¡£×ã¹»ÁË°É£¡
+                // å€’è®¡æ—¶è®¾ç½®ä¸º1å¤©ã€‚è¶³å¤Ÿäº†å§ï¼
                 m_stTRP.nSeconds = 3600 * 24;
             }
         }
     };
 
-    // ºÎÊ±Ó¦¸ÃÌáÊ¾Ê±¼ä
+    // ä½•æ—¶åº”è¯¥æç¤ºæ—¶é—´
     QTime tmRemind = tmExec - QTimeSpan( (m_stTRP.nSeconds) / SECONDS_OF_DAY );
     if ( tmNow > tmRemind )
-    {   // ÒÑ¾­¹ıÁËÌáÊ¾Ê±¼äÁË
-        // Ó¦¸ÃÁ¢¼´ÌáÊ¾
-        m_stTRP.nSeconds = (tmExec - tmNow).GetTotalSeconds();   // ¾àÀëÈÎÎñÖ´ĞĞÊ±¼äÓĞ¶àÉÙÃë
+    {   // å·²ç»è¿‡äº†æç¤ºæ—¶é—´äº†
+        // åº”è¯¥ç«‹å³æç¤º
+        m_stTRP.nSeconds = (tmExec - tmNow).GetTotalSeconds();   // è·ç¦»ä»»åŠ¡æ‰§è¡Œæ—¶é—´æœ‰å¤šå°‘ç§’
         fix_seconds();
 
         if (NULL != m_pTEH)
@@ -184,12 +184,12 @@ BOOL QTimer::SetRemindTimer(HANDLE hTimerQueue, int nTaskID, const QTime& tmExec
         return TRUE;
     }
 
-    // »¹Ã»ÓĞµ½ÌáÊ¾Ê±¼ä 
-    // ¾ßÌå»¹ÓĞ¶àÉÙÃëÈ¥ÌáÊ¾ÄØ£¿
+    // è¿˜æ²¡æœ‰åˆ°æç¤ºæ—¶é—´ 
+    // å…·ä½“è¿˜æœ‰å¤šå°‘ç§’å»æç¤ºå‘¢ï¼Ÿ
     DWORD dwSecToRemind = (tmRemind - tmNow).GetTotalSeconds();
     if (dwSecToRemind < 5)
-    {   // ¾àÀëÌáÊ¾Ê±¼ä»¹ÓĞ5Ãë£¬Ì«¶ÌÀ²£¬Ö±½ÓÏÔÊ¾ÌáÊ¾¿ò°É
-        // µ«ÊÇµ¹¼ÆÊ±Ó¦¸Ã¼ÓÉÏÕâ¶ÎÊ±¼ä
+    {   // è·ç¦»æç¤ºæ—¶é—´è¿˜æœ‰5ç§’ï¼Œå¤ªçŸ­å•¦ï¼Œç›´æ¥æ˜¾ç¤ºæç¤ºæ¡†å§
+        // ä½†æ˜¯å€’è®¡æ—¶åº”è¯¥åŠ ä¸Šè¿™æ®µæ—¶é—´
         m_stTRP.nSeconds += dwSecToRemind;
         fix_seconds();
         if (NULL != m_pTEH)
@@ -202,12 +202,12 @@ BOOL QTimer::SetRemindTimer(HANDLE hTimerQueue, int nTaskID, const QTime& tmExec
     m_stTRP.nSeconds = QHelper::HowManySeconds(nA,cUnit);
     fix_seconds();
 
-    // Èç¹û¾àÀë¸ÃÌáÊ¾µÄÊ±¼ä»¹×ã¹»³¤£¬ÄÇÃ´ĞèÒª´´½¨Ò»¸ö¶¨Ê±Æ÷»Øµ÷º¯Êı
-    // µ±»Øµ÷·¢ÉúÊ±ÔÙÏò´°¿Ú·¢ÏûÏ¢£¬Í¨ÖªÏÔÊ¾ÌáÊ¾´°¿Ú
-    // ´´½¨µ¥´Î¶¨Ê±Æ÷À´Ö´ĞĞÌáÊ¾»Øµ÷
+    // å¦‚æœè·ç¦»è¯¥æç¤ºçš„æ—¶é—´è¿˜è¶³å¤Ÿé•¿ï¼Œé‚£ä¹ˆéœ€è¦åˆ›å»ºä¸€ä¸ªå®šæ—¶å™¨å›è°ƒå‡½æ•°
+    // å½“å›è°ƒå‘ç”Ÿæ—¶å†å‘çª—å£å‘æ¶ˆæ¯ï¼Œé€šçŸ¥æ˜¾ç¤ºæç¤ºçª—å£
+    // åˆ›å»ºå•æ¬¡å®šæ—¶å™¨æ¥æ‰§è¡Œæç¤ºå›è°ƒ
     return CreateTimerQueueTimer(&m_hTimerReminder,hTimerQueue,
             TaskRemindCallback,(PVOID)&m_stTRP, dwSecToRemind * 1000,
-            0, WT_EXECUTEDEFAULT); // µ¥´Î¶¨Ê±Æ÷
+            0, WT_EXECUTEDEFAULT); // å•æ¬¡å®šæ—¶å™¨
 }
 
 ENUM_AUTOTASK_RUNNING_STATUS QTimer::Start(HANDLE hTimerQueue ,int nTaskID)
@@ -231,7 +231,7 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::StartFrom(QTime &tmBegin,HANDLE hTimerQueue
 			break;
 		}
 		lHowLongToExec = (m_tmNextExec-QTime::GetCurrentTime()).GetTotalSeconds(); 
-		if (lHowLongToExec <= 3.0f) // Èç¹ûÀëÖ´ĞĞÊ±¼äÖ»ÓĞ3Ãë£¬Ôò²éÕÒÏÂ´ÎÖ´ĞĞÊ±¼äµã
+		if (lHowLongToExec <= 3.0f) // å¦‚æœç¦»æ‰§è¡Œæ—¶é—´åªæœ‰3ç§’ï¼Œåˆ™æŸ¥æ‰¾ä¸‹æ¬¡æ‰§è¡Œæ—¶é—´ç‚¹
 		{
 			tmBegin = m_tmNextExec + QTimeSpan( 1 / SECONDS_OF_DAY );
 			continue;
@@ -243,7 +243,7 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::StartFrom(QTime &tmBegin,HANDLE hTimerQueue
 			return AUTOTASK_RUNNING_STATUS_APPERROR;
 		}
 
-		// ÌáÇ°ÌáĞÑ
+		// æå‰æé†’
 		if (IsReminderEnabled())
 		{
 			SetRemindTimer(hTimerQueue,nTaskID,m_tmNextExec);
@@ -266,7 +266,7 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::TestStart()
 			break;
 		}
 		lHowLongToExec = (m_tmNextExec-tmBegin).GetTotalSeconds(); 
-		if (lHowLongToExec <= 3.0f) // Èç¹ûÀëÖ´ĞĞÊ±¼äÖ»ÓĞ3Ãë£¬Ôò²éÕÒÏÂ´ÎÖ´ĞĞÊ±¼äµã
+		if (lHowLongToExec <= 3.0f) // å¦‚æœç¦»æ‰§è¡Œæ—¶é—´åªæœ‰3ç§’ï¼Œåˆ™æŸ¥æ‰¾ä¸‹æ¬¡æ‰§è¡Œæ—¶é—´ç‚¹
 		{
 			tmBegin = m_tmNextExec + QTimeSpan( 1 / SECONDS_OF_DAY );
 			continue;
@@ -282,7 +282,7 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::JumpoverThisExec(HANDLE hTimerQueue,int nTa
 	{
 		return AUTOTASK_RUNNING_STATUS_APPERROR;
 	}
-    // ´Óµ±Ç°Ö´ĞĞÈÎÎñµÄÏÂÒ»¸ö30Ãë¿ªÊ¼¼ÆËãÏÂ´ÎµÄÖ´ĞĞÊ±¼ä
+    // ä»å½“å‰æ‰§è¡Œä»»åŠ¡çš„ä¸‹ä¸€ä¸ª30ç§’å¼€å§‹è®¡ç®—ä¸‹æ¬¡çš„æ‰§è¡Œæ—¶é—´
 	return StartFrom(m_tmNextExec + QTimeSpan((DWORD)30),hTimerQueue,nTaskID);
 
     //return AUTOTASK_RUNNING_STATUS_OK;
@@ -293,7 +293,7 @@ BOOL QTimer::Stop(HANDLE hTimerQueue, int nTaskID)
 	if (IsStarted())
     {
         BOOL bHasReminder = FALSE;
-        // Sleep(100);	// °ÑÏß³ÌÊ±¼äÈÃ³öÀ´£¬¸ø¶¨Ê±Æ÷º¯ÊıÖ´ĞĞÍê³É¡£
+        // Sleep(100);	// æŠŠçº¿ç¨‹æ—¶é—´è®©å‡ºæ¥ï¼Œç»™å®šæ—¶å™¨å‡½æ•°æ‰§è¡Œå®Œæˆã€‚
         if (m_hTimerReminder != NULL)
         {
             if (!DeleteTimerQueueTimer(hTimerQueue,m_hTimerReminder,INVALID_HANDLE_VALUE))
@@ -306,7 +306,7 @@ BOOL QTimer::Stop(HANDLE hTimerQueue, int nTaskID)
         }
         if (NULL != m_hTimerTask)
         {
-            // µÈ´ı£¬Ö±µ½É¾³ı
+            // ç­‰å¾…ï¼Œç›´åˆ°åˆ é™¤
             if (!DeleteTimerQueueTimer(hTimerQueue,m_hTimerTask,INVALID_HANDLE_VALUE))
             {
                 if (bHasReminder && (INVALID_ID != nTaskID))
@@ -348,15 +348,15 @@ void QTimer::ResetAllFiled()
 
 	m_dwSpan = 0;
 	m_cSpanUnit = L'';
-	m_dwSpan2 = 0;	// µÚ¶ş¸öÊ±¼ä¼ä¸ô
+	m_dwSpan2 = 0;	// ç¬¬äºŒä¸ªæ—¶é—´é—´éš”
 	m_cSpanUnit2 = L''; 
-	m_iExecCount = 0;	// Ö´ĞĞ´ÎÊı
+	m_iExecCount = 0;	// æ‰§è¡Œæ¬¡æ•°
 
 	m_arX.clear();
 	m_arTime.clear();
 	m_wTimeBegin = 0;
 	m_wTimeEnd = 0;
-	m_dwSpan = 0; // Ê±¼ä¼ä¸ô £¬µ¥Î»s
+	m_dwSpan = 0; // æ—¶é—´é—´éš” ï¼Œå•ä½s
 }
 
 BOOL QTimer::ParseExp( const CStdString& sExp )
@@ -398,22 +398,22 @@ BOOL QTimer::ParseAbsoluteExp( const CStdString& sExp )
 				std::stable_sort(m_arX.begin(),m_arX.end());
 				break;
 			}
-		case L'S': // Ê±¼ä
+		case L'S': // æ—¶é—´
 			{
 				m_wTimeBegin = StrToInt(sValue);
 				break;
 			}
-		case L'E': // Ê±¼ä
+		case L'E': // æ—¶é—´
 			{
 				m_wTimeEnd = StrToInt(sValue);
 				break;
 			}
-        case L'Q': // Ê±¼ä
+        case L'Q': // æ—¶é—´
             {
                 m_dwSpan = StrToInt(sValue);
                 break;
             }
-		case L'P': // ¼ä¸ôÊ±¼äÖ´ĞĞ
+		case L'P': // é—´éš”æ—¶é—´æ‰§è¡Œ
 			{
 				if (!_ParseToIntArray(sValue,m_arX))
 					return FALSE;
@@ -421,7 +421,7 @@ BOOL QTimer::ParseAbsoluteExp( const CStdString& sExp )
 					return FALSE;
 				break;
 			}
-		case L'T': // Ê±¼äµãÖ´ĞĞ
+		case L'T': // æ—¶é—´ç‚¹æ‰§è¡Œ
 			{
 				if (!_ParseToIntArray(sValue,m_arTime))
 					return FALSE;
@@ -433,7 +433,7 @@ BOOL QTimer::ParseAbsoluteExp( const CStdString& sExp )
 // 					TRACE(tmT.Format(L"%H:%M:%S\n"));
 // 				}
 // #endif
-				// ´ÓĞ¡µ½´óÅÅĞò
+				// ä»å°åˆ°å¤§æ’åº
 				std::stable_sort(m_arTime.begin(),m_arTime.end());
 				break;
 			}
@@ -509,13 +509,13 @@ BOOL QTimer::ParseRelateExp( const CStdString& sExp )
 					return FALSE;
 				break;
 			}
-		case L'Q': // µÚ¶ş¸öÊ±¼ä¼ä¸ô
+		case L'Q': // ç¬¬äºŒä¸ªæ—¶é—´é—´éš”
 			{
 				if (!_ParseSpanTime(sValue,m_cSpanUnit2,m_dwSpan2))
 					return FALSE;
 				break;
 			}
-		case L'C': // Ö´ĞĞ´ÎÊı
+		case L'C': // æ‰§è¡Œæ¬¡æ•°
 			{
 				m_iExecCount = StrToInt(sValue);
 				break;
@@ -580,33 +580,33 @@ BOOL QTimer::_ParseToIntArray( __inout CStdString& sExp,__out ExArray<int> & ar 
 // 	
 // 	switch (eflag_exec_)
 // 	{
-//     case AUTOTASK_EXEC_ATYEARDAY:	// = 0x00010000,	// ¾ø¶ÔÈÕÆÚ 2011/11/11
+//     case AUTOTASK_EXEC_ATYEARDAY:	// = 0x00010000,	// ç»å¯¹æ—¥æœŸ 2011/11/11
 //         {
-//             // ÄÄÔÂÄÄÈÕÖ´ĞĞ
+//             // å“ªæœˆå“ªæ—¥æ‰§è¡Œ
 //             QTime t = QTime::ParseDate(m_arX[0]);
-//             // Äê ĞèÒªÊ¹ÓÃ²âÊÔµÄÖµ
+//             // å¹´ éœ€è¦ä½¿ç”¨æµ‹è¯•çš„å€¼
 //             t.SetDate(d.GetYear(), t.GetMonth(), t.GetDay());
-//             // ¼õµôÌáÇ°Á¿£¬µÃµ½Ö´ĞĞµÄÈÕÆÚ
+//             // å‡æ‰æå‰é‡ï¼Œå¾—åˆ°æ‰§è¡Œçš„æ—¥æœŸ
 //             t -= QTimeSpan(m_dwSpan, 0, 0, 0);
-//             // ÌáÇ°ÈÕÆÚ
+//             // æå‰æ—¥æœŸ
 //             return t.CompareDate(d) == 0;
 //         }
-// 	case AUTOTASK_EXEC_ATDATE:	// = 0x00010000,	// ¾ø¶ÔÈÕÆÚ 2011/11/11
+// 	case AUTOTASK_EXEC_ATDATE:	// = 0x00010000,	// ç»å¯¹æ—¥æœŸ 2011/11/11
 // 		{
 // 			return m_arX.contain(d.MakeDate());
 // 		}
-// 	case AUTOTASK_EXEC_ATDAILY:	// = 0x00020000,	// Ã¿xÌì,
+// 	case AUTOTASK_EXEC_ATDAILY:	// = 0x00020000,	// æ¯xå¤©,
 // 		{
 // 			if (m_arX.size())
 // 			{
 // 				QTime t2 = d;
 // 				t2.SetTime(m_tmLifeBegin.GetHour(),m_tmLifeBegin.GetMinute(),0);
-// 				// ÓàÊıÎª0ÔòÖ´ĞĞ
+// 				// ä½™æ•°ä¸º0åˆ™æ‰§è¡Œ
 // 				return !((DWORD)((t2 - m_tmLifeBegin).GetTotalDays()) % (m_arX[0])); 
 // 			}
 // 			ASSERT(FALSE); return FALSE;
 // 		}
-// 	case AUTOTASK_EXEC_ATMONTHDAY:	// = 0x00040000,	// Ã¿ÔÂµÄxºÅ 
+// 	case AUTOTASK_EXEC_ATMONTHDAY:	// = 0x00040000,	// æ¯æœˆçš„xå· 
 // 		{	
 // 			if (m_arX.size())
 // 			{
@@ -614,7 +614,7 @@ BOOL QTimer::_ParseToIntArray( __inout CStdString& sExp,__out ExArray<int> & ar 
 // 			}
 // 			ASSERT(FALSE);return FALSE;
 // 		}
-// 	case AUTOTASK_EXEC_ATWEEKDAY:	// = 0x00080000,	// Ã¿ÔÂµÄxÖÜ x[ËùÓĞÖÜ|µÚÒ»ÖÜ|¡£¡£|µÚ4ÖÜ]
+// 	case AUTOTASK_EXEC_ATWEEKDAY:	// = 0x00080000,	// æ¯æœˆçš„xå‘¨ x[æ‰€æœ‰å‘¨|ç¬¬ä¸€å‘¨|ã€‚ã€‚|ç¬¬4å‘¨]
 // 		{	
 // 			if (m_arX.size())
 // 			{// 1 - sunday , 7 - saturday
@@ -644,33 +644,33 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::_RelateTime_CheckWith(
 	}
 
 	QTime tmFirstExec = tmX + QTimeSpan(GetExecSpanSeconds()/SECONDS_OF_DAY);
-	if (tmFirstExec <= tmTest) // µÈÓÚÒ²ËãÊÇ´í¹ıÁËÖ´ĞĞÊ±¼ä
-	{	// ´í¹ıÁËµÚÒ»´ÎÖ´ĞĞÊ±¼ä
+	if (tmFirstExec <= tmTest) // ç­‰äºä¹Ÿç®—æ˜¯é”™è¿‡äº†æ‰§è¡Œæ—¶é—´
+	{	// é”™è¿‡äº†ç¬¬ä¸€æ¬¡æ‰§è¡Œæ—¶é—´
 		if (!IsExecSpan2())
-		{ // ´í¹ıµÚÒ»´ÎÖ´ĞĞÊ±¼ä£¬²¢ÇÒ·Ç¶à´ÎÖ´ĞĞ
+		{ // é”™è¿‡ç¬¬ä¸€æ¬¡æ‰§è¡Œæ—¶é—´ï¼Œå¹¶ä¸”éå¤šæ¬¡æ‰§è¡Œ
 			if (AUTOTASK_EXEC_AFTERSYSBOOT == eflag_exec_)
-				return AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT; // µÈ´ıÏµÍ³ÖØÆô
+				return AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT; // ç­‰å¾…ç³»ç»Ÿé‡å¯
 			else if (AUTOTASK_EXEC_AFTERMINDERSTART == eflag_exec_) 
-				return AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT; // µÈ´ı³ÌĞòÖØÆô
-			else // ·Ç¶à´Î¿ÉÖ´ĞĞ£¬¹ıÆÚ
+				return AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT; // ç­‰å¾…ç¨‹åºé‡å¯
+			else // éå¤šæ¬¡å¯æ‰§è¡Œï¼Œè¿‡æœŸ
 				return AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC; 
 		}
-		// ¶à´Î¼ä¸ôÖ´ĞĞ
-		// ×Ô´ÓµÚÒ»´Î¿ÉÖ´ĞĞÊ±¼äµ½tmTestÒÑ¾­¹ıÈ¥ÁË¶à³¤Ê±¼ä
+		// å¤šæ¬¡é—´éš”æ‰§è¡Œ
+		// è‡ªä»ç¬¬ä¸€æ¬¡å¯æ‰§è¡Œæ—¶é—´åˆ°tmTestå·²ç»è¿‡å»äº†å¤šé•¿æ—¶é—´
 		double dTotalSeconds = (tmTest - tmFirstExec).GetTotalSeconds(); // 
-		// ÔÚ¹ıÈ¥µÄÕâÃ´³¤Ê±¼äÀï¿ÉÒÔÖ´ĞĞ¶àÉÙ´Î£¿
-		DWORD dwExec = dTotalSeconds / GetExecSpanSeconds2(); //Ö´ĞĞ´ÎÊı
+		// åœ¨è¿‡å»çš„è¿™ä¹ˆé•¿æ—¶é—´é‡Œå¯ä»¥æ‰§è¡Œå¤šå°‘æ¬¡ï¼Ÿ
+		DWORD dwExec = dTotalSeconds / GetExecSpanSeconds2(); //æ‰§è¡Œæ¬¡æ•°
 		if (IsExecCount() && (dwExec >= m_iExecCount))
-		{ // ¿ÉÖ´ĞĞ´ÎÊıÒÑ¾­³¬¹ıÁË×Ü¹²ĞèÒªÖ´ĞĞµÄ´ÎÊı
+		{ // å¯æ‰§è¡Œæ¬¡æ•°å·²ç»è¶…è¿‡äº†æ€»å…±éœ€è¦æ‰§è¡Œçš„æ¬¡æ•°
 			if (AUTOTASK_EXEC_AFTERSYSBOOT == eflag_exec_)
-				return AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT; // µÈ´ıÏµÍ³ÖØÆô
+				return AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT; // ç­‰å¾…ç³»ç»Ÿé‡å¯
 			else if (AUTOTASK_EXEC_AFTERMINDERSTART == eflag_exec_) 
-				return AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT; // µÈ´ı³ÌĞòÖØÆô
-			else // ·Ç¶à´Î¿ÉÖ´ĞĞ£¬¹ıÆÚ
+				return AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT; // ç­‰å¾…ç¨‹åºé‡å¯
+			else // éå¤šæ¬¡å¯æ‰§è¡Œï¼Œè¿‡æœŸ
 				return AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC; 
 		}
 		else
-		{ // ¿ÉÖ´ĞĞ´ÎÊı»¹Ã»ÓĞ³¬¹ıÁË×Ü¹²ĞèÒªÖ´ĞĞµÄ´ÎÊı
+		{ // å¯æ‰§è¡Œæ¬¡æ•°è¿˜æ²¡æœ‰è¶…è¿‡äº†æ€»å…±éœ€è¦æ‰§è¡Œçš„æ¬¡æ•°
 			tmExec = tmFirstExec + QTimeSpan(((dwExec + 1) * GetExecSpanSeconds2()) / SECONDS_OF_DAY);
 			if (tmExec >= m_tmLifeEnd)
 			{
@@ -686,26 +686,26 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::_RelateTime_CheckWith(
 	}
 }
 
-// tmTest ½«±»µ÷Õû£¬ºÁÃë¼¶±ğ½«»áºöÂÔÖÃÎª0
+// tmTest å°†è¢«è°ƒæ•´ï¼Œæ¯«ç§’çº§åˆ«å°†ä¼šå¿½ç•¥ç½®ä¸º0
 ENUM_AUTOTASK_RUNNING_STATUS QTimer::GetNextExecTimeFrom( 
 	__inout QTime& tmTest,
 	__out QTime& tmExec ) const
 {
 	if (tmTest >= m_tmLifeEnd)
-		return AUTOTASK_RUNNING_STATUS_OVERDUE;	// ¹ıÆÚ
+		return AUTOTASK_RUNNING_STATUS_OVERDUE;	// è¿‡æœŸ
 	switch (eflag_exec_)
 	{
 	//////////////////////////////////////////////////////////////////////////
-	// Ïà¶ÔÊ±¼ä
-	case AUTOTASK_EXEC_AFTERSYSBOOT:	//= 0x00000001,	// ÏµÍ³Æô¶¯
+	// ç›¸å¯¹æ—¶é—´
+	case AUTOTASK_EXEC_AFTERSYSBOOT:	//= 0x00000001,	// ç³»ç»Ÿå¯åŠ¨
 		{
 			return _RelateTime_CheckWith(QProcessMan::GetSystemStartupTime(),tmTest,tmExec);
 		}
-	case AUTOTASK_EXEC_AFTERMINDERSTART:	// = 0x00000004,// ±¾³ÌĞòÆô¶¯
+	case AUTOTASK_EXEC_AFTERMINDERSTART:	// = 0x00000004,// æœ¬ç¨‹åºå¯åŠ¨
 		{
 			return _RelateTime_CheckWith(QProcessMan::GetCurrentProcessStartupTime(),tmTest,tmExec);
 		}
-/*	case TASK_EXEC_AFTERPROGSTART:	// = 0x00000008,// Íâ²¿³ÌĞòÆô¶¯
+/*	case TASK_EXEC_AFTERPROGSTART:	// = 0x00000008,// å¤–éƒ¨ç¨‹åºå¯åŠ¨
 		{
 			QTime tmProgStart;
 			if (QProcessMgr::IsExeRun(m_sXFiledExp,tmProgStart))
@@ -714,21 +714,21 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::GetNextExecTimeFrom(
 			}
 			return TASK_RUNNING_STATUS_BASEDONEXETERNALPROG;
 		}
-	case TASK_EXEC_AFTERPROGEXIT:	// = 0x00000010,// Íâ²¿³ÌĞòÍË³ö
+	case TASK_EXEC_AFTERPROGEXIT:	// = 0x00000010,// å¤–éƒ¨ç¨‹åºé€€å‡º
 		{ 
 			return TASK_RUNNING_STATUS_BASEDONEXETERNALPROG;
 		}
-*/	case AUTOTASK_EXEC_AFTERTASKSTART:	// = 0x00000002,	// ÈÎÎñÆô¶¯ 
+*/	case AUTOTASK_EXEC_AFTERTASKSTART:	// = 0x00000002,	// ä»»åŠ¡å¯åŠ¨ 
 		{
 			return _RelateTime_CheckWith(m_tmLifeBegin,tmTest,tmExec);
 		}
 	//////////////////////////////////////////////////////////////////////////
-	// ¾ø¶ÔÊ±¼ä
-    case AUTOTASK_EXEC_ATYEARDAY:	// = 0x00010000,	// ¾ø¶ÔÈÕÆÚ 2011/11/11
-	case AUTOTASK_EXEC_ATDATE:	// = 0x00010000,	// ¾ø¶ÔÈÕÆÚ 2011/11/11
-	case AUTOTASK_EXEC_ATDAILY:	// = 0x00020000,	// Ã¿xÌì,
-	case AUTOTASK_EXEC_ATMONTHDAY:	// = 0x00040000,	// Ã¿ÔÂµÄxºÅ 
-	case AUTOTASK_EXEC_ATWEEKDAY:	// = 0x00080000,	// Ã¿ÔÂµÄxÖÜ x[ËùÓĞÖÜ|µÚÒ»ÖÜ|¡£¡£|µÚ4ÖÜ]
+	// ç»å¯¹æ—¶é—´
+    case AUTOTASK_EXEC_ATYEARDAY:	// = 0x00010000,	// ç»å¯¹æ—¥æœŸ 2011/11/11
+	case AUTOTASK_EXEC_ATDATE:	// = 0x00010000,	// ç»å¯¹æ—¥æœŸ 2011/11/11
+	case AUTOTASK_EXEC_ATDAILY:	// = 0x00020000,	// æ¯xå¤©,
+	case AUTOTASK_EXEC_ATMONTHDAY:	// = 0x00040000,	// æ¯æœˆçš„xå· 
+	case AUTOTASK_EXEC_ATWEEKDAY:	// = 0x00080000,	// æ¯æœˆçš„xå‘¨ x[æ‰€æœ‰å‘¨|ç¬¬ä¸€å‘¨|ã€‚ã€‚|ç¬¬4å‘¨]
 		{
 			DWORD dwNextExecDate,dwNextExecTime;
 			ENUM_AUTOTASK_RUNNING_STATUS eStatus;
@@ -736,22 +736,22 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::GetNextExecTimeFrom(
 			while(true)
 			{
 				dwNextExecDate = tmExec.MakeDate();
-				eStatus = AbsTime_NextExecDate(dwNextExecDate); // Ö´ĞĞÈÕÆÚ
+				eStatus = AbsTime_NextExecDate(dwNextExecDate); // æ‰§è¡Œæ—¥æœŸ
 				if (AUTOTASK_RUNNING_STATUS_OK == eStatus)
 				{
 					tmExec = QTime::ParseDate(dwNextExecDate);
 					eStatus = _AbsTime_NextRightTimeFrom(tmTempTest,tmExec,dwNextExecTime);
 					if (AUTOTASK_RUNNING_STATUS_OK == eStatus)
-					{ // Ö´ĞĞÊ±¼ä
+					{ // æ‰§è¡Œæ—¶é—´
 						tmExec = QTime::CombineTime(dwNextExecDate,dwNextExecTime);
-						if (tmExec > m_tmLifeEnd) // ±ØĞë¼ì²éºÏ³ÉµÄÊ±¼äÊÇ·ñ³¬¹ıÁËÈÎÎñÖÜÆÚ
+						if (tmExec > m_tmLifeEnd) // å¿…é¡»æ£€æŸ¥åˆæˆçš„æ—¶é—´æ˜¯å¦è¶…è¿‡äº†ä»»åŠ¡å‘¨æœŸ
 							return AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC;
 						else
 							return AUTOTASK_RUNNING_STATUS_OK;
 					}
 					else if (AUTOTASK_RUNNING_STATUS_TIMENOTMATCH == eStatus)
-					{ // ËµÃ÷µ±Ç°²âÊÔµÄÈÕÆÚÊÇ²»¿ÉÄÜÖ´ĞĞµÄ£¬Ö»ÄÜ±È½ñÌìÍíµÄÈÕÆÚÖ´ĞĞ
-						// ÕâÊ±Ê±¼ä¿ÉÒÔÊÇ×îĞ¡µÄ
+					{ // è¯´æ˜å½“å‰æµ‹è¯•çš„æ—¥æœŸæ˜¯ä¸å¯èƒ½æ‰§è¡Œçš„ï¼Œåªèƒ½æ¯”ä»Šå¤©æ™šçš„æ—¥æœŸæ‰§è¡Œ
+						// è¿™æ—¶æ—¶é—´å¯ä»¥æ˜¯æœ€å°çš„
 						tmExec += QTimeSpan(1,0,0,0);
 						tmExec.SetTime(0,0,0);
 						tmTempTest.SetTime(0,0,0);
@@ -789,22 +789,22 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::GetNextNextExecTime(__out QTime& tmExec) co
 ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)const
 {
 	if (dwDate > m_tmLifeEnd.MakeDate())
-		return AUTOTASK_RUNNING_STATUS_OVERDUE;	// ¹ıÆÚ
+		return AUTOTASK_RUNNING_STATUS_OVERDUE;	// è¿‡æœŸ
 	if (m_arX.size() < 1)
 		return AUTOTASK_RUNNING_STATUS_BADTIMER;
 	switch (eflag_exec_)
 	{
     case AUTOTASK_EXEC_ATYEARDAY:
         {
-            // ĞèÒª²âÊÔµÄÖ´ĞĞÈÕÆÚ
+            // éœ€è¦æµ‹è¯•çš„æ‰§è¡Œæ—¥æœŸ
             QTime t_test = QTime::ParseDate(dwDate);
 
             for (int year = t_test.GetYear() - 1; year < t_test.GetYear() + 2; ++year)
             {
-                // Éè¶¨µÄÖ´ĞĞµã
+                // è®¾å®šçš„æ‰§è¡Œç‚¹
                 QTime t_exec = QTime::ParseDate(m_arX[0]);
                 t_exec.SetDate(year, t_exec.GetMonth(), t_exec.GetDay());
-                // Ö´ĞĞµã¼õÈ¥ÌáÇ°Á¿µÄÖ´ĞĞÊ±¼ä
+                // æ‰§è¡Œç‚¹å‡å»æå‰é‡çš„æ‰§è¡Œæ—¶é—´
                 QTime t_adv = t_exec;
                 t_adv -= QTimeSpan(m_dwSpan, 0, 0, 0);
 
@@ -812,13 +812,13 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)
                 TRACEDATE(t_test);
                 TRACEDATE(t_exec);
 
-                // Èç¹ûÖ´ĞĞÊ±¼äÉõÖÁ»¹Ã»ÓĞµ½ÌáÇ°Á¿µÄÖ´ĞĞÊ±¼ä£¬ÄÇÃ´·µ»ØÌáÇ°Á¿´¦µÄÖ´ĞĞÊ±¼ä
+                // å¦‚æœæ‰§è¡Œæ—¶é—´ç”šè‡³è¿˜æ²¡æœ‰åˆ°æå‰é‡çš„æ‰§è¡Œæ—¶é—´ï¼Œé‚£ä¹ˆè¿”å›æå‰é‡å¤„çš„æ‰§è¡Œæ—¶é—´
                 if ((t_adv.CompareDate(t_test) >= 0) && (t_adv.CompareDate(GetLifeEnd()) <= 0))
                 {
                     dwDate = t_adv.MakeDate();
                     return AUTOTASK_RUNNING_STATUS_OK;
                 }
-                // Èç¹û²âÊÔÊ±¼äµãÂäÈë[ÌáÇ°µã£¬Ö´ĞĞµã]Ö®¼ä£¬ÄÇÃ´·µ»ØÕâ¸ö²âÊÔÊ±¼äµã
+                // å¦‚æœæµ‹è¯•æ—¶é—´ç‚¹è½å…¥[æå‰ç‚¹ï¼Œæ‰§è¡Œç‚¹]ä¹‹é—´ï¼Œé‚£ä¹ˆè¿”å›è¿™ä¸ªæµ‹è¯•æ—¶é—´ç‚¹
                 else if ((t_test.CompareDate(t_adv) >= 0) && (t_test.CompareDate(t_exec) <= 0))
                 {
                     dwDate = t_test.MakeDate();
@@ -836,37 +836,37 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)
 				dwDate = m_arX[idx];
 				return AUTOTASK_RUNNING_STATUS_OK;
 			}
-			return AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC; // ÎŞ»ú»áÔÙÖ´ĞĞ
+			return AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC; // æ— æœºä¼šå†æ‰§è¡Œ
 		}
 
 	case AUTOTASK_EXEC_ATDAILY:
 		{
 			ASSERT(m_arX.size() == 1);
 			QTimeSpan tsDate = QTime::ParseDate(dwDate) - QTime::ParseDate(m_tmLifeBegin.MakeDate());
-			DWORD xDay = (DWORD)(tsDate.GetTotalDays()) % m_arX[0]; // »¹ÓĞ¼¸ÌìÏÂ´ÎÖ´ĞĞ
+			DWORD xDay = (DWORD)(tsDate.GetTotalDays()) % m_arX[0]; // è¿˜æœ‰å‡ å¤©ä¸‹æ¬¡æ‰§è¡Œ
 			if (xDay > 0)
 			{
 				QTime tmNextExecDate = QTime::ParseDate(dwDate) + QTimeSpan(xDay,0,0,0);
-				if (tmNextExecDate.CompareDate(m_tmLifeEnd) > 0) // ¼ÆËã³öÀ´µÄÊ±¼ä´óÓÚÉúÃüÆÚÖ®ºó
-					return AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC;	// ÎŞ»ú»áÖ´ĞĞÁË¡£
+				if (tmNextExecDate.CompareDate(m_tmLifeEnd) > 0) // è®¡ç®—å‡ºæ¥çš„æ—¶é—´å¤§äºç”Ÿå‘½æœŸä¹‹å
+					return AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC;	// æ— æœºä¼šæ‰§è¡Œäº†ã€‚
 				dwDate = tmNextExecDate.MakeDate();
 				return AUTOTASK_RUNNING_STATUS_OK;
 			}
-			else if (0 == xDay) //dwDate ±¾Éí¼´ÎªÖ´ĞĞÈÕÆÚ
+			else if (0 == xDay) //dwDate æœ¬èº«å³ä¸ºæ‰§è¡Œæ—¥æœŸ
 			{
 				return AUTOTASK_RUNNING_STATUS_OK;
 			}
-			// ²»Ó¦¸ÃÖ´ĞĞµ½Õâ¶ù
+			// ä¸åº”è¯¥æ‰§è¡Œåˆ°è¿™å„¿
 			return AUTOTASK_RUNNING_STATUS_APPERROR;
 		}
 	case AUTOTASK_EXEC_ATWEEKDAY:
-		{ // ĞÇÆÚxÖ´ĞĞ
+		{ // æ˜ŸæœŸxæ‰§è¡Œ
 			ASSERT(m_arX.size() == 1); 
-			if (0 == m_arX[0]) // ±ØĞëÖÁÉÙÓĞÒ»¸ö¹¤×÷ÈÕÊÇ¿ÉÒÔÖ´ĞĞµÄ
+			if (0 == m_arX[0]) // å¿…é¡»è‡³å°‘æœ‰ä¸€ä¸ªå·¥ä½œæ—¥æ˜¯å¯ä»¥æ‰§è¡Œçš„
 				return AUTOTASK_RUNNING_STATUS_BADTIMER;
 			QTime tmTest = QTime::ParseDate(dwDate);
 			for (int iTestCount = 0; iTestCount < 7; iTestCount++)
-			{// ²âÊÔ7ÌìÖ®ÄÚµÄÖ´ĞĞÇé¿ö,
+			{// æµ‹è¯•7å¤©ä¹‹å†…çš„æ‰§è¡Œæƒ…å†µ,
 				if (m_arX[0] & (0x01<<(tmTest.GetDayOfWeek()-1))) // 0-sunday,1-monday...6-saturday
 				{
 					dwDate = tmTest.MakeDate();
@@ -878,13 +878,13 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)
 					return AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC;
 				}
 			}
-			// ²»Ó¦¸ÃÖ´ĞĞµ½Õâ¶ù,µ±Ç°µÄÉè¼ÆÊÇÒ»ÖÜÖ®ÄÚ±ØÓĞÒ»ÌìÊÇ¿ÉÒÔÖ´ĞĞµÄ
+			// ä¸åº”è¯¥æ‰§è¡Œåˆ°è¿™å„¿,å½“å‰çš„è®¾è®¡æ˜¯ä¸€å‘¨ä¹‹å†…å¿…æœ‰ä¸€å¤©æ˜¯å¯ä»¥æ‰§è¡Œçš„
 			return AUTOTASK_RUNNING_STATUS_APPERROR;
 		}
 	case AUTOTASK_EXEC_ATMONTHDAY:
 		{
 			ASSERT(m_arX.size() == 1); 
-			if (0 == m_arX[0]) // ±ØĞëÖÁÉÙÓĞÒ»¸ö¹¤×÷ÈÕÊÇ¿ÉÒÔÖ´ĞĞµÄ
+			if (0 == m_arX[0]) // å¿…é¡»è‡³å°‘æœ‰ä¸€ä¸ªå·¥ä½œæ—¥æ˜¯å¯ä»¥æ‰§è¡Œçš„
 				return AUTOTASK_RUNNING_STATUS_BADTIMER;
 			QTime tmTest = QTime::ParseDate(dwDate);
 			for (int iTestCount = 0; iTestCount < 31; iTestCount++)
@@ -894,13 +894,13 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)
 					dwDate = tmTest.MakeDate();
 					return AUTOTASK_RUNNING_STATUS_OK;
 				}
-				tmTest += QTimeSpan(1,0,0,0); // ÏÂÒ»Ìì
+				tmTest += QTimeSpan(1,0,0,0); // ä¸‹ä¸€å¤©
 				if (tmTest.CompareDate(m_tmLifeEnd) > 0)
 				{
 					return AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC;
 				}
 			}
-			// ²»Ó¦¸ÃÖ´ĞĞµ½Õâ¶ù£¬ÒòÎªÔÚ31ÌìÖ®ÄÚ£¬±ØÓĞÒ»ÌìÊÇ¿ÉÒÔÖ´ĞĞµÄ
+			// ä¸åº”è¯¥æ‰§è¡Œåˆ°è¿™å„¿ï¼Œå› ä¸ºåœ¨31å¤©ä¹‹å†…ï¼Œå¿…æœ‰ä¸€å¤©æ˜¯å¯ä»¥æ‰§è¡Œçš„
 			return AUTOTASK_RUNNING_STATUS_APPERROR;
 		}
 	default:
@@ -912,18 +912,18 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::AbsTime_NextExecDate(__inout DWORD& dwDate)
 	return AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC;
 }
 
-// Èç¹ûtmExecµÄÈÕÆÚ´óÓÚtmTestµÄÈÕÆÚ£¬tmNextÉè¶¨Îªm_arTime[0],·µ»ØTASK_RUNNING_STATUS_OK
-// Èç¹ûtmExecµÄÈÕÆÚµÈÓÚtmTestµÄÈÕÆÚ£¬tmNextÉè¶¨Îª´óÓÚµÈÓÚtmTest.MakeTime()µÄÖµ£¬
-//		Èç¹ûm_arTimeÖĞ°üº¬ÕâÑùµÄÊ±¼ä£¬·µ»ØTASK_RUNNING_STATUS_OK
-//		Èç¹û²»°üº¬ÕâÑùµÄÊ±¼ä£¬·µ»ØTASK_RUNNING_STATUS_TIMENOTMATCH
-// Èç¹ûtmExecµÄÈÕÆÚĞ¡ÓÚtmTestµÄÈÕÆÚ£¬ÔòÊÇÂß¼­´íÎó·¢Éú£¬·µ»ØTASK_RUNNING_STATUS_OVERDUE
+// å¦‚æœtmExecçš„æ—¥æœŸå¤§äºtmTestçš„æ—¥æœŸï¼ŒtmNextè®¾å®šä¸ºm_arTime[0],è¿”å›TASK_RUNNING_STATUS_OK
+// å¦‚æœtmExecçš„æ—¥æœŸç­‰äºtmTestçš„æ—¥æœŸï¼ŒtmNextè®¾å®šä¸ºå¤§äºç­‰äºtmTest.MakeTime()çš„å€¼ï¼Œ
+//		å¦‚æœm_arTimeä¸­åŒ…å«è¿™æ ·çš„æ—¶é—´ï¼Œè¿”å›TASK_RUNNING_STATUS_OK
+//		å¦‚æœä¸åŒ…å«è¿™æ ·çš„æ—¶é—´ï¼Œè¿”å›TASK_RUNNING_STATUS_TIMENOTMATCH
+// å¦‚æœtmExecçš„æ—¥æœŸå°äºtmTestçš„æ—¥æœŸï¼Œåˆ™æ˜¯é€»è¾‘é”™è¯¯å‘ç”Ÿï¼Œè¿”å›TASK_RUNNING_STATUS_OVERDUE
 ENUM_AUTOTASK_RUNNING_STATUS QTimer::_AbsTime_NextRightTimeFrom(__in const QTime&tmTest,
 			__in const QTime& tmExec,__inout DWORD &dwNextExecTime)const
 {
 	ASSERT(!IsRelateTimer());
 	ASSERT(m_arTime.size());
 	if (m_arTime.size())
-	{ // ¾ø¶ÔÊ±¼äÖµ
+	{ // ç»å¯¹æ—¶é—´å€¼
 		int iCmp = tmExec.CompareDate(tmTest);
 		if ( iCmp > 0)
 		{
@@ -945,7 +945,7 @@ ENUM_AUTOTASK_RUNNING_STATUS QTimer::_AbsTime_NextRightTimeFrom(__in const QTime
 			return AUTOTASK_RUNNING_STATUS_OVERDUE;
 		}
 	}
-	// Õâ¶ù²»Ó¦¸Ã±»Ö´ĞĞµ½
+	// è¿™å„¿ä¸åº”è¯¥è¢«æ‰§è¡Œåˆ°
 	ASSERT(FALSE); 
 	return AUTOTASK_RUNNING_STATUS_BADTIMER;
 }
@@ -1003,7 +1003,7 @@ int QTimer::GetExecTimeSpot(__out std::vector<QTime>& vTimes)
     {
         vTimes.push_back(QTime::ParseTime(m_arTime[i]));
     }
-    ASSERT(vTimes.size());      // ÖÁÉÙÒªÓĞÒ»¸öÖ´ĞĞÊ±¼äµã
+    ASSERT(vTimes.size());      // è‡³å°‘è¦æœ‰ä¸€ä¸ªæ‰§è¡Œæ—¶é—´ç‚¹
     return vTimes.size();
 }
 
@@ -1025,11 +1025,11 @@ BOOL QTimer::GetRemindString(__out CStdString& sReminderDes)const
 	if (QTimer::ParseRemindExp(m_sExpRemind,nA,cUnit,sSound,sMsg))
 	{
 		sReminderDes.Format(
-            L"<b .back>ÔÚÖ´ĞĞÇ°:</b> <b .yellow>%d %s</b><br/>"
-            L"<b .back>²¥·ÅÉùÒô:</b>%s<br/><b .back>ÌáÊ¾ÏûÏ¢:</b>%s",
+            L"<b .back>åœ¨æ‰§è¡Œå‰:</b> <b .yellow>%d %s</b><br/>"
+            L"<b .back>æ’­æ”¾å£°éŸ³:</b>%s<br/><b .back>æç¤ºæ¶ˆæ¯:</b>%s",
             nA, QHelper::GetTimeUnitString(cUnit),
-            sSound.IsEmpty() ? L"ÎŞ" : sSound,
-            sMsg.IsEmpty() ? L"ÎŞ" : sMsg);
+            sSound.IsEmpty() ? L"æ— " : sSound,
+            sMsg.IsEmpty() ? L"æ— " : sMsg);
         return TRUE;
 	}
 	return FALSE;
@@ -1055,21 +1055,21 @@ BOOL QTimer::GetWhenDoString(CStdString &when_des)const
 // 			m_tmLifeBegin.Format(L"%Y/%m/%d %H:%M"),
 // 			m_tmLifeEnd.Format(L"%Y/%m/%d %H:%M"));
 		// after
-		when_des.Format(L"ÔÚ<b .yellow>[%s] [%d][%s]</b>Ö®ºó",
+		when_des.Format(L"åœ¨<b .yellow>[%s] [%d][%s]</b>ä¹‹å",
 			GetExecFlagText(eflag_exec_),
 			GetExecSpan(),
 			QHelper::GetTimeUnitString(GetExecSpanUnit()));
 		// then every
 		if (IsExecSpan2())
 		{
-			time_part.Format(L"È»ºóÃ¿ <b .yellow>[%d][%s]</b>Ö´ĞĞ",
+			time_part.Format(L"ç„¶åæ¯ <b .yellow>[%d][%s]</b>æ‰§è¡Œ",
 				GetExecSpan2(),
 				QHelper::GetTimeUnitString(GetExecSpanUnit2()));
 			when_des += L"<br/>" + time_part;
 			// after x times stop
 			if (IsExecCount())
 			{
-				time_part.Format(L"ÔÚ <b .yellow>[%d]</b> ´ÎºóÍ£Ö¹",
+				time_part.Format(L"åœ¨ <b .yellow>[%d]</b> æ¬¡ååœæ­¢",
 					GetExecCount());
 				when_des += L"<br />" + time_part;
 			}
@@ -1093,33 +1093,33 @@ BOOL QTimer::GetWhenDoString(CStdString &when_des)const
                 CStdString tmp;
                 if (0 != m_dwSpan)
                 {
-                    tmp.Format(L" - ÌáÇ°%dÌì", m_dwSpan);
+                    tmp.Format(L" - æå‰%då¤©", m_dwSpan);
                 }
                 CStdString date_part;
                 date_part.Format(L"%d/%d%s", tm_test.GetMonth(), tm_test.GetDay(), tmp);
-                when_des.Format(L"ÔÚ <b .yellow>[%s] [%s]</b>", date_part, time_part);
+                when_des.Format(L"åœ¨ <b .yellow>[%s] [%s]</b>", date_part, time_part);
                 break;
             }
 		case AUTOTASK_EXEC_ATDATE:
 			{
 				tm_test = QTime::ParseDate(m_arX[0]);
-				when_des.Format(L"ÔÚ <b .yellow>[%s] [%s]</b>",
+				when_des.Format(L"åœ¨ <b .yellow>[%s] [%s]</b>",
                     tm_test.Format(L"%Y/%m/%d"),time_part);
 				break;
 			}
 		case AUTOTASK_EXEC_ATDAILY:
 			{
 				ASSERT(m_arX.size() == 1);
-				when_des.Format(L"Ã¿ <b .yellow>[%d]</b> ÌìµÄ <b .yellow>[%s]</b>",
+				when_des.Format(L"æ¯ <b .yellow>[%d]</b> å¤©çš„ <b .yellow>[%s]</b>",
                     m_arX[0],time_part);
 				break;
 			}
 		case AUTOTASK_EXEC_ATWEEKDAY:
-			{ // ĞÇÆÚxÖ´ĞĞ
+			{ // æ˜ŸæœŸxæ‰§è¡Œ
 				ASSERT(m_arX.size() == 1); 
 				CStdString sWeekdays,sTemp;
 				for (int iWeekday = 0; iWeekday < 7; iWeekday++)
-				{// ²âÊÔ7ÌìÖ®ÄÚµÄÖ´ĞĞÇé¿ö,
+				{// æµ‹è¯•7å¤©ä¹‹å†…çš„æ‰§è¡Œæƒ…å†µ,
 					if (m_arX[0] & (0x01<<iWeekday)) // 0-sunday,1-monday...6-saturday
 					{
 						sTemp.Format(L"%d,",iWeekday);
@@ -1127,7 +1127,7 @@ BOOL QTimer::GetWhenDoString(CStdString &when_des)const
 					}
 				}
 				sWeekdays = sWeekdays.Left(sWeekdays.GetLength() - 1);
-				when_des.Format(L"<b .yellow>ĞÇÆÚ[%s]</b>(0-ÖÜÈÕ,...,6-ÖÜÁù)µÄ [%s]<br />",sWeekdays,time_part);
+				when_des.Format(L"<b .yellow>æ˜ŸæœŸ[%s]</b>(0-å‘¨æ—¥,...,6-å‘¨å…­)çš„ [%s]<br />",sWeekdays,time_part);
 				break;
 			}
 		case AUTOTASK_EXEC_ATMONTHDAY:
@@ -1143,7 +1143,7 @@ BOOL QTimer::GetWhenDoString(CStdString &when_des)const
 					}
 				}
 				days = days.Left(days.GetLength() - 1);
-				when_des.Format(L"Ã¿ <b .yellow>ÔÂ[%s]</b> µÄ [%s]",days,time_part);
+				when_des.Format(L"æ¯ <b .yellow>æœˆ[%s]</b> çš„ [%s]",days,time_part);
 				break;
 			}
         default:

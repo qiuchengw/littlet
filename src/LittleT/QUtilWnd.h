@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ui/QFrame.h"
 #include "QPictureLoader.h"
 
 enum
 {
-    QSCREENWND_MIN_LIFESEC = 30,    // Ä¬ÈÏ×î¶ÌÏÔÊ¾Ê±¼äÊÇ30s
+    QSCREENWND_MIN_LIFESEC = 30,    // é»˜è®¤æœ€çŸ­æ˜¾ç¤ºæ—¶é—´æ˜¯30s
     QSCREENWND_LIFETIMER_ID = 0x101,    //
     QSCREENWND_ANIMATIONTIMER_ID = 0x102,    //
     QSCREENWND_LIFETIMER_PERIOD = 1000,    // 1000MS
@@ -52,8 +52,8 @@ protected:
 
 private:
     QPictureLoader      m_pic;
-    int                 m_nLifeSec;     // ÏÔÊ¾¶àÉÙÃë
-    int                 m_nPeriodSec;   // Í¼Æ¬²¥·ÅÆµÂÊ
+    int                 m_nLifeSec;     // æ˜¾ç¤ºå¤šå°‘ç§’
+    int                 m_nPeriodSec;   // å›¾ç‰‡æ’­æ”¾é¢‘çŽ‡
     int                 m_iAnimation;   
     ECtrl               m_ctlPic;
 };

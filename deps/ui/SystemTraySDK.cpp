@@ -1,4 +1,4 @@
-// TrayIcon.cpp: implementation of the CSystemTray class.
+﻿// TrayIcon.cpp: implementation of the CSystemTray class.
 //
 // This class is a light wrapper around the windows system tray stuff. It
 // adds an icon to the system tray with the specified ToolTip text and 

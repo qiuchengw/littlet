@@ -1,4 +1,4 @@
-#include "QLongplan.h"
+ï»¿#include "QLongplan.h"
 #include "../common/QDBPlan.h"
 #include "AppHelper.h"
 #include "qstrex.h"
@@ -8,16 +8,16 @@ CStdString GetTimeFleeText(QTimeSpan &tmSpan)
 	CStdString sRet,sPart;
 	int nDays = tmSpan.GetDays();
 	if (nDays > 365)
-		sPart.Format(L"%dÄê",nDays / 365);
+		sPart.Format(L"%då¹´",nDays / 365);
 	sRet += sPart;
 	nDays %= 365;
 	sPart = L"";
 	if (nDays > 30)
-		sPart.Format(L"%dÔÂ",nDays / 30);
+		sPart.Format(L"%dæœˆ",nDays / 30);
 	sRet += sPart;
 	nDays %= 30;
 	sPart = L"";
-	sPart.Format(L"%dÌì",nDays);
+	sPart.Format(L"%då¤©",nDays);
 	sRet += sPart;
 
 	return sRet;
@@ -124,8 +124,8 @@ BOOL QGoalItem::CheckIt( BOOL bChecked /*= TRUE*/ )
 
 BOOL QGoalItem::Delete()
 {
-    // ÏÈÉ¾³ıÏÂÃæËùÓĞµÄ¶¨Ê±Æ÷
-    // ÔİÊ±²»ÊµÏÖ
+    // å…ˆåˆ é™¤ä¸‹é¢æ‰€æœ‰çš„å®šæ—¶å™¨
+    // æš‚æ—¶ä¸å®ç°
     return QDBPlan::GetInstance()->DeleteGoalItem(ID());
 }
 
@@ -211,7 +211,7 @@ QGoal& QGoal::operator=( const QGoal& o )
 
 BOOL QGoal::Delete()
 {
-    // ÏÈÉ¾³ıÏÂÃæËùÓĞµÄgoalitem
+    // å…ˆåˆ é™¤ä¸‹é¢æ‰€æœ‰çš„goalitem
     VecGoalItem vi;
     GetAllItems(vi, GOALITEM_STATUS_NOTSET);
     QGoalItem *pGI;
@@ -291,14 +291,14 @@ int QPlan::GetTimeProcess()
 {
     QTime tmNow = QTime::GetCurrentTime();
     if (tmNow.CompareDate(BeginTime()) > 0)
-        return 100; // Ê±¼äÒÑ¾­¹ıÍêÁË¡£
+        return 100; // æ—¶é—´å·²ç»è¿‡å®Œäº†ã€‚
 
     int nTotalDays = (EndTime() - BeginTime()).GetTotalDays();
-    if ( nTotalDays <= 0 )   // ¿ªÊ¼ºÍ½áÊøÊÇÍ¬Ò»Ìì
+    if ( nTotalDays <= 0 )   // å¼€å§‹å’Œç»“æŸæ˜¯åŒä¸€å¤©
         return 100;
 
     int nEllipseDay = (tmNow - BeginTime()).GetTotalDays();
-    if (nEllipseDay <= 0)   // ²»×ãÒ»Ìì£¬°´ÕÕÒ»Ìì¼ÆËã
+    if (nEllipseDay <= 0)   // ä¸è¶³ä¸€å¤©ï¼ŒæŒ‰ç…§ä¸€å¤©è®¡ç®—
         nEllipseDay = 1;
 
 	return ( nEllipseDay * 100 / nTotalDays) / 100;
@@ -366,7 +366,7 @@ BOOL QPlan::DeleteStage( QStage *pStage )
 
 BOOL QPlan::Delete()
 {
-    // ²¢·ÇÕæÕıµÄÉ¾³ıµô×Ô¼º£¬Ö»ÊÇ±ê¼ÇÎªÉ¾³ı¶øÒÑ
+    // å¹¶éçœŸæ­£çš„åˆ é™¤æ‰è‡ªå·±ï¼Œåªæ˜¯æ ‡è®°ä¸ºåˆ é™¤è€Œå·²
     return QDBPlan::GetInstance()->DeletePlan(ID());
 }
 
@@ -449,14 +449,14 @@ int QStage::GetTimeProcess()
 {
     QTime tmNow = QTime::GetCurrentTime();
     if (tmNow.CompareDate(BeginTime()) > 0)
-        return 100; // Ê±¼äÒÑ¾­¹ıÍêÁË¡£
+        return 100; // æ—¶é—´å·²ç»è¿‡å®Œäº†ã€‚
 
     int nTotalDays = (EndTime() - BeginTime()).GetTotalDays();
-    if ( nTotalDays <= 0 )   // ¿ªÊ¼ºÍ½áÊøÊÇÍ¬Ò»Ìì
+    if ( nTotalDays <= 0 )   // å¼€å§‹å’Œç»“æŸæ˜¯åŒä¸€å¤©
         return 100;
 
     int nEllipseDay = (tmNow - BeginTime()).GetTotalDays();
-    if (nEllipseDay <= 0)   // ²»×ãÒ»Ìì£¬°´ÕÕÒ»Ìì¼ÆËã
+    if (nEllipseDay <= 0)   // ä¸è¶³ä¸€å¤©ï¼ŒæŒ‰ç…§ä¸€å¤©è®¡ç®—
         nEllipseDay = 1;
 
     return ( nEllipseDay * 100 / nTotalDays) / 100;
@@ -484,7 +484,7 @@ BOOL QStage::Edit( const CStdString& sStage,
 
 BOOL QStage::Delete()
 {
-    // ÏÈÉ¾³ıÏÂÃæËùÓĞµÄgoal
+    // å…ˆåˆ é™¤ä¸‹é¢æ‰€æœ‰çš„goal
     VecGoal vg;
     GetAllGoals(vg);
     QGoal* pGoal = NULL;

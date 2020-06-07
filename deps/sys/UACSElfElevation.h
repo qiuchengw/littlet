@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 /****************************** Module Header ******************************\
     * Module Name:	CppUACSelfElevation.cpp
@@ -25,7 +25,7 @@
 #include <shlobj.h>
 
 //////////////////////////////////////////////////////////////////////////
-// UACÏÂÎªÓ¦ÓÃ³ÌĞòÌáÈ¨
+// UACä¸‹ä¸ºåº”ç”¨ç¨‹åºææƒ
 class CUACSElfElevations
 {
 public:

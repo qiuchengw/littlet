@@ -1,4 +1,4 @@
-#include "file/FileEnumerator.h"
+ï»¿#include "file/FileEnumerator.h"
 #include <list>
 #include <iterator>
 #include "StkTimerMan.h"
@@ -19,11 +19,11 @@ public:
 	}
 
 	/*
-	 *	É¨ÃèÎÄ¼ş¼ĞÏÂµÄÍ¼ÏñÎÄ¼ş£¨*.jpg,*.png£©
+	 *	æ‰«ææ–‡ä»¶å¤¹ä¸‹çš„å›¾åƒæ–‡ä»¶ï¼ˆ*.jpg,*.pngï¼‰
 	 *	-return
-	 *		É¨ÃèµÄÎÄ¼şÊıÄ¿
+	 *		æ‰«æçš„æ–‡ä»¶æ•°ç›®
      *
-     *   shuffle    ÊÇ·ñÂÒĞò
+     *   shuffle    æ˜¯å¦ä¹±åº
      *
 	 */
 	int LoadFolder(__in LPCWSTR szFolder, bool shuffle)
@@ -34,7 +34,7 @@ public:
 		m_bRecycle = FALSE;
 		m_hHtmlayoutWnd = NULL;
 		m_sPath = szFolder;
-		if (m_sPath.Find(L':') == -1)   // ·ÇÈ«Â·¾¶
+		if (m_sPath.Find(L':') == -1)   // éå…¨è·¯å¾„
         {
             m_sPath = quibase::GetModulePath() + m_sPath;
         }
@@ -60,31 +60,31 @@ public:
 	}
 
 	/*
-	 *	²¥·ÅÉ¨Ãèµ½µÄÎÄ¼ş
+	 *	æ’­æ”¾æ‰«æåˆ°çš„æ–‡ä»¶
 	 * -param
-		-[in]	szDestUri HtmlayoutÄÜ¹»Ê¶±ğµÄµØÖ·£¬±¾µØÂ·¾¶ĞèÒªÒÔ "file://" ¿ªÊ¼
-		-[in]	nPeriodSec	×Ô¶¯²¥·ÅµÄ¼ä¸ôÊ±¼ä£¬µ¥Î»ÎªÃë¡¾s¡¿
-		-[in]	bAutoPlay	ÊÇ·ñ×Ô¶¯²¥·Å
-		-[in]	bRecycle	ÊÇ·ñÑ­»·²¥·Å
+		-[in]	szDestUri Htmlayoutèƒ½å¤Ÿè¯†åˆ«çš„åœ°å€ï¼Œæœ¬åœ°è·¯å¾„éœ€è¦ä»¥ "file://" å¼€å§‹
+		-[in]	nPeriodSec	è‡ªåŠ¨æ’­æ”¾çš„é—´éš”æ—¶é—´ï¼Œå•ä½ä¸ºç§’ã€sã€‘
+		-[in]	bAutoPlay	æ˜¯å¦è‡ªåŠ¨æ’­æ”¾
+		-[in]	bRecycle	æ˜¯å¦å¾ªç¯æ’­æ”¾
 	 */
 	BOOL HtmlayoutPlay(HWND hHtmlayoutWnd,LPCWSTR szDestUri,int nPeriodSec,BOOL bAutoPlay,BOOL bRecycle)
 	{
 		if (StrCmpNICW(szDestUri,L"file://",7) != 0)
-		{ // ²»¿ÉÊ¶±ğµÄµØÖ·
+		{ // ä¸å¯è¯†åˆ«çš„åœ°å€
 			return FALSE;
 		}
 		if (QUIMgr::QWindowFromHWND(hHtmlayoutWnd) == NULL )
-		{ // ·Ç¿ÉÊ¶±ğµÄ´°¿Ú
+		{ // éå¯è¯†åˆ«çš„çª—å£
 			return FALSE;
 		}
 		m_hHtmlayoutWnd = hHtmlayoutWnd;
 		m_sDestUri = szDestUri;
-		// ĞÎÈç£º file://F:/phto/x.jpg . ²»ÄÜÊ¹ÓÃ ¡®\\¡¯·Ö¸ô·û
+		// å½¢å¦‚ï¼š file://F:/phto/x.jpg . ä¸èƒ½ä½¿ç”¨ â€˜\\â€™åˆ†éš”ç¬¦
 		m_sDestUri.Replace(L'\\',L'/');
 		//m_sDestUri.Replace(L"//",L"/");
 
 		m_bRecycle = bRecycle;
-		// Æô¶¯×Ô¶¯²¥·ÅµÄ¶¨Ê±Æ÷
+		// å¯åŠ¨è‡ªåŠ¨æ’­æ”¾çš„å®šæ—¶å™¨
 		if (bAutoPlay && (GetFileCount() > 0))
 		{
 			return SetAutoPlayTimer(nPeriodSec);
@@ -110,7 +110,7 @@ public:
 			return FALSE;
 
 		if (m_nIdx <= 0)
-			return FALSE;	// ÒÑ¾­µ½×î¿ªÊ¼ÁË
+			return FALSE;	// å·²ç»åˆ°æœ€å¼€å§‹äº†
 
 		--m_nIdx;
 
@@ -123,9 +123,9 @@ public:
 		if (0 == nRet)
 			return PlayPicture(m_list[m_nIdx].c_str());
 		else if(1 == nRet)
-			; // Í¨Öª²¥·ÅÍê³É
+			; // é€šçŸ¥æ’­æ”¾å®Œæˆ
 		else 
-			; // ´íÎó
+			; // é”™è¯¯
 	}
 
 	BOOL PlayPicture(LPCWSTR szPic)
@@ -156,7 +156,7 @@ public:
     }
 
     /*
-    *	Ëæ»úÂÒĞòÍ¼Æ¬Ë³Ğò
+    *	éšæœºä¹±åºå›¾ç‰‡é¡ºåº
     */
     void ShuffleOrders()
     {
@@ -192,9 +192,9 @@ protected:
 		QUIPostCodeTo(m_hHtmlayoutWnd,PICTRUELOADER_PLAYTIMER_FIRED,m_nIdx);
 	}
 
-	// -1 Í£Ö¹
-	// 0 Õı³£
-	// 1 ²¥·ÅÍêÁË
+	// -1 åœæ­¢
+	// 0 æ­£å¸¸
+	// 1 æ’­æ”¾å®Œäº†
 	int StepNext()
 	{
 		int nFile = GetFileCount();
@@ -225,12 +225,12 @@ protected:
 	}
 
 public:
-	CStdString		m_sDestUri;		// HtmlayoutÄÜ¹»Ê¶±ğµÄµØÖ·£¬±¾µØÂ·¾¶ĞèÒªÒÔ "file://" ¿ªÊ¼
+	CStdString		m_sDestUri;		// Htmlayoutèƒ½å¤Ÿè¯†åˆ«çš„åœ°å€ï¼Œæœ¬åœ°è·¯å¾„éœ€è¦ä»¥ "file://" å¼€å§‹
 	HWND		m_hHtmlayoutWnd;
-	BOOL		m_bRecycle;	// Ñ­»·²¥·Å
+	BOOL		m_bRecycle;	// å¾ªç¯æ’­æ”¾
 	CStdString		m_sPath;
 	std::vector<tstring> m_list;
-	int			m_nIdx;	// µ±Ç°²¥·ÅµÄÎÄ¼şË÷Òı
-	HANDLE		m_hTimer;	// ×Ô¶¯²¥·ÅµÄ¶¨Ê±Æ÷
+	int			m_nIdx;	// å½“å‰æ’­æ”¾çš„æ–‡ä»¶ç´¢å¼•
+	HANDLE		m_hTimer;	// è‡ªåŠ¨æ’­æ”¾çš„å®šæ—¶å™¨
 };
 

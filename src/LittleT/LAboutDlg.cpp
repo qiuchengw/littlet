@@ -1,4 +1,4 @@
-#include "LAboutDlg.h"
+Ôªø#include "LAboutDlg.h"
 #include "../common/LittleTcmn.h"
 #include "crypt/CXUnzip.h"
 #include "LittleT.h"
@@ -68,7 +68,7 @@ LDocDlg::LDocDlg(LPCWSTR szFile)
 
 LRESULT LDocDlg::OnDocumentComplete()
 {
-    SetTitle(L"Œƒµµ");
+    SetTitle(L"ÊñáÊ°£");
 
     GetCtrl("[xrole=\"OK\"]").ShowCtrl(SHOW_MODE_COLLAPSE);
     GetCtrl("[xrole=\"Cancel\"]").ShowCtrl(SHOW_MODE_COLLAPSE);
@@ -108,7 +108,7 @@ void LSettingDlg::ShowModal()
 
 LRESULT LSettingDlg::OnDocumentComplete()
 {
-    //  –›œ¢“ªª·∂˘
+    //  ‰ºëÊÅØ‰∏Ä‰ºöÂÑø
     LittleTConfig *pCfg = (LittleTConfig*)QUIGetConfig();
     _BreakSec().SetInt(pCfg->GetBreakSec());
     _BreakSpan().SetInt(pCfg->GetPicSec());
@@ -130,7 +130,7 @@ LRESULT LSettingDlg::OnDocumentComplete()
 
 CStdStringW LSettingDlg::_ProgPath()
 {
-    // –Ë“™º”…œÀ´“˝∫≈
+    // ÈúÄË¶ÅÂä†‰∏äÂèåÂºïÂè∑
     TCHAR path[MAX_PATH] = {0};
     GetModuleFileName(NULL, path, MAX_PATH);
     CStdString sRet;
@@ -143,7 +143,7 @@ BOOL LSettingDlg::OnDefaultButton( INT_PTR nBtn )
     if (IDOK != nBtn)
         return TRUE;
 
-    //  –›œ¢“ªª·∂˘
+    //  ‰ºëÊÅØ‰∏Ä‰ºöÂÑø
     LittleTConfig *pCfg = (LittleTConfig*)QUIGetConfig();
     pCfg->SetBreakFolder(_BreakFolder().GetFolderPath());
     pCfg->SetBreakSpan(_BreakSpan().GetInt());
@@ -180,7 +180,7 @@ void LSettingDlg::OnCmnChkAutoRun( HELEMENT he)
             //bOk = quibase::CreateFileShortcut(NULL, sStartupDir);
             ATL::CW2AEX<128> dir(sStartupDir);
             bOk = quibase::CreateShortcut(dir, szModuleName, NULL, 
-                NULL, quibase::GetModulePath(), L"«Ô≥«£¨qiuchengw@163.com");
+                NULL, quibase::GetModulePath(), L"ÁßãÂüéÔºåqiuchengw@163.com");
         }
         else
         {
@@ -193,7 +193,7 @@ void LSettingDlg::OnCmnChkAutoRun( HELEMENT he)
 
     if (!bOk)
     {
-        chkAutoRun.ShowTooltip(L"≤Ÿ◊˜ ß∞‹");
+        chkAutoRun.ShowTooltip(L"Êìç‰ΩúÂ§±Ë¥•");
     }
 }
 
@@ -217,6 +217,6 @@ void LSettingDlg::OnCmnChkPinToTaskbar(HELEMENT h)
     quibase::CreateShortcut(d);
     quibase::PinToTaskbar(s_dir + s_exe_name);
 
-    XMsgBox::OkMsgBox(L"∏„∂®£°<br/>£®∂‘XPœµÕ≥Œﬁ–ß£©°£");
+    XMsgBox::OkMsgBox(L"ÊêûÂÆöÔºÅ<br/>ÔºàÂØπXPÁ≥ªÁªüÊó†ÊïàÔºâ„ÄÇ");
 }
 

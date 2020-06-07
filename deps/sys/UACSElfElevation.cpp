@@ -1,4 +1,4 @@
-#include "UACSElfElevation.h"
+ï»¿#include "UACSElfElevation.h"
 
 
 #pragma region Includes and Manifest Dependencies
@@ -300,7 +300,7 @@ BOOL CUACSElfElevations::SelfElevation()
     {
         UNREFERENCED_PARAMETER(dwError);
         // ReportError(L"IsRunAsAdmin", dwError);
-        // ÏµÍ³µÍ»òÕßÆäËû´íÎó
+        // ç³»ç»Ÿä½Žæˆ–è€…å…¶ä»–é”™è¯¯
         return FALSE;
     }
 

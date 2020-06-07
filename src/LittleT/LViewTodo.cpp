@@ -1,4 +1,4 @@
-#include "LViewTodo.h"
+ï»¿#include "LViewTodo.h"
 
 #include "../common/ConstValues.h"
 #include "LDatas.h"
@@ -48,7 +48,7 @@ void LFormTodo::OnClkTaskChk( HELEMENT hBtn )
     {
         table.set_attribute("done",L"");
         eStarbox.EnableCtrl(FALSE);
-        // Èç¹ûÕâ¸ötodoÓĞµ¹¼ÆÊ±£¬ÄÇÃ´Í£Ö¹µ¹¼ÆÊ±
+        // å¦‚æœè¿™ä¸ªtodoæœ‰å€’è®¡æ—¶ï¼Œé‚£ä¹ˆåœæ­¢å€’è®¡æ—¶
         ETable tblTest = table.next_sibling();
         if (tblTest.ID().CompareNoCase(L"do_it") == 0)
         {
@@ -91,7 +91,7 @@ bool LFormTodo::_onDeleteTask(int task_id)
     {
         RefreshTaskNum();
 
-        // ´ÓconfigÎÄ¼şÖĞÈ¥µôstickyÏà¹ØµÄ¶«Î÷
+        // ä»configæ–‡ä»¶ä¸­å»æ‰stickyç›¸å…³çš„ä¸œè¥¿
         auto* cfg = QUIGetConfig();
         cfg->RemoveKey(L"StickyNote", CStdString::number(task_id));
         cfg->RemoveKey(L"StickyNoteColor", CStdString::number(task_id));
@@ -113,7 +113,7 @@ void LFormTodo::OnClkStickyNote(HELEMENT hBtn)
     {
         StickyNoteMan::GetInstance()->Create(task_itm);
 
-        // ´ÓÁĞ±íÖĞÉ¾³ı
+        // ä»åˆ—è¡¨ä¸­åˆ é™¤
         table.destroy();
         RefreshTaskNum();
     }
@@ -168,15 +168,15 @@ void LFormTodo::FreshTaskItem( ECtrl& eGroup, ECtrl &etable, TTodoTask* pTask )
 //     }
 
     CStdString str;
-    str.Format(L"<tr title=\"´´½¨ÓÚ:%s\">"
+    str.Format(L"<tr title=\"åˆ›å»ºäº:%s\">"
         L"<td .item-exec><widget type=\"checkbox\" name=\"Chk_NoteTask\" %s /></td>"
         L"<td name=\"item_doit\" .qbtn/>"
         L"<td .item-todo name=\"item_todo\">%s</td>"
-        L"<td name=\"btn_todoitem_stickynote\" title=\"´´½¨µ½×ÀÃæ±ãÇ©\"></td>"
+        L"<td name=\"btn_todoitem_stickynote\" title=\"åˆ›å»ºåˆ°æ¡Œé¢ä¾¿ç­¾\"></td>"
         // L"<td name=\"btn_todoitem_delete\">r</td>"
         L"<td><ul type=\"starbox\" name=\"star_Priority\" stars=\"4\" index=\"%d\" %s/></td>"
         L"</tr>",
-        pTask->tmCreate.Format(L"%c"),      // ´´½¨Ê±¼ä
+        pTask->tmCreate.Format(L"%c"),      // åˆ›å»ºæ—¶é—´
         (pTask->eStatus == TODO_STATUS_FINISH)?L"checked":L"",
         pTask->sTask,
         pTask->nPriority,
@@ -198,10 +198,10 @@ void LFormTodo::OnClkPriority( HELEMENT he)
     t_task.nPriority = eStarBox.GetCurSel();
     QDBEvents::GetInstance()->TodoTask_SetPriority((int)(eTable.GetData()), t_task.nPriority);
 
-    // É¾³ı£¬ÖØĞÂÅÅĞò
+    // åˆ é™¤ï¼Œé‡æ–°æ’åº
     eTable.destroy();
 
-    // ²åÈëµ½ĞÂµÄµØ·½
+    // æ’å…¥åˆ°æ–°çš„åœ°æ–¹
     InsertTask(_TodoList(), &t_task, FindFirstLessEqual(t_task.nPriority));
 }
 
@@ -216,7 +216,7 @@ BOOL LFormTodo::ShowTask( ENUM_TODO_STATUS eStatus )
     else if (TODO_STATUS_PROCESSING == eStatus)
         pMgr->TodoTask_GetUnfinished(lst);
 
-    // ÓÅÏÈ¼¶´ÓĞ¡µ½´óÅÅĞò
+    // ä¼˜å…ˆçº§ä»å°åˆ°å¤§æ’åº
     std::stable_sort(lst.begin(), lst.end(), [](const TTodoTask& a, const TTodoTask& b)->bool
     {
         return a.nPriority < b.nPriority;
@@ -226,8 +226,8 @@ BOOL LFormTodo::ShowTask( ENUM_TODO_STATUS eStatus )
     ctlList.DeleteAllChild();
     for (auto& t : lst)
     {
-        if (!_HasFlag(t.nFlag, TODO_FLAG_STICKYNOTE)    // ·Çsticky
-            && !_HasFlag(t.nFlag, TODO_FLAG_ENCRYPTED)) // ·Ç¼ÓÃÜ
+        if (!_HasFlag(t.nFlag, TODO_FLAG_STICKYNOTE)    // ésticky
+            && !_HasFlag(t.nFlag, TODO_FLAG_ENCRYPTED)) // éåŠ å¯†
         {
             InsertTask(ctlList, &t);
         }
@@ -242,15 +242,15 @@ void LFormTodo::ShowPopupBar( TTodoTask &t,BOOL bEdit,HELEMENT he )
         he = GetCtrl("#id_todo_caption");
     }
 
-    // È·±£´°¿ÚÊÇÇ°Ì¨´°¿Ú
+    // ç¡®ä¿çª—å£æ˜¯å‰å°çª—å£
     quibase::SetForegroundWindowInternal(QUIGetMainWnd());
 
     ECtrl bar = _PopupBar();
-    //  Ä¿Â¼
+    //  ç›®å½•
 //     ECombobox eCmbCate = bar.find_first("#id_bar_cate");
 //     eCmbCate.DeleteAllItem();
-//     // µÚÒ»ÏîÎªÄ¬ÈÏ
-//     eCmbCate.InsertItem(L"Ä¬ÈÏ");
+//     // ç¬¬ä¸€é¡¹ä¸ºé»˜è®¤
+//     eCmbCate.InsertItem(L"é»˜è®¤");
 //     eCmbCate.SetItemData(0,(LPVOID)(-1));
 //     QDBHelper *pMan = QDBHelper::GetInstance();
 //     VecCate vc;
@@ -262,7 +262,7 @@ void LFormTodo::ShowPopupBar( TTodoTask &t,BOOL bEdit,HELEMENT he )
 //     }
 
     EEdit ctlInput = bar.find_first("#id_bar_todo");
-    // Ä£Ê½ÉèÖÃ
+    // æ¨¡å¼è®¾ç½®
     if (bEdit)
     {
 //         ECheck(bar.find_first("#id_bar_hasexectime")).SetCheck(_HasFlag(t.nFlag, TODO_FLAG_HASENDTIME));
@@ -273,7 +273,7 @@ void LFormTodo::ShowPopupBar( TTodoTask &t,BOOL bEdit,HELEMENT he )
 //      ECombobox(bar.find_first("#id_bar_cate")).SelectItem_ItemData((LPVOID)t.nCateID);
         EStarBox(bar.find_first("#id_bar_priority")).SetCurSel(t.nPriority);
 
- //       ECtrl(bar.find_first("#id_bar_ok")).SetText(L"±à¼­");
+ //       ECtrl(bar.find_first("#id_bar_ok")).SetText(L"ç¼–è¾‘");
         bar.set_attribute("edit",L"true");
     }
     else
@@ -282,7 +282,7 @@ void LFormTodo::ShowPopupBar( TTodoTask &t,BOOL bEdit,HELEMENT he )
 //         EDate(bar.find_first("#id_bar_date")).SetDate(QTime::GetCurrentTime());
 //         ETime(bar.find_first("#id_bar_time")).SetTime(QTime::GetCurrentTime());
         ctlInput.SetText(L"");
-//        ECtrl(bar.find_first("#id_bar_ok")).SetText(L"Ìí¼Ó");
+//        ECtrl(bar.find_first("#id_bar_ok")).SetText(L"æ·»åŠ ");
         bar.set_attribute("edit",L"false");
     }
     ctlInput.SelectText();
@@ -384,33 +384,33 @@ void LFormTodo::OnClkDoit( HELEMENT he)
     ETable tblCountdown = ctlList.find_first("table#do_it");
     if ( tblCountdown.is_valid() )
     {
-        // ÊÇÕâ¸öÈÎÎñµÄÖØ¸´µã»÷£¿
+        // æ˜¯è¿™ä¸ªä»»åŠ¡çš„é‡å¤ç‚¹å‡»ï¼Ÿ
         if (tblCountdown == ctlItem.next_sibling())
         {
-            // È¡Ïûµ¹¼ÆÊ±
+            // å–æ¶ˆå€’è®¡æ—¶
             tblCountdown.destroy();
             return;
         }
 
-        // µ±Ç°µÄÕâ¼şÊÂÃ»×öÍê£¬¾ÍÓÖÈ¥×öÁíÍâÒ»¼şÊÂÁË£¿
+        // å½“å‰çš„è¿™ä»¶äº‹æ²¡åšå®Œï¼Œå°±åˆå»åšå¦å¤–ä¸€ä»¶äº‹äº†ï¼Ÿ
         ETextCountdown tcd = tblCountdown.find_first("#td_countdown");
         if (tcd.GetCountdown() > 0)
         {
-            ctlItem.ShowTooltip(L"¼¯ÖĞ×¢ÒâÁ¦£ºÖ»×öÒ»¼şÊÂ¾ÍºÃÀ²£¡");
+            ctlItem.ShowTooltip(L"é›†ä¸­æ³¨æ„åŠ›ï¼šåªåšä¸€ä»¶äº‹å°±å¥½å•¦ï¼");
             return;
         }
-        // µ±Ç°µÄÊÂÇéÒÑ¾­×öÍêÁË¡£
-        tblCountdown.destroy(); // ÉÏÒ»¸öÏú»Ùµô
+        // å½“å‰çš„äº‹æƒ…å·²ç»åšå®Œäº†ã€‚
+        tblCountdown.destroy(); // ä¸Šä¸€ä¸ªé”€æ¯æ‰
     }
 
-    // Ã¿´ÎÖ»ÄÜÓĞÒ»¸öµ¹Êı¼ÆÊ±
+    // æ¯æ¬¡åªèƒ½æœ‰ä¸€ä¸ªå€’æ•°è®¡æ—¶
     tblCountdown = (HELEMENT)ETable::create("table");
     ctlList.insert(tblCountdown, ctlItem.index() + 1);
     tblCountdown.set_attribute("id",L"do_it");
     tblCountdown.SetHtml(
                 L"<tr>"
                 L"  <td .icon rowspan=2 />"
-                L"  <td id=\"td_countdown\" rowspan=2>00:15:00</td>"    // ³õÊ¼»¯15·ÖÖÓ
+                L"  <td id=\"td_countdown\" rowspan=2>00:15:00</td>"    // åˆå§‹åŒ–15åˆ†é’Ÿ
                 L"  <td id=\"btn_plus5m\" .qbtn/>"
                 L"</tr>"
                 L"<tr>"
@@ -481,7 +481,7 @@ void LViewTodo::OnDestroy()
 
 LRESULT LViewTodo::OnDocumentComplete()
 {
-    // Æô¶¯×ÀÃæ±ãÇ©
+    // å¯åŠ¨æ¡Œé¢ä¾¿ç­¾
     StickyNoteMan::GetInstance()->Startup();
 
     return 0;

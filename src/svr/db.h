@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "file/db/QDBMgr.h"
 

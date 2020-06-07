@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 // #include <stdint.h>
 #include <string>
@@ -27,25 +27,25 @@ typedef rapidjson::StringBuffer RJsonStringBuffer;
 namespace rapidjson
 {
     /**
-     *	±£´æjsonÖµµ½×Ö·û´®ÀïÃæ	
+     *	ä¿å­˜jsonå€¼åˆ°å­—ç¬¦ä¸²é‡Œé¢	
      *
      *	@param
      *		-[in]
      *          d       json
-     *          prety   ´ø¸ñÊ½»¯
-     *          indent  ¸ñÊ½»¯Ëõ½ø
+     *          prety   å¸¦æ ¼å¼åŒ–
+     *          indent  æ ¼å¼åŒ–ç¼©è¿›
      *		-[out]
-     *          str     ±£´æºóµÄ×Ö·û´®
+     *          str     ä¿å­˜åçš„å­—ç¬¦ä¸²
     **/
 //     inline bool SaveToString(RJsonValueW* d, std::wstring& str,
 //         bool prety = true, int indent = 4)
 //     {
-//         // ±£´æ
+//         // ä¿å­˜
 //         RJsonStringBufferW sb;
 //         rapidjson::PrettyWriter<RJsonStringBufferW, ::UTF16> wrt(sb);
 //         if (prety)
 //         {
-//             wrt.SetIndent(' ', (indent <= 0) ? 4 : indent); // 4¸ö¿Õ¸ñ
+//             wrt.SetIndent(' ', (indent <= 0) ? 4 : indent); // 4ä¸ªç©ºæ ¼
 //         }
 //         d->Accept(wrt);
 //         str = sb.GetString();
@@ -53,26 +53,26 @@ namespace rapidjson
 //     }
 
     /**
-    *	±£´æjsonÖµµ½×Ö·û´®ÀïÃæ
+    *	ä¿å­˜jsonå€¼åˆ°å­—ç¬¦ä¸²é‡Œé¢
     *
     *	@param
     *		-[in]
     *          d       json
-    *          prety   ´ø¸ñÊ½»¯
-    *          indent  ¸ñÊ½»¯Ëõ½ø
+    *          prety   å¸¦æ ¼å¼åŒ–
+    *          indent  æ ¼å¼åŒ–ç¼©è¿›
     *		-[out]
-    *          str     ±£´æºóµÄ×Ö·û´®
+    *          str     ä¿å­˜åçš„å­—ç¬¦ä¸²
     **/
     template<typename _StrType> // QString / std::string
     inline bool SaveToString(RJsonValue* d, _StrType& str,
         bool prety = true, int indent = 4)
     {
-        // ±£´æ
+        // ä¿å­˜
         RJsonStringBuffer sb;
         rapidjson::PrettyWriter<RJsonStringBuffer, rapidjson::UTF8<> > wrt(sb);
         if (prety)
         {
-            wrt.SetIndent(' ', (indent <= 0) ? 4 : indent); // 4¸ö¿Õ¸ñ
+            wrt.SetIndent(' ', (indent <= 0) ? 4 : indent); // 4ä¸ªç©ºæ ¼
         }
         d->Accept(wrt);
         str = sb.GetString();
@@ -90,8 +90,8 @@ public:
      *		
      *	@param
      *		-[in]
-     *		    content     jsonÄÚÈİ
-     *		    auto_reset_if_fail  Èç¹û½âÎö´íÎó£¬×Ô¶¯ÉèÖÃ³É½âÎö¿ÕÎÄ¼ş
+     *		    content     jsonå†…å®¹
+     *		    auto_reset_if_fail  å¦‚æœè§£æé”™è¯¯ï¼Œè‡ªåŠ¨è®¾ç½®æˆè§£æç©ºæ–‡ä»¶
      *
     **/
     RJsonDoc(const QString& content = "{}", bool auto_reset_if_fail = true)
@@ -99,7 +99,7 @@ public:
         MyParse(content, auto_reset_if_fail);
     }
 
-    // false £º has error
+    // false ï¼š has error
     bool MyParse(const QString& content, bool auto_reset_if_fail)
     {
         QByteArray ar = content.toUtf8();

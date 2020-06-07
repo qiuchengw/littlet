@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // TrayIcon.h: interface for the CSystemTray class.
 //

@@ -1,4 +1,4 @@
-#include "QDBHelper.h"
+ï»¿#include "QDBHelper.h"
 
 #define DEFAULT_TODOTASK_PRIORITY 3
 
@@ -94,7 +94,7 @@ BOOL QDBEvents::_TodoTask(SqlQuery &q, ENUM_TODOTASK_TYPE t_type, __out TTodoTas
                     break;
 
                 case TODOTASK_TYPE_TODO:
-                    if (_HasFlag(t.nFlag, TODO_FLAG_STICKYNOTE ))  // ·Ç±ãÇ©
+                    if (_HasFlag(t.nFlag, TODO_FLAG_STICKYNOTE ))  // éä¾¿ç­¾
                         return FALSE;
                     break;
                 }
@@ -323,7 +323,7 @@ BOOL QDBEvents::_Cate(SqlQuery &q, __out TCate &c)
 BOOL QDBEvents::AutoTask_GetAll(AutoTaskList & lst)
 {
     QDB_BEGIN_TRY
-        // ËùÓĞµÄ×Ô¶¯¼Æ»®
+        // æ‰€æœ‰çš„è‡ªåŠ¨è®¡åˆ’
         QAutoTask *pTask;
     SqlQuery q = ExecQuery(L"SELECT * FROM tbl_autotask");
     for (q.nextRow(); !q.eof(); q.nextRow())
@@ -386,7 +386,7 @@ BOOL QDBEvents::AutoTask_GetInfo(int nTaskID,
     __out QTime &tmCreate)
 {
     QDB_BEGIN_TRY
-        // ËùÓĞµÄ×Ô¶¯¼Æ»®
+        // æ‰€æœ‰çš„è‡ªåŠ¨è®¡åˆ’
         CStdString sQ;
     sQ.Format(L"SELECT * FROM tbl_autotask WHERE (ID=%d)", nTaskID);
     SqlQuery q = ExecQuery(sQ);
@@ -416,7 +416,7 @@ BOOL QDBEvents::AutoTask_Delete(int nTaskID)
     int nTimerID = AutoTask_GetTimerID(nTaskID);
     if (INVALID_ID != nTimerID)
     {
-        // É¾³ı¹ØÁªµÄTimer
+        // åˆ é™¤å…³è”çš„Timer
         CStdString sQ;
         sQ.Format(L"DELETE FROM tbl_timer WHERE (ID=%d)", nTimerID);
         _ExecSQL_RetBOOL(sQ);

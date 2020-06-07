@@ -1,6 +1,6 @@
-#pragma once
+﻿#pragma once
 
-// ͳ��
+// Í³¼Æ
 class CStaticsSvr
 {
 public:

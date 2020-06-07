@@ -1,4 +1,4 @@
-#include "server.h"
+ï»¿#include "server.h"
 #include <process.h>
 #include <iostream>
 
@@ -33,10 +33,10 @@ public:
     virtual void   Abort ();
 
     /**
-     *	Èç¹ûÏûÏ¢±»´¦ÀíµÄ»°£¬´Ó¶ÓÁĞÖĞÉ¾³ı	
+     *	å¦‚æœæ¶ˆæ¯è¢«å¤„ç†çš„è¯ï¼Œä»é˜Ÿåˆ—ä¸­åˆ é™¤	
      *
      *	@return
-     *	    »¹Ã»ÓĞ±»´¦ÀíµÄÏûÏ¢¸öÊı	
+     *	    è¿˜æ²¡æœ‰è¢«å¤„ç†çš„æ¶ˆæ¯ä¸ªæ•°	
      *
     **/
     int scan_usefeed();
@@ -67,17 +67,17 @@ CMsgServer::~CMsgServer(void)
 
 int CMsgServer::Startup()
 {
-    // Æô¶¯10¸ö¹¤×÷ÕßÏß³Ì
+    // å¯åŠ¨10ä¸ªå·¥ä½œè€…çº¿ç¨‹
     zmq::context_t ctx;
     user_feed_param ufp;
     ufp.ctx = &ctx;
     ufp.ip_port = "inproc://*:5230";
 
-    // ¹¤×÷ÕßÏß³Ì
+    // å·¥ä½œè€…çº¿ç¨‹
     CWorkQueue  work_queue;
     work_queue.Create(WT_NUM);
 
-    // Ö±½ÓÈ«²¿´´½¨°É£¡
+    // ç›´æ¥å…¨éƒ¨åˆ›å»ºå§ï¼
     Workers workers;
     for (int i = 0; i < WT_NUM; ++i)
     {
@@ -92,19 +92,19 @@ int CMsgServer::Startup()
         }
     }
 
-    // Ê¹ÓÃdealer½ÓÊÕ¿Í»§¶ËÏûÏ¢
+    // ä½¿ç”¨dealeræ¥æ”¶å®¢æˆ·ç«¯æ¶ˆæ¯
     zmq::socket_t front_end(ctx, ZMQ_ROUTER);
-    front_end.bind("tcp://*:5231");  // ±¾µØµÄ¶Ë¿Ú
+    front_end.bind("tcp://*:5231");  // æœ¬åœ°çš„ç«¯å£
     
     zmq::socket_t back_end(ctx, ZMQ_DEALER);
-    back_end.bind(ufp.ip_port.c_str());  // ±¾µØµÄ¶Ë¿Ú
+    back_end.bind(ufp.ip_port.c_str());  // æœ¬åœ°çš„ç«¯å£
 
-    // ´¦ÀíÊı¾İµÄÏß³Ì
+    // å¤„ç†æ•°æ®çš„çº¿ç¨‹
     HANDLE h_feed = (HANDLE)_beginthreadex(nullptr, 0, 
         &CMsgServer::thread_handlemsg, &workers, 0, nullptr);
     CloseHandle(h_feed);
 
-    // ³ÖĞøÔËĞĞ
+    // æŒç»­è¿è¡Œ
     zmq::proxy(front_end, back_end, nullptr);
 
     return 0;
@@ -124,69 +124,69 @@ CStdString GetModulePath()
 
 UINT_PTR __stdcall CMsgServer::thread_handlemsg( void* param )
 {
-    // Æô¶¯Êı¾İ¿â
+    // å¯åŠ¨æ•°æ®åº“
     if (!db::GetInstance()->Open(GetModulePath() + L"littlet.db"))
     {
         return -1;
     }
 
     Workers* ws = reinterpret_cast<Workers*>(param);
-    // µÈ´ıÏûÏ¢
+    // ç­‰å¾…æ¶ˆæ¯
     while (true)
     {
-        // É¨ÃèËùÓĞ¹¤×÷ÕßÏß³ÌÖĞÊÕµ½µÄÊı¾İ
+        // æ‰«ææ‰€æœ‰å·¥ä½œè€…çº¿ç¨‹ä¸­æ”¶åˆ°çš„æ•°æ®
         for (auto i_worker = ws->begin(); i_worker != ws->end(); ++i_worker)
         {
-            // ´¦Àí
+            // å¤„ç†
             const Msgs* ms = (*i_worker)->msgs();
             for (auto i_msg = ms->begin(); i_msg != ms->end(); ++i_msg)
             {
                 const UserMsg *a_msg = *i_msg;
                 if (a_msg->handled)
-                    continue;   // ÒÑ¾­´¦Àí¹ıÁË
+                    continue;   // å·²ç»å¤„ç†è¿‡äº†
 
-                // Ã»´¦ÀíµÄ
+                // æ²¡å¤„ç†çš„
                 const OneMsg& m = a_msg->msg;
-                // ¹²3Ö¡£º
-                //  1,·şÎñÃû
-                //  2,MAC µØÖ·
-                //  3,ÄÚÈİ
+                // å…±3å¸§ï¼š
+                //  1,æœåŠ¡å
+                //  2,MAC åœ°å€
+                //  3,å†…å®¹
                 if (m.size() < 3)
                 {
                      const_cast<UserMsg*>(a_msg)->handled = true;
                      continue;
                 }
 
-                // È«ÊÇwchar_tÀàĞÍµÄ×Ö·û´®
+                // å…¨æ˜¯wchar_tç±»å‹çš„å­—ç¬¦ä¸²
                 CStdString svr_name((const wchar_t*)(m[0]->data()), m[0]->size() / 2);
                 CStdString mac_addr((const wchar_t*)(m[1]->data()), m[1]->size() / 2);
                 CStdString content((const wchar_t*)(m[2]->data()), m[2]->size() / 2);
 
                 std::wcout<<L"user ["<<mac_addr.c_str()<<L"] activity: ["<<svr_name.c_str()<<"]"<<std::endl;
 
-                // ¸ù¾İ·şÎñÃû×öÏàÓ¦µÄ²Ù×÷
+                // æ ¹æ®æœåŠ¡ååšç›¸åº”çš„æ“ä½œ
                 if (svr_name.CompareNoCase(L"feed") == 0)
                 {
-                    // Ğ´µ½Êı¾İ¿â
+                    // å†™åˆ°æ•°æ®åº“
                     db::GetInstance()->UserFeedback(mac_addr, content, L"");
                 }
                 else if (svr_name.CompareNoCase(L"login") == 0)
                 {
-                    // Ğ´µ½Êı¾İ¿â
+                    // å†™åˆ°æ•°æ®åº“
                     db::GetInstance()->UserLogin(mac_addr);
                 }
                 else if (svr_name.CompareNoCase(L"logout") == 0)
                 {
-                    // Ğ´µ½Êı¾İ¿â
+                    // å†™åˆ°æ•°æ®åº“
                     db::GetInstance()->UserLogout(mac_addr);
                 }
                 else if (svr_name.CompareNoCase(L"require_feed_qcw") == 0)
                 {
-                    // Ğ´µ½Êı¾İ¿â
+                    // å†™åˆ°æ•°æ®åº“
                     db::GetInstance()->UserLogout(mac_addr);
                 }
 
-                // ´¦ÀíÍê³É
+                // å¤„ç†å®Œæˆ
                 const_cast<UserMsg*>(a_msg)->handled = true;
             }
         }
@@ -203,13 +203,13 @@ void CUserFeedWorkItem::DoWork( void* thread_context )
     // param_ = *reinterpret_cast<user_feed_param*>(thread_context);
     assert(nullptr != param_);
 
-    // ½ÓÊÕÕßÏß³Ì
+    // æ¥æ”¶è€…çº¿ç¨‹
     sock_ = new zmq::socket_t(*(param_->ctx), ZMQ_REP);
     sock_->connect(param_->ip_port.c_str());
 
     run_ = true;
 
-    // µÈ´ıÏûÏ¢µÄµ½À´
+    // ç­‰å¾…æ¶ˆæ¯çš„åˆ°æ¥
     int has_more;
     while (run_)
     {
@@ -225,7 +225,7 @@ void CUserFeedWorkItem::DoWork( void* thread_context )
 
             std::cout<<"LitteT server tool thread: begin recv ...."<<std::endl;
 
-            // ×èÈûÊ½µÄÊÕÏûÏ¢
+            // é˜»å¡å¼çš„æ”¶æ¶ˆæ¯
             if (!sock_->recv(msg_frame))
             {
                 delete msg_frame;
@@ -234,10 +234,10 @@ void CUserFeedWorkItem::DoWork( void* thread_context )
 #ifdef _DEBUG
             std::cout<<"msg recived."<<std::endl;
 #endif
-            // ¼ÇÂ¼Ò»Ö¡ÏûÏ¢
+            // è®°å½•ä¸€å¸§æ¶ˆæ¯
             msg.push_back(msg_frame);
 
-            // ÊÇ·ñ¸ü¶àÏûÏ¢£¿
+            // æ˜¯å¦æ›´å¤šæ¶ˆæ¯ï¼Ÿ
             size_t size_len = sizeof(has_more);
             sock_->getsockopt(ZMQ_RCVMORE, &has_more, &size_len);
             if (!has_more)
@@ -249,10 +249,10 @@ void CUserFeedWorkItem::DoWork( void* thread_context )
         
         if (bok)
         {
-            // Ò»¸öÏûÏ¢½ÓÊÕÍê³É, ¿ÉÒÔ·ÅÈëÊı¾İ¶ÓÁĞÁË
+            // ä¸€ä¸ªæ¶ˆæ¯æ¥æ”¶å®Œæˆ, å¯ä»¥æ”¾å…¥æ•°æ®é˜Ÿåˆ—äº†
             msgs_.push_back(uf);
 
-            // ·¢»ØÒ»¸öÏûÏ¢
+            // å‘å›ä¸€ä¸ªæ¶ˆæ¯
             const char* buf = "thanks!";
             sock_->send(buf, strlen(buf));
         }

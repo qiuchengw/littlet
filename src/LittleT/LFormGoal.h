@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ui/QForm.h"
 #include "ui/QDialog.h"
@@ -27,7 +27,7 @@ public:
     // goal sub item stagtus changed
     void GoalSubItemStatusChanged(QGoalItem *pGoalItem);
     
-    // pParentGoal ÏÂµÄÒ»¸ösubitem£¨qgoalitem£©±»É¾³ı
+    // pParentGoal ä¸‹çš„ä¸€ä¸ªsubitemï¼ˆqgoalitemï¼‰è¢«åˆ é™¤
     void GoalSubItemDelete(QGoal *pParentGoal);
 
     void SetGoalitemShow(BOOL bShowFinished, BOOL bShowUnFinished);
@@ -38,13 +38,13 @@ protected:
     
     void RefreshGoal(ETable &tblGoal);
 
-    /** Ñ¡ÖĞÒ»¸ö¼Æ»®ÏîÄ¿
+    /** é€‰ä¸­ä¸€ä¸ªè®¡åˆ’é¡¹ç›®
      *	return:
-     *      TRUE    ³É¹¦
+     *      TRUE    æˆåŠŸ
      *	params:
      *		-[in]
-     *          tblGoal     ĞèÒª±»Ñ¡ÖĞµÄÏîÄ¿
-     *                      ÎŞĞ§Ê±Ñ¡ÖĞÁĞ±íÖĞµÄµÚÒ»¸öÏîÄ¿
+     *          tblGoal     éœ€è¦è¢«é€‰ä¸­çš„é¡¹ç›®
+     *                      æ— æ•ˆæ—¶é€‰ä¸­åˆ—è¡¨ä¸­çš„ç¬¬ä¸€ä¸ªé¡¹ç›®
     **/
     BOOL SelectGoal(__in ETable tblGoal = NULL);
 protected:
@@ -84,7 +84,7 @@ protected:
     {
         return _GoalOfCtl(_CurrentGoalCtl());
     }
-    // ´´½¨goalµÄ×Óform
+    // åˆ›å»ºgoalçš„å­form
     void CreateGoalitemForm(ETable &tblGoal);
 private:
     QStage*         m_pStage;
@@ -96,14 +96,14 @@ private:
 class LGoalDlg : public QDialog
 {
 public:
-    LGoalDlg(QGoal *pGoal);    // ±à¼­Ä£Ê½ 
-    LGoalDlg(QStage* pStage);  // Ìí¼ÓÄ£Ê½
+    LGoalDlg(QGoal *pGoal);    // ç¼–è¾‘æ¨¡å¼ 
+    LGoalDlg(QStage* pStage);  // æ·»åŠ æ¨¡å¼
 
 
 protected:
     virtual LRESULT OnDocumentComplete();
     virtual BOOL OnDefaultButton(INT_PTR nBtn);
-    // ¼ì²é²ÎÊıµÄºÏ·¨ĞÔ
+    // æ£€æŸ¥å‚æ•°çš„åˆæ³•æ€§
     BOOL CheckMemberParameters();
 
 private:

@@ -1,4 +1,4 @@
-#define _ATL_EX_CONVERSION_MACROS_ONLY
+﻿#define _ATL_EX_CONVERSION_MACROS_ONLY
 #define SS_NO_CONVERSION
 
 #include "file/FileEnumerator.h"

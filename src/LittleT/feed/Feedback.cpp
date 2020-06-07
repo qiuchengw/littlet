@@ -1,4 +1,4 @@
-#include "Feedback.h"
+ï»¿#include "Feedback.h"
 #include "ui/QUIDlgs.h"
 #include "deps/sys/SyncInvoker.h"
 #include "ui/QConfig.h"
@@ -17,7 +17,7 @@ QUI_END_EVENT_MAP()
 QUserFeedbackWnd::QUserFeedbackWnd( void )
     :QFrame(L"qabs:common/feedback.htm")
 {
-    // Ä¬ÈÏÃ¿Ìì×î¶àÄÜ·¢ËÍ10¸ö·´À¡
+    // é»˜è®¤æ¯å¤©æœ€å¤šèƒ½å‘é€10ä¸ªåé¦ˆ
     max_feed_ = 10000; 
 }
 
@@ -28,22 +28,22 @@ void QUserFeedbackWnd::OnclkSubmit( HELEMENT he )
 
     if (sContent.Trim().GetLength() < 3)
     {
-        XMsgBox::OkMsgBox(L"Òâ¼ûĞ´¹»3¸ö×ÖßÂ¡£");
+        XMsgBox::OkMsgBox(L"æ„è§å†™å¤Ÿ3ä¸ªå­—å‘—ã€‚");
 
         return;
     }
 
     feed_content_ = MakeContent(sContent, sContact);
-    // ±£´æÓÃ»§µÄÁ·Ï°·½Ê½
+    // ä¿å­˜ç”¨æˆ·çš„ç»ƒä¹ æ–¹å¼
     SaveContactInfo();
 
     SENDFEEDBACK_RESULT lRet = SENDFEEDBACK_RESULT_OK;
-    // ½ûÓÃÊäÈë
+    // ç¦ç”¨è¾“å…¥
     ECtrl tblInput = GetCtrl("#tbl_input");
     tblInput.EnableCtrl(FALSE);
     if ( CheckMaxFeedbackReached() )
     {
-        // ÒÑ´ïµ½·¢ËÍÏŞÖÆ£¬¼Ù×°ÔÚ·¢ËÍ£¬È»ºóÌáÊ¾³É¹¦ÁË£¬¾ÍĞĞÁË
+        // å·²è¾¾åˆ°å‘é€é™åˆ¶ï¼Œå‡è£…åœ¨å‘é€ï¼Œç„¶åæç¤ºæˆåŠŸäº†ï¼Œå°±è¡Œäº†
         LRESULT nouse = 0;
         SyncInvoke(QUserFeedbackWnd, AsyncFakeSend, NULL, nouse);
     }
@@ -55,11 +55,11 @@ void QUserFeedbackWnd::OnclkSubmit( HELEMENT he )
     XMsgBox::OkMsgBox(FormatSendResult(lRet));
     switch(lRet)
     {
-    case SENDFEEDBACK_RESULT_MAXSENDREACHED:// = -2,    // ´ïµ½Ã¿Ìì×î¶àÄÜ·¢ËÍµÄ·´¿¹ÊıÄ¿
+    case SENDFEEDBACK_RESULT_MAXSENDREACHED:// = -2,    // è¾¾åˆ°æ¯å¤©æœ€å¤šèƒ½å‘é€çš„åæŠ—æ•°ç›®
         break;
     case SENDFEEDBACK_RESULT_OK:// = 0,
         IncreaseFeedback();
-        // É¾³ıµô±¸·İÎÄ¼ş
+        // åˆ é™¤æ‰å¤‡ä»½æ–‡ä»¶
         ::DeleteFile(_FeedbackBackpath());
 
         PostMessage(WM_CLOSE);
@@ -68,11 +68,11 @@ void QUserFeedbackWnd::OnclkSubmit( HELEMENT he )
     case SENDFEEDBACK_RESULT_NOCLIENTMAIL://,
     case SENDFEEDBACK_RESULT_NOSERVERMAIL://,
     case SENDFEEDBACK_RESULT_FAIL:// = -1,
-        // ¼ÇÂ¼ÏÂfeedback£¬µÈÓĞ»ú»áÔÙ·¢ËÍ
+        // è®°å½•ä¸‹feedbackï¼Œç­‰æœ‰æœºä¼šå†å‘é€
         BackupFeedback();
         break;
     }
-    // ÆôÓÃ·¢ËÍ°´Å¥
+    // å¯ç”¨å‘é€æŒ‰é’®
     tblInput.EnableCtrl(TRUE);
 }
 
@@ -84,7 +84,7 @@ BOOL QUserFeedbackWnd::Show( const CStdString& sSubject , const CStdString& sSen
         pThis->Create(QUIGetMainWnd(), WS_POPUP | WS_VISIBLE, 
             WS_EX_TOOLWINDOW | WS_EX_TOPMOST);
     
-        // ¾ÓÖĞÏÔÊ¾
+        // å±…ä¸­æ˜¾ç¤º
         pThis->CenterWindow();
 
         pThis->sender_name_ = sSenderName;
@@ -130,15 +130,15 @@ CStdString QUserFeedbackWnd::FormatSendResult( SENDFEEDBACK_RESULT s )
     CStdString sRet;
     switch (s)
     {
-    case SENDFEEDBACK_RESULT_MAXSENDREACHED:// = -2,    // ´ïµ½Ã¿Ìì×î¶àÄÜ·¢ËÍµÄ·´¿¹ÊıÄ¿
+    case SENDFEEDBACK_RESULT_MAXSENDREACHED:// = -2,    // è¾¾åˆ°æ¯å¤©æœ€å¤šèƒ½å‘é€çš„åæŠ—æ•°ç›®
     case SENDFEEDBACK_RESULT_OK:// = 0,
-        sRet.Format(L"ÊÕµ½£¡Ğ»Ğ»ÄúµÄ½¨Òé¡£");
+        sRet.Format(L"æ”¶åˆ°ï¼è°¢è°¢æ‚¨çš„å»ºè®®ã€‚");
         break;
 
     case SENDFEEDBACK_RESULT_NOCLIENTMAIL://,
     case SENDFEEDBACK_RESULT_NOSERVERMAIL://,
     case SENDFEEDBACK_RESULT_FAIL:// = -1,
-        sRet.Format(L"Ã»ÓĞ³É¹¦...");
+        sRet.Format(L"æ²¡æœ‰æˆåŠŸ...");
         break;
     }
     return sRet;
@@ -146,7 +146,7 @@ CStdString QUserFeedbackWnd::FormatSendResult( SENDFEEDBACK_RESULT s )
 
 LRESULT QUserFeedbackWnd::AsyncFakeSend( LPVOID )
 {
-    // Ë¯Ãß5Ãë£¬¼Ù×°ÊÇÔÚ·¢ËÍ
+    // ç¡çœ 5ç§’ï¼Œå‡è£…æ˜¯åœ¨å‘é€
     Sleep(5000);
 
     return SENDFEEDBACK_RESULT_MAXSENDREACHED;
@@ -228,9 +228,9 @@ BOOL QUserFeedbackWnd::SaveContactInfo()
 CStdString QUserFeedbackWnd::MakeContent( const CStdString& sTxt, const CStdString& sMail )
 {
     CStdString str;
-    str = L"Òâ¼û£º\r\n";
+    str = L"æ„è§ï¼š\r\n";
     str += sTxt;
-    str += L"\r\nÁªÏµ·½Ê½£º\r\n";
+    str += L"\r\nè”ç³»æ–¹å¼ï¼š\r\n";
     str += sMail;
     return str;
 }

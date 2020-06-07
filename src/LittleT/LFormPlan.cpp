@@ -1,4 +1,4 @@
-#include "LFormPlan.h"
+ï»¿#include "LFormPlan.h"
 #include "../common/LittleTUIcmn.h"
 #include "LFormStage.h"
 #include "ui/QUIGlobal.h"
@@ -50,7 +50,7 @@ void LFormPlan::OnMenuItemDelete( HELEMENT,EMenuItem mi )
     if (NULL == pPlan)
         return;
 
-    if (XMsgBox::YesNoMsgBox(L"È·¶¨ÒªÉ¾³ıÕâ¸ö¼Æ»®Âğ£¿<br> <b .red>É¾³ıºó²»¿ÉÒÔ»Ö¸´</b>") == IDYES)
+    if (XMsgBox::YesNoMsgBox(L"ç¡®å®šè¦åˆ é™¤è¿™ä¸ªè®¡åˆ’å—ï¼Ÿ<br> <b .red>åˆ é™¤åä¸å¯ä»¥æ¢å¤</b>") == IDYES)
     {
         if (QPlanMan::GetInstance()->DeletePlan(pPlan->ID()))
         {
@@ -70,7 +70,7 @@ void LFormPlan::OnMenuItemNewStage( HELEMENT,EMenuItem mi )
     QPlan* pPlan = GetCurrentPlan();
     if (NULL == pPlan)
     {
-        XMsgBox::OkMsgBox(L"ÇëĞÂ½¨Ò»¸ö¼Æ»®");
+        XMsgBox::OkMsgBox(L"è¯·æ–°å»ºä¸€ä¸ªè®¡åˆ’");
         return ;
     }
 
@@ -90,10 +90,10 @@ void LFormPlan::OnPlanItemSelectChanged(HELEMENT he)
     ctlTitle.SetData(pPlan);
     ctlTitle.SetText(pPlan->Plan());
 
-    // Òş²Ø×Ô¼º
+    // éšè—è‡ªå·±
     ::HTMLayoutHidePopup(GetCtrl("#list-plan>popup"));
 
-    // ·´ÉäÊÂ¼ş£¬ÈÃ¸¸´°¿ÚÒ²´¦Àí´ËÊÂ¼ş
+    // åå°„äº‹ä»¶ï¼Œè®©çˆ¶çª—å£ä¹Ÿå¤„ç†æ­¤äº‹ä»¶
     QUIPostCodeTo(GetSafeHwnd(), VIEWPLAN_NOTIFY_PLANSELCHANGED, (LPARAM)pPlan);
 //    ReflectThisEvent();
 }
@@ -126,8 +126,8 @@ void LFormPlan::RefreshPlanItem(ETable &tblPlan)
 
     CStdString sHtml;
     sHtml.Format(
-        L"<tr> <td .plan-title>%s</td> <td .plan-time>[%s - %s]</td></tr>"   // ¼Æ»®Ãû£¬ÖÜÆÚ
-        L"<tr> <td .plan-des colspan=2>%s</td> </tr>", // ¼Æ»®ÃèÊö
+        L"<tr> <td .plan-title>%s</td> <td .plan-time>[%s - %s]</td></tr>"   // è®¡åˆ’åï¼Œå‘¨æœŸ
+        L"<tr> <td .plan-des colspan=2>%s</td> </tr>", // è®¡åˆ’æè¿°
         pPlan->Plan(),
         pPlan->BeginTime().Format(L"%Y/%m/%d"),
         pPlan->EndTime().Format(L"%Y/%m/%d"),
@@ -154,7 +154,7 @@ ETable LFormPlan::AddPlan(QPlan *pPlan)
 BOOL LFormPlan::SelectPlanItem( __in ETable tblPlan /*= NULL*/ )
 {
     if ( !tblPlan.is_valid() )
-    {   // ÎŞĞ§µÄ»°£¬Ñ¡ÖĞµÚÒ»¸öÏîÄ¿
+    {   // æ— æ•ˆçš„è¯ï¼Œé€‰ä¸­ç¬¬ä¸€ä¸ªé¡¹ç›®
         ECtrl ctlPlanBox = _PlanBox();
         if ( ctlPlanBox.children_count() )
         {
@@ -178,7 +178,7 @@ BOOL LFormPlan::SelectPlanItem( __in ETable tblPlan /*= NULL*/ )
     else
     {
         pSel = nullptr;
-        _PlanTitle().SetText(L"{»¹Ã»ÓĞ¼Æ»®}");
+        _PlanTitle().SetText(L"{è¿˜æ²¡æœ‰è®¡åˆ’}");
     }
 
     QUIPostCodeTo(GetSafeHwnd(), VIEWPLAN_NOTIFY_PLANSELCHANGED, (LPARAM)pSel);
@@ -188,17 +188,17 @@ BOOL LFormPlan::SelectPlanItem( __in ETable tblPlan /*= NULL*/ )
 
 void LFormPlan::OnPlanItemClicked( HELEMENT he )
 {
-    // Òş²Ø×Ô¼º
+    // éšè—è‡ªå·±
     ::HTMLayoutHidePopup(GetCtrl("#list-plan>popup"));
 }
 
 void LFormPlan::NewPlanAdded( QPlan *pPlan )
 {
     ETable tbl = AddPlan(pPlan);
-    // ×ªµ½ĞÂ½¨µÄ¼Æ»®ÏîÄ¿
+    // è½¬åˆ°æ–°å»ºçš„è®¡åˆ’é¡¹ç›®
     SelectPlanItem(tbl);
 
-//     if (XMsgBox::YesNoMsgBox(L"¼Æ»®ÒÑ¾­Ìí¼Ó£¬ÊÇ·ñ¹æ»®Ò»ÏÂ£¿") == IDYES)
+//     if (XMsgBox::YesNoMsgBox(L"è®¡åˆ’å·²ç»æ·»åŠ ï¼Œæ˜¯å¦è§„åˆ’ä¸€ä¸‹ï¼Ÿ") == IDYES)
 //     {
 //         OnMenuItemNewStage(NULL,NULL);
 //     }
@@ -222,7 +222,7 @@ BOOL LPlanDlg::CheckDate(__out QTime &tmBegin,__out QTime &tmEnd)
 //     QTime tmNow = QTime::GetCurrentTime();
 //     if ((tmBegin.CompareDate(tmNow) < 0) || (tmBegin >= tmEnd))
 //     {
-//         XMsgBox::OkMsgBox(L"ÇëÉè¶¨Ò»¸öÕıÈ·µÄÈÎÎñÖÜÆÚ");
+//         XMsgBox::OkMsgBox(L"è¯·è®¾å®šä¸€ä¸ªæ­£ç¡®çš„ä»»åŠ¡å‘¨æœŸ");
 //         return FALSE;
 //     }
     return TRUE;
@@ -243,11 +243,11 @@ BOOL LPlanDlg::OnDefaultButton( INT_PTR nBtn )
     CStdString sPlan = EEdit(GetCtrl("#txt-plan")).GetText().Trim();
     if (sPlan.IsEmpty())
     {
-        XMsgBox::OkMsgBox(L"¼Æ»®²»ÄÜÎª¿Õ");
+        XMsgBox::OkMsgBox(L"è®¡åˆ’ä¸èƒ½ä¸ºç©º");
         return FALSE;
     }
 
-    // ĞèÒª²âÊÔ
+    // éœ€è¦æµ‹è¯•
     BOOL bOK = FALSE;
     if (m_bEditMode)
     {
@@ -268,7 +268,7 @@ BOOL LPlanDlg::OnDefaultButton( INT_PTR nBtn )
     }
     if (!bOK)
     {
-        XMsgBox::ErrorMsgBox(L"²Ù×÷Ê§°Ü£¡ÇëÖØÊÔ.");
+        XMsgBox::ErrorMsgBox(L"æ“ä½œå¤±è´¥ï¼è¯·é‡è¯•.");
         return FALSE;
     }
     return TRUE;
@@ -283,7 +283,7 @@ BOOL LPlanDlg::CheckMemberParameters()
     }
     if ( !bOK )
     {
-        XMsgBox::ErrorMsgBox(L"Êı¾İ´íÎó£¬²Ù×÷Ê§°Ü!");
+        XMsgBox::ErrorMsgBox(L"æ•°æ®é”™è¯¯ï¼Œæ“ä½œå¤±è´¥!");
     }
     return bOK;
 }

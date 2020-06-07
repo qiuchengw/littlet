@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <list>
 #include "time/QTime.h"
@@ -9,88 +9,88 @@
 
 // enum ENUM_AUTOTASK_EXECFLAG
 // {
-//     AUTOTASK_EXEC_NOTSET	= 0,	// ÏµÍ³Æô¶¯
-//     // Ïà¶ÔÊ±¼ä
-//     AUTOTASK_EXEC_AFTERSYSBOOT	= 0x00000001,	// ÏµÍ³Æô¶¯
-//     AUTOTASK_EXEC_AFTERTASKSTART = 0x00000002,	// ÈÎÎñÆô¶¯
-//     AUTOTASK_EXEC_AFTERMINDERSTART = 0x00000004,// ±¾³ÌĞòÆô¶¯
-//     AUTOTASK_EXEC_AFTERPROGSTART = 0x00000008,// Íâ²¿³ÌĞòÆô¶¯
-//     AUTOTASK_EXEC_AFTERPROGEXIT = 0x00000010,// Íâ²¿³ÌĞòÍË³ö
-//     // ¾ø¶ÔÊ±¼ä±ê¼Ç
-//     AUTOTASK_EXEC_ATDATE = 0x00010000,	// ¾ø¶ÔÈÕÆÚ 2011/11/11
-//     AUTOTASK_EXEC_ATDAILY = 0x00020000,	// Ã¿¸ôxÌì
-//     AUTOTASK_EXEC_ATMONTHDAY = 0x00040000,	// Ã¿ÔÂµÄxºÅ
-//     AUTOTASK_EXEC_ATWEEKDAY = 0x00080000,	// Ã¿ÔÂµÄxÖÜ x[ËùÓĞÖÜ|µÚÒ»ÖÜ|¡£¡£|µÚ4ÖÜ]
+//     AUTOTASK_EXEC_NOTSET	= 0,	// ç³»ç»Ÿå¯åŠ¨
+//     // ç›¸å¯¹æ—¶é—´
+//     AUTOTASK_EXEC_AFTERSYSBOOT	= 0x00000001,	// ç³»ç»Ÿå¯åŠ¨
+//     AUTOTASK_EXEC_AFTERTASKSTART = 0x00000002,	// ä»»åŠ¡å¯åŠ¨
+//     AUTOTASK_EXEC_AFTERMINDERSTART = 0x00000004,// æœ¬ç¨‹åºå¯åŠ¨
+//     AUTOTASK_EXEC_AFTERPROGSTART = 0x00000008,// å¤–éƒ¨ç¨‹åºå¯åŠ¨
+//     AUTOTASK_EXEC_AFTERPROGEXIT = 0x00000010,// å¤–éƒ¨ç¨‹åºé€€å‡º
+//     // ç»å¯¹æ—¶é—´æ ‡è®°
+//     AUTOTASK_EXEC_ATDATE = 0x00010000,	// ç»å¯¹æ—¥æœŸ 2011/11/11
+//     AUTOTASK_EXEC_ATDAILY = 0x00020000,	// æ¯éš”xå¤©
+//     AUTOTASK_EXEC_ATMONTHDAY = 0x00040000,	// æ¯æœˆçš„xå·
+//     AUTOTASK_EXEC_ATWEEKDAY = 0x00080000,	// æ¯æœˆçš„xå‘¨ x[æ‰€æœ‰å‘¨|ç¬¬ä¸€å‘¨|ã€‚ã€‚|ç¬¬4å‘¨]
 //
 //     //////////////////////////////////////////////////////////////////////////
-//     AUTOTASK_EXEC_RELATE_EXECANDTHEN = 0x01000000,	// Ïà¶ÔÊ±¼äÖ®ºóÔÙ´ÎÖ´ĞĞ¶à´Î¼ä¸ô
+//     AUTOTASK_EXEC_RELATE_EXECANDTHEN = 0x01000000,	// ç›¸å¯¹æ—¶é—´ä¹‹åå†æ¬¡æ‰§è¡Œå¤šæ¬¡é—´éš”
 //
 // };
 //
-// // ÈÎÎñÔËĞĞÊ±×´Ì¬
+// // ä»»åŠ¡è¿è¡Œæ—¶çŠ¶æ€
 // enum ENUM_AUTOTASK_RUNNING_STATUS
 // {
-//     AUTOTASK_RUNNING_STATUS_BADTIMER = -2,	// ²»ÄÜ½âÎötimer±í´ïÊ½
-//     AUTOTASK_RUNNING_STATUS_APPERROR = -1,	// Ó¦ÓÃ³ÌĞò³öÏÖÁË´íÎó
-//     AUTOTASK_RUNNING_STATUS_OK = 0,	// ÈÎÎñÕı³£Æô¶¯
-//     AUTOTASK_RUNNING_STATUS_NOTSTARTUP = 1,	// ÈÎÎñ»¹Î´Æô¶¯
-//     AUTOTASK_RUNNING_STATUS_PAUSED,	// ÈÎÎñ»¹Î´Æô¶¯
-//     AUTOTASK_RUNNING_STATUS_OVERDUE,	// ÈÎÎñ¹ıÆÚÁË
-//     AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT,	// ĞèÒªÏÂ´Î»úÆ÷ÖØÆô£¬ÈÎÎñ²ÅÖ´ĞĞ
-//     AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT,	// ĞèÒª³ÌĞòÖØÆô£¬ÈÎÎñ²ÅÖ´ĞĞ
-//     AUTOTASK_RUNNING_STATUS_BASEDONEXETERNALPROG,	// ÒÀÀµµÄÍâ²¿³ÌĞò²¢Ã»ÓĞÔËĞĞ
+//     AUTOTASK_RUNNING_STATUS_BADTIMER = -2,	// ä¸èƒ½è§£ætimerè¡¨è¾¾å¼
+//     AUTOTASK_RUNNING_STATUS_APPERROR = -1,	// åº”ç”¨ç¨‹åºå‡ºç°äº†é”™è¯¯
+//     AUTOTASK_RUNNING_STATUS_OK = 0,	// ä»»åŠ¡æ­£å¸¸å¯åŠ¨
+//     AUTOTASK_RUNNING_STATUS_NOTSTARTUP = 1,	// ä»»åŠ¡è¿˜æœªå¯åŠ¨
+//     AUTOTASK_RUNNING_STATUS_PAUSED,	// ä»»åŠ¡è¿˜æœªå¯åŠ¨
+//     AUTOTASK_RUNNING_STATUS_OVERDUE,	// ä»»åŠ¡è¿‡æœŸäº†
+//     AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT,	// éœ€è¦ä¸‹æ¬¡æœºå™¨é‡å¯ï¼Œä»»åŠ¡æ‰æ‰§è¡Œ
+//     AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT,	// éœ€è¦ç¨‹åºé‡å¯ï¼Œä»»åŠ¡æ‰æ‰§è¡Œ
+//     AUTOTASK_RUNNING_STATUS_BASEDONEXETERNALPROG,	// ä¾èµ–çš„å¤–éƒ¨ç¨‹åºå¹¶æ²¡æœ‰è¿è¡Œ
 //     //////////////////////////////////////////////////////////////////////////
-//     // ¾ø¶ÔÊ±¼ä
-//     AUTOTASK_RUNNING_STATUS_TIMENOTMATCH,	// ÎŞ¿ÉÖ´ĞĞµÄÊ±¼äÆ¥Åä
-//     AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC,	// ËäÈ»ÈÎÎñÎ´¹ıÆÚ£¬µ«ÊÇÓàÏÂµÄÊ±¼äÀï£¬ÈÎÎñ¶¼Ã»ÓĞ»ú»áÔÙÖ´ĞĞÁË
+//     // ç»å¯¹æ—¶é—´
+//     AUTOTASK_RUNNING_STATUS_TIMENOTMATCH,	// æ— å¯æ‰§è¡Œçš„æ—¶é—´åŒ¹é…
+//     AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC,	// è™½ç„¶ä»»åŠ¡æœªè¿‡æœŸï¼Œä½†æ˜¯ä½™ä¸‹çš„æ—¶é—´é‡Œï¼Œä»»åŠ¡éƒ½æ²¡æœ‰æœºä¼šå†æ‰§è¡Œäº†
 // };
 
 //
-// // ÈÎÎñÓÅÏÈ¼¶
+// // ä»»åŠ¡ä¼˜å…ˆçº§
 // enum ENUM_TASK_PRIORITY
 // {
-// 	TASK_PRIORITY_LOWEST = 1,	// ×îµÍ
-// 	TASK_PRIORITY_LOW = 2,		// µÍ
-// 	TASK_PRIORITY_NOMAL = 3,	// Õı³£
-// 	TASK_PRIORITY_HIGH = 4,		// ¸ß
-// 	TASK_PRIORITY_HIGHEST = 5,	// ×î¸ßÓÅÏÈ¼¶
+// 	TASK_PRIORITY_LOWEST = 1,	// æœ€ä½
+// 	TASK_PRIORITY_LOW = 2,		// ä½
+// 	TASK_PRIORITY_NOMAL = 3,	// æ­£å¸¸
+// 	TASK_PRIORITY_HIGH = 4,		// é«˜
+// 	TASK_PRIORITY_HIGHEST = 5,	// æœ€é«˜ä¼˜å…ˆçº§
 // };
 //
 
 /************************************************************************/
 /*
-Ïà¶ÔÊ±¼ä±í´ïÊ½£º
+ç›¸å¯¹æ—¶é—´è¡¨è¾¾å¼ï¼š
 	R=1;P=20m;Q=22m;C=100;
-	R: Ïà¶ÔÓÚ1£¨TASK_EXEC_AFTERSYSBOOT£©
-	P: 20minutesºóÖ´ĞĞÈÎÎñ P[1s~24h]
-	Q: È»ºóÃ¿¸ö22minutesÖ´ĞĞÒ»´Î Q[1s~24h]
-	C: Ö´ĞĞ100´ÎºóÍ£Ö¹£¬C[1~86400]
+	R: ç›¸å¯¹äº1ï¼ˆTASK_EXEC_AFTERSYSBOOTï¼‰
+	P: 20minutesåæ‰§è¡Œä»»åŠ¡ P[1s~24h]
+	Q: ç„¶åæ¯ä¸ª22minutesæ‰§è¡Œä¸€æ¬¡ Q[1s~24h]
+	C: æ‰§è¡Œ100æ¬¡ååœæ­¢ï¼ŒC[1~86400]
 
-¾ø¶ÔÊ±¼ä±í´ïÊ½£º
+ç»å¯¹æ—¶é—´è¡¨è¾¾å¼ï¼š
 	A=d;S=d;E=d;P=d;T=d1,d2,d3...;X=s;
 	
-    A: Ö´ĞĞÊ±¼ä±êÖ¾ENUM_TASK_EXECFLAG
+    A: æ‰§è¡Œæ—¶é—´æ ‡å¿—ENUM_TASK_EXECFLAG
 	
-    S,E: ÆğÖ¹ÈÕÆÚ£¬ÈÎÎñµÄÓĞĞ§ÆÚ
+    S,E: èµ·æ­¢æ—¥æœŸï¼Œä»»åŠ¡çš„æœ‰æ•ˆæœŸ
 
-    P: µ¥¸öINTÖµ
-		¼ä¸ôÈÕÆÚ£ºA=TASK_EXEC_ATDAILYÓĞĞ§£¬µ¥Î»Ìì¡£ ±ÈÈçÃ¿¸ô3Ìì P=3;
+    P: å•ä¸ªINTå€¼
+		é—´éš”æ—¥æœŸï¼šA=TASK_EXEC_ATDAILYæœ‰æ•ˆï¼Œå•ä½å¤©ã€‚ æ¯”å¦‚æ¯éš”3å¤© P=3;
 
-    Q: µ¥¸öINTÖµ
-        ÌáÇ°ÌìÊı£ºA=AUTOTASK_EXEC_ATYEARDAYÓĞĞ§£¬µ¥Î»Ìì£¬±ÈÈçÌáÇ°3Ìì
+    Q: å•ä¸ªINTå€¼
+        æå‰å¤©æ•°ï¼šA=AUTOTASK_EXEC_ATYEARDAYæœ‰æ•ˆï¼Œå•ä½å¤©ï¼Œæ¯”å¦‚æå‰3å¤©
 
-	T: Ö´ĞĞÊ±¼äµã£¬Ò»¸ö»ò¶à¸öINTÖµ£¬´ËÖµ¿É½âÎöÎª¾ø¶ÔÊ±¼ä
-		±ÈÈçÒ»ÌìÖĞµÄ13£º30£¬14£º30£¬16£º20¡£¡£¡£
+	T: æ‰§è¡Œæ—¶é—´ç‚¹ï¼Œä¸€ä¸ªæˆ–å¤šä¸ªINTå€¼ï¼Œæ­¤å€¼å¯è§£æä¸ºç»å¯¹æ—¶é—´
+		æ¯”å¦‚ä¸€å¤©ä¸­çš„13ï¼š30ï¼Œ14ï¼š30ï¼Œ16ï¼š20ã€‚ã€‚ã€‚
 
-	X: 1¸ö¶à¸öÕûÊıÖµ£¬ÒÔ¡®,¡¯·Ö¸ô£¬¾ßÌåº¬ÒåÓÉA¾ö¶¨
-		1>A=TASK_EXEC_ATDATE, XÎª¶à¸öÈÕÆÚµã£¬¿É½âÎöÎªÈÕÆÚ
-		2>A=TASK_EXEC_ATDAILY, XÎªÒ»¸öµ¥¸öÖµ£¬±£´æP¼ä¸ôµÄÌìÊı
-		3>A=TASK_EXEC_ATMONTHDAY, XÒ»¸öÕûÊıÖµ´ú±íÎªÔÂµÄÈÕºÅ
-				´ËÊıÖµÎªÄÄÒ»Ìì¿ÉÖ´ĞĞ£¬Ê¹ÓÃÎ»±êÊ¾£¬¹²32Î»£¬×îµÍÎ»Îª1ºÅ..
-		4>A=TASK_EXEC_ATWEEKDAY, X°üº¬Ò»¸öÕûÊıÖµ£¬
-				´ËÖµ±íÊ¾ÄÄÒ»Ìì£¨ĞÇÆÚÈÕµ½ĞÇÆÚÁù£©¿ÉÖ´ĞĞ£¬Ê¹ÓÃÎ»±êÊ¶±íÊ¾£¬ENUM_NTH_WEEKDAY
-        5>A=AUTOTASK_EXEC_ATYEARDAY£¬XÎªÒ»¸öÕûÊıÖµ£¬´ú±í [ÔÂ-ÈÕ] 
-                Ã¿ÄêµÄÄ³¸öÈÕÆÚ 2011~2020 µÄ [11/11]£¬¿ÉÒÔÓĞÒ»¸öÌáÇ°Á¿¡£ÀàËÆÓÚÉúÈÕÌáĞÑ
+	X: 1ä¸ªå¤šä¸ªæ•´æ•°å€¼ï¼Œä»¥â€˜,â€™åˆ†éš”ï¼Œå…·ä½“å«ä¹‰ç”±Aå†³å®š
+		1>A=TASK_EXEC_ATDATE, Xä¸ºå¤šä¸ªæ—¥æœŸç‚¹ï¼Œå¯è§£æä¸ºæ—¥æœŸ
+		2>A=TASK_EXEC_ATDAILY, Xä¸ºä¸€ä¸ªå•ä¸ªå€¼ï¼Œä¿å­˜Pé—´éš”çš„å¤©æ•°
+		3>A=TASK_EXEC_ATMONTHDAY, Xä¸€ä¸ªæ•´æ•°å€¼ä»£è¡¨ä¸ºæœˆçš„æ—¥å·
+				æ­¤æ•°å€¼ä¸ºå“ªä¸€å¤©å¯æ‰§è¡Œï¼Œä½¿ç”¨ä½æ ‡ç¤ºï¼Œå…±32ä½ï¼Œæœ€ä½ä½ä¸º1å·..
+		4>A=TASK_EXEC_ATWEEKDAY, XåŒ…å«ä¸€ä¸ªæ•´æ•°å€¼ï¼Œ
+				æ­¤å€¼è¡¨ç¤ºå“ªä¸€å¤©ï¼ˆæ˜ŸæœŸæ—¥åˆ°æ˜ŸæœŸå…­ï¼‰å¯æ‰§è¡Œï¼Œä½¿ç”¨ä½æ ‡è¯†è¡¨ç¤ºï¼ŒENUM_NTH_WEEKDAY
+        5>A=AUTOTASK_EXEC_ATYEARDAYï¼ŒXä¸ºä¸€ä¸ªæ•´æ•°å€¼ï¼Œä»£è¡¨ [æœˆ-æ—¥] 
+                æ¯å¹´çš„æŸä¸ªæ—¥æœŸ 2011~2020 çš„ [11/11]ï¼Œå¯ä»¥æœ‰ä¸€ä¸ªæå‰é‡ã€‚ç±»ä¼¼äºç”Ÿæ—¥æé†’
 */
 /************************************************************************/
 
@@ -118,7 +118,7 @@ enum ENUM_NTH_WEEKDAY
 
 enum ENUM_TIMER_FLAG
 {
-    TIMER_FLAG_REMINDERDISABLED = 0x00000001,	// ÆôÓÃÌáÊ¾¶¨Ê±Æ÷
+    TIMER_FLAG_REMINDERDISABLED = 0x00000001,	// å¯ç”¨æç¤ºå®šæ—¶å™¨
 };
 
 CStdString GetRunningStatusDescription(ENUM_AUTOTASK_RUNNING_STATUS eStatus);
@@ -140,7 +140,7 @@ public:
            LPCWSTR szWhen,LPCWSTR szReminder,LPCWSTR szXFiled);
     ~QTimer(void);
 
-    // ¸üĞÂÊı¾İ
+    // æ›´æ–°æ•°æ®
     BOOL Update(int nTimerID, QTime tmB, QTime tmEnd, LPCWSTR szExpWhen,
                 LPCWSTR szExpRemind, LPCWSTR szExpXFiled);
 
@@ -149,12 +149,12 @@ public:
         m_pTEH = pHandler;
     }
 
-    // Ö´ĞĞÈÎÎñÇ°µÄÌáÊ¾±í´ïÊ½
-    // ¸ñÊ½£º
+    // æ‰§è¡Œä»»åŠ¡å‰çš„æç¤ºè¡¨è¾¾å¼
+    // æ ¼å¼ï¼š
     // A=15[s|h|m];\nsound=path;\nmsg=message;\n
-    // A=15[s|h|m] Ö´ĞĞÈÎÎñÇ°15[Ãë£¬·Ö£¬Ê±]ÌáÊ¾
-    // S=path; path ÎªÉùÒôÎÄ¼şÂ·¾¶ ,¿ÕÎª²»²¥·ÅÉùÒô
-    // M=message; messsage Îª×Ô¶¨ÒåÏûÏ¢£¬¿ÕÎªÎŞ×Ô¶¨ÒåÏûÏ¢
+    // A=15[s|h|m] æ‰§è¡Œä»»åŠ¡å‰15[ç§’ï¼Œåˆ†ï¼Œæ—¶]æç¤º
+    // S=path; path ä¸ºå£°éŸ³æ–‡ä»¶è·¯å¾„ ,ç©ºä¸ºä¸æ’­æ”¾å£°éŸ³
+    // M=message; messsage ä¸ºè‡ªå®šä¹‰æ¶ˆæ¯ï¼Œç©ºä¸ºæ— è‡ªå®šä¹‰æ¶ˆæ¯
     static BOOL ParseRemindExp( const CStdString&sExp,__out int &nA,
                                 __out WCHAR&cAUnit,__out CStdString&sSound,__out CStdString&sMsg );
 
@@ -162,18 +162,18 @@ public:
     
     //----------------------------------------------------------
     // status
-    // ¶¨Ê±Æ÷ÊÇ·ñÒÑ¾­Æô¶¯
+    // å®šæ—¶å™¨æ˜¯å¦å·²ç»å¯åŠ¨
     inline BOOL IsStarted()const
     {
         return m_hTimerTask != NULL;
     }
     
-    // nTaskID Èç¹û²»ÎªÎŞĞ§id£¬ÄÇÃ´Èç¹ûÍ£Ö¹Ê§°Ü£¬Ôò³¢ÊÔÖØÆôÈÎÎñ
+    // nTaskID å¦‚æœä¸ä¸ºæ— æ•ˆidï¼Œé‚£ä¹ˆå¦‚æœåœæ­¢å¤±è´¥ï¼Œåˆ™å°è¯•é‡å¯ä»»åŠ¡
     BOOL Stop(HANDLE hTimerQueue, int nTaskID = INVALID_ID);
     
     ENUM_AUTOTASK_RUNNING_STATUS Start( HANDLE hTimerQueue ,int nTaskID);
     
-    // Ìø¹ı´Ë´ÎÈÎÎñµÄÖ´ĞĞ£¬Ö±½Óµ½ÏÂÒ»´ÎÖ´ĞĞÊ±¼äÖ´ĞĞ
+    // è·³è¿‡æ­¤æ¬¡ä»»åŠ¡çš„æ‰§è¡Œï¼Œç›´æ¥åˆ°ä¸‹ä¸€æ¬¡æ‰§è¡Œæ—¶é—´æ‰§è¡Œ
     ENUM_AUTOTASK_RUNNING_STATUS JumpoverThisExec(HANDLE hTimerQueue,int nTaskID);
 
     inline QTime NextExecTime()const
@@ -182,7 +182,7 @@ public:
         return m_tmNextExec;
     }
     
-    // ¼ì²éÈÎÎñÊÇ·ñºÏ·¨»ò¹ıÆÚ£¬²¢²»ÕæÕıÉè¶¨¶¨Ê±Æ÷
+    // æ£€æŸ¥ä»»åŠ¡æ˜¯å¦åˆæ³•æˆ–è¿‡æœŸï¼Œå¹¶ä¸çœŸæ­£è®¾å®šå®šæ—¶å™¨
     ENUM_AUTOTASK_RUNNING_STATUS TestStart( );
 
     inline BOOL IsReminderEnabled()const
@@ -215,11 +215,11 @@ public:
         return eflag_exec_;
     }
 
-    // tmTestÖ®ºóµÄÏÂ´ÎÖ´ĞĞÊ±¼ä
-    // tmTest ½«±»µ÷Õû£¬ºÁÃë¼¶±ğ½«»áºöÂÔÖÃÎª0
+    // tmTestä¹‹åçš„ä¸‹æ¬¡æ‰§è¡Œæ—¶é—´
+    // tmTest å°†è¢«è°ƒæ•´ï¼Œæ¯«ç§’çº§åˆ«å°†ä¼šå¿½ç•¥ç½®ä¸º0
     ENUM_AUTOTASK_RUNNING_STATUS GetNextExecTimeFrom(__inout QTime& tmTest, __out QTime& tmExec) const;
 
-    // ÏÂÒ»´ÎÖ®ºóÒ»´ÎµÄÖ´ĞĞÊ±¼ä
+    // ä¸‹ä¸€æ¬¡ä¹‹åä¸€æ¬¡çš„æ‰§è¡Œæ—¶é—´
     ENUM_AUTOTASK_RUNNING_STATUS GetNextNextExecTime(__out QTime& tmExec) const;
 
     BOOL SetLifeTime(QTime tmLifeBegin,QTime tmLifeEnd);
@@ -242,8 +242,8 @@ public:
     }
 
 protected:
-    // ´ÓÊ±¼ätmBegin¿ªÊ¼Éè¶¨ÈÎÎñ£¬
-    // Õâ¸öº¯ÊıÖ»ÄÜÔÚQTimerÄÚ²¿µ÷ÓÃ
+    // ä»æ—¶é—´tmBeginå¼€å§‹è®¾å®šä»»åŠ¡ï¼Œ
+    // è¿™ä¸ªå‡½æ•°åªèƒ½åœ¨QTimerå†…éƒ¨è°ƒç”¨
     ENUM_AUTOTASK_RUNNING_STATUS StartFrom(QTime &tmBegin,HANDLE hTimerQueue ,int nTaskID);
 
 public: // relate
@@ -252,7 +252,7 @@ public: // relate
         return m_dwSpan;
     }
 
-    // ½âÎöÎªÃë·µ»Ø
+    // è§£æä¸ºç§’è¿”å›
     DWORD GetExecSpanSeconds()const ;
     
     inline WCHAR GetExecSpanUnit()const
@@ -277,7 +277,7 @@ public: // relate
         return m_iExecCount;
     }
 
-    // Ö´ĞĞµÚÒ»´ÎºóÊÇ·ñÔÙ¼ä¸ôÖ´ĞĞ
+    // æ‰§è¡Œç¬¬ä¸€æ¬¡åæ˜¯å¦å†é—´éš”æ‰§è¡Œ
     inline BOOL IsExecSpan2()const
     {
         return (m_dwSpan2>0);
@@ -289,15 +289,15 @@ public: // relate
     }
 
 public: // abs
-    /** ¾ø¶ÔÊ±¼äµÄ£¬Ö´ĞĞÊ±¼äµã
+    /** ç»å¯¹æ—¶é—´çš„ï¼Œæ‰§è¡Œæ—¶é—´ç‚¹
      *	return:
-     *      Ê±¼äµã¸öÊı  >= 1
-     *      Èç¹û´íÎó£¬== 0
+     *      æ—¶é—´ç‚¹ä¸ªæ•°  >= 1
+     *      å¦‚æœé”™è¯¯ï¼Œ== 0
      *	params:
      *		-[out]
-     *      vTimes      Ê±¼äµã
+     *      vTimes      æ—¶é—´ç‚¹
     **/
-    // Ö´ĞĞÊ±¼äµã
+    // æ‰§è¡Œæ—¶é—´ç‚¹
     int GetExecTimeSpot(__out std::vector<QTime>& vTimes);
 
     DWORD GetExecDate( )const ;
@@ -330,8 +330,8 @@ protected:
     ENUM_AUTOTASK_RUNNING_STATUS _AbsTime_NextRightTimeFrom(__in const QTime&tmTest,
         __in const QTime& tmExec, __inout DWORD &dwNextExecTime) const;
 
-    // Õâ¸öº¯ÊıÓÃÓÚÏà¶ÔÊ±¼äÖ´ĞĞµÄ¸¨Öúº¯Êı
-    // Ïà¶ÔÓÚtmX£¬ÕÒ³ö´óÓÚµÈÓÚtmTestµÄÖ´ĞĞÊ±¼ä£¬·ÅÈëµ½tmExecÖĞ
+    // è¿™ä¸ªå‡½æ•°ç”¨äºç›¸å¯¹æ—¶é—´æ‰§è¡Œçš„è¾…åŠ©å‡½æ•°
+    // ç›¸å¯¹äºtmXï¼Œæ‰¾å‡ºå¤§äºç­‰äºtmTestçš„æ‰§è¡Œæ—¶é—´ï¼Œæ”¾å…¥åˆ°tmExecä¸­
     ENUM_AUTOTASK_RUNNING_STATUS _RelateTime_CheckWith( const QTime& tmX,
             const QTime& tmTest,__out QTime& tmExec) const;
 
@@ -360,49 +360,49 @@ protected:
     BOOL _ParseSpanTime(__in const CStdString &sExp , __out WCHAR& cUnit, __out DWORD& dwSpan );
 
     // 2,4,8,9
-    // ÒÔ Ó¢ÎÄ¡®,¡¯ ·Ö¸ôµÄÊı×Ö×Ö·û£¬×ª»»µ½ÕûÊıÖµ
+    // ä»¥ è‹±æ–‡â€˜,â€™ åˆ†éš”çš„æ•°å­—å­—ç¬¦ï¼Œè½¬æ¢åˆ°æ•´æ•°å€¼
     BOOL _ParseToIntArray( __inout CStdString& sExp,__out ExArray<int> & ar );
 
 private:
-    // Æô¶¯¶¨Ê±Æ÷µÄÊ±ºòµ÷ÓÃ£¬ÒÔÉè¶¨ÌáÇ°ÌáÊ¾ÈÎÎñ
-    // tmExec ÈÎÎñµÄÖ´ĞĞÊ±¼ä
+    // å¯åŠ¨å®šæ—¶å™¨çš„æ—¶å€™è°ƒç”¨ï¼Œä»¥è®¾å®šæå‰æç¤ºä»»åŠ¡
+    // tmExec ä»»åŠ¡çš„æ‰§è¡Œæ—¶é—´
     BOOL SetRemindTimer( HANDLE hTimerQueue ,int nTaskID,const QTime& tmExec);
     
-    // ÉèÖÃÌáÊ¾¶¨Ê±Æ÷±í´ïÊ½
+    // è®¾ç½®æç¤ºå®šæ—¶å™¨è¡¨è¾¾å¼
     BOOL SetRemindExp(LPCWSTR pszRmdExp);
 private:
-    int				m_nID;	// Êı¾İ¿âÖĞµÄid
-    CStdString			m_sExpWhen;		// ºÎÊ±×ö
-    CStdString			m_sExpRemind;	// ºÎÊ±ÌáĞÑ
+    int				m_nID;	// æ•°æ®åº“ä¸­çš„id
+    CStdString			m_sExpWhen;		// ä½•æ—¶åš
+    CStdString			m_sExpRemind;	// ä½•æ—¶æé†’
     ENUM_AUTOTASK_EXECFLAG	eflag_exec_;
-    ENUM_TIMER_TYPE		m_eTimerType;		// Ïà¶ÔÊ±¼ä»¹ÊÇ¾ø¶ÔÊ±¼äÈÎÎñ
-    QTime			m_tmLifeBegin;	// ÈÎÎñµÄÉúĞ§Ê±¼ä
-    QTime			m_tmLifeEnd;	// ÈÎÎñ¹ıÆÚÊ±¼ä
+    ENUM_TIMER_TYPE		m_eTimerType;		// ç›¸å¯¹æ—¶é—´è¿˜æ˜¯ç»å¯¹æ—¶é—´ä»»åŠ¡
+    QTime			m_tmLifeBegin;	// ä»»åŠ¡çš„ç”Ÿæ•ˆæ—¶é—´
+    QTime			m_tmLifeEnd;	// ä»»åŠ¡è¿‡æœŸæ—¶é—´
     CStdString			m_sXFiledExp;	//
-    HANDLE			m_hTimerTask;	// ¶ÓÁĞ¶¨Ê±Æ÷¾ä±ú
-    HANDLE			m_hTimerReminder;	// ÌáÇ°ÌáÊ¾¶¨Ê±Æ÷
-    QTime			m_tmNextExec; // ÏÂ´ÎÖ´ĞĞÊ±¼ä
+    HANDLE			m_hTimerTask;	// é˜Ÿåˆ—å®šæ—¶å™¨å¥æŸ„
+    HANDLE			m_hTimerReminder;	// æå‰æç¤ºå®šæ—¶å™¨
+    QTime			m_tmNextExec; // ä¸‹æ¬¡æ‰§è¡Œæ—¶é—´
     DWORD			m_dwTimerFlag;
-    TASK_REMINDER_PARAM   m_stTRP; // ÈÎÎñÌáÊ¾µÄÊı¾İ
-    QTimerEventHandlerBase*   m_pTEH;  // QTimer·¢ÉúµÄÊÂ¼ş½»¸øËü´¦Àí
+    TASK_REMINDER_PARAM   m_stTRP; // ä»»åŠ¡æç¤ºçš„æ•°æ®
+    QTimerEventHandlerBase*   m_pTEH;  // QTimerå‘ç”Ÿçš„äº‹ä»¶äº¤ç»™å®ƒå¤„ç†
 
 private:	// Relate;
-    // Ïà¶ÔÓÚENUM_TASK_EXECFLAGËùÖ¸Ê¾µÄÈÎÎñµÄ
-    // ·¢Éúºó¶àÉÙÊ±¼äÖ´ĞĞµÚÒ»´ÎÈÎÎñ£¬µ¥Î»»»ËãÎªÃë
-    // ´ËÊ±¼äÏŞÖÆÎª24Ğ¡Ê±Ö®ÄÚ
-    DWORD			m_dwSpan;		// ¼ä¸ôÊ±¼ä»ò¼ä¸ôÈÕÆÚ
-    WCHAR			m_cSpanUnit;	// Ô­Ê¼µ¥Î»s/m/h
-    // Ïà¶ÔÓÚµÚÒ»´ÎÈÎÎñÖ´ĞĞºó¶àÉÙÊ±¼äÖ´ĞĞ
-    DWORD			m_dwSpan2;	// µÚ¶ş¸öÊ±¼ä¼ä¸ô
+    // ç›¸å¯¹äºENUM_TASK_EXECFLAGæ‰€æŒ‡ç¤ºçš„ä»»åŠ¡çš„
+    // å‘ç”Ÿåå¤šå°‘æ—¶é—´æ‰§è¡Œç¬¬ä¸€æ¬¡ä»»åŠ¡ï¼Œå•ä½æ¢ç®—ä¸ºç§’
+    // æ­¤æ—¶é—´é™åˆ¶ä¸º24å°æ—¶ä¹‹å†…
+    DWORD			m_dwSpan;		// é—´éš”æ—¶é—´æˆ–é—´éš”æ—¥æœŸ
+    WCHAR			m_cSpanUnit;	// åŸå§‹å•ä½s/m/h
+    // ç›¸å¯¹äºç¬¬ä¸€æ¬¡ä»»åŠ¡æ‰§è¡Œåå¤šå°‘æ—¶é—´æ‰§è¡Œ
+    DWORD			m_dwSpan2;	// ç¬¬äºŒä¸ªæ—¶é—´é—´éš”
     WCHAR			m_cSpanUnit2;
-    int				m_iExecCount;	// µÚÒ»´ÎÖ´ĞĞºó£¬ÔÙÖ´ĞĞµÄ´ÎÊı
+    int				m_iExecCount;	// ç¬¬ä¸€æ¬¡æ‰§è¡Œåï¼Œå†æ‰§è¡Œçš„æ¬¡æ•°
 
 private: // absolute
     //----------------------------------------
-    ExArray<int>		m_arX;		// Ö´ĞĞÈÕÆÚµã£¬ĞèÅäºÏENUM_TASK_EXECFLAG²ÅÄÜÈ·¶¨ÆäÖµµÄÒâÒå
-    ExArray<int>		m_arTime;	// Ö´ĞĞÊ±¼äµã£¬
+    ExArray<int>		m_arX;		// æ‰§è¡Œæ—¥æœŸç‚¹ï¼Œéœ€é…åˆENUM_TASK_EXECFLAGæ‰èƒ½ç¡®å®šå…¶å€¼çš„æ„ä¹‰
+    ExArray<int>		m_arTime;	// æ‰§è¡Œæ—¶é—´ç‚¹ï¼Œ
     //-----------------------------------------------
-    // ÔÚÒ»ÌìÖĞµÄ [03:00 ~ 20:00] Ã¿¸ô 30m Ö´ĞĞÒ»´Î
-    WORD			m_wTimeBegin;	// Ö´ĞĞÊ±¼ä
+    // åœ¨ä¸€å¤©ä¸­çš„ [03:00 ~ 20:00] æ¯éš” 30m æ‰§è¡Œä¸€æ¬¡
+    WORD			m_wTimeBegin;	// æ‰§è¡Œæ—¶é—´
     WORD			m_wTimeEnd;
 };

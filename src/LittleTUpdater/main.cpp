@@ -1,7 +1,7 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <vector>
 
-// Òş²Øconsole´°¿Ú
+// éšè—consoleçª—å£
 #pragma comment(linker, "/subsystem:\"windows\" /entry:\"wmainCRTStartup\"") 
 
 #include "../common/LittleTcmn.h"
@@ -42,25 +42,25 @@ BOOL IsFileExist(LPCTSTR pszFile)
 struct _Files 
 {
     wstring     sdest;
-    wstring     sbackup; // ±¸·İÎÄ¼ş
-    wstring     ssrc;   // Ô´ÎÄ¼ş
+    wstring     sbackup; // å¤‡ä»½æ–‡ä»¶
+    wstring     ssrc;   // æºæ–‡ä»¶
     QBuffer     buf;
 };
 
 typedef std::vector<_Files*> LstFiles;
 
-/** ½âÑ¹Ñ¹Ëõ°üÄÚµÄËùÓĞÊı¾İ²¢±£´æµ½Á´±í
+/** è§£å‹å‹ç¼©åŒ…å†…çš„æ‰€æœ‰æ•°æ®å¹¶ä¿å­˜åˆ°é“¾è¡¨
  *	return:
- *      true    ³É¹¦
+ *      true    æˆåŠŸ
  *	params:
  *		-[in]
- *          szZip   zipÎÄ¼ş
- *          lst     ÎÄ¼şĞÅÏ¢
+ *          szZip   zipæ–‡ä»¶
+ *          lst     æ–‡ä»¶ä¿¡æ¯
 **/
 bool ExtractAll(__in LPCWSTR szZip, __out LstFiles& lst)
 {
     lst.clear();
-    // ½âÑ¹Ñ¹Ëõ°ü
+    // è§£å‹å‹ç¼©åŒ…
     CXUnzip theZip;
     if ( !theZip.Open(szZip) )
     {
@@ -68,7 +68,7 @@ bool ExtractAll(__in LPCWSTR szZip, __out LstFiles& lst)
     }
 
     bool bRet = true;
-    // ±éÀúzip°üÀïÃæµÄÎÄ¼ş
+    // éå†zipåŒ…é‡Œé¢çš„æ–‡ä»¶
     ZIPENTRYW ze;
     for (int i = 0; i < theZip.GetItemCount(); ++i)
     {
@@ -76,7 +76,7 @@ bool ExtractAll(__in LPCWSTR szZip, __out LstFiles& lst)
             continue;
 
 //         if (StrCmpIW(LITTLET_UPDATE_CONTENT_FILENEWNAME, ze.name) == 0)
-//             continue;   // ¸üĞÂÄÚÈİ£¬²»±ØĞ´
+//             continue;   // æ›´æ–°å†…å®¹ï¼Œä¸å¿…å†™
 
         _Files* p = new _Files;
         p->sdest = ze.name;
@@ -110,30 +110,30 @@ bool UpdateFiles(__in LstFiles& lst, __in wstring sDest)
         p->ssrc += p->sdest;
         p->sbackup = p->ssrc;
         p->sbackup += L".__bak__";
-        // ÏÈ±¸·İÕâ¸öÎÄ¼ş
+        // å…ˆå¤‡ä»½è¿™ä¸ªæ–‡ä»¶
         if (!IsFileExist(p->ssrc.c_str()))
         {
-            // Ô­À´²»´æÔÚµÄÎÄ¼ş£¬¾ÍÖ±½Ó¿½±´ĞÂÎÄ¼ş¾ÍÍê³ÉÁË
+            // åŸæ¥ä¸å­˜åœ¨çš„æ–‡ä»¶ï¼Œå°±ç›´æ¥æ‹·è´æ–°æ–‡ä»¶å°±å®Œæˆäº†
             p->sbackup.clear();
         }
         else
         {
-            // ÒÑÓĞµÄÎÄ¼şĞèÒªÏÈ±¸·İÏÂ
-            // Èç¹ûÊÇ¸üĞÂ×Ô¼º¡°LittleTUpdater.exe¡±, ÄÇ¾ÍÖ±½ÓÅäºÏÖ÷½ø³ÌLittleTÀ´¸üĞÂ×Ô¼º
-            // Ö»ĞèÒª°Ñ×Ô¼ºĞ´µ½µ±Ç°ÎÄ¼ş¼ĞÏÂÃæµÄ¾ÍĞĞÁË
+            // å·²æœ‰çš„æ–‡ä»¶éœ€è¦å…ˆå¤‡ä»½ä¸‹
+            // å¦‚æœæ˜¯æ›´æ–°è‡ªå·±â€œLittleTUpdater.exeâ€, é‚£å°±ç›´æ¥é…åˆä¸»è¿›ç¨‹LittleTæ¥æ›´æ–°è‡ªå·±
+            // åªéœ€è¦æŠŠè‡ªå·±å†™åˆ°å½“å‰æ–‡ä»¶å¤¹ä¸‹é¢çš„å°±è¡Œäº†
             if (StrCmpIW(p->sdest.c_str(), L"LittleTUpdater.exe") == 0)
             {
-                // Ö÷½ø³Ì¡°LittleT.exe¡±Æô¶¯µÄÊ±ºò»á¼ì²éÓĞÃ»ÓĞÕâ¸öÎÄ¼ş
-                // ÓĞµÄ»°£¬¾Í»áÓÃËüÌæ»»µôµ±Ç°µÄLittleTUpdater.exe
+                // ä¸»è¿›ç¨‹â€œLittleT.exeâ€å¯åŠ¨çš„æ—¶å€™ä¼šæ£€æŸ¥æœ‰æ²¡æœ‰è¿™ä¸ªæ–‡ä»¶
+                // æœ‰çš„è¯ï¼Œå°±ä¼šç”¨å®ƒæ›¿æ¢æ‰å½“å‰çš„LittleTUpdater.exe
                 p->buf.FileWrite(LITTLET_UPDATER_NEWNAME);
                 continue;
             }
-            // Èç¹û²»ÊÇ¸üĞÂ¡°¸üĞÂ³ÌĞò¡±£¬ÄÇÃ´ÏÈ±¸·İ
+            // å¦‚æœä¸æ˜¯æ›´æ–°â€œæ›´æ–°ç¨‹åºâ€ï¼Œé‚£ä¹ˆå…ˆå¤‡ä»½
             if (!MoveFileEx(p->ssrc.c_str(), p->sbackup.c_str(),
                 MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH))
             {
 #ifdef _DEBUG
-                wcout<<"backup File£º["
+                wcout<<"backup Fileï¼š["
                     <<p->ssrc.c_str()<<"] to ["
                     <<p->sbackup.c_str()<<"] failed!"<<endl;
 #endif
@@ -143,11 +143,11 @@ bool UpdateFiles(__in LstFiles& lst, __in wstring sDest)
                 break;
             }
         }
-        // °ÑÎÄ¼şÄÚÈİĞ´µ½±¾µØ
+        // æŠŠæ–‡ä»¶å†…å®¹å†™åˆ°æœ¬åœ°
         if ( !p->buf.FileWrite(p->ssrc.c_str()) )
         {
 #ifdef _DEBUG
-            wcout<<"Write File£º["<<p->ssrc.c_str()<<"] failed!"<<endl;
+            wcout<<"Write Fileï¼š["<<p->ssrc.c_str()<<"] failed!"<<endl;
 #endif
             bRet = false;
             break;
@@ -156,7 +156,7 @@ bool UpdateFiles(__in LstFiles& lst, __in wstring sDest)
     return bRet;
 }
 
-// ²Ù×÷Ã»Íê³É£¬´Ó±¸·İÖĞ»Ö¸´Ô­À´µÄÎÄ¼ş
+// æ“ä½œæ²¡å®Œæˆï¼Œä»å¤‡ä»½ä¸­æ¢å¤åŸæ¥çš„æ–‡ä»¶
 bool RestoreFile(__in LstFiles& lst)
 {
     bool bRet = true;
@@ -165,7 +165,7 @@ bool RestoreFile(__in LstFiles& lst)
         _Files* p = *i;
         if ( !p->sbackup.empty() )
         {
-            // ÊÔ3´Î»Ö¸´
+            // è¯•3æ¬¡æ¢å¤
             int j = 0;
             while (j < 3)
             {
@@ -179,7 +179,7 @@ bool RestoreFile(__in LstFiles& lst)
             if (j == 3)
             {
                 // fuck!
-                // ³ÌĞòÓ¦¸Ã±»ÆÆ»µÁË
+                // ç¨‹åºåº”è¯¥è¢«ç ´åäº†
                 bRet = false;
             }
             else
@@ -192,7 +192,7 @@ bool RestoreFile(__in LstFiles& lst)
     return bRet;
 }
 
-// ÎÄ¼ş¸üĞÂ³É¹¦£¬±¸·İÎÄ¼ş¿ÉÒÔÉ¾³ıÁË
+// æ–‡ä»¶æ›´æ–°æˆåŠŸï¼Œå¤‡ä»½æ–‡ä»¶å¯ä»¥åˆ é™¤äº†
 void DeleteBackup(__in LstFiles& lst)
 {
     for (LstFiles::iterator i = lst.begin(); i != lst.end(); ++i)
@@ -217,63 +217,63 @@ int wmain(int nArgc, wchar_t**argv)
 
     if (nArgc < 3)
     {
-        wcout<<"²ÎÊı´íÎó£¡¸üĞÂÊ§°Ü"<<endl;
+        wcout<<"å‚æ•°é”™è¯¯ï¼æ›´æ–°å¤±è´¥"<<endl;
         return -1;
     }
 
-    wcout<<"ÕıÔÚ¸üĞÂ£¬ÇëÉÔµÈÆ¬¿Ì£¬²»Òª¹Ø±ÕÕâ¸ö´°¿Ú£¬Ó¦¸Ã²»»á³¬¹ı10ÃëµÄ....."<<endl;
-    // È·±£Ö÷½ø³ÌÒÑ¾­ÍË³öÁË
+    wcout<<"æ­£åœ¨æ›´æ–°ï¼Œè¯·ç¨ç­‰ç‰‡åˆ»ï¼Œä¸è¦å…³é—­è¿™ä¸ªçª—å£ï¼Œåº”è¯¥ä¸ä¼šè¶…è¿‡10ç§’çš„....."<<endl;
+    // ç¡®ä¿ä¸»è¿›ç¨‹å·²ç»é€€å‡ºäº†
     HANDLE hEvent = CreateEvent(NULL, TRUE, FALSE, LITTLET_UPDATER_EVENTNAME);
     if (NULL != hEvent)
     {
         if (GetLastError() != ERROR_ALREADY_EXISTS)
         {
-            // µÈ´ıÕâ¸öÊÂ¼ş±äÎªÓĞĞÅºÅÔÙÖ´ĞĞ
+            // ç­‰å¾…è¿™ä¸ªäº‹ä»¶å˜ä¸ºæœ‰ä¿¡å·å†æ‰§è¡Œ
             WaitForSingleObject(hEvent,3000);
         }
         CloseHandle(hEvent);
     }
-    // ÊÍ·Åµ½Ä¿µÄÂ·¾¶
+    // é‡Šæ”¾åˆ°ç›®çš„è·¯å¾„
     wstring sZip = argv[1];
     wstring sDestDir = argv[2];
     bool bFailed = false;
     do 
     {
-        // ½âÑ¹ËùÓĞÎÄ¼ş
+        // è§£å‹æ‰€æœ‰æ–‡ä»¶
         LstFiles lst;
         //    wstring szip = L"f:\\UI\\ddd\\UI.zip";
-        wcout<<"½âÑ¹ÎÄ¼ş....."<<endl;
+        wcout<<"è§£å‹æ–‡ä»¶....."<<endl;
         if ( !ExtractAll(sZip.c_str(), lst) )
         {
-            wcout<<"½âÑ¹ÎÄ¼ş´íÎó£¬¸üĞÂÊ§°Ü"<<endl;
+            wcout<<"è§£å‹æ–‡ä»¶é”™è¯¯ï¼Œæ›´æ–°å¤±è´¥"<<endl;
             bFailed = true;
             break;
         }
 
-        // ÌáÉı×Ô¼ºµÄÔËĞĞÈ¨ÏŞ£¬ÒÔÓ¦¶Ôvista»òÒÔÉÏÏµÍ³µÄUACÏŞÖÆ
+        // æå‡è‡ªå·±çš„è¿è¡Œæƒé™ï¼Œä»¥åº”å¯¹vistaæˆ–ä»¥ä¸Šç³»ç»Ÿçš„UACé™åˆ¶
         CUACSElfElevations::SelfElevation();
 
-        // ¿ªÊ¼Ìæ»»ÎÄ¼ş
-        wcout<<"¸üĞÂ³ÌĞò....."<<endl;
+        // å¼€å§‹æ›¿æ¢æ–‡ä»¶
+        wcout<<"æ›´æ–°ç¨‹åº....."<<endl;
         if ( !UpdateFiles(lst, sDestDir))
         {
-            wcout<<"ÔÎ£¬²»ºÃÒâË¼£¬¸üĞÂÎÄ¼şÊ§°Ü£¡"<<endl;
+            wcout<<"æ™•ï¼Œä¸å¥½æ„æ€ï¼Œæ›´æ–°æ–‡ä»¶å¤±è´¥ï¼"<<endl;
             if (!RestoreFile(lst))
             {
-                wcout<<"-_-! ¸ü²»ºÃÒâË¼ÁË£¬²»ÄÜ»Ö¸´µ½Ô­À´×´Ì¬£¡"<<endl;
-                wcout<<"ÇëÊÖ¶¯È¥µô__bak__À©Õ¹Ãû£¬Èç¹û²»»á-->ÎÊÎÊ¶®µçÄÔµÄÔõÃ´×ö"<<endl;
+                wcout<<"-_-! æ›´ä¸å¥½æ„æ€äº†ï¼Œä¸èƒ½æ¢å¤åˆ°åŸæ¥çŠ¶æ€ï¼"<<endl;
+                wcout<<"è¯·æ‰‹åŠ¨å»æ‰__bak__æ‰©å±•åï¼Œå¦‚æœä¸ä¼š-->é—®é—®æ‡‚ç”µè„‘çš„æ€ä¹ˆåš"<<endl;
                 // fuuuuuuuuuuuuuuuuuuck!!!!!!
             }
             bFailed = true;
         }
         else
         {
-            // ok£¬¸üĞÂ³É¹¦
-            // É¾³ı±¸·İÎÄ¼ş
+            // okï¼Œæ›´æ–°æˆåŠŸ
+            // åˆ é™¤å¤‡ä»½æ–‡ä»¶
             DeleteBackup(lst);
         }
 
-        // ÇåÀí×ÊÔ´
+        // æ¸…ç†èµ„æº
         for (LstFiles::iterator i = lst.begin(); i != lst.end(); ++i)
         {
             delete *i;
@@ -281,7 +281,7 @@ int wmain(int nArgc, wchar_t**argv)
         lst.clear();
     } while (false);
 
-    // ¸üĞÂµÄÖĞ¼äÎÄ¼şÒ²É¾³ı°É
+    // æ›´æ–°çš„ä¸­é—´æ–‡ä»¶ä¹Ÿåˆ é™¤å§
     DeleteFile(sZip.c_str());
 
     if (bFailed)
@@ -290,10 +290,10 @@ int wmain(int nArgc, wchar_t**argv)
     }
     else
     {
-        wcout<<"¸ã¶¨ÁË..."<<endl;
+        wcout<<"æå®šäº†..."<<endl;
     }
 
-    // ÎŞÂÛÈçºÎ£¬ÊÔÊÔÖØĞÂÆô¶¯Ö÷³ÌĞò
+    // æ— è®ºå¦‚ä½•ï¼Œè¯•è¯•é‡æ–°å¯åŠ¨ä¸»ç¨‹åº
     wstring sfile = sDestDir;
     sfile += L"LittleT.exe";
     ShellExecute(NULL,L"open", sfile.c_str(), NULL, sDestDir.c_str(), SW_SHOWNORMAL);

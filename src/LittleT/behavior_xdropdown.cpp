@@ -1,4 +1,4 @@
-#include "behavior_aux.h"
+﻿#include "behavior_aux.h"
 #include "time/QTime.h"
 
 namespace htmlayout 

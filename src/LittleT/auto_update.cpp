@@ -1,4 +1,4 @@
-#include "auto_update.h"
+ï»¿#include "auto_update.h"
 #include "ui/QUIGlobal.h"
 #include "ui/QConfig.h"
 #include "ui/QApp.h"
@@ -26,7 +26,7 @@ VOID CALLBACK QAutoUpdater::CheckUpdateCallback(
     }
     pThis->CheckUpdate();
 
-    // µÇÂ¼Í¨Öª
+    // ç™»å½•é€šçŸ¥
     littlet::SendWebRequest(L"login", L"with-in-update");
 }
 
@@ -54,21 +54,21 @@ BOOL QAutoUpdater::CheckUpdate( )
 
 BOOL IsHigherVersion(CStdString& sVer, BOOL IsUpdation)
 {
-    // °æ±¾ºÅÓ¦¸ÃÖ»´øÒ»¸öĞ¡Êıµã
+    // ç‰ˆæœ¬å·åº”è¯¥åªå¸¦ä¸€ä¸ªå°æ•°ç‚¹
     if (IsUpdation) 
     {
         return _wtof(sVer.Trim()) > _wtof(QUIGetAppVersion());
     }
 
-    // ´ÓÅäÖÃÎÄ¼şÖĞ¶ÁÈ¡
+    // ä»é…ç½®æ–‡ä»¶ä¸­è¯»å–
     CStdString str = QUIGetConfig()->GetValue(L"APP",L"base_data_ver").Trim();
 
-    // Èç¹û±¾µØÎÄ¼ş²»´æÔÚ£¬ÄÇÃ´Ò²ÈÏÎªÓĞ¸üĞÂµÄ
+    // å¦‚æœæœ¬åœ°æ–‡ä»¶ä¸å­˜åœ¨ï¼Œé‚£ä¹ˆä¹Ÿè®¤ä¸ºæœ‰æ›´æ–°çš„
     return (_wtof(sVer.Trim()) > _wtof(str)) 
         || !quibase::IsFileExist(__BasedataCacheFile());
 }
 
-// J¼ÇÂ¼°æ±¾ºÅ
+// Jè®°å½•ç‰ˆæœ¬å·
 void SaveBaseDataVersion(const CStdString& sVer)
 {
     QUIGetConfig()->SetValue(L"APP",L"base_data_ver", sVer);
@@ -77,7 +77,7 @@ void SaveBaseDataVersion(const CStdString& sVer)
 BOOL updation_ExtractVerAndUrl(__in CStdString& sHtml, __out CStdString& sVersion,
     __out CStdString& sFileUrl)
 {
-    // Õâ¶Î´úÂëÕæ¶ñĞÄ°¡£¬²»»áÕıÔò±í´ïÊ½°¡
+    // è¿™æ®µä»£ç çœŸæ¶å¿ƒå•Šï¼Œä¸ä¼šæ­£åˆ™è¡¨è¾¾å¼å•Š
     // version
     int ib = sHtml.Find(L"[[[ver:");
     if (-1 == ib)
@@ -104,14 +104,14 @@ BOOL updation_ExtractVerAndUrl(__in CStdString& sHtml, __out CStdString& sVersio
 //     ib = sFileUrl.Find(L"http://");
 //     if (-1 == ib)
 //         return FALSE;
-    sFileUrl = "http://www.jiubaibu.com/appcast/littlet/littlet_latest.zip"; // sFileUrl.Mid(ib);
+    sFileUrl = "http://piaode.ren/appcast/littlet/littlet_latest.zip"; // sFileUrl.Mid(ib);
     return TRUE;
 }
 
 BOOL basedata_ExtractVerAndUrl(__in CStdString& sHtml, __out CStdString& sVersion,
     __out CStdString& sFileUrl)
 {
-    // Õâ¶Î´úÂëÕæ¶ñĞÄ°¡£¬²»»áÕıÔò±í´ïÊ½°¡
+    // è¿™æ®µä»£ç çœŸæ¶å¿ƒå•Šï¼Œä¸ä¼šæ­£åˆ™è¡¨è¾¾å¼å•Š
     // version
 //     int ib = sHtml.Find(L"[[[ver:");
 //     if (-1 == ib)
@@ -153,19 +153,19 @@ BOOL DecryptPictureData(__in QBuffer& bufEncrypt, __out QBuffer& bufData)
 //         return FALSE;
 //     }
 // 
-//     // ×îºóĞ´Èë20¸ö×Ö½Ú£¬Ë³ĞòÈçÏÂ
-//     // ÃÜÔ¿ÔÚÍ¼ÏñÊı¾İÖĞµÄÆ«ÒÆ
+//     // æœ€åå†™å…¥20ä¸ªå­—èŠ‚ï¼Œé¡ºåºå¦‚ä¸‹
+//     // å¯†é’¥åœ¨å›¾åƒæ•°æ®ä¸­çš„åç§»
 //     DWORD dwOffset;
 //     bufEncrypt.ReadLast((BYTE*)&dwOffset,sizeof(DWORD));
-//     // ÃÜÔ¿³¤¶È
+//     // å¯†é’¥é•¿åº¦
 //     DWORD dwKeyLen;
 //     bufEncrypt.ReadLast((BYTE*)&dwKeyLen,sizeof(DWORD));
-//     // Í¼Ïñ´óĞ¡
+//     // å›¾åƒå¤§å°
 //     bufEncrypt.ReadLast((BYTE*)&dwPicSize,sizeof(DWORD));
-//     // ¼ÓÃÜºóµÄÊı¾İ³¤¶È
+//     // åŠ å¯†åçš„æ•°æ®é•¿åº¦
 //     DWORD dwEncrypDataLen;
 //     bufEncrypt.ReadLast((BYTE*)&dwEncrypDataLen,sizeof(DWORD));
-//     // Ô­Ê¼Êı¾İ³¤¶È
+//     // åŸå§‹æ•°æ®é•¿åº¦
 //     DWORD dwOriginLen;
 //     bufEncrypt.ReadLast((BYTE*)&dwOriginLen,sizeof(DWORD));
 // 
@@ -175,7 +175,7 @@ BOOL DecryptPictureData(__in QBuffer& bufEncrypt, __out QBuffer& bufData)
 //     }
 //     if (!bufData.Write(bufEncrypt.GetBuffer(dwPicSize),dwEncrypDataLen))
 //     {
-//         // eInfo.SetText(L"¶ÁÈ¡Êı¾İ´íÎó");
+//         // eInfo.SetText(L"è¯»å–æ•°æ®é”™è¯¯");
 //         return FALSE;
 //     }
 // 
@@ -183,15 +183,15 @@ BOOL DecryptPictureData(__in QBuffer& bufEncrypt, __out QBuffer& bufData)
 //     if (!ende.SetCodeData(bufEncrypt.GetBuffer(dwOffset),dwKeyLen))
 //     {
 //         return FALSE;
-//         // eInfo.SetText(L"ÉèÖÃÃÜÂëÊı¾İÊ§°Ü");
+//         // eInfo.SetText(L"è®¾ç½®å¯†ç æ•°æ®å¤±è´¥");
 //     }
 //     if (!ende.DecryptData(bufData))
 //     {
-//         // eInfo.SetText(L"½âÃÜÊı¾İÊ§°Ü!");
+//         // eInfo.SetText(L"è§£å¯†æ•°æ®å¤±è´¥!");
 //         return FALSE;
 //     }
 // 
-//     // eInfo.SetText(L"È«²¿¸ã¶¨À²£¡ÒÑ¾­±£´æÎª£º" + sFileName);
+//     // eInfo.SetText(L"å…¨éƒ¨æå®šå•¦ï¼å·²ç»ä¿å­˜ä¸ºï¼š" + sFileName);
 //     return TRUE;
 }
 
@@ -227,23 +227,23 @@ UINT_PTR __stdcall QAutoUpdater::thread_download( void* pparam )
     cl.SetReferrer(p->sRefer);
     //cl.SetReferrer(L"http://blog.sina.com.cn");
 
-    // ÏÈ¼ì²éÊÇ·ñÓĞ¸üĞÂ
+    // å…ˆæ£€æŸ¥æ˜¯å¦æœ‰æ›´æ–°
     CStdString sVer = L"0", sFileUrl;
     for (int iTry = 0; iTry < 3; iTry++)
     {
         if (!cl.SendHttpRequest())
             continue;
 
-        // ÏÂÔØÊı¾İÁË£¬Õâ¸öÆäÊµÊÇÂÒÂë£¬µ«ÊÇÄÜÕÒµ½ËùÒªµÄĞÅÏ¢¾ÍºÃÁË ¡£
+        // ä¸‹è½½æ•°æ®äº†ï¼Œè¿™ä¸ªå…¶å®æ˜¯ä¹±ç ï¼Œä½†æ˜¯èƒ½æ‰¾åˆ°æ‰€è¦çš„ä¿¡æ¯å°±å¥½äº† ã€‚
         CStdString sHtml = cl.GetResponseContent(); 
         if (p->IsUpdationTask())
         {
-            // ×Ô¶¯¸üĞÂ
+            // è‡ªåŠ¨æ›´æ–°
             bOK = updation_ExtractVerAndUrl(sHtml, sVer, sFileUrl);
         }
         else
         {
-            // »ù´¡Êı¾İ
+            // åŸºç¡€æ•°æ®
             bOK = basedata_ExtractVerAndUrl(sHtml, sVer, sFileUrl);
         }
         break;
@@ -261,14 +261,14 @@ UINT_PTR __stdcall QAutoUpdater::thread_download( void* pparam )
     }
 
     bOK = FALSE;
-    // ÊÔÈı´ÎÈ¥ÏÂÔØÊı¾İ
+    // è¯•ä¸‰æ¬¡å»ä¸‹è½½æ•°æ®
     for (int iTry = 0; iTry < 3; iTry++)
     {
         cl.UpdateUrl(sFileUrl);
         if (!cl.SendHttpRequest())
             continue;
 
-        // ÏÂÔØÊı¾İÁË
+        // ä¸‹è½½æ•°æ®äº†
         p->bufDown.ClearBuffer();
         p->bufDown.Write(cl.GetRawResponseContent(),
             cl.GetRawResponseReceivedContentLength());
@@ -276,16 +276,16 @@ UINT_PTR __stdcall QAutoUpdater::thread_download( void* pparam )
         break;
     }
 
-    // ÏÂÔØ³É¹¦
+    // ä¸‹è½½æˆåŠŸ
     if (bOK)
     {
-        // ³ÌĞò¸üĞÂµÄ»°£¬½«Êı¾İĞ´µ½ÁÙÊ±ÎÄ¼şÖĞ
+        // ç¨‹åºæ›´æ–°çš„è¯ï¼Œå°†æ•°æ®å†™åˆ°ä¸´æ—¶æ–‡ä»¶ä¸­
         if (p->IsUpdationTask())
         {
             sSavePath = __UpdationTempFile();
             bOK = DecryptUpdateFile(p->bufDown, sSavePath);
         }
-        // »ù´¡Êı¾İ¾ÍÖ±½ÓĞ´ÏÂÀ´¾ÍºÃÁË£¬²»Òª½âÃÜ£¬ºÙºÙ£¬ÕâÊÇÃØÃÜ°¡
+        // åŸºç¡€æ•°æ®å°±ç›´æ¥å†™ä¸‹æ¥å°±å¥½äº†ï¼Œä¸è¦è§£å¯†ï¼Œå˜¿å˜¿ï¼Œè¿™æ˜¯ç§˜å¯†å•Š
         else
         {
             sSavePath = __BasedataCacheFile();
@@ -300,21 +300,21 @@ UINT_PTR __stdcall QAutoUpdater::thread_download( void* pparam )
     if (bHasUpdate)
     {
         LPQUI_USERMSGPARAM pMsg = QUIGetUserMsgParam(
-            (bOK) ? 1 : 0,   // ÏÂÔØ¸üĞÂÊÇ·ñÍê³É
+            (bOK) ? 1 : 0,   // ä¸‹è½½æ›´æ–°æ˜¯å¦å®Œæˆ
             p->IsUpdationTask() ? 0 : 1, 
             NULL,
-            sSavePath, // ¸üĞÂÎÄ¼şµÄµØÖ·
-            TRUE);  // ½ÓÊÕÕßÓ¦¸ÃÊÍ·ÅÄÚ´æ
-        // Í¨Öª³ÌĞò¸üĞÂ
+            sSavePath, // æ›´æ–°æ–‡ä»¶çš„åœ°å€
+            TRUE);  // æ¥æ”¶è€…åº”è¯¥é‡Šæ”¾å†…å­˜
+        // é€šçŸ¥ç¨‹åºæ›´æ–°
         ::PostMessage(QUIGetMainWnd(), QSOFT_MSG_UPDATEAPP, 
-            1, // ÓĞ¸üĞÂ
+            1, // æœ‰æ›´æ–°
             (LPARAM)pMsg);
     }
     else
     {
-        // Í¨Öª³ÌĞò¸üĞÂ
+        // é€šçŸ¥ç¨‹åºæ›´æ–°
         ::PostMessage(QUIGetMainWnd(), QSOFT_MSG_UPDATEAPP, 
-            0, // Ã»ÓĞ¸üĞÂ
+            0, // æ²¡æœ‰æ›´æ–°
             0);
     }
     delete p;
@@ -338,7 +338,7 @@ BOOL QAutoUpdater::Startup( __in _Url& urlUpdation,
 
     dwCheckPeriod = max(10, dwCheckPeriod);
 
-    // Æô¶¯3·ÖÖÓºóµÄÊ±ºòÏÈ¼ì²éÒ»´Î¸üĞÂ
+    // å¯åŠ¨3åˆ†é’Ÿåçš„æ—¶å€™å…ˆæ£€æŸ¥ä¸€æ¬¡æ›´æ–°
     return CreateTimerQueueTimer(&m_hTimer, NULL, CheckUpdateCallback, this,
         3 * 60 * 1000, dwCheckPeriod * 60 * 1000, WT_EXECUTEDEFAULT);
 }

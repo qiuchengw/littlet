@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "file/db/QDBMgr.h"
 #include "ConstValues.h"
@@ -39,10 +39,10 @@ struct TFileData
 	int			nID;
 	QBuffer		bufData;
 	DWORD		nDataSize;
-	LONG		nRefs;		// ÒıÓÃ¼ÆÊı
+	LONG		nRefs;		// å¼•ç”¨è®¡æ•°
 	ENUM_DBFILE_TYPE	eType;
 	CStdString		sResName;
-	CStdString		sExt;		// ÎŞ '.'
+	CStdString		sExt;		// æ—  '.'
 	QTime		tmCreate;
 	QTime		tmUpdate;
 };
@@ -60,7 +60,7 @@ class QResDB : public DBMan
 private:
 	BOOL Startup();
 
-	// ¶Ô tbl_file ²Ù×÷
+	// å¯¹ tbl_file æ“ä½œ
 	BOOL AddData( __inout TFileData &fd );
 	BOOL DeleteData(int nID);
     BOOL GetData( int nID, BOOL bWithData, __out TFileData& fd );
@@ -69,20 +69,20 @@ private:
 	int GetDataRef(int nDataID);
 	int GetDataCount();
 
-	/** Ìî³ä³öDataÒÔÍâµÄ×Ö¶Î£¨ID£¬size£¬name...)
+	/** å¡«å……å‡ºDataä»¥å¤–çš„å­—æ®µï¼ˆIDï¼Œsizeï¼Œname...)
 	 *	-return:	
-     *      Êı¾İÏîÄ¿¸öÊı
+     *      æ•°æ®é¡¹ç›®ä¸ªæ•°
 	 *	-params:	
-	 *		-[in]	eType Òª»ñÈ¡µÄ×Ö¶ÎÊı¾İÀàĞÍ
+	 *		-[in]	eType è¦è·å–çš„å­—æ®µæ•°æ®ç±»å‹
 	 *		-[out]	vfd
 	 **/
 	int GetDataItems( __out VecFileData& vfd ,DWORD eType = DBFILE_TYPE_ALL);
 
-	// bIncludeData °üÀ¨BLOBÊı¾İ
+	// bIncludeData åŒ…æ‹¬BLOBæ•°æ®
 	int GetDataItems(__in ExArray<int>& vi,__out VecFileData& vfd,BOOL bIncludeData=FALSE);
 };
 
-// QResDB ¹ÜÀíÆ÷
+// QResDB ç®¡ç†å™¨
 class QResMan
 {
     SINGLETON_ON_DESTRUCTOR(QResMan)
@@ -93,9 +93,9 @@ class QResMan
 public:
     BOOL Startup(CStdString sIconDir);
 
-    /** ¸ù¾İiconÔÚÊı¾İ¿âÖĞµÄID»ñÈ¡ÆäÂ·¾¶
+    /** æ ¹æ®iconåœ¨æ•°æ®åº“ä¸­çš„IDè·å–å…¶è·¯å¾„
      *	return
-     *      icon±»ÊÍ·Åµ½µÄÂ·¾¶,
+     *      iconè¢«é‡Šæ”¾åˆ°çš„è·¯å¾„,
      *	param
      *		-[in]
      *          tfd 
@@ -103,31 +103,31 @@ public:
     CStdString GetDBResFilePath(__in TFileData& tfd);
     CStdString GetDBResFilePath(__in int nID);
 
-    /** ½«Êı¾İÊÍ·Åµ½szFile
+    /** å°†æ•°æ®é‡Šæ”¾åˆ°szFile
      *	return
-     *      TRUE    ¸ã¶¨
+     *      TRUE    æå®š
      *	param
      *		-[in]
-     *          nID     Êı¾İID
-     *          szFile  ÎÄ¼şÂ·¾¶£¬±ØĞëÎªÈ«Â·¾¶
+     *          nID     æ•°æ®ID
+     *          szFile  æ–‡ä»¶è·¯å¾„ï¼Œå¿…é¡»ä¸ºå…¨è·¯å¾„
     **/
     BOOL ReleaseDataToFile( __in int nID, __in LPCWSTR szFile );
 
-    /**×Ô¶¯¼ì²âÊı¾İ£¬¸ù¾İÊı¾İÀàĞÍÊÍ·Åµ½ÌØ¶¨µÄÄ¿Â¼
+    /**è‡ªåŠ¨æ£€æµ‹æ•°æ®ï¼Œæ ¹æ®æ•°æ®ç±»å‹é‡Šæ”¾åˆ°ç‰¹å®šçš„ç›®å½•
      *	return
-     *      ÊÍ·Åµ½µÄÎÄ¼şÂ·¾¶£¬Ê§°Ü·µ»Ø¿Õ
+     *      é‡Šæ”¾åˆ°çš„æ–‡ä»¶è·¯å¾„ï¼Œå¤±è´¥è¿”å›ç©º
      *	param
      *		-[in]
-     *          nID     Êı¾İID
+     *          nID     æ•°æ®ID
     **/
     CStdString ReleaseDataToFile(__in int nID );
 
     int GetDataItems( __out VecFileData& vfd ,DWORD eType = DBFILE_TYPE_ALL);
 
-    // bIncludeData °üÀ¨BLOBÊı¾İ
+    // bIncludeData åŒ…æ‹¬BLOBæ•°æ®
     int GetDataItems(__in ExArray<int>& vi,__out VecFileData& vfd,BOOL bIncludeData=FALSE);
 
-    // ¶Ô tbl_file ²Ù×÷
+    // å¯¹ tbl_file æ“ä½œ
     BOOL AddData( __inout TFileData &fd );
     BOOL DeleteData(int nID);
     BOOL GetData( int nID, BOOL bWithData, __out TFileData& fd );
@@ -137,7 +137,7 @@ public:
     int GetDataCount();
 
 private:
-    ExArray<int>    m_vResIcons;    // ÒÑ¾­ÊÍ·Åµ½cacheÖĞµÄiconµÄid»á±»¼ÇÂ¼Õâ¶ù
+    ExArray<int>    m_vResIcons;    // å·²ç»é‡Šæ”¾åˆ°cacheä¸­çš„iconçš„idä¼šè¢«è®°å½•è¿™å„¿
     CStdString     m_sIconDir;
 };
 

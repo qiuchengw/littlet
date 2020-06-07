@@ -1,4 +1,4 @@
-#include "db.h"
+Ôªø#include "db.h"
 
 db::db(void)
 {
@@ -10,7 +10,7 @@ bool db::UserLogin( const CStdString& mac )
     sQ.Format(L"SELECT COUNT(id) FROM tbl_user WHERE (mac='%s')", SFHSQ(mac));
     if (0 >= _ExecSQL_RetInt(sQ))
     {
-        // ≤Â»Î“ª∏ˆmac
+        // ÊèíÂÖ•‰∏Ä‰∏™mac
         sQ.Format(L"INSERT INTO tbl_user(mac, crtime) VALUES('%s', %lf);",
             SFHSQ(mac), QTime::SQLDateTimeCurrent());
         _ExecSQL_RetBOOL(sQ);
@@ -26,7 +26,7 @@ bool db::UserLogout( const CStdString& mac )
 
 bool db::UserFeedback( const CStdString& mac, const CStdString& content, const CStdString& contact )
 {
-    // º«¬º
+    // ËÆ∞ÂΩï
     CStdString sQ;
     sQ.Format(L"INSERT INTO tbl_feed(mac, content, contact, crtime) "
         L" VALUES('%s', '%s', '%s', %lf)",

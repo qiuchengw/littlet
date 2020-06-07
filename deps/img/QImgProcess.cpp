@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "QImgProcess.h"
 #include "QBuffer.h"
 #include "file/QFile.h"
@@ -58,7 +58,7 @@ Image* QImgProcess::CreateThumb( int cx ,int cy,BOOL bFailIfSmall)
 		ATLASSERT(FALSE);
 		return NULL;
 	}
-	// ´´½¨ËõÂÔÍ¼
+	// åˆ›å»ºç¼©ç•¥å›¾
 	int nWidth = m_pImg->GetWidth();
 	int nHeight = m_pImg->GetHeight();
 	if (bFailIfSmall && (nWidth <= cx) && (nHeight <= cy))
@@ -66,7 +66,7 @@ Image* QImgProcess::CreateThumb( int cx ,int cy,BOOL bFailIfSmall)
 		return NULL;
 	}
 
-	// Ê¹ÓÃ32ARGBÊ¹µÃ±³¾°Í¸Ã÷
+	// ä½¿ç”¨32ARGBä½¿å¾—èƒŒæ™¯é€æ˜Ž
 	Bitmap* pBitmap = new Bitmap(cx, cy, PixelFormat32bppARGB);  // PixelFormat24bppRGB
 	Graphics graph(pBitmap);
 	if (graph.DrawImage(m_pImg, Rect(0,0,cx,cy))!= Ok)
@@ -80,7 +80,7 @@ Image* QImgProcess::CreateThumb( int cx ,int cy,BOOL bFailIfSmall)
 Image* QImgProcess::CreateThumb( int cx ,BOOL bFailIfSmall )
 {
 	ATLASSERT(m_pImg != NULL);
-	// ´´½¨ËõÂÔÍ¼
+	// åˆ›å»ºç¼©ç•¥å›¾
 	return CreateThumb(cx,(m_pImg->GetHeight()) * cx / m_pImg->GetWidth(),bFailIfSmall);
 }
 
@@ -108,21 +108,21 @@ BOOL QImgProcess::SaveIamge( Image *pImg,LPCTSTR pszPath,int quality )
         return FALSE;
     }
 
-	// ±£´æµ½ÎÄ¼þ
+	// ä¿å­˜åˆ°æ–‡ä»¶
 	EncoderParameters encoderParameters;  
-	//¹¹Ôì±àÂë²ÎÊýÁÐ±í  
-	//Êý×éÖÐÖ»°üº¬Ò»¸öEncoderParameter¶ÔÏó  
+	//æž„é€ ç¼–ç å‚æ•°åˆ—è¡¨  
+	//æ•°ç»„ä¸­åªåŒ…å«ä¸€ä¸ªEncoderParameterå¯¹è±¡  
 	encoderParameters.Count = 1;  
 	encoderParameters.Parameter[0].Guid = EncoderQuality;  
-	//²ÎÊýÀàÐÍÎªLONG  
+	//å‚æ•°ç±»åž‹ä¸ºLONG  
 	encoderParameters.Parameter[0].Type = EncoderParameterValueTypeLong;  
-	//Ö»ÉèÖÃÒ»¸ö²ÎÊý 
+	//åªè®¾ç½®ä¸€ä¸ªå‚æ•° 
 	encoderParameters.Parameter[0].NumberOfValues = 1;  
 
-	//Ñ¹ËõJPEGÍ¼Æ¬ÖÊÁ¿  
+	//åŽ‹ç¼©JPEGå›¾ç‰‡è´¨é‡  
 	encoderParameters.Parameter[0].Value = &quality;  
-	// ±£´æµ½ÎÄ¼þ
-	// ½âÂëÆ÷
+	// ä¿å­˜åˆ°æ–‡ä»¶
+	// è§£ç å™¨
 	CLSID clsid;
 	CStdString sExtName = quibase::CPath(pszPath).GetExtName();
 	if (L"jpg" == sExtName)
@@ -149,8 +149,8 @@ BOOL QImgProcess::Save( LPCTSTR pszPath,int quality /*=100*/ )
 // {
 // 	ASSERT(pImg != NULL);
 // 	EncoderParameters encoderParameters;  
-// 	//¹¹Ôì±àÂë²ÎÊýÁÐ±í  
-// 	//Êý×éÖÐÖ»°üº¬Ò»¸öEncoderParameter¶ÔÏó  
+// 	//æž„é€ ç¼–ç å‚æ•°åˆ—è¡¨  
+// 	//æ•°ç»„ä¸­åªåŒ…å«ä¸€ä¸ªEncoderParameterå¯¹è±¡  
 // 	encoderParameters.Count = 1;  
 // 	encoderParameters.Parameter[0].Guid = EncoderQuality;  
 // 	encoderParameters.Parameter[0].Type = EncoderParameterValueTypeLong;  
@@ -168,21 +168,21 @@ BOOL QImgProcess::Save( LPCTSTR pszPath,int quality /*=100*/ )
 // 		hRes = GlobalAlloc(GMEM_MOVEABLE,GetImagePhysicSize(pImg));
 // 		if (NULL == hRes)
 // 			break;
-// 		// µÚ¶þ¸ö²ÎÊýÎªTrue,×Ô¶¯ÊÍ·ÅÄÚ´æ
+// 		// ç¬¬äºŒä¸ªå‚æ•°ä¸ºTrue,è‡ªåŠ¨é‡Šæ”¾å†…å­˜
 // 		if ( S_OK != (CreateStreamOnHGlobal(hRes,TRUE,&pStream)))
 // 			break;
 // 		if (Ok != pImg->Save(pStream,&clsid,&encoderParameters))
 // 			break;
 // 
-// 		// ´´½¨Í¼Ïñ,ÔÚ´Ë²Ù×÷ÖÐpStreamÔö¼ÓÁËÒýÓÃ¼ÆÊý
-// 		// image::FromStream ²¢Ã»ÓÐÖØÐÂÉêÇëÄÚ´æ,¶øÊÇÊ¹ÓÃÁËpStreamËùÖ¸ÏòµÄÄÚ´æÇø.
-// 		// ÔÚ´Ë´¦¾ÍÊÇhRes,¸ù¾Ý²âÊÔ,CreateStreamOnHGlobalµÄµÚ¶þ¸ö²ÎÊýÎªtrueÊ±,
-// 		// delete pImg ºó,pStreamÒýÓÃ¼ÆÊý¼õÎª0, hResËùÖ¸ÏòµÄÄÚ´æÇøµÃµ½×Ô¶¯ÊÍ·Å.
+// 		// åˆ›å»ºå›¾åƒ,åœ¨æ­¤æ“ä½œä¸­pStreamå¢žåŠ äº†å¼•ç”¨è®¡æ•°
+// 		// image::FromStream å¹¶æ²¡æœ‰é‡æ–°ç”³è¯·å†…å­˜,è€Œæ˜¯ä½¿ç”¨äº†pStreamæ‰€æŒ‡å‘çš„å†…å­˜åŒº.
+// 		// åœ¨æ­¤å¤„å°±æ˜¯hRes,æ ¹æ®æµ‹è¯•,CreateStreamOnHGlobalçš„ç¬¬äºŒä¸ªå‚æ•°ä¸ºtrueæ—¶,
+// 		// delete pImg åŽ,pStreamå¼•ç”¨è®¡æ•°å‡ä¸º0, hResæ‰€æŒ‡å‘çš„å†…å­˜åŒºå¾—åˆ°è‡ªåŠ¨é‡Šæ”¾.
 // 		delete pImg;
 // 		pImg = Image::FromStream(pStream,TRUE);
 // 		pStream->Release();	// pStream 
-// 		// ´Ë´¦²»ÄÜÊÍ·ÅÄÚ´æ,ÒòÎªpImgÊÇÒªÊ¹ÓÃ´ËÊý¾ÝµÄ
-// 		// Í¨¹ýÉèÖÃCreateStreamOnHGlobalµÄµÚ¶þ¸ö²ÎÊýÎªTrue¿ÉÒÔ×Ô¶¯ÊÍ·Å´ËÄÚ´æ
+// 		// æ­¤å¤„ä¸èƒ½é‡Šæ”¾å†…å­˜,å› ä¸ºpImgæ˜¯è¦ä½¿ç”¨æ­¤æ•°æ®çš„
+// 		// é€šè¿‡è®¾ç½®CreateStreamOnHGlobalçš„ç¬¬äºŒä¸ªå‚æ•°ä¸ºTrueå¯ä»¥è‡ªåŠ¨é‡Šæ”¾æ­¤å†…å­˜
 // 		//		GlobalFree(hRes);	
 // 		bOK = TRUE;
 // 	} while (0);

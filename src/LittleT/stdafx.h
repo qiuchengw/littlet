@@ -1,4 +1,4 @@
-#ifndef stdafx_h__
+﻿#ifndef stdafx_h__
 #define stdafx_h__
 
 #define SS_NO_CONVERSION

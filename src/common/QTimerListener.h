@@ -1,13 +1,13 @@
-#pragma once
+ï»¿#pragma once
 
 
 typedef struct TASK_REMINDER_PARAM 
 {
-    int		nSeconds; // ÌáÇ°¶àÉÙÃëÌáĞÑ
-    int		nTaskID; // ÈÎÎñid
-    QTime	tmExec; // ÈÎÎñµÄÖ´ĞĞÊ±¼ä
-    CStdString sSound;	// ÉùÒôÎÄ¼şÂ·¾¶
-    CStdString sMsg; // ÌáÊ¾ĞÅÏ¢
+    int		nSeconds; // æå‰å¤šå°‘ç§’æé†’
+    int		nTaskID; // ä»»åŠ¡id
+    QTime	tmExec; // ä»»åŠ¡çš„æ‰§è¡Œæ—¶é—´
+    CStdString sSound;	// å£°éŸ³æ–‡ä»¶è·¯å¾„
+    CStdString sMsg; // æç¤ºä¿¡æ¯
 }*LPTASK_REMINDER_PARAM;
 
 class QTimerEventHandlerBase

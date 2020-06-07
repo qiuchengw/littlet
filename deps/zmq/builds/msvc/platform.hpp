@@ -1,4 +1,4 @@
-/*
+﻿/*
     Copyright (c) 2007-2011 iMatix Corporation
     Copyright (c) 2007-2011 Other contributors as noted in the AUTHORS file
 

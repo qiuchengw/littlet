@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "LittleTView.h"
 #include "../common/QLongplan.h"
@@ -78,7 +78,7 @@ protected:
 
     void RefreshCurrentGoal();
 
-    // ֪ͨ�ϼ��ƻ���Ŀ�仯
+    // 通知上级计划数目变化
     void NotifyPlanNumChanged();
 private:
     LFormPlan   m_formPlan;

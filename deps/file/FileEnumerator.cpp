@@ -1,4 +1,4 @@
-/* 
+﻿/* 
  * Kenny Liu
  * http://www.codeproject.com/Members/yonken
  *

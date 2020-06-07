@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "app.h"
 #include "AppHelper.h"
 #include <lmerr.h>
@@ -425,7 +425,7 @@ namespace quibase
         return (GetLastError() == ERROR_SUCCESS);
     }
 
-    // ȡ���ػ�
+    // 取消关机
     BOOL PreventSystemShutdown()
     {
         HANDLE hToken;              // handle to process token 
@@ -586,18 +586,18 @@ namespace quibase
 //         }
 // 
 //         WSADATA wsaData;
-//         //��ʼ��Socket ��
+//         //初始化Socket 库
 //         WSAStartup(MAKEWORD(2,0),&wsaData);
-//         //�����׽��� 
+//         //创建套接字 
 //         SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 //         SOCKADDR_IN sa;
 //         sa.sin_family = AF_INET;
-//         //���÷������˵Ķ˿�
-//         //sa.sin_port = htons(IPPORT_SMTP);   //SMTP����������Ķ˿�Ϊ25
-//         sa.sin_port = htons(IPPORT_TIMESERVER);  //SNTPУʱ����Ķ˿ں�Ϊ37
-//         //��ʱ������ip��ַ
+//         //设置服务器端的端口
+//         //sa.sin_port = htons(IPPORT_SMTP);   //SMTP邮箱服务器的端口为25
+//         sa.sin_port = htons(IPPORT_TIMESERVER);  //SNTP校时服务的端口号为37
+//         //授时服务器ip地址
 //         sa.sin_addr.S_un.S_addr = inet_addr("223.255.185.2");
-//         //���ӷ�����,����������Ƿ�ɹ�
+//         //连接服务器,并检测连接是否成功
 //         if(connect(sock, (SOCKADDR *)&sa, sizeof(sa)) == SOCKET_ERROR)
 //         {
 //             return -2;
@@ -607,26 +607,26 @@ namespace quibase
 // 
 //         unsigned long ulTime = 0;
 //         recv(sock, (char *)&ulTime, sizeof(unsigned long), 0);
-//         //��һ���޷��ų��������������ֽ�˳��ת��Ϊ�����ֽ�˳��
+//         //将一个无符号长整形数从网络字节顺序转换为主机字节顺序
 //         ulTime = ntohl(ulTime);
-//         SYSTEMTIME st; //ϵͳʱ��ṹ��,������WinBase.h
+//         SYSTEMTIME st; //系统时间结构体,定义于WinBase.h
 //         UINT64 uiCurTime, uiBaseTime, uiResult; 
 //         uiBaseTime = ((UINT64)HIGHTIME << 32) + LOWTIME; 
 //         uiCurTime = (UINT64)ulTime * (UINT64)10000000;
 //         uiResult = uiBaseTime + uiCurTime; 
-//         //��FILETIME�ṹװ�䵽SYSTEMTIME�ṹ
+//         //把FILETIME结构装箱到SYSTEMTIME结构
 //         FileTimeToSystemTime((LPFILETIME)&uiResult, &st);
 // 
-//         //����ϵͳʱ��
+//         //设置系统时间
 //         if (st.wYear > 2012)
-//         { // ��ʱȡ��ʱ�䲻��ȷ��2012ֻ����һ���жϿ�ȡ���������ǲ�����ȷ
+//         { // 有时取的时间不正确，2012只是做一下判断看取到的数据是不是正确
 //             if (FALSE == SetSystemTime(&st))
 //             {
 //                 nRet = -3;
 //             }
 //         }
 // 
-//         //�ر�socket��������WSADATA��Դ 
+//         //关闭socket，并清理WSADATA资源 
 //         closesocket(sock);
 //         WSACleanup();
 //         return nRet;
@@ -640,11 +640,11 @@ namespace quibase
         if(hFile == INVALID_HANDLE_VALUE)
             return FALSE;
 
-        // ������Դ�ļ��С�������Դ���ڴ桢�õ���Դ��С   
+        // 查找资源文件中、加载资源到内存、得到资源大小   
         HRSRC hrsc=FindResource(NULL, MAKEINTRESOURCE(wResID), filetype);
         HGLOBAL hG=LoadResource(NULL, hrsc);
         DWORD dwSize=SizeofResource( NULL, hrsc);
-        // д���ļ�
+        // 写入文件
         WriteFile(hFile,hG,dwSize,&dwWrite,NULL);
         CloseHandle(hFile);
         return TRUE;
@@ -784,39 +784,39 @@ namespace quibase
         strcat_s(szPath, MAX_PATH, ".lnk");
 
         HRESULT hr = S_OK;
-        IShellLink *psl = NULL;     //IShellLink�ӿ�ָ��
-        IPersistFile* ppf = NULL;   //IPersistFile�ӿ�ָ��
+        IShellLink *psl = NULL;     //IShellLink接口指针
+        IPersistFile* ppf = NULL;   //IPersistFile接口指针
         BOOL bChk = FALSE;
 
         ::CoInitialize(NULL);
-        //�õ�CLSID_ShellLink��ʶ��COM�����IShellLink�ӿ�
+        //得到CLSID_ShellLink标识的COM对象的IShellLink接口
         hr = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLink, (void **)&psl);
         if(SUCCEEDED(hr))
         {
-            //��ѯIPersistFile�ӿ��Խ��п�ݷ�ʽ�Ĵ洢����
+            //查询IPersistFile接口以进行快捷方式的存储操作
             hr = psl->QueryInterface (IID_IPersistFile, (void **)&ppf);
             if(SUCCEEDED(hr))
             {
-                psl->SetDescription(lpszDescription);    //���ñ�ע
+                psl->SetDescription(lpszDescription);    //设置备注
                 if (NULL == lpszProgram)
-                    psl->SetPath(quibase::GetModulePath() + quibase::GetModuleName(TRUE));               //����Դ�ļ���ַ
+                    psl->SetPath(quibase::GetModulePath() + quibase::GetModuleName(TRUE));               //设置源文件地址
                 else
-                    psl->SetPath(lpszProgram);               //����Դ�ļ���ַ
+                    psl->SetPath(lpszProgram);               //设置源文件地址
 
                 if (NULL != lpszWorkingDir)
                     psl->SetWorkingDirectory(lpszWorkingDir);
     
                 if (NULL != lpszIco)
-                    psl->SetIconLocation(lpszIco, 0);         //���ÿ�ݷ�ʽ��ͼ��
+                    psl->SetIconLocation(lpszIco, 0);         //设置快捷方式的图标
     
                 if (NULL != lpszArguments)
-                   psl->SetArguments(lpszArguments);         //���ò���
+                   psl->SetArguments(lpszArguments);         //设置参数
 
-                WORD wsz[MAX_PATH] = {0};   //Unicode�ַ����Ļ����ַ
+                WORD wsz[MAX_PATH] = {0};   //Unicode字符串的缓冲地址
 
-                // ��ANSI�ַ���ת��ΪUnicode�ַ���
+                // 将ANSI字符串转换为Unicode字符串
                 MultiByteToWideChar(CP_ACP, 0, szPath, -1, (LPWSTR)wsz, MAX_PATH);
-                hr = ppf->Save((LPWSTR)wsz, FALSE);         //����Save�������д洢
+                hr = ppf->Save((LPWSTR)wsz, FALSE);         //调用Save方法进行存储
                 ppf->Release();
             }
             psl->Release();
@@ -834,15 +834,15 @@ namespace quibase
             return FALSE;  
 
         HRESULT hr;  
-        IShellLink     *pLink;  //IShellLink����ָ��  
-        IPersistFile   *ppf; //IPersisFil����ָ��  
+        IShellLink     *pLink;  //IShellLink对象指针  
+        IPersistFile   *ppf; //IPersisFil对象指针  
 
-        //����IShellLink����  
+        //创建IShellLink对象  
         hr = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLink, (void**)&pLink);  
         if (FAILED(hr))  
             return FALSE;  
 
-        //��IShellLink�����л�ȡIPersistFile�ӿ�  
+        //从IShellLink对象中获取IPersistFile接口  
         hr = pLink->QueryInterface(IID_IPersistFile, (void**)&ppf);  
         if (FAILED(hr))  
         {  
@@ -850,35 +850,35 @@ namespace quibase
             return FALSE;  
         }  
 
-        //Ŀ��  
+        //目标  
         if (lpszFileName == NULL)  
             pLink->SetPath(_wpgmptr);  
         else  
             pLink->SetPath(lpszFileName);  
 
-        //����Ŀ¼  
+        //工作目录  
         if (lpszWorkDir != NULL)  
             pLink->SetPath(lpszWorkDir);  
 
-        //��ݼ�  
+        //快捷键  
         if (wHotkey != 0)  
             pLink->SetHotkey(wHotkey);  
 
-        //��ע  
+        //备注  
         if (lpszDescription != NULL)  
             pLink->SetDescription(lpszDescription);  
 
-        //��ʾ��ʽ  
+        //显示方式  
         pLink->SetShowCmd(iShowCmd);  
 
 
-        //��ݷ�ʽ��·�� + ����  
+        //快捷方式的路径 + 名称  
         wchar_t szBuffer[MAX_PATH] = {0};  
-        if (lpszLnkFileName != NULL) //ָ���˿�ݷ�ʽ������  
+        if (lpszLnkFileName != NULL) //指定了快捷方式的名称  
             swprintf_s(szBuffer,MAX_PATH, L"%s\\%s", lpszLnkFileDir, lpszLnkFileName);  
         else     
         {  
-            //û��ָ�����ƣ��ʹ�ȡָ���ļ����ļ�����Ϊ��ݷ�ʽ���ơ�  
+            //没有指定名称，就从取指定文件的文件名作为快捷方式名称。  
             wchar_t szTmp[MAX_PATH] = {0};
             const wchar_t *pstr = NULL;  
             if (lpszFileName != NULL)  
@@ -891,14 +891,14 @@ namespace quibase
                 pLink->Release();  
                 return FALSE;  
             }  
-            //ע���׺��Ҫ��.exe��Ϊ.lnk  
+            //注意后缀名要从.exe改为.lnk  
             swprintf_s(szBuffer,MAX_PATH, L"%s\\%s", lpszLnkFileDir, pstr);  
             int nLen = wcslen(szBuffer);  
             szBuffer[nLen - 3] = L'l';  
             szBuffer[nLen - 2] = L'n';  
             szBuffer[nLen - 1] = L'k';  
         }  
-        //�����ݷ�ʽ��ָ��Ŀ¼��  
+        //保存快捷方式到指定目录下  
         hr = ppf->Save(szBuffer, TRUE);  
 
         ppf->Release();  
@@ -908,7 +908,7 @@ namespace quibase
 
     BOOL IsPEFile(LPCTSTR lpszPath)
     {
-        //�򿪼���ļ�
+        //打开检查文件
         HANDLE hFile=::CreateFile(lpszPath,GENERIC_READ,
             FILE_SHARE_READ,NULL,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);
 
@@ -917,15 +917,15 @@ namespace quibase
             return FALSE;
         }
 
-        //����PE�ļ��е�DOSͷ��NTͷ
+        //定义PE文件中的DOS头和NT头
         IMAGE_DOS_HEADER dosHeader;
         IMAGE_NT_HEADERS ntHeader;
 
-        //��֤����
+        //验证过程
         BOOL bValid = FALSE;
         DWORD dwRead = NULL;
 
-        //��ȡDOSͷ
+        //读取DOS头
         ::ReadFile(hFile,&dosHeader,sizeof(dosHeader),&dwRead,NULL);
         if (dwRead==sizeof(dosHeader))
         {
@@ -959,7 +959,7 @@ BOOL QMemFile::SetEventData(HANDLE hEvent,DWORD dwData)
 		{
 			return FALSE;  
 		}  
-		//����ֵ�������ڴ���  
+		//将数值拷贝到内存中  
 		memcpy(memFile.pMapBuf,&dwData,sizeof(DWORD));  
 	}
 	return FALSE;
@@ -975,7 +975,7 @@ DWORD QMemFile::GetEventData(HANDLE hEvent)
 		{  
 			return 0;  
 		}  
-		//���ڴ��л�ȡDWORD����
+		//从内存中获取DWORD数据
 		DWORD dwVal = 0;  
 		memcpy(&dwVal,memFile.pMapBuf,4); 
 		return dwVal;
@@ -1010,18 +1010,18 @@ BOOL QMemFile::CloseHandle(HANDLE hObject)
 BOOL QMemFile::GetMemFile(LPCTSTR lpEventName, ME &memFile) 
 {
 	memFile.sEventName = GetEventName(lpEventName);
-	// ����ӳ���ļ�  
+	// 创建映射文件  
 	HANDLE hFileMap = ::OpenFileMapping(FILE_MAP_ALL_ACCESS,TRUE,memFile.sEventName);
 	if (hFileMap == NULL
 		&& (hFileMap = ::CreateFileMapping(INVALID_HANDLE_VALUE,NULL,PAGE_READWRITE,0,4,memFile.sEventName)) == NULL)
 	{
 		return FALSE;  
 	}
-	//��ӳ���ļ������÷�����ڴ�ռ�  
+	//从映射文件句柄获得分配的内存空间  
 	VOID *pMapBuf = MapViewOfFile(hFileMap,FILE_MAP_ALL_ACCESS,0,0,0);   
 	if(pMapBuf != NULL)  
 	{  
-		//����ֵ���浽�ṹ����  
+		//将数值保存到结构体中  
 		memFile.hFileMap = hFileMap;  
 		memFile.pMapBuf = pMapBuf; 
 		return TRUE;
@@ -1033,15 +1033,15 @@ BOOL QMemFile::GetMemFile(LPCTSTR lpEventName, ME &memFile)
 CStdString QMemFile::GetEventName(LPCTSTR lpName,HANDLE hEvent/*=NULL*/)
 {
 	TCHAR buf[MAX_PATH] = {0};
-	//���ж�������Ƿ�ֻ���ڲ�ʹ�á���ν���ڲ�ʹ�ã�ָ����û�����ֵ��¼�������ͨ�����������ʹ�����⣬�޷�ͨ���ٴδ򿪻�á�  
+	//先判断这个类是否只是内部使用。所谓的内部使用，指的是没有名字的事件，除了通过句柄来进行使用以外，无法通过再次打开获得。  
 	if(lpName != NULL && _tcslen(lpName) > 0)  
 	{  
-		//��Ϊ�ڴ�ӳ���ļ����¼�����ͬһ�������ռ䣬���������ߵ����ֲ�����ͬ��������Ҫ�������ڴ�ӳ���ļ���Ϊ��EVENT_ǰ׺ + �¼�����  
+		//因为内存映射文件和事件名是同一个命名空间，所以这两者的名字不能相同。故我们要创建的内存映射文件名为：EVENT_前缀 + 事件名。  
 		_stprintf_s(buf,MAX_PATH,TEXT("EVENT_%s\0"),lpName);
 	}  
 	else  
 	{  
-		//������¼�Ϊ�ڲ�ʹ�ã���ôҲ����ζ�����ڴ�ӳ���ļ�Ҳ���ڲ�ʹ�á��ʲ��ó�����������+�¼����ķ�ʽ�����ڴ�ӳ���ļ�������ȷ����  
+		//如果该事件为内部使用，那么也就意味着这内存映射文件也是内部使用。故采用程序句柄的名字+事件名的方式进行内存映射文件的名字确定。  
 		_stprintf_s(buf,MAX_PATH,TEXT("%ld_%ld\0"),(DWORD)GetModuleHandle(NULL),(DWORD)hEvent);
 	}  
 	return buf;
@@ -1074,7 +1074,7 @@ BOOL CSingleInstance::InstanceAlreadyRun( LPCTSTR pszName,BOOL bBringLastTop/*=T
     {
         SetEvent(m_hEvent);
     }
-    if (GetLastError() == ERROR_ALREADY_EXISTS) // �Ѿ���һ��ʵ����������
+    if (GetLastError() == ERROR_ALREADY_EXISTS) // 已经有一个实例在运行了
     {
         if (bBringLastTop)
         {

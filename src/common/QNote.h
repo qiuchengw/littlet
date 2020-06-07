@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "BaseType.h"
 #include "time/QTime.h"
@@ -18,7 +18,7 @@
 
 enum ENUM_NOTE_TYPE
 {
-	NOTE_TYPE_NOTSET,	// �޹���
+	NOTE_TYPE_NOTSET,	// ÎÞ¹ØÁª
 	NOTE_TYPE_GOALITEM,
 };
 

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <list>
 #include "ui/QFrame.h"
@@ -23,7 +23,7 @@ class LStickyNoteWnd : public QFrame
         MSG_WM_KILLFOCUS(OnKillFocus)
         MSG_WM_SETFOCUS(OnSetFocus)
         MSG_WM_CLOSE(OnClose)
-        MSG_WM_KEYDOWN(OnKeyDown)  // Õâ¸öÎªÉ¶»áÔì³É×ÖÌåÉèÖÃ°´Å¥²»¿ÉÓÃ£¿
+        MSG_WM_KEYDOWN(OnKeyDown)  // è¿™ä¸ªä¸ºå•¥ä¼šé€ æˆå­—ä½“è®¾ç½®æŒ‰é’®ä¸å¯ç”¨ï¼Ÿ
         CHAIN_MSG_MAP(_Base)
     END_MSG_MAP()
 public:
@@ -59,7 +59,7 @@ protected:
     void OnSetFocus(HWND);
     void OnKeyDown(TCHAR ch, UINT n, UINT r);
 
-    // Î»ÖÃ
+    // ä½ç½®
     void SaveWindowPos();
     BOOL RestoreSetting();
 
@@ -91,7 +91,7 @@ protected:
         return GetCtrl("#editor_msg #richtext-fontfamily");
     }
 
-    // bAtFirst ÔÚ×îÇ°²åÈë
+    // bAtFirst åœ¨æœ€å‰æ’å…¥
     ETable AddItem(__in TTodoTask* p, __in BOOL bAtFirst = TRUE);
     ETable NewItem(__in TTodoTask* p);
     BOOL UpdateItem(__in ETable& tbl);
@@ -106,7 +106,7 @@ private:
 };
 
 /*
- *	±ãÇ©¹ÜÀíÆ÷
+ *	ä¾¿ç­¾ç®¡ç†å™¨
  */
 class StickyNoteMan
 {
@@ -131,7 +131,7 @@ public:
     LStickyNoteWnd* NextSibling(LStickyNoteWnd* p);
 
     /*
-     *	ËÑË÷
+     *	æœç´¢
      */
     LStickyNoteWnd* SearchNext(LStickyNoteWnd* cur_win);
 public:

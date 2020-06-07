@@ -1,4 +1,4 @@
-
+﻿
 /*
     Copyright (c) 2007-2013 Contributors as noted in the AUTHORS file
 

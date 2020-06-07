@@ -1,14 +1,14 @@
-#pragma once
+О╩©#pragma once
 
 #include "BaseType.h"
 
 enum ENUM_APP_MODE
 {
-    APP_MODE_INVALID,  //нчп╖ 
-    APP_MODE_PLAN,  //╪ф╩╝
-    APP_MODE_EVENTS,  //вт╤╞хннЯ 
+    APP_MODE_INVALID,  //Ф≈═Ф∙┬ 
+    APP_MODE_PLAN,  //Х╝║Е┬▓
+    APP_MODE_EVENTS,  //Х┤╙Е┼╗Д╩╩Е┼║ 
     APP_MODE_TODO,  //todo 
-    APP_MODE_DING,  //аИ╦п ding~~ ааак
+    APP_MODE_DING,  //Г│╣Ф└÷ ding~~ Д╨╝Д╨├
 };
 
 namespace littlet
@@ -16,7 +16,7 @@ namespace littlet
     void EnterAppMode(ENUM_APP_MODE eMode);
     ENUM_APP_MODE GetAppMode();
 
-    /** ctrl╪Э╟╢обё╛сп©идэйг╠╬╣ь©Л╫щ╪Эё╛╣Всц╢к╨╞йЩ©иртмЙЁиоЮс╕╡ывВ
+    /** ctrlИ■╝Ф▄┴Д╦▀О╪▄Ф°┴Е▐╞Х┐╫Ф≤╞Ф°╛Е°╟Е©╚Ф█╥И■╝О╪▄Х╟┐Г■╗Ф╜╓Е┤╫Ф∙╟Е▐╞Д╩╔Е╝▄Ф┬░Г⌡╦Е╨■Ф⌠█Д╫°
      *	return
      *      SetMsgHandled(OnCtrlKeyPressDown(...));
      *	param

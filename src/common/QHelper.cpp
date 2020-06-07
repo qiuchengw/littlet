@@ -1,9 +1,9 @@
-#include "QHelper.h"
+ï»¿#include "QHelper.h"
 #include "basetype.h"
 #include <Shlwapi.h>
 
 //////////////////////////////////////////////////////////////////////////
-// ºöÂÔºÁÃë
+// å¿½ç•¥æ¯«ç§’
 /*
 const QHelper::_CONTACT_RELATION QHelper::sm_arrRelationMap[]=
 {
@@ -44,14 +44,14 @@ CStdString QHelper::UniqueString()
 	return str;
 }
 
-// t2 - t1 µÄ²îÖµ£¬Ïà¾àµÄÃëÊı
+// t2 - t1 çš„å·®å€¼ï¼Œç›¸è·çš„ç§’æ•°
 DWORD QHelper::TimeSpan(WORD t1,WORD t2)
 {
 	return (DWORD)((QTime::ParseTime(t2) - QTime::ParseTime(t1)).GetTotalSeconds());
 }
 
-// ·µ»Øt1 + dwSecs ÃëµÃµ½µÄÊ±¼äÖµ£¬
-// Èç¹û³¬¹ıÁË23£º59 ,bOverflow ÎªÕæ
+// è¿”å›t1 + dwSecs ç§’å¾—åˆ°çš„æ—¶é—´å€¼ï¼Œ
+// å¦‚æœè¶…è¿‡äº†23ï¼š59 ,bOverflow ä¸ºçœŸ
 WORD QHelper::TimePlus(WORD t1,DWORD dwSecs,BOOL &bOverflow)
 {
 	ASSERT(FALSE);
@@ -81,16 +81,16 @@ CStdString QHelper::GetTimeUnitString(WCHAR cUnit)
 {
 	switch (cUnit)
 	{
-	case L's':case L'S': return L"Ãë";
-	case L'm':case L'M': return L"·Ö";
-	case L'h':case L'H': return L"Ê±";
-	default:ASSERT(FALSE); return L"ÎŞĞ§µ¥Î»";
+	case L's':case L'S': return L"ç§’";
+	case L'm':case L'M': return L"åˆ†";
+	case L'h':case L'H': return L"æ—¶";
+	default:ASSERT(FALSE); return L"æ— æ•ˆå•ä½";
 	}
 }
 
 CStdString QHelper::MakeReleateExp( ENUM_AUTOTASK_EXECFLAG eExec, 
-    int nSpan, wchar_t cUnit, /* Ïà¶ÔÓÚeExec?¶¨Ê±¼ä */ 
-    int nSpan1 /*= 0*/, wchar_t cUnit1 /*= L's'*/, /* ?ºó¼ä¸ô£¬ 0 ÎªÎŞ¼ä¸ô */ 
+    int nSpan, wchar_t cUnit, /* ç›¸å¯¹äºeExec?å®šæ—¶é—´ */ 
+    int nSpan1 /*= 0*/, wchar_t cUnit1 /*= L's'*/, /* ?åé—´éš”ï¼Œ 0 ä¸ºæ— é—´éš” */ 
     int nExecCount /*= 0*/ )
 {
     CStdString sExp;
@@ -135,11 +135,11 @@ BOOL QHelper::MakeAbsExp(ENUM_AUTOTASK_EXECFLAG flag,QTime& tmB, QTime& tmE,
     if (arTimePots.empty() || arDatePots.empty())
     {
         ASSERT(FALSE);
-        sError = L"±ØĞëÖÁÉÙÖ¸¶¨Ò»¸öÈÕÆÚºÍÒ»¸öÊ±¼ä";
+        sError = L"å¿…é¡»è‡³å°‘æŒ‡å®šä¸€ä¸ªæ—¥æœŸå’Œä¸€ä¸ªæ—¶é—´";
         return FALSE;
     }
 
-    // ÏÈ»ñÈ¡Ê±¼äµã
+    // å…ˆè·å–æ—¶é—´ç‚¹
     CStdString sTimePots;
     QTime tTime;
     std::vector<DWORD> vExist;
@@ -147,7 +147,7 @@ BOOL QHelper::MakeAbsExp(ENUM_AUTOTASK_EXECFLAG flag,QTime& tmB, QTime& tmE,
     {
         if ( !tTime.ParseDateTime(arTimePots[i], VAR_TIMEVALUEONLY))
         {
-            sError = L"Ö´ĞĞÊ±¼äµã´íÎó";
+            sError = L"æ‰§è¡Œæ—¶é—´ç‚¹é”™è¯¯";
             return FALSE;
         }
         DWORD dwT = tTime.MakeTime();
@@ -157,21 +157,21 @@ BOOL QHelper::MakeAbsExp(ENUM_AUTOTASK_EXECFLAG flag,QTime& tmB, QTime& tmE,
             sTimePots.AppendFormat(L"%u,", dwT);
         }
     }
-    // È¥µô×îºóÒ»¸ö×Ö·û','
+    // å»æ‰æœ€åä¸€ä¸ªå­—ç¬¦','
     sTimePots.TrimRight(L',');
 
-    // ÈÕÆÚ²¿·Ö
+    // æ—¥æœŸéƒ¨åˆ†
     if (AUTOTASK_EXEC_ATDATE == flag)
-    { // µ¥¸öÈÕÆÚºÍÊ±¼äµãÖ´ĞĞ
+    { // å•ä¸ªæ—¥æœŸå’Œæ—¶é—´ç‚¹æ‰§è¡Œ
         QTime tmNow = QTime::GetCurrentTime();
         QTime tDate;
         tDate.ParseDateTime(arDatePots[0]);
         if (tDate.CompareDate(tmNow) < 0)
         {
-            sError = L"Ö´ĞĞÈÕÆÚÒÑ¾­¹ıÈ¥ÁË";
+            sError = L"æ‰§è¡Œæ—¥æœŸå·²ç»è¿‡å»äº†";
             return FALSE;
         }
-        // ×Ô¶¯µ÷ÕûÈÎÎñµÄÉúÃüÆÚÎªºÏÊÊµÄÊ±¼ä
+        // è‡ªåŠ¨è°ƒæ•´ä»»åŠ¡çš„ç”Ÿå‘½æœŸä¸ºåˆé€‚çš„æ—¶é—´
         if ((tmB >= tmE) || (tmE <= tmNow) || (tmB <= tmNow)
             || (tmB > tDate) || (tmE < tDate))
         {
@@ -182,10 +182,10 @@ BOOL QHelper::MakeAbsExp(ENUM_AUTOTASK_EXECFLAG flag,QTime& tmB, QTime& tmE,
         return TRUE;
     }
     else if (AUTOTASK_EXEC_ATYEARDAY == flag)
-    { // ÏñÉúÈÕÒ»Ñù£¬ÓĞÌáÇ°Á¿
+    { // åƒç”Ÿæ—¥ä¸€æ ·ï¼Œæœ‰æå‰é‡
         if (arDatePots.size() != 2)
         {
-            sError = L"°´ÄêÖ´ĞĞ     ²ÎÊıÖ»ÄÜÓĞ2¸ö£¨[0]:Ö´ĞĞÈÕÆÚ£¬[1]:ÌáÇ°Á¿£©";
+            sError = L"æŒ‰å¹´æ‰§è¡Œ     å‚æ•°åªèƒ½æœ‰2ä¸ªï¼ˆ[0]:æ‰§è¡Œæ—¥æœŸï¼Œ[1]:æå‰é‡ï¼‰";
             return FALSE;
         }
 
@@ -194,20 +194,20 @@ BOOL QHelper::MakeAbsExp(ENUM_AUTOTASK_EXECFLAG flag,QTime& tmB, QTime& tmE,
         return TRUE;
     }
     else if (AUTOTASK_EXEC_ATDAILY == flag)
-    { // Ã¿¸ôxÌìÖ´ĞĞÒ»´Î
+    { // æ¯éš”xå¤©æ‰§è¡Œä¸€æ¬¡
         if (arDatePots.size() > 1)
         {
-            sError = L"°´ÈÕ¼ä¸ôÖ´ĞĞ   ²ÎÊıÌ«¶à";
+            sError = L"æŒ‰æ—¥é—´éš”æ‰§è¡Œ   å‚æ•°å¤ªå¤š";
             return FALSE;
         }
         int nXDay;
         if (!QHelper::ParseInt(arDatePots[0], nXDay))
         {
-            sError = L"°´ÈÕ¼ä¸ôÖ´ĞĞ   ²ÎÊı½âÎö´íÎó      Ó¦¸ÃÖ¸¶¨Ò»¸öÕûÊı¼ä¸ô";
+            sError = L"æŒ‰æ—¥é—´éš”æ‰§è¡Œ   å‚æ•°è§£æé”™è¯¯      åº”è¯¥æŒ‡å®šä¸€ä¸ªæ•´æ•°é—´éš”";
         }
         if ((nXDay < 1) || (nXDay > 30))
         {
-            sError = L"°´ÈÕ¼ä¸ôÖ´ĞĞ   ¼ä¸ô·¶Î§Ó¦¸ÃÔÚ[1,30]Ö®¼ä";
+            sError = L"æŒ‰æ—¥é—´éš”æ‰§è¡Œ   é—´éš”èŒƒå›´åº”è¯¥åœ¨[1,30]ä¹‹é—´";
             return FALSE;
         }
         sResultExp.Format(L"A=%d;P=%u;T=%s;", AUTOTASK_EXEC_ATDAILY, nXDay, sTimePots);
@@ -215,20 +215,20 @@ BOOL QHelper::MakeAbsExp(ENUM_AUTOTASK_EXECFLAG flag,QTime& tmB, QTime& tmE,
     }
     else if (AUTOTASK_EXEC_ATWEEKDAY == flag)
     { 
-        // ÖÜ¼¸
+        // å‘¨å‡ 
         int v , weeks = 0;
         for (unsigned int i = 0; i < arDatePots.size(); ++i)
         {
             if (!QHelper::ParseInt(arDatePots[i], v) || (v > 6))
             {
-                sError = L"°´ÖÜÖ´ĞĞ   ²ÎÊı½âÎö´íÎó    Ó¦¸ÃÖ¸¶¨Ò»¸ö[0, 6]µÄÕûÊı";
+                sError = L"æŒ‰å‘¨æ‰§è¡Œ   å‚æ•°è§£æé”™è¯¯    åº”è¯¥æŒ‡å®šä¸€ä¸ª[0, 6]çš„æ•´æ•°";
                 return FALSE;
             }
             weeks |= (0x1<<v);
         }
         if (0 == weeks)
         {
-            sError = L"°´ÖÜÖ´ĞĞ   ²ÎÊı½âÎö´íÎó    Ó¦¸ÃÖÁÉÙÖ¸¶¨Ò»¸ö[0, 6]µÄÕûÊı";
+            sError = L"æŒ‰å‘¨æ‰§è¡Œ   å‚æ•°è§£æé”™è¯¯    åº”è¯¥è‡³å°‘æŒ‡å®šä¸€ä¸ª[0, 6]çš„æ•´æ•°";
             return FALSE;
         }
         sResultExp.Format(L"A=%d;X=%u;T=%s;",AUTOTASK_EXEC_ATWEEKDAY, weeks, sTimePots);
@@ -241,25 +241,25 @@ BOOL QHelper::MakeAbsExp(ENUM_AUTOTASK_EXECFLAG flag,QTime& tmB, QTime& tmE,
         {
             if (!QHelper::ParseInt(arDatePots[i], d) || (d > 31))
             {
-                sError = L"°´ÈÕÖ´ĞĞ   ²ÎÊı½âÎö´íÎó    ²ÎÊı·¶Î§[0, 31], 0 - Ã¿ÈÕ¶¼Ö´ĞĞ";
+                sError = L"æŒ‰æ—¥æ‰§è¡Œ   å‚æ•°è§£æé”™è¯¯    å‚æ•°èŒƒå›´[0, 31], 0 - æ¯æ—¥éƒ½æ‰§è¡Œ";
                 return FALSE;
             }
             else if (0 == d)
             {
-                days = 0x0fffffff;  // È«ÈÕÖ´ĞĞ
+                days = 0x0fffffff;  // å…¨æ—¥æ‰§è¡Œ
                 break;
             }
             days |= (0x1 << d);
         }
         if (0 == days)
         {
-            sError = L"°´ÈÕÖ´ĞĞ   ²ÎÊı½âÎö´íÎó    Ó¦¸ÃÖÁÉÙÖ¸¶¨Ò»¸ö[0, 31]µÄÕûÊı,  0 - Ã¿ÈÕ¶¼Ö´ĞĞ";
+            sError = L"æŒ‰æ—¥æ‰§è¡Œ   å‚æ•°è§£æé”™è¯¯    åº”è¯¥è‡³å°‘æŒ‡å®šä¸€ä¸ª[0, 31]çš„æ•´æ•°,  0 - æ¯æ—¥éƒ½æ‰§è¡Œ";
             return FALSE;
         }
         sResultExp.Format(L"A=%d;X=%u;T=%s;",AUTOTASK_EXEC_ATMONTHDAY,  days, sTimePots);
         return TRUE;
     }
-    sError = L"¾ø¶Ô±í´ïÊ½    Ö´ĞĞ²ÎÊı´íÎó";
+    sError = L"ç»å¯¹è¡¨è¾¾å¼    æ‰§è¡Œå‚æ•°é”™è¯¯";
     return FALSE;
 }
 

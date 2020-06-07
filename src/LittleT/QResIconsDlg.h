@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ui/QDialog.h"
 
@@ -16,8 +16,8 @@ protected:
     void OnIconSelChanged(HELEMENT);
     void OnAddNewIcon(HELEMENT he);
 
-    // nIconID  ÎªÍ¼±êÔÚÊı¾İ¿âÖĞµÄID
-    // szIconPath ÎªÒÑ¾­×ª»»ºÃµÄĞ¡Í¼±êµÄÂ·¾¶
+    // nIconID  ä¸ºå›¾æ ‡åœ¨æ•°æ®åº“ä¸­çš„ID
+    // szIconPath ä¸ºå·²ç»è½¬æ¢å¥½çš„å°å›¾æ ‡çš„è·¯å¾„
     BOOL AddIcon(int nIconID, LPCWSTR szIconPath );
 
 private:

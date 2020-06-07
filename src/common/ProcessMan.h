@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "BaseType.h"
 #include "time/QTime.h"
@@ -9,18 +9,18 @@
 
 #pragma comment(lib,"Psapi")
 
-// ÏµÍ³½ø³ÌÃ¶¾ÙÆ÷
+// ç³»ç»Ÿè¿›ç¨‹æšä¸¾å™¨
 class QProcessMan
 {
 public:
 	QProcessMan(void);
 	~QProcessMan(void);
 
-	// Ã¶¾ÙÖ®
+	// æšä¸¾ä¹‹
 	BOOL SnapShot();
-	// ½ø³ÌÊıÄ¿
+	// è¿›ç¨‹æ•°ç›®
 	inline DWORD GetPsNumber()const { return pids_.size(); }
-	// ±éÀú½ø³ÌID
+	// éå†è¿›ç¨‹ID
 	DWORD NextID();
 	
 	static BOOL GetPsPath( __in DWORD nProcessID, 
@@ -40,7 +40,7 @@ private:
 	typedef std::vector<DWORD> PIDs;
 	PIDs	pids_;
 	int		idx_;
-	static const QTime		sm_tmSystemStart; // ÏµÍ³Æô¶¯Ê±¼ä
-	static QTime		sm_tmAppStart;	// ±¾Ó¦ÓÃ³ÌĞòÆô¶¯Ê±¼ä
+	static const QTime		sm_tmSystemStart; // ç³»ç»Ÿå¯åŠ¨æ—¶é—´
+	static QTime		sm_tmAppStart;	// æœ¬åº”ç”¨ç¨‹åºå¯åŠ¨æ—¶é—´
 };
 

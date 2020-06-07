@@ -1,4 +1,4 @@
-#include "QNote.h"
+ï»¿#include "QNote.h"
 
 
 QNote::QNote(void)
@@ -17,12 +17,12 @@ CStdString QNote::TypeString()
 	{
 	case NOTE_TYPE_NOTSET:
 		{
-			sRet = L"·Ç¹ØÁª±Ê¼Ç";
+			sRet = L"éå…³è”ç¬”è®°";
 			return sRet;
 		}
 	case NOTE_TYPE_GOALITEM:
 		{
-			sRet = L"¼Æ»®Ä¿±êÏî";
+			sRet = L"è®¡åˆ’ç›®æ ‡é¡¹";
 			break;
 		}
 	}

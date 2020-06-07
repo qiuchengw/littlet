@@ -1,4 +1,4 @@
-/*@ Docs Online - A Google Docs Backup Applicaiotn                          */
+﻿/*@ Docs Online - A Google Docs Backup Applicaiotn                          */
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 /* Written and Designed by Michael Haephrati                                */

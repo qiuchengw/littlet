@@ -1,4 +1,4 @@
-#include <winsock2.h>
+ï»¿#include <winsock2.h>
 #include <windows.h>
 
 #include "misc.h"
@@ -11,30 +11,30 @@ namespace littlet
 {
     bool SendWebRequest(const CStdString& name, const CStdString& content, BOOL bAsync /*= TRUE*/)
     {
-        // Ê¹ÓÃzmqµÄrequest
+        // ä½¿ç”¨zmqçš„request
         zmq::context_t ctx;
         zmq::socket_t sock(ctx, ZMQ_REQ);
 
-        // Ô¶³ÌµØÖ·
-        // sock.connect("tcp://www.jiubaibu.com:5230");
+        // è¿œç¨‹åœ°å€
+        // sock.connect("tcp://piaode.ren:5230");
         try
         {
-            sock.connect("tcp://www.jiubaibu.com:5231");
+            sock.connect("tcp://piaode.ren:5231");
             // sock.connect("tcp://127.0.0.1:5231");
 
-            // µÚÒ»Ö¡ÊÇ·şÎñÃû×Ö
+            // ç¬¬ä¸€å¸§æ˜¯æœåŠ¡åå­—
             // login / logout / feed
             sock.send(name.c_str(), name.GetLength() * sizeof(CStdString::value_type), ZMQ_SNDMORE);
 
-            // µÚ¶şÖ¡ÊÇmacµØÖ·
+            // ç¬¬äºŒå¸§æ˜¯macåœ°å€
             CStdString mac_addr;
             GetMACAddress(mac_addr);
             sock.send(mac_addr.c_str(), mac_addr.GetLength() * sizeof(CStdString::value_type), ZMQ_SNDMORE);
 
-            // ×îºóÒ»¸öÊÇÄÚÈİ
+            // æœ€åä¸€ä¸ªæ˜¯å†…å®¹
             sock.send(content.c_str(), content.GetLength() * sizeof(CStdString::value_type));
 
-            // ×îºó±ØÈ»ÓĞÒ»¸ö½ÓÊÕµÄ¶¯×÷
+            // æœ€åå¿…ç„¶æœ‰ä¸€ä¸ªæ¥æ”¶çš„åŠ¨ä½œ
             char buf[64];
             sock.recv(buf, 64, bAsync ? ZMQ_NOBLOCK : 0);
 

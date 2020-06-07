@@ -1,4 +1,4 @@
-#include "QDBRes.h"
+ï»¿#include "QDBRes.h"
 #include "AppHelper.h"
 #include "crypt/zlibdata.h"
 
@@ -12,7 +12,7 @@ BOOL QResDB::AddData( __inout TFileData &fd  )
 {
     fd.nDataSize = fd.bufData.GetBufferLen();
 	ASSERT(fd.nDataSize > 0);
-	// ¶ÔÍ¼ÏñÊý¾Ý½øÐÐÑ¹ËõºóÔÙ´æ´¢
+	// å¯¹å›¾åƒæ•°æ®è¿›è¡ŒåŽ‹ç¼©åŽå†å­˜å‚¨
 	QBuffer buf;
 	if (ZlibData::CompressData(fd.bufData, buf))
 	{
@@ -174,7 +174,7 @@ BOOL QResMan::Startup( CStdString sIconDir )
 
     m_sIconDir = sIconDir;
 
-    // ÊÍ·ÅËùÓÐµÄiconµ½cacheÖÐ
+    // é‡Šæ”¾æ‰€æœ‰çš„iconåˆ°cacheä¸­
     VecFileData vfd;
     pDB->GetDataItems(vfd, DBFILE_TYPE_THUMBICON);
     for (VecFileData::iterator i = vfd.begin(); i != vfd.end(); ++i)
@@ -203,7 +203,7 @@ CStdString QResMan::GetDBResFilePath( __in TFileData& tfd )
     case DBFILE_TYPE_EXE:// = 0x20,
     case DBFILE_TYPE_UNKOWN:// = 0x1,
         {
-            ASSERT(FALSE);  // Î´ÊµÏÖ
+            ASSERT(FALSE);  // æœªå®žçŽ°
             break;
         }
     case DBFILE_TYPE_THUMBICON:// = 0x40,

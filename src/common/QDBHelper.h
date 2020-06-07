@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "BaseType.h"
 #include <list>
@@ -11,7 +11,7 @@ class QIdea;
 typedef std::vector<QIdea*> IdeaVec;
 typedef IdeaVec::iterator IdeaVecItr;
 
-// ¼´Ê±ÈÎÎñ¹ÜÀíÆ÷
+// å³æ—¶ä»»åŠ¡ç®¡ç†å™¨
 enum ENUM_TODOTASK_TYPE
 {
     TODOTASK_TYPE_TODO = 1,
@@ -21,11 +21,11 @@ enum ENUM_TODOTASK_TYPE
 
 enum ENUM_TODOTASK_FLAG
 {
-	TODO_FLAG_PLANRELATED = 0x1, // ºÍ´ó¼Æ»®Ïà¹ØÁªµÄÈÎÎñ
-	TODO_FLAG_NEEDREMIND = 0x2, // ĞèÒªÌáÇ°ÌáÊ¾
-    TODO_FLAG_HASENDTIME = 0x4, // ÓĞ½áÊøÈÕÆÚ
-    TODO_FLAG_STICKYNOTE = 0x8, // ÏÔÊ¾Îª±ãÇ©
-    TODO_FLAG_ENCRYPTED = 0x10, // Êı¾İÒÑ¾­¼ÓÃÜ
+	TODO_FLAG_PLANRELATED = 0x1, // å’Œå¤§è®¡åˆ’ç›¸å…³è”çš„ä»»åŠ¡
+	TODO_FLAG_NEEDREMIND = 0x2, // éœ€è¦æå‰æç¤º
+    TODO_FLAG_HASENDTIME = 0x4, // æœ‰ç»“æŸæ—¥æœŸ
+    TODO_FLAG_STICKYNOTE = 0x8, // æ˜¾ç¤ºä¸ºä¾¿ç­¾
+    TODO_FLAG_ENCRYPTED = 0x10, // æ•°æ®å·²ç»åŠ å¯†
 };
 
 struct TCate
@@ -46,7 +46,7 @@ enum ENUM_TODO_STATUS
 	TODO_STATUS_FINISH,
 //	TODO_STATUS_ABORT,
     //-------------------
-    // ·ÇÈÎÎñ×´Ì¬£¬Ö»ÓÃÓÚÏÔÊ¾ÈÎÎñÊ±ºòµÄÖ¸Ê¾
+    // éä»»åŠ¡çŠ¶æ€ï¼Œåªç”¨äºæ˜¾ç¤ºä»»åŠ¡æ—¶å€™çš„æŒ‡ç¤º
     TODO_STATUS_SHOWNONE,
     TODO_STATUS_SHOWALL,
 };
@@ -94,8 +94,8 @@ public:
 	BOOL TodoTask_SetCate( int nTaskID,int nCateID );
 	BOOL TodoTask_IsDone(int nID);
 	BOOL TodoTask_Edit(TTodoTask* pItem);
-	// bActiveAndDone ÎªTRUEµÄÊ±ºò£¬eStatus ²»Ê¹ÓÃ
-	// bAllTimeTask ÎªTRUEµÄÊ±ºò£¬tmBegin,tmEnd ²»Ê¹ÓÃ
+	// bActiveAndDone ä¸ºTRUEçš„æ—¶å€™ï¼ŒeStatus ä¸ä½¿ç”¨
+	// bAllTimeTask ä¸ºTRUEçš„æ—¶å€™ï¼ŒtmBegin,tmEnd ä¸ä½¿ç”¨
 // 	BOOL TodoTask_Get(BOOL bActiveAndDone,ENUM_TODO_STATUS eStatus, 
 // 		BOOL bAllTimeTask,const QTime& tmBegin,
 // 		const QTime& tmEnd,__out TodoTaskList &lst);
@@ -112,7 +112,7 @@ public:
 public:
 	//////////////////////////////////////////////////////////////////////////
 	// cate
-	// »ñÈ¡Ä¿Â¼ÏÂµÄÈÎÎñÁĞ±í
+	// è·å–ç›®å½•ä¸‹çš„ä»»åŠ¡åˆ—è¡¨
 	BOOL Cate_IsExist(const CStdString& sCate);
 	BOOL Cate_IsHasTask(int nCateID);
 	int Cate_Add( const CStdStringW &sCate ,UINT nFlags,int nIconID,const CStdString& sDescription);
@@ -129,13 +129,13 @@ public: // autotask
 	BOOL AutoTask_SetTimer(int nTaskID,int nTimerID);
 	BOOL AutoTask_SetDo(int nTaskID, LPCWSTR pszTask,ENUM_AUTOTASK_DOWHAT eDo);
 	int AutoTask_GetTimerID(int nTaskID);
-	// ´ÓÊı¾İ¿âÖĞÉ¾³ıÈÎÎñ
+	// ä»æ•°æ®åº“ä¸­åˆ é™¤ä»»åŠ¡
 	BOOL AutoTask_Delete( int nID );
 	BOOL AutoTask_GetInfo( int nTaskID, __out CStdString & sTask,
 		__out int &nTimerID, __out ENUM_AUTOTASK_DOWHAT &eDo,
 		__out int& nFlag,__out QTime &tmCreate);
 protected:
-	// ¶ÁÈ¡Î´Íê³ÉµÄÈÎÎñ
+	// è¯»å–æœªå®Œæˆçš„ä»»åŠ¡
 	BOOL AutoTask_GetAll( AutoTaskList & lst );
 
 protected:

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <Windows.h>
 #include <vector>
@@ -24,9 +24,9 @@ public:
         WIN_PATH_UNICODE_UNC_PATH_PREFIX    = 7,            ///< length of "\\\\??\\UNC\\"
     };
 
-    // return S_FALSE, Ä¿Â¼ÒÑ´æÔÚ
-    // return S_OK, Ä¿Â¼±»ÐÂ´´½¨
-    // return E_XX, Ê§°Ü
+    // return S_FALSE, ç›®å½•å·²å­˜åœ¨
+    // return S_OK, ç›®å½•è¢«æ–°åˆ›å»º
+    // return E_XX, å¤±è´¥
     static HRESULT CreateFullPath(LPCWSTR lpszFileName, DWORD dwFileAttribute = FILE_ATTRIBUTE_NORMAL);
 
     /// see Win32 API GetFullPathName

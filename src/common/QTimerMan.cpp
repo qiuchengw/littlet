@@ -1,4 +1,4 @@
-#pragma warning(disable:4244 4018)
+ï»¿#pragma warning(disable:4244 4018)
 
 #include "QTimerMan.h"
 #include "QHelper.h"
@@ -7,7 +7,7 @@
 #include "xtrace.h"
 
 VOID CALLBACK TaskCallback(__in PVOID lpParameter,__in BOOLEAN TimerOrWaitFired);
-// ×Ô¶¯ÈÎÎñÌáÇ°ÌáÊ¾µÄµÄ»Øµ÷º¯Êı
+// è‡ªåŠ¨ä»»åŠ¡æå‰æç¤ºçš„çš„å›è°ƒå‡½æ•°
 VOID CALLBACK TaskRemindCallback(__in PVOID lpParameter,__in BOOLEAN TimerOrWaitFired)
 {
 	ASSERT(lpParameter != NULL);

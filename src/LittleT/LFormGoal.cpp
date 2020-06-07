@@ -1,4 +1,4 @@
-#include "LFormGoal.h"
+ï»¿#include "LFormGoal.h"
 #include "../common/LittleTUIcmn.h"
 #include "ui/QUIGlobal.h"
 
@@ -87,7 +87,7 @@ void LFormGoal::NewGoalAdded( QGoal* pGoal )
     ASSERT(NULL != pGoal);
     m_goals.push_back(pGoal);
     ETable tblGoal = AddGoalCtl(pGoal);
-    // Ñ¡ÖĞĞÂÌí¼ÓµÄÕâ¸ö
+    // é€‰ä¸­æ–°æ·»åŠ çš„è¿™ä¸ª
     SelectGoal(tblGoal);
 }
 
@@ -130,7 +130,7 @@ void LFormGoal::OnMenuItemClkEdit( HELEMENT he,EMenuItem )
     {
         ETable tblGoal = _GoalBox().FindFirstWithData(pGoal);
         RefreshGoal(tblGoal);
-        // ÈÃÉÏ²ãÒ²Ë¢ĞÂÏÔÊ¾goal
+        // è®©ä¸Šå±‚ä¹Ÿåˆ·æ–°æ˜¾ç¤ºgoal
         SelectGoal(he);
     }
 }
@@ -154,8 +154,8 @@ BOOL LFormGoal::SelectGoal( __in ETable tblGoal /*= NULL*/ )
 {
     if ( !tblGoal.is_valid() )
     {   
-        // ÎŞĞ§µÄ»°£¬Ñ¡ÖĞµÚÒ»¸öÏîÄ¿
-        // Ñ¡ÖĞµÚÒ»¸ö
+        // æ— æ•ˆçš„è¯ï¼Œé€‰ä¸­ç¬¬ä¸€ä¸ªé¡¹ç›®
+        // é€‰ä¸­ç¬¬ä¸€ä¸ª
         tblGoal = _GoalBox().find_first("[name=\"goal-item\"]");
     }
 #ifdef _DEBUG
@@ -166,7 +166,7 @@ BOOL LFormGoal::SelectGoal( __in ETable tblGoal /*= NULL*/ )
 #endif
     if (tblGoal.is_valid())
     {
-        // ÔÚÆäÏÂÃæÉú³ÉÒ»¸öform
+        // åœ¨å…¶ä¸‹é¢ç”Ÿæˆä¸€ä¸ªform
         CreateGoalitemForm(tblGoal);
 
         tblGoal.SetCheck(TRUE,TRUE);
@@ -174,7 +174,7 @@ BOOL LFormGoal::SelectGoal( __in ETable tblGoal /*= NULL*/ )
 
         tblGoal.scroll_to_view(true, true);
 
-        // Í¨ÖªÉÏ¼¶×Ô¼ºÑ¡Ôñ±ä»¯ÁË
+        // é€šçŸ¥ä¸Šçº§è‡ªå·±é€‰æ‹©å˜åŒ–äº†
         QUIPostCodeTo(GetSafeHwnd(), VIEWPLAN_NOTIFY_GOALSELCHANGED,
             (LPARAM)pGoal);
     }
@@ -188,12 +188,12 @@ void LFormGoal::CreateGoalitemForm(ETable &tblGoal)
     if ((-1 != idx) && (iPos < idx))
         iPos += 1;
     iPos = (0 == iPos) ? 1 : iPos;
-    // ÖØĞÂ½¨Á¢Õâ¸öform
+    // é‡æ–°å»ºç«‹è¿™ä¸ªform
     m_formGoalItem.CreateForm(GetRoot(), iPos, _GoalOfCtl(tblGoal));
 
     RemoveFormEntry(&m_formGoalItem);
 
-    // ½¨Á¢formÏûÏ¢Ó³Éä
+    // å»ºç«‹formæ¶ˆæ¯æ˜ å°„
     __AddFormEntry(&m_formGoalItem);
 }
 
@@ -216,7 +216,7 @@ void LFormGoal::OnClkDeleteGoal( HELEMENT he)
     ASSERT(i != iEnd);
     
     CStdString sTip;
-    sTip.Format(L"È·¶¨É¾³ıÕâ¸öÄ¿±êÂğ£¿£¬ÆäÏÂÓĞ[%d]×ÓÄ¿±ê¡£", 
+    sTip.Format(L"ç¡®å®šåˆ é™¤è¿™ä¸ªç›®æ ‡å—ï¼Ÿï¼Œå…¶ä¸‹æœ‰[%d]å­ç›®æ ‡ã€‚", 
         pGoal->GetGoalItemNum());
     if (XMsgBox::YesNoMsgBox(sTip) == IDYES)
     {
@@ -248,7 +248,7 @@ void LFormGoal::ClearMem()
 
 void LFormGoal::GoalSubItemDelete( QGoal *pParentGoal )
 {
-    // Ë¢ĞÂÏÔÊ¾ÊıÄ¿
+    // åˆ·æ–°æ˜¾ç¤ºæ•°ç›®
     ETable tblGoal = _GoalBox().FindFirstWithData(pParentGoal);
     RefreshGoal(tblGoal);
 }
@@ -264,7 +264,7 @@ void LFormGoal::GoalSubItemStatusChanged( QGoalItem *pGoalItem )
             break;
         }
     }
-    // Ë¢ĞÂÏÔÊ¾ÊıÄ¿
+    // åˆ·æ–°æ˜¾ç¤ºæ•°ç›®
     ETable tblGoal = _GoalBox().FindFirstWithData(pGoal);
     RefreshGoal(tblGoal);
 }
@@ -309,10 +309,10 @@ BOOL LGoalDlg::OnDefaultButton( INT_PTR nBtn )
     CStdString sStage = EEdit(GetCtrl("#txt-goal")).GetText().Trim();
     if (sStage.IsEmpty())
     {
-        XMsgBox::OkMsgBox(L"Ä¿±êÃû²»ÄÜÎª¿Õ");
+        XMsgBox::OkMsgBox(L"ç›®æ ‡åä¸èƒ½ä¸ºç©º");
         return FALSE;
     }
-    // ĞèÒª²âÊÔ
+    // éœ€è¦æµ‹è¯•
     BOOL bOK = FALSE;
     if (m_bEditMode)
     {
@@ -330,7 +330,7 @@ BOOL LGoalDlg::OnDefaultButton( INT_PTR nBtn )
     }
     if (!bOK)
     {
-        XMsgBox::ErrorMsgBox(L"²Ù×÷Ê§°Ü£¡ÇëÖØÊÔ.");
+        XMsgBox::ErrorMsgBox(L"æ“ä½œå¤±è´¥ï¼è¯·é‡è¯•.");
         return FALSE;
     }
     return TRUE;
@@ -349,7 +349,7 @@ BOOL LGoalDlg::CheckMemberParameters()
     }
     if ( !bOK )
     {
-        XMsgBox::ErrorMsgBox(L"Êı¾İ´íÎó£¬²Ù×÷Ê§°Ü!");
+        XMsgBox::ErrorMsgBox(L"æ•°æ®é”™è¯¯ï¼Œæ“ä½œå¤±è´¥!");
     }
     return bOK;
 }

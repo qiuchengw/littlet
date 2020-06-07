@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ui/QDialog.h"
 //#include "sys/Regkey.h"
@@ -35,7 +35,7 @@ private:
     CStdString     m_sZipFile; // updater file
 };
 
-// ÎÄµµ
+// æ–‡æ¡£
 class LDocDlg : public QDialog
 {
 public:
@@ -99,7 +99,7 @@ protected:
         return GetCtrl("#chk_cmn_autorun");
     }
 
-    // ±¾³ÌĞòµÄ×¢²á±íÂ·¾¶
+    // æœ¬ç¨‹åºçš„æ³¨å†Œè¡¨è·¯å¾„
     // CStdStringW _KeyPath();
     CStdStringW _ProgPath();
 

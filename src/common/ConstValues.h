@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <list>
 #include <vector>
@@ -9,201 +9,201 @@
 
 enum
 {
-	// ˢ��autotask, 
+	// 刷新autotask, 
 	// lParam 
 	//		- autoTaskID
 	MWND_CMD_REFRESHAUTOTASK = 1,
-    // �л�Ӧ�ó���ģʽ, 
+    // 切换应用程序模式, 
     // lParam 
     //		- ENUM_APP_MODE
     MWND_CMD_ENTERAPPMODE,
 
-	// ѡ��autotask��Ŀ
+	// 选择autotask项目
 	// lParam
 	//		- AutoTask ID
 	EVENTWND_CMD_SELECTAUTOTASK,
 
-    // �û�ѡ������һ������ִ��
+    // 用户选择跳过一次任务执行
     // lParam
     //		- AutoTask ID
     EVENTWND_NOTIFY_USERJUMPEVENTEXEC,
 
-	// ��autotask����
+	// 对autotask操作
 	// LPQMSG_PARAM
 	//		-wParam		ENUM_TASK_OPERATION
 	//		-lParam		AutoTask ID
 	//		-lData 
-	//				- ��wParamΪDELETE��ʱ�򣬴�ֵΪɾ��ԭ��ENUM_TASK_RUNNING_STATUS
-	//				- ��wParamΪToggleRemind����ֵΪ���û��߽���ֵ��BOOL��
+	//				- 当wParam为DELETE的时候，此值为删除原因，ENUM_TASK_RUNNING_STATUS
+	//				- 当wParam为ToggleRemind，此值为启用或者禁用值（BOOL）
 	MWND_CMD_AUTOTASKOPERATION,
 	// lParam 
 	//		LPCWSTR -- messag
 	MWND_CMD_SHOWMESSAGE,
-	// �ػ�����
+	// 关机命令
 	// lParam  
 	//		
 	MWND_CMD_SHUTDOWN,
-	// ��������
+	// 重启命令
 	// LParam
 	// - 
 	MWND_CMD_REBOOT,
-	// ��Ϣһ�������ʾ����
+	// 休息一会儿，显示屏保
 	// LParam
-	// - ��ʾʱ��	��λ�루s��
+	// - 显示时长	单位秒（s）
 	MWND_CMD_SHOWSCREENSAVER,
 
-	// ��ʾ�Զ��������ʾ��
+	// 显示自动任务的提示框
 	// lParam 
 	//		- LPTASK_REMINDER_PARAM
 	MWND_CMD_SHOWAUTOTASKREMIND,
-	// ��ʾ�Զ��������ʾ��
-	// lParam ��ʹ��
+	// 显示自动任务的提示框
+	// lParam 不使用
 	MWND_CMD_SHOWOVERDUETASK,
-	// ������
+	// 做任务
 	// lParam
 	//  - LPQMSG_PARAM
 	//		wParam ENUM_TASK_DOWHAT
-	//		lParam ����wParam ����
+	//		lParam 根据wParam 而定
 	MWND_CMD_DOWORK,
-	// ��ʾ���
+	// 显示面板
 	// lParam
-	//		-string: funcbar button ID�����磺L"btn_funcbar_tasks"
+	//		-string: funcbar button ID，例如：L"btn_funcbar_tasks"
 	MWND_CMD_SHOWPANE,
-	// ���¹��
-	// lParam��wParam 
+	// 更新广告
+	// lParam，wParam 
 	MWND_CMD_UPDATEAD,
 
     //////////////////////////////////////////////////////////////////////////
     // notifys
-    // todo �����½���ɾ����״̬����
+    // todo 任务新建、删除和状态更改
     // lParam
     //		- 
     MWND_NOTIFY_TODOTASKCHANGED,
-    // autotask �����½���ɾ��
+    // autotask 任务新建、删除
     // lParam
     //		- 
     MWND_NOTIFY_EVENTNUMCHANGED,
 
-    // autoTask ���� 
+    // autoTask 启动 
     //		- lParam	  TaskID
     MWND_NOTIFY_AUTOTASKSTART,
-    // autoTask ɾ�� 
+    // autoTask 删除 
     //		- lParam	  TaskID
     MWND_NOTIFY_AUTOTASKDELETE,
-    // ���ڵ�����ɾ��
+    // 过期的任务删除
     //		- lParam	  TaskID
     MWND_NOTIFY_AUTOTASKOVERDUE,
-    // autoTask �༭ 
+    // autoTask 编辑 
     //		- lParam	  TaskID
     MWND_NOTIFY_AUTOTASKEDIT,
-    // autoTask ��ͣ 
+    // autoTask 暂停 
     //		- lParam	  TaskID
     MWND_NOTIFY_AUTOTASKPAUSE,
     // autotask
     MWND_NOTIFY_AUTOTASKTOGGLEREMINDER,
-    // auto Task ִ���ˣ���ʱ�����ɾ����������ʾ�ˣ�����еĻ���
+    // auto Task 执行了，这时候可以删除掉它的提示了（如果有的话）
     // lParam 
     //		- TaskID
     MWND_NOTIFY_AUTOTASKFIRED,
-    // ��������ɾ�������ã�����
+    // 过期任务删除，重置，新增
     // lParam 
-    //		- QAutoTask* ����Ϊ NULL
+    //		- QAutoTask* 可以为 NULL
     MWND_NOTIFY_OVERDUETASKCHANGED,
-    // �½���һ���Զ�����
+    // 新建了一个自动任务
     // lParam  
     //		- QAutoTask*
     MWND_NOTIFY_AUTOTASKADDED,
-    // �½���һ��Ŀ¼
+    // 新建了一个目录
     // lParam
     //		- QCate*
     MWND_NOTIFY_CATEGORYADDED,
-    // ������һ��Ŀ¼
+    // 更改了一个目录
     // lParam
     //		- QCate*
     MWND_NOTIFY_CATEGORYCHANGED,
-    // ɾ����һ��Ŀ¼
+    // 删除了一个目录
     // lParam
     //		- QCate*
     MWND_NOTIFY_CATEGORYDELETED,
 
     //////////////////////////////////////////////////////////////////////////
-    // �ƻ���Ŀ�仯
+    // 计划数目变化
     // lParam
-    //		- int   �µ�plan��Ŀ
+    //		- int   新的plan数目
     MWND_NOTIFY_PLANNUMCHANGED,
     //////////////////////////////////////////////////////////////////////////
-    // QPictureLoader �Ĳ���ͼƬ��ʱ������
+    // QPictureLoader 的播放图片定时器激发
     // lParam   
-    //          int     ����ͼ������
+    //          int     播放图像索引
     PICTRUELOADER_PLAYTIMER_FIRED,
 
     //////////////////////////////////////////////////////////////////////////
-    /** planѡ��֪ͨ
+    /** plan选中通知
      *	params:
      *		-[in]
-     *          lParam  QPlan* ����Ϊnull
+     *          lParam  QPlan* 可以为null
     **/
     VIEWPLAN_NOTIFY_PLANSELCHANGED,
 
-    /** ����stage֪ͨ
+    /** 添加stage通知
      *	params:
      *		-[in]
      *          lParam  QStage*
     **/
     VIEWPLAN_NOTIFY_STAGEADDED,    // 
 
-    /** ɾ��stage֪ͨ
+    /** 删除stage通知
      *	params:
      *		-[in]
      *          lParam  nStageID
     **/
     VIEWPLAN_NOTIFY_STAGEDELETED,    
     
-    /** ����goal֪ͨ
+    /** 添加goal通知
      *	params:
      *		-[in]
      *          lParam  QStage*
-     *              ������NULL
+     *              可能是NULL
     **/
     VIEWPLAN_NOTIFY_STAGESELCHANGED,
 
-   /** ����goal֪ͨ
+   /** 添加goal通知
      *	params:
      *		-[in]
      *          lParam  QGoal*
     **/
     VIEWPLAN_NOTIFY_GOALADDED,    
     
-    /** ����goal֪ͨ
+    /** 添加goal通知
      *	params:
      *		-[in]
      *          lParam  GOAL ID
     **/
     VIEWPLAN_NOTIFY_GOALDELETED,   
     
-    /** ����goal֪ͨ
+    /** 添加goal通知
      *	params:
      *		-[in]
      *          lParam  QGoal*
-     *              ������NULL
+     *              可能是NULL
     **/
     VIEWPLAN_NOTIFY_GOALSELCHANGED,   
 
-   /** ����goalitem֪ͨ
+   /** 添加goalitem通知
      *	params:
      *		-[in]
      *          lParam  QGoalitem*
     **/
     VIEWPLAN_NOTIFY_GOALSUBITEMADDED,    
     
-    /** ɾ��goalitme֪ͨ
+    /** 删除goalitme通知
      *	params:
      *		-[in]
-     *          lParam  QGoal* (goalitem�ĸ���ָ��)
+     *          lParam  QGoal* (goalitem的父亲指针)
     **/
     VIEWPLAN_NOTIFY_GOALSUBITEMDELETED,   
 
-    /** goalitem״̬�仯֪ͨ
+    /** goalitem状态变化通知
      *	params:
      *		-[in]
      *          lParam  QGoalitem*
@@ -220,96 +220,96 @@ enum ENUM_SSTYLE_TYPE
     STYLE_TYPE_IMAGEANDCOLOR = 4, 
 };
 
-// QRes ���ݿ��е�ͼ�����;
+// QRes 数据库中的图像的用途
 enum ENUM_DBFILE_USAGE
 {
-    FILE_USAGE_DATA = 1,	// �������ڴ�����
+    FILE_USAGE_DATA = 1,	// 单纯的内存数据
     FILE_USAGE_IMAGEFIRST,	// IMAGE
-    FILE_USAGE_CONTACTS_PHOTO = FILE_USAGE_IMAGEFIRST,	// ��ϵ����Ƭ
-    FILE_USAGE_CATEGORY_ICON,		// Ŀ¼����ͼ��
+    FILE_USAGE_CONTACTS_PHOTO = FILE_USAGE_IMAGEFIRST,	// 联系人照片
+    FILE_USAGE_CATEGORY_ICON,		// 目录关联图标
     FILE_USAGE_SIMPLESTYLE_IMAGE,
     FILE_USAGE_IMAGELAST = FILE_USAGE_CATEGORY_ICON,
 };
 
 //////////////////////////////////////////////////////////////////////////
-// ��������
+// 任务描述
 enum ENUM_TASK_DOWHAT
 {
-    TASK_DO_NOTSET = 0,	// δ����	
-    TASK_DO_LONGPLAN = 1,	// ���ڵĵ���ƻ�
-    TASK_DO_REMIND = 2, // ��ʾ��Ϣ
-    TASK_DO_EXECPROG = 3,  // ִ�г���
-    TASK_DO_SYSSHUTDOWN = 4,  // �ػ�
-    TASK_DO_SYSREBOOT = 5,  // ����
-    TASK_DO_BREAKAMOMENT = 6, // ��Ϣһ���
+    TASK_DO_NOTSET = 0,	// 未设置	
+    TASK_DO_LONGPLAN = 1,	// 长期的单项计划
+    TASK_DO_REMIND = 2, // 提示信息
+    TASK_DO_EXECPROG = 3,  // 执行程序
+    TASK_DO_SYSSHUTDOWN = 4,  // 关机
+    TASK_DO_SYSREBOOT = 5,  // 重启
+    TASK_DO_BREAKAMOMENT = 6, // 休息一会儿
 };
 
 enum ENUM_TASK_OPERATION
 {
-    TASK_OP_START,		// ����
-    TASK_OP_PAUSE,		// ��ͣ
-    TASK_OP_DELETE,		// ɾ��
-    TASK_OP_EDIT,		// �༭
-    TASK_OP_JUMPOVEREXEC, // ��������ִ��
-    TASK_OP_TOGGLEREMIND, // ��ֹ��ʾ
+    TASK_OP_START,		// 启动
+    TASK_OP_PAUSE,		// 暂停
+    TASK_OP_DELETE,		// 删除
+    TASK_OP_EDIT,		// 编辑
+    TASK_OP_JUMPOVEREXEC, // 跳过本次执行
+    TASK_OP_TOGGLEREMIND, // 禁止提示
 };
 
 enum ENUM_TASK_EXECFLAG
 {
-    TASK_EXEC_NOTSET	= 0,	// ϵͳ����
-    // ���ʱ��
-    TASK_EXEC_AFTERSYSBOOT	= 0x00000001,	// ϵͳ����
-    TASK_EXEC_AFTERTASKSTART = 0x00000002,	// �������� 
-    TASK_EXEC_AFTERMINDERSTART = 0x00000004,// ����������
-    TASK_EXEC_AFTERPROGSTART = 0x00000008,// �ⲿ��������
-    TASK_EXEC_AFTERPROGEXIT = 0x00000010,// �ⲿ�����˳�
-    // ����ʱ����
-    TASK_EXEC_ATDATE = 0x00010000,	// �������� 2011/11/11
-    TASK_EXEC_ATDAILY = 0x00020000,	// ÿ��x��
-    TASK_EXEC_ATMONTHDAY = 0x00040000,	// ÿ�µ�x�� 
-    TASK_EXEC_ATWEEKDAY = 0x00080000,	// ÿ�µ�x�� x[������|��һ��|����|��4��]
+    TASK_EXEC_NOTSET	= 0,	// 系统启动
+    // 相对时间
+    TASK_EXEC_AFTERSYSBOOT	= 0x00000001,	// 系统启动
+    TASK_EXEC_AFTERTASKSTART = 0x00000002,	// 任务启动 
+    TASK_EXEC_AFTERMINDERSTART = 0x00000004,// 本程序启动
+    TASK_EXEC_AFTERPROGSTART = 0x00000008,// 外部程序启动
+    TASK_EXEC_AFTERPROGEXIT = 0x00000010,// 外部程序退出
+    // 绝对时间标记
+    TASK_EXEC_ATDATE = 0x00010000,	// 绝对日期 2011/11/11
+    TASK_EXEC_ATDAILY = 0x00020000,	// 每隔x天
+    TASK_EXEC_ATMONTHDAY = 0x00040000,	// 每月的x号 
+    TASK_EXEC_ATWEEKDAY = 0x00080000,	// 每月的x周 x[所有周|第一周|。。|第4周]
 
     //////////////////////////////////////////////////////////////////////////
-    TASK_EXEC_RELATE_EXECANDTHEN = 0x01000000,	// ���ʱ��֮���ٴ�ִ�ж�μ��
+    TASK_EXEC_RELATE_EXECANDTHEN = 0x01000000,	// 相对时间之后再次执行多次间隔
 
 };
 
-// ����״̬
+// 任务状态
 enum ENUM_TASK_STATUS
 {
-    TASK_STATUS_NOTBEGIN	= 0,	// ��δ���е���������
-    TASK_STATUS_PROCESSING	= 1,	// ������
-    TASK_STATUS_PAUSE = 2,		// ��ͣ
-    TASK_STATUS_ABORT = 3,		// ���
-    TASK_STATUS_FINISH = 4,		// ����
-    TASK_STATUS_OVERDUE = 5,	// ������ڣ�CurrentTime > EndTime
+    TASK_STATUS_NOTBEGIN	= 0,	// 还未进行到任务周期
+    TASK_STATUS_PROCESSING	= 1,	// 进行中
+    TASK_STATUS_PAUSE = 2,		// 暂停
+    TASK_STATUS_ABORT = 3,		// 完成
+    TASK_STATUS_FINISH = 4,		// 放弃
+    TASK_STATUS_OVERDUE = 5,	// 任务过期，CurrentTime > EndTime
 };
 
-// ��������ʱ״̬
+// 任务运行时状态
 enum ENUM_TASK_RUNNING_STATUS
 {
-    TASK_RUNNING_STATUS_BADTIMER = -2,	// ���ܽ���timer����ʽ
-    TASK_RUNNING_STATUS_APPERROR = -1,	// Ӧ�ó�������˴���
-    TASK_RUNNING_STATUS_OK = 0,	// ������������
-    TASK_RUNNING_STATUS_NOTSTARTUP = 1,	// ����δ����
-    TASK_RUNNING_STATUS_OVERDUE,	// ���������
-    TASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT,	// ��Ҫ�´λ��������������ִ��
-    TASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT,	// ��Ҫ���������������ִ��
-    TASK_RUNNING_STATUS_BASEDONEXETERNALPROG,	// �������ⲿ����û������
+    TASK_RUNNING_STATUS_BADTIMER = -2,	// 不能解析timer表达式
+    TASK_RUNNING_STATUS_APPERROR = -1,	// 应用程序出现了错误
+    TASK_RUNNING_STATUS_OK = 0,	// 任务正常启动
+    TASK_RUNNING_STATUS_NOTSTARTUP = 1,	// 任务还未启动
+    TASK_RUNNING_STATUS_OVERDUE,	// 任务过期了
+    TASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT,	// 需要下次机器重启，任务才执行
+    TASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT,	// 需要程序重启，任务才执行
+    TASK_RUNNING_STATUS_BASEDONEXETERNALPROG,	// 依赖的外部程序并没有运行
     //////////////////////////////////////////////////////////////////////////
-    // ����ʱ��
-    TASK_RUNNING_STATUS_TIMENOTMATCH,	// �޿�ִ�е�ʱ��ƥ��
-    TASK_RUNNING_STATUS_NOCHANCETOEXEC,	// ��Ȼ����δ���ڣ��������µ�ʱ�������û�л�����ִ����
+    // 绝对时间
+    TASK_RUNNING_STATUS_TIMENOTMATCH,	// 无可执行的时间匹配
+    TASK_RUNNING_STATUS_NOCHANCETOEXEC,	// 虽然任务未过期，但是余下的时间里，任务都没有机会再执行了
 };
 
-// �������ȼ�
+// 任务优先级
 enum ENUM_TASK_PRIORITY
 {
-    TASK_PRIORITY_LOWEST = 1,	// ���
-    TASK_PRIORITY_LOW = 2,		// ��
-    TASK_PRIORITY_NOMAL = 3,	// ����
-    TASK_PRIORITY_HIGH = 4,		// ��
-    TASK_PRIORITY_HIGHEST = 5,	// ������ȼ�
+    TASK_PRIORITY_LOWEST = 1,	// 最低
+    TASK_PRIORITY_LOW = 2,		// 低
+    TASK_PRIORITY_NOMAL = 3,	// 正常
+    TASK_PRIORITY_HIGH = 4,		// 高
+    TASK_PRIORITY_HIGHEST = 5,	// 最高优先级
 };
 
 enum ENUM_WORK_TYPE
@@ -340,74 +340,74 @@ enum ENUM_EVENT_TRACK
 
 enum ENUM_AUTOTASK_FLAG
 {
-    AUTOTASK_FLAG_PAUSED = 0x1,		// ��ִͣ��
+    AUTOTASK_FLAG_PAUSED = 0x1,		// 暂停执行
 
-    AUTOTASK_FLAG_CONTACTBIRTHDAY = 0x10000000,		// ��ϵ��������ʾ��
+    AUTOTASK_FLAG_CONTACTBIRTHDAY = 0x10000000,		// 联系人生日提示器
 };
 
 //////////////////////////////////////////////////////////////////////////
-// ��������
+// 任务描述
 enum ENUM_AUTOTASK_DOWHAT
 {
-    AUTOTASK_DO_NOTSET = 0,	// δ����	
-    AUTOTASK_DO_REMIND = 2, // ��ʾ��Ϣ
-    AUTOTASK_DO_EXECPROG = 3,  // ִ�г���
-    AUTOTASK_DO_SYSSHUTDOWN = 4,  // �ػ�
-    AUTOTASK_DO_SYSREBOOT = 5,  // ����
-    AUTOTASK_DO_BREAKAMOMENT = 6, // ��Ϣһ���
+    AUTOTASK_DO_NOTSET = 0,	// 未设置	
+    AUTOTASK_DO_REMIND = 2, // 提示信息
+    AUTOTASK_DO_EXECPROG = 3,  // 执行程序
+    AUTOTASK_DO_SYSSHUTDOWN = 4,  // 关机
+    AUTOTASK_DO_SYSREBOOT = 5,  // 重启
+    AUTOTASK_DO_BREAKAMOMENT = 6, // 休息一会儿
 };
 
 enum ENUM_AUTOTASK_OPERATION
 {
-    AUTOTASK_OP_START,		// ����
-    AUTOTASK_OP_PAUSE,		// ��ͣ
-    AUTOTASK_OP_DELETE,		// ɾ��
-    AUTOTASK_OP_EDIT,		// �༭
-    AUTOTASK_OP_JUMPOVEREXEC, // ��������ִ��
-    AUTOTASK_OP_TOGGLEREMIND, // ��ֹ��ʾ
+    AUTOTASK_OP_START,		// 启动
+    AUTOTASK_OP_PAUSE,		// 暂停
+    AUTOTASK_OP_DELETE,		// 删除
+    AUTOTASK_OP_EDIT,		// 编辑
+    AUTOTASK_OP_JUMPOVEREXEC, // 跳过本次执行
+    AUTOTASK_OP_TOGGLEREMIND, // 禁止提示
 };
 
 
-// һ�������
+// 一天的秒数
 const double SECONDS_OF_DAY = 86400.0f;
 
 enum ENUM_AUTOTASK_EXECFLAG
 {
-    AUTOTASK_EXEC_NOTSET	= 0,	// ϵͳ����
-    // ���ʱ��
-    AUTOTASK_EXEC_AFTERSYSBOOT	= 0x00000001,	// ϵͳ����
-    AUTOTASK_EXEC_AFTERTASKSTART = 0x00000002,	// �������� 
-    AUTOTASK_EXEC_AFTERMINDERSTART = 0x00000004,// ����������
-    AUTOTASK_EXEC_AFTERPROGSTART = 0x00000008,// �ⲿ��������
-    AUTOTASK_EXEC_AFTERPROGEXIT = 0x00000010,// �ⲿ�����˳�
-    // ����ʱ����
-    AUTOTASK_EXEC_ATDATE = 0x00010000,	// �������� 2011/11/11
-    AUTOTASK_EXEC_ATDAILY = 0x00020000,	// ÿ��x��
-    AUTOTASK_EXEC_ATMONTHDAY = 0x00040000,	// ÿ�µ�x�� 
-    AUTOTASK_EXEC_ATWEEKDAY = 0x00080000,	// ÿ�µ�x�� x[������|��һ��|����|��4��]
-    AUTOTASK_EXEC_ATYEARDAY = 0x00100000,	// ÿ���ĳ������ 2011~2020 �� [11/11]��������һ����ǰ������������������
+    AUTOTASK_EXEC_NOTSET	= 0,	// 系统启动
+    // 相对时间
+    AUTOTASK_EXEC_AFTERSYSBOOT	= 0x00000001,	// 系统启动
+    AUTOTASK_EXEC_AFTERTASKSTART = 0x00000002,	// 任务启动 
+    AUTOTASK_EXEC_AFTERMINDERSTART = 0x00000004,// 本程序启动
+    AUTOTASK_EXEC_AFTERPROGSTART = 0x00000008,// 外部程序启动
+    AUTOTASK_EXEC_AFTERPROGEXIT = 0x00000010,// 外部程序退出
+    // 绝对时间标记
+    AUTOTASK_EXEC_ATDATE = 0x00010000,	// 绝对日期 2011/11/11
+    AUTOTASK_EXEC_ATDAILY = 0x00020000,	// 每隔x天
+    AUTOTASK_EXEC_ATMONTHDAY = 0x00040000,	// 每月的x号 
+    AUTOTASK_EXEC_ATWEEKDAY = 0x00080000,	// 每月的x周 x[所有周|第一周|。。|第4周]
+    AUTOTASK_EXEC_ATYEARDAY = 0x00100000,	// 每年的某个日期 2011~2020 的 [11/11]，可以有一个提前量。类似于生日提醒
 
     //////////////////////////////////////////////////////////////////////////
-    AUTOTASK_EXEC_RELATE_EXECANDTHEN = 0x01000000,	// ���ʱ��֮���ٴ�ִ�ж�μ��
+    AUTOTASK_EXEC_RELATE_EXECANDTHEN = 0x01000000,	// 相对时间之后再次执行多次间隔
 
 };
 
-// ��������ʱ״̬
+// 任务运行时状态
 enum ENUM_AUTOTASK_RUNNING_STATUS
 {
-    AUTOTASK_RUNNING_STATUS_BADTIMER = -2,	// ���ܽ���timer����ʽ
-    AUTOTASK_RUNNING_STATUS_APPERROR = -1,	// Ӧ�ó�������˴���
-    AUTOTASK_RUNNING_STATUS_OK = 0,	// ������������
-    AUTOTASK_RUNNING_STATUS_NOTSTARTUP = 1,	// ����δ����
-    AUTOTASK_RUNNING_STATUS_PAUSED,	// ����δ����
-    AUTOTASK_RUNNING_STATUS_OVERDUE,	// ���������
-    AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT,	// ��Ҫ�´λ��������������ִ��
-    AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT,	// ��Ҫ���������������ִ��
-    AUTOTASK_RUNNING_STATUS_BASEDONEXETERNALPROG,	// �������ⲿ����û������
+    AUTOTASK_RUNNING_STATUS_BADTIMER = -2,	// 不能解析timer表达式
+    AUTOTASK_RUNNING_STATUS_APPERROR = -1,	// 应用程序出现了错误
+    AUTOTASK_RUNNING_STATUS_OK = 0,	// 任务正常启动
+    AUTOTASK_RUNNING_STATUS_NOTSTARTUP = 1,	// 任务还未启动
+    AUTOTASK_RUNNING_STATUS_PAUSED,	// 任务还未启动
+    AUTOTASK_RUNNING_STATUS_OVERDUE,	// 任务过期了
+    AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT,	// 需要下次机器重启，任务才执行
+    AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT,	// 需要程序重启，任务才执行
+    AUTOTASK_RUNNING_STATUS_BASEDONEXETERNALPROG,	// 依赖的外部程序并没有运行
     //////////////////////////////////////////////////////////////////////////
-    // ����ʱ��
-    AUTOTASK_RUNNING_STATUS_TIMENOTMATCH,	// �޿�ִ�е�ʱ��ƥ��
-    AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC,	// ��Ȼ����δ���ڣ��������µ�ʱ�������û�л�����ִ����
+    // 绝对时间
+    AUTOTASK_RUNNING_STATUS_TIMENOTMATCH,	// 无可执行的时间匹配
+    AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC,	// 虽然任务未过期，但是余下的时间里，任务都没有机会再执行了
 };
 
 
@@ -425,14 +425,14 @@ class QIdea;
 typedef std::vector<QIdea*> IdeaVec;
 typedef IdeaVec::iterator IdeaVecItr;
 
-#define MAX_CATE_LEN 10		// Ŀ¼����ַ���
+#define MAX_CATE_LEN 10		// 目录最大字符数
 
-// ͼ������ͼ�Ŀ��ȣ���λpx
+// 图标缩略图的宽度，单位px
 #ifndef ICON_THUMB_WIDTH
 #   define ICON_THUMB_WIDTH 80
 #endif
 
-// ͼ������ͼ�ĸ߶ȣ���λpx
+// 图标缩略图的高度，单位px
 #ifndef ICON_THUMB_HEIGHT
 #   define ICON_THUMB_HEIGHT 80
 #endif

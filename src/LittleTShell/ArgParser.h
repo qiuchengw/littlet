@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Console.h"
 #include <iostream>
@@ -21,18 +21,18 @@ class QArgvParser
     };
 
 public:
-    // µÚÒ»²½£ºSet
+    // ç¬¬ä¸€æ­¥ï¼šSet
     BOOL SetArgv(_TCHAR* argv[], int nArgc)
     {
         if (nArgc < 3)
         {
-            m_arErrors.push_back(L"²ÎÊıÌ«ÉÙ£¡");
+            m_arErrors.push_back(L"å‚æ•°å¤ªå°‘ï¼");
             return FALSE;
         }
 
         m_args.clear();
 
-        // ´ÓµÚ¶ş¸ö²ÎÊı½øĞĞ¼ÇÂ¼
+        // ä»ç¬¬äºŒä¸ªå‚æ•°è¿›è¡Œè®°å½•
         CStdStringW sArgv;
         for (int i = 1; i < nArgc; i++)
         {
@@ -46,14 +46,14 @@ public:
 
         if (m_args.size() < 2)
         {
-            m_arErrors.push_back(L"²ÎÊıÌ«ÉÙ£¡");
+            m_arErrors.push_back(L"å‚æ•°å¤ªå°‘ï¼");
             return FALSE;
         }
         m_arErrors.clear();
         return TRUE;
     }
 
-    // µÚ¶ş²½£º½âÎö
+    // ç¬¬äºŒæ­¥ï¼šè§£æ
     BOOL ParseArgs(__out ENUM_AUTOTASK_DOWHAT& eDoWhat, __out CStdStringW& sDoWhatParam,
             __out CStdStringW& sWhenDo, __out CStdStringW& sRemindExp,
             __out QTime& tmBegin, __out QTime& tmEnd)
@@ -61,16 +61,16 @@ public:
         BOOL bOK = FALSE;
         do 
         {
-            // ×öÊ²Ã´
+            // åšä»€ä¹ˆ
             eDoWhat = GetDoWhat(sDoWhatParam);
             if (AUTOTASK_DO_NOTSET == eDoWhat)
                 break;
 
-            // ºÎÊ±×ö
+            // ä½•æ—¶åš
             if (!GetExecTime(sWhenDo, tmBegin, tmEnd))
                 break;
 
-            // ¹ØÓÚÈÎÎñÌáÊ¾
+            // å…³äºä»»åŠ¡æç¤º
             if (!GetTaskRemind(sRemindExp))
                 break;
 
@@ -80,7 +80,7 @@ public:
         return bOK;
     }
 
-    /** ÔÚ¿ØÖÆÌ¨Êä³ö´íÎó
+    /** åœ¨æ§åˆ¶å°è¾“å‡ºé”™è¯¯
      *	params: none
     **/
     void EchoErrors()
@@ -107,7 +107,7 @@ public:
         std::wcout<<L"-----------------"<<endl;
     }
     
-    // ²âÊÔ´úÂë
+    // æµ‹è¯•ä»£ç 
     void TestSplitString()
     {
         TestString(L"a;b;c");
@@ -125,9 +125,9 @@ public:
 #endif
 
 protected:
-    /** »ñÈ¡Ö´ĞĞÃüÁî
+    /** è·å–æ‰§è¡Œå‘½ä»¤
      *	return:
-     *      AUTOTASK_DO_NOTE    ÎŞĞ§ÃüÁî»òhelpÃüÁî¡£
+     *      AUTOTASK_DO_NOTE    æ— æ•ˆå‘½ä»¤æˆ–helpå‘½ä»¤ã€‚
     **/
     ENUM_AUTOTASK_DOWHAT GetDoWhat(__out CStdStringW& sDoWhat)
     {
@@ -161,7 +161,7 @@ protected:
 
         if (AUTOTASK_DO_NOTSET  == eRet)
         {
-            m_arErrors.push_back(L"ÎŞĞ§µÄÈÎÎñÖ´ĞĞÀàĞÍ£¡");
+            m_arErrors.push_back(L"æ— æ•ˆçš„ä»»åŠ¡æ‰§è¡Œç±»å‹ï¼");
         }
         else if (bNeedParam)
         {
@@ -176,7 +176,7 @@ protected:
             else
             {
                 CStdString sTmp;
-                sTmp.Format(L"ÃüÁî %s È±ÉÙ²ÎÊı", s1);
+                sTmp.Format(L"å‘½ä»¤ %s ç¼ºå°‘å‚æ•°", s1);
                 m_arErrors.push_back(sTmp);
                 eRet = AUTOTASK_DO_NOTSET;
             }
@@ -185,9 +185,9 @@ protected:
         return eRet;
     }
 
-    /** ÈÎÎñÌáÊ¾
+    /** ä»»åŠ¡æç¤º
      *	return:
-     *      TRUE    ¸ã¶¨
+     *      TRUE    æå®š
      *	params:
      *		-[out]
      *      sRemind 
@@ -201,34 +201,34 @@ protected:
             return TRUE;
         }
 
-        // ÏÂÒ»¸ö¾ÍÊÇ²ÎÊı
+        // ä¸‹ä¸€ä¸ªå°±æ˜¯å‚æ•°
         ++i;
         if (_End() == i)
         {
-            m_arErrors.push_back(L"-w   ÈÎÎñÌáÊ¾    Î´Ö¸¶¨²ÎÊı");
+            m_arErrors.push_back(L"-w   ä»»åŠ¡æç¤º    æœªæŒ‡å®šå‚æ•°");
             return FALSE;
         }
 
         StrArray arP;
         if (SplitString(*i, arP) != 3)
         {
-            m_arErrors.push_back(L"-w   ÈÎÎñÌáÊ¾    ²ÎÊı¸öÊı´íÎó£º" + *i);
+            m_arErrors.push_back(L"-w   ä»»åŠ¡æç¤º    å‚æ•°ä¸ªæ•°é”™è¯¯ï¼š" + *i);
             return FALSE;
         }
 
-        // Ê±¼ä
+        // æ—¶é—´
         int nT;
         wchar_t cUnit;
         if (!QHelper::ParseUnitTime(arP[0], nT, cUnit))
         {
-            m_arErrors.push_back(L"-w   ÈÎÎñÌáÊ¾    ÌáÊ¾Ê±¼ä´íÎó£º" + *i);
+            m_arErrors.push_back(L"-w   ä»»åŠ¡æç¤º    æç¤ºæ—¶é—´é”™è¯¯ï¼š" + *i);
             return FALSE;
         }
-        // ÌáÊ¾Ê±¼ä²»ÄÜ¹ı³¤
+        // æç¤ºæ—¶é—´ä¸èƒ½è¿‡é•¿
         DWORD nSecs = QHelper::HowManySeconds(nT, cUnit);
         if ((nSecs > 86400) || (nSecs < 5))
         {
-            m_arErrors.push_back(L"-w   ÈÎÎñÌáÊ¾    ÌáÊ¾Ê±¼ä·¶Î§[10s, 24h)£º" + *i);
+            m_arErrors.push_back(L"-w   ä»»åŠ¡æç¤º    æç¤ºæ—¶é—´èŒƒå›´[10s, 24h)ï¼š" + *i);
             return FALSE;
         }
 
@@ -236,12 +236,12 @@ protected:
         return !sRemind.IsEmpty();
     }
 
-    /** ÈÎÎñµÄÖ´ĞĞÊ±¼ä
+    /** ä»»åŠ¡çš„æ‰§è¡Œæ—¶é—´
      *	return:
-     *      TRUE    ½âÎö³É¹¦
+     *      TRUE    è§£ææˆåŠŸ
      *	params:
      *		-[out]
-     *      sTime   ½âÎö¹ıºóµÄ±í´ïÊ½£¬ÄÜ¹»Ö±½Ó±»QTimerÊ¹ÓÃ
+     *      sTime   è§£æè¿‡åçš„è¡¨è¾¾å¼ï¼Œèƒ½å¤Ÿç›´æ¥è¢«QTimerä½¿ç”¨
     **/
     BOOL GetExecTime(__out CStdStringW& sTime, __out QTime& tmBegin, __out QTime& tmEnd)
     {
@@ -250,28 +250,28 @@ protected:
             return FALSE;
         }
 
-        // ¼ì²éÏà¶ÔÊ±¼ä
+        // æ£€æŸ¥ç›¸å¯¹æ—¶é—´
         StrArrayItr iR = FindX(L"-r");
         StrArrayItr iA = FindX(L"-a");
         if ((_End() != iR) && (_End() != iA))
         {
-            m_arErrors.push_back(L"-r/-a    Ö´ĞĞÊ±¼ä    Ö»ÄÜÖ¸¶¨Ò»¸öÖ´ĞĞÊ±¼ä");
+            m_arErrors.push_back(L"-r/-a    æ‰§è¡Œæ—¶é—´    åªèƒ½æŒ‡å®šä¸€ä¸ªæ‰§è¡Œæ—¶é—´");
             return FALSE;
         }
 
         if ( (_End() == iA) && (_End() == iR))
         {
-            m_arErrors.push_back(L"-r/-a    Î´Éè¶¨Ö´ĞĞÊ±¼ä");
+            m_arErrors.push_back(L"-r/-a    æœªè®¾å®šæ‰§è¡Œæ—¶é—´");
             return FALSE;
         }
 
         if (_End() != iA)
-        { // ¾ø¶ÔÊ±¼ä
-            // ÏÂÒ»¸ö¾ÍÊÇ²ÎÊı
+        { // ç»å¯¹æ—¶é—´
+            // ä¸‹ä¸€ä¸ªå°±æ˜¯å‚æ•°
             ++iA;
             if (_End() == iA)
             {
-                m_arErrors.push_back(L"-a   Ö´ĞĞÊ±¼ä£¨¾ø¶ÔÊ±¼ä£©    Î´Ö¸¶¨²ÎÊı");
+                m_arErrors.push_back(L"-a   æ‰§è¡Œæ—¶é—´ï¼ˆç»å¯¹æ—¶é—´ï¼‰    æœªæŒ‡å®šå‚æ•°");
                 return FALSE;
             }
             return ParseAbsTime(*iA, tmBegin, tmEnd,sTime);
@@ -279,11 +279,11 @@ protected:
         
         if (_End() != iR)
         {
-            // ÏÂÒ»¸ö¾ÍÊÇ²ÎÊı
+            // ä¸‹ä¸€ä¸ªå°±æ˜¯å‚æ•°
             ++iR;
             if (_End() == iR)
             {
-                m_arErrors.push_back(L"-r   Ö´ĞĞÊ±¼ä£¨Ïà¶ÔÊ±¼ä£©    Î´Ö¸¶¨²ÎÊı");
+                m_arErrors.push_back(L"-r   æ‰§è¡Œæ—¶é—´ï¼ˆç›¸å¯¹æ—¶é—´ï¼‰    æœªæŒ‡å®šå‚æ•°");
                 return FALSE;
             }
             return ParseRelateTime(*iR, sTime);
@@ -292,9 +292,9 @@ protected:
         return FALSE;
     }
 
-    /** ÅĞ¶ÏÊÇ·ñÊÇÃüÁî£¬ÒÔÓ¢ÎÄ'-'¿ªÍ·µÄÊÇCommand
+    /** åˆ¤æ–­æ˜¯å¦æ˜¯å‘½ä»¤ï¼Œä»¥è‹±æ–‡'-'å¼€å¤´çš„æ˜¯Command
      *	return:
-     *      TRUE    ÊÇ
+     *      TRUE    æ˜¯
      *	params:
      *		-[in]
      *          sText  
@@ -304,9 +304,9 @@ protected:
         ASSERT(sText.size() > 1);
         return (sText[0] == L'-');
     }
-    /** ÈÎÎñÓĞĞ§ÆÚ
+    /** ä»»åŠ¡æœ‰æ•ˆæœŸ
      *	return:
-     *      TRUE    ³É¹¦
+     *      TRUE    æˆåŠŸ
     **/
     BOOL GetLifePeriod(__out QTime& tmBegin, __out QTime& tmEnd)
     {
@@ -315,22 +315,22 @@ protected:
         if (_End() == i)
         {
             tmBegin = QTime::GetCurrentTime();
-            // Ö´ĞĞÓĞĞ§ÆÚ£º10Äê£¡¹»³¤ÁË°É¡£
+            // æ‰§è¡Œæœ‰æ•ˆæœŸï¼š10å¹´ï¼å¤Ÿé•¿äº†å§ã€‚
             tmEnd = tmBegin + QTimeSpan(365 * 10, 1, 0 ,0);
             return TRUE;
         }
 
-        // ÏÂÒ»¸ö¾ÍÊÇ²ÎÊı
+        // ä¸‹ä¸€ä¸ªå°±æ˜¯å‚æ•°
         ++i;
         if (_End() == i)
         {
-            m_arErrors.push_back(L"-l   ÈÎÎñÓĞĞ§ÆÚ    Î´Ö¸¶¨²ÎÊı");
+            m_arErrors.push_back(L"-l   ä»»åŠ¡æœ‰æ•ˆæœŸ    æœªæŒ‡å®šå‚æ•°");
             return FALSE;
         }
         StrArray arP;
         if (SplitString(*i, arP) != 2)
         {
-            m_arErrors.push_back(L"-l   ÈÎÎñÓĞĞ§ÆÚ   ²ÎÊı´íÎó£º" + *i);
+            m_arErrors.push_back(L"-l   ä»»åŠ¡æœ‰æ•ˆæœŸ   å‚æ•°é”™è¯¯ï¼š" + *i);
             return FALSE;
         }
 
@@ -340,12 +340,12 @@ protected:
         }
         else if (!tmBegin.ParseDateTime(arP[0]))
         {
-            m_arErrors.push_back(L"-l   ÈÎÎñÓĞĞ§ÆÚ   ¿ªÊ¼Ê±¼ä´íÎó£º" + *i);
+            m_arErrors.push_back(L"-l   ä»»åŠ¡æœ‰æ•ˆæœŸ   å¼€å§‹æ—¶é—´é”™è¯¯ï¼š" + *i);
             return FALSE;
         }
 
 #ifdef _DEBUG
-        std::wcout<<L"¿ªÊ¼Ê±¼ä:"<<tmBegin.Format(L"%c\n");
+        std::wcout<<L"å¼€å§‹æ—¶é—´:"<<tmBegin.Format(L"%c\n");
 #endif
 
         if (arP[1].IsEmpty())
@@ -354,17 +354,17 @@ protected:
         }
         else if (!tmEnd.ParseDateTime(arP[1]))
         {
-            m_arErrors.push_back(L"-l   ÈÎÎñÓĞĞ§ÆÚ   ½áÊøÊ±¼ä´íÎó£º" + *i);
+            m_arErrors.push_back(L"-l   ä»»åŠ¡æœ‰æ•ˆæœŸ   ç»“æŸæ—¶é—´é”™è¯¯ï¼š" + *i);
             return FALSE;
         }
 
 #ifdef _DEBUG
-        std::wcout<<L"¿ªÊ¼Ê±¼ä:"<<tmEnd.Format(L"%c\n");
+        std::wcout<<L"å¼€å§‹æ—¶é—´:"<<tmEnd.Format(L"%c\n");
 #endif
         
         if (tmBegin >= tmEnd)
         {
-            m_arErrors.push_back(L"-l   ÈÎÎñÓĞĞ§ÆÚ   ¿ªÊ¼Ê±¼ä´óÓÚ½áÊøÊ±¼ä£º" + *i);
+            m_arErrors.push_back(L"-l   ä»»åŠ¡æœ‰æ•ˆæœŸ   å¼€å§‹æ—¶é—´å¤§äºç»“æŸæ—¶é—´ï¼š" + *i);
             return FALSE;
         }
         return TRUE;
@@ -378,22 +378,22 @@ protected:
         StrArray arP;
         if (SplitString(src, arP) != 2)
         {
-            m_arErrors.push_back(L"-a   Ö´ĞĞÊ±¼ä£¨¾ø¶ÔÊ±¼ä£©    ²ÎÊı´íÎó£º" + src);
+            m_arErrors.push_back(L"-a   æ‰§è¡Œæ—¶é—´ï¼ˆç»å¯¹æ—¶é—´ï¼‰    å‚æ•°é”™è¯¯ï¼š" + src);
             return FALSE;
         }
 
-        // ÈÕÆÚµã£»Ê±¼äµã
+        // æ—¥æœŸç‚¹ï¼›æ—¶é—´ç‚¹
         StrArray aS;
         if (SplitString(arP[0], aS, L':') != 2)
         {
-            m_arErrors.push_back(L"-a   Ö´ĞĞÊ±¼ä£¨¾ø¶ÔÊ±¼ä£©    ²ÎÊı´íÎó: " + arP[0]);
+            m_arErrors.push_back(L"-a   æ‰§è¡Œæ—¶é—´ï¼ˆç»å¯¹æ—¶é—´ï¼‰    å‚æ•°é”™è¯¯: " + arP[0]);
             return FALSE;
         }
 
         ENUM_AUTOTASK_EXECFLAG eFlag;
-        // aS[0] Ö»ÄÜÓĞ3ÖÖ¿ÉÄÜ£ºp,s,t
+        // aS[0] åªèƒ½æœ‰3ç§å¯èƒ½ï¼šp,s,t
         if (aS[0].CompareNoCase(L"d") == 0)
-        {   // littlet Æô¶¯ºó
+        {   // littlet å¯åŠ¨å
             eFlag = AUTOTASK_EXEC_ATDATE;
         }
         else if (aS[0].CompareNoCase(L"s") == 0)
@@ -410,7 +410,7 @@ protected:
         }
         else
         {
-            m_arErrors.push_back(L"-a   Ö´ĞĞÊ±¼ä£¨¾ø¶ÔÊ±¼ä£©    ÎŞĞ§²ÎÊı´íÎó£º" + src);
+            m_arErrors.push_back(L"-a   æ‰§è¡Œæ—¶é—´ï¼ˆç»å¯¹æ—¶é—´ï¼‰    æ— æ•ˆå‚æ•°é”™è¯¯ï¼š" + src);
             return FALSE;
         }
         StringArray arDatePots;
@@ -419,7 +419,7 @@ protected:
         StringArray arTimePots;
         if (SplitString(arP[1], arTimePots, L',') <= 0)
         {
-            m_arErrors.push_back(L"-a   Ö´ĞĞÊ±¼ä£¨¾ø¶ÔÊ±¼ä£©    Ö´ĞĞÊ±¼äµãÎŞĞ§£º" + src);
+            m_arErrors.push_back(L"-a   æ‰§è¡Œæ—¶é—´ï¼ˆç»å¯¹æ—¶é—´ï¼‰    æ‰§è¡Œæ—¶é—´ç‚¹æ— æ•ˆï¼š" + src);
             return FALSE;
         }
         CStdString sError;
@@ -436,21 +436,21 @@ protected:
         StrArray arP;
         if (SplitString(src, arP) != 3)
         {
-            m_arErrors.push_back(L"-r   Ö´ĞĞÊ±¼ä£¨Ïà¶ÔÊ±¼ä£©    ²ÎÊı´íÎó£º" + src);
+            m_arErrors.push_back(L"-r   æ‰§è¡Œæ—¶é—´ï¼ˆç›¸å¯¹æ—¶é—´ï¼‰    å‚æ•°é”™è¯¯ï¼š" + src);
             return FALSE;
         }
 
-        // Ïà¶ÔÓÚ£»¼ä¸ô£»Ö´ĞĞ´ÎÊı
+        // ç›¸å¯¹äºï¼›é—´éš”ï¼›æ‰§è¡Œæ¬¡æ•°
         StrArray aS;
         if (SplitString(arP[0], aS, L':') != 2)
         {
-            m_arErrors.push_back(L"-r   Ö´ĞĞÊ±¼ä£¨Ïà¶ÔÊ±¼ä£©    ²ÎÊı´íÎó: " + src);
+            m_arErrors.push_back(L"-r   æ‰§è¡Œæ—¶é—´ï¼ˆç›¸å¯¹æ—¶é—´ï¼‰    å‚æ•°é”™è¯¯: " + src);
             return FALSE;
         }
         ENUM_AUTOTASK_EXECFLAG eFlag;
-        // aS[0] Ö»ÄÜÓĞ3ÖÖ¿ÉÄÜ£ºp,s,t
+        // aS[0] åªèƒ½æœ‰3ç§å¯èƒ½ï¼šp,s,t
         if (aS[0].CompareNoCase(L"p") == 0)
-        {   // littlet Æô¶¯ºó
+        {   // littlet å¯åŠ¨å
             eFlag = AUTOTASK_EXEC_AFTERMINDERSTART;
         }
         else if (aS[0].CompareNoCase(L"s") == 0)
@@ -463,32 +463,32 @@ protected:
         }
         else
         {
-            m_arErrors.push_back(L"-r   Ö´ĞĞÊ±¼ä£¨Ïà¶ÔÊ±¼ä£©    ²ÎÊı´íÎó£º" + src);
+            m_arErrors.push_back(L"-r   æ‰§è¡Œæ—¶é—´ï¼ˆç›¸å¯¹æ—¶é—´ï¼‰    å‚æ•°é”™è¯¯ï¼š" + src);
             return FALSE;
         }
         int nSpan = 0;
         wchar_t cUnit = L's';
         if (!QHelper::ParseUnitTime(aS[1], nSpan, cUnit))
         {
-            m_arErrors.push_back(L"-r   Ö´ĞĞÊ±¼ä£¨Ïà¶ÔÊ±¼ä£©    ²ÎÊı´íÎó£º" + src);
+            m_arErrors.push_back(L"-r   æ‰§è¡Œæ—¶é—´ï¼ˆç›¸å¯¹æ—¶é—´ï¼‰    å‚æ•°é”™è¯¯ï¼š" + src);
             return FALSE;
         }
 
-        // ¼ä¸ôºÍÖ´ĞĞ´ÎÊı
+        // é—´éš”å’Œæ‰§è¡Œæ¬¡æ•°
         int nSpan1 = 0, nExecCount = 0;
         wchar_t cUnit1 = L's';
         if (!arP[1].IsEmpty())
         {
             if (!QHelper::ParseUnitTime(arP[1], nSpan1, cUnit1))
             {
-                m_arErrors.push_back(L"-r   Ö´ĞĞÊ±¼ä£¨Ïà¶ÔÊ±¼ä£©    ²ÎÊı´íÎó£º" + src);
+                m_arErrors.push_back(L"-r   æ‰§è¡Œæ—¶é—´ï¼ˆç›¸å¯¹æ—¶é—´ï¼‰    å‚æ•°é”™è¯¯ï¼š" + src);
                 return FALSE;
             }
             if (!arP[2].IsEmpty())
             {
                 if (!QHelper::ParseInt(arP[2], nExecCount))
                 {
-                    m_arErrors.push_back(L"-r   Ö´ĞĞÊ±¼ä£¨Ïà¶ÔÊ±¼ä£©    ²ÎÊı´íÎó" + src);
+                    m_arErrors.push_back(L"-r   æ‰§è¡Œæ—¶é—´ï¼ˆç›¸å¯¹æ—¶é—´ï¼‰    å‚æ•°é”™è¯¯" + src);
                     return FALSE;
                 }
             }
@@ -515,16 +515,16 @@ protected:
         return iEnd;
     }
 
-    /** ·Ö¸î×Ö·û´®µ½Êı×éÖĞ
+    /** åˆ†å‰²å­—ç¬¦ä¸²åˆ°æ•°ç»„ä¸­
      *	return:
-     *      ·Ö¸îµÄ×Ö·û´®¸öÊı£¬·Ö¸îµÄ¸öÊıÓÉchSepµÄ¸öÊı¾ö¶¨
-     *      ·Ö¸îµÄ¸öÊıÎª COUNT(chSep) + 1
+     *      åˆ†å‰²çš„å­—ç¬¦ä¸²ä¸ªæ•°ï¼Œåˆ†å‰²çš„ä¸ªæ•°ç”±chSepçš„ä¸ªæ•°å†³å®š
+     *      åˆ†å‰²çš„ä¸ªæ•°ä¸º COUNT(chSep) + 1
      *	params:
      *		-[in]
-     *          src     Ô´×Ö·û´®
-     *          chSep   ·Ö¸î·ûºÅ
+     *          src     æºå­—ç¬¦ä¸²
+     *          chSep   åˆ†å‰²ç¬¦å·
      *		-[out]
-     *          result  ½á¹û
+     *          result  ç»“æœ
     **/
     int SplitString(__in const CStdStringW& src, __out StrArray& result,
                     __in const wchar_t chSep = L';')
@@ -536,7 +536,7 @@ protected:
         {
             return 0;
         }
-        // ×îºóÒ»¸öÊÇ ·Ö¸ô·ûµÄ»°£¬ºóÃæµÄËã×÷¿ÕµÄ×Ö·û´®
+        // æœ€åä¸€ä¸ªæ˜¯ åˆ†éš”ç¬¦çš„è¯ï¼Œåé¢çš„ç®—ä½œç©ºçš„å­—ç¬¦ä¸²
         BOOL bPushEmpty = (tmp.back() == chSep);
         do 
         {

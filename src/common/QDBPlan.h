@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "file/db/QDBMgr.h"
 #include "../common/QLongplan.h"
@@ -15,7 +15,7 @@ public:
 
 protected:
     friend class QPlan;
-	// Èç¹û³É¹¦£¬ÔòIDĞ´Èëµ½p::m_nID
+	// å¦‚æœæˆåŠŸï¼Œåˆ™IDå†™å…¥åˆ°p::m_nID
 	BOOL AddPlan( __inout QPlan *p );
     BOOL DeletePlan(__in int nID);
 	BOOL EditPlan(int nID,const CStdString& sPlan, const CStdString& sDes, QTime tmBegin, QTime tmEnd);

@@ -1,4 +1,4 @@
-#ifndef LFormStage_h__
+ï»¿#ifndef LFormStage_h__
 #define LFormStage_h__
 
 #pragma once
@@ -45,13 +45,13 @@ protected:
     void RefreshPageNum();
 //    void RefreshStageBar();
     BOOL DeleteStage( QStage* pStage );
-    /** Ñ¡ÖĞÒ»¸östageÏîÄ¿
+    /** é€‰ä¸­ä¸€ä¸ªstageé¡¹ç›®
      *	return:
-     *      TRUE    ³É¹¦
+     *      TRUE    æˆåŠŸ
      *	params:
      *		-[in]
-     *          tblStage     ĞèÒª±»Ñ¡ÖĞµÄÏîÄ¿
-     *                       ÎŞĞ§Ê±Ñ¡ÖĞÁĞ±íÖĞµÄµÚÒ»¸öÏîÄ¿
+     *          tblStage     éœ€è¦è¢«é€‰ä¸­çš„é¡¹ç›®
+     *                       æ— æ•ˆæ—¶é€‰ä¸­åˆ—è¡¨ä¸­çš„ç¬¬ä¸€ä¸ªé¡¹ç›®
     **/
     BOOL SelectStageItem(__in ETable tblStage = NULL);
 
@@ -82,13 +82,13 @@ protected:
         return NULL;
     }
 
-    // stage ĞòºÅ
+    // stage åºå·
     ECtrl _StageNO()
     {
         return GetCtrl("#id-stage-bar>#id-stage-num");
     }
 
-    // stage ÖÜÆÚ
+    // stage å‘¨æœŸ
     ECtrl _StagePeriod()
     {
         return GetCtrl("#id-stage-bar>#id-stage-period");
@@ -108,14 +108,14 @@ class LStageDlg : public QDialog
 {
     QUI_DECLARE_EVENT_MAP
 public:
-    LStageDlg(QPlan *pPlan);    // Ìí¼ÓÄ£Ê½
-    LStageDlg(QStage* pStage);  // ±à¼­Ä£Ê½
+    LStageDlg(QPlan *pPlan);    // æ·»åŠ æ¨¡å¼
+    LStageDlg(QStage* pStage);  // ç¼–è¾‘æ¨¡å¼
 
 protected:
     virtual LRESULT OnDocumentComplete();
     virtual BOOL OnDefaultButton(INT_PTR nBtn);
     BOOL CheckDate(__out QTime &tmBegin,__out QTime &tmEnd);
-    // ¼ì²é²ÎÊıµÄºÏ·¨ĞÔ
+    // æ£€æŸ¥å‚æ•°çš„åˆæ³•æ€§
     BOOL CheckMemberParameters();
 
     void OnClkStageIcon(HELEMENT he);

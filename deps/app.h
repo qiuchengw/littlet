@@ -1,4 +1,4 @@
-#ifndef _app_h__
+﻿#ifndef _app_h__
 #define _app_h__
 
 #pragma once
@@ -9,159 +9,159 @@ namespace quibase
 {
     
     /**
-     *	ȷ���ļ�Ŀ¼·�����ڣ��������򴴽�	
+     *	确保文件目录路径存在，不存在则创建	
      *
     **/
 	BOOL MakeSureDirExist(LPCWSTR sDir);
 
     /**
-     *	�����ַ�����GUID	
+     *	解析字符串到GUID	
      *
     **/
 	BOOL GuidFromString(LPCTSTR szGuid, __out GUID& guid);
 
     /**
-     *	�ж��Ƿ���GUID
+     *	判断是否是GUID
      *
     **/
 	BOOL IsGuid(LPCTSTR szGuid);
 
     
     /**
-     *	GUIDת�ַ���
+     *	GUID转字符串
      *
     **/
 	BOOL GuidToString(const GUID& guid, __out CStdString& sGuid);
 
     /**
-     *	GUID�Ƿ��
+     *	GUID是否空
      *
     **/
 	BOOL GuidIsNull(const GUID& guid);
 
     /**
-     *	���ؿ�GUID
+     *	返回空GUID
      *
     **/
 	void NullGuid(__out GUID& guid);
 	
     /**
-     *	GUID��ͬ
+     *	GUID相同
      *
     **/
     BOOL SameGuids(const GUID& guid1, const GUID& guid2);
 
     /**
-     *	�Ƿ����汻������
+     *	是否桌面被锁定了
      *
     **/
 	BOOL IsWorkStationLocked();
 
     /**
-     *	�Ƿ���������ģʽ��
+     *	是否正在屏保模式下
      *
     **/
 	BOOL IsScreenSaverActive();
 
-    /**  ��ȡ����·��
+    /**  获取特殊路径
      *	return
-     *      TRUE    ��ȡ�ɹ�
+     *      TRUE    获取成功
      *	param
      *		-[in]
-     *          csidl       ���磺CSIDL_STARTUP
+     *          csidl       例如：CSIDL_STARTUP
      *		-[out]
-     *			sPath       ��ȡ����·��
+     *			sPath       获取到的路径
     **/
     BOOL GetSpeialPath(__in int csidl, __out CStdString &sPath);
 
     /**
-     *	�Ƿ񿪻��Զ�����	
+     *	是否开机自动运行	
      *
     **/
     bool IsAutoRun();               
     
     /**
-     *	���������Զ�����	
+     *	创建开机自动运行	
      *
     **/
     void CreateAutoRun();           
     
     /**
-     *	�Ƴ������Զ�����	
+     *	移除开机自动运行	
      *
     **/
     void RemoveAutoRun();           
     
     /**
-     *	���ÿ����Զ�����	
+     *	设置开机自动运行	
      *
     **/
     void SetAutoRun(bool bAutoRun); 
 
     /**
-     *	����Ȩ��	
+     *	提升权限	
      *
     **/
     BOOL UpgradeProcessPrivilege(); 
     
     /**
-     *	�϶�ϵͳʱ��	
+     *	较对系统时间	
      *
     **/ 
     int  CorrectTime();             
     
     /**
-     *	�϶�ʱ�䣬ͨ������Ȩ���ԼӲ����ķ�ʽ���г���ʵ��	
+     *	较对时间，通过提升权限以加参数的方式运行程序实现	
      *
     **/ 
     int  SyncTime();        
 
     /**
-     *	����Դ�ļ��ͷų���	
+     *	把资源文件释放出来	
      *
     **/ 
     BOOL ReleaseRes(LPCTSTR filename,WORD wResID, LPCTSTR filetype);  
 
     /**
-     *	��Ĭ��������򿪣���Ĭ��ʱ��IE��	
+     *	用默认浏览器打开，无默认时用IE打开	
      *
     **/ 
     void VisitWebsiteWithDefaultBrowser(LPCWSTR lpszUrl);             
 
     /**
-     *	url�Ƿ�Ϊie��ҳ	
+     *	url是否为ie首页	
      *
     **/ 
     bool IsIEHomePage(LPCTSTR url);   
     
     /**
-     *	����ie��ҳ, ����Ѿ�����ҳ�����ظ�����
+     *	设置ie首页, 如果已经是首页，则不重复创建
      *
     **/ 
     bool SetIEHomePage(LPCTSTR url);  
 
     /**
-     *	��������
+     *	快速启动
      *
     **/ 
     void PinToTaskbar(LPCTSTR lpszDestPath);        
 
     /**
-     *	ɾ����������
+     *	删除快速启动
      *
     **/ 
     void UnPinFromTaskbar(LPCTSTR lpszDestPath);    
 
     /**
-     *	����������
-     *      lpszProgram     ΪNULL�������������ߵ�·����
-     *                      �����������߿���ΪDLL
+     *	创建桌面快捷
+     *      lpszProgram     为NULL代表创建调用者的路径。
+     *                      ！！！调用者可能为DLL
     **/
     BOOL CreateShortcut(LPCSTR lpszDestPath, LPCTSTR lpszProgram = nullptr, LPCTSTR lpszIco = nullptr,
         LPCTSTR lpszArguments = nullptr, LPCTSTR lpszWorkingDir = nullptr, LPCTSTR lpszDescription = nullptr);
 
     /**
-     * �Ƿ���PE�ļ�		
+     * 是否是PE文件		
      *
     **/
     BOOL IsPEFile(LPCTSTR lpszPath);

@@ -1,4 +1,4 @@
-#include "ui/QForm.h"
+ï»¿#include "ui/QForm.h"
 #include "ui/QFrame.h"
 #include "LittleTView.h"
 #include "../common/QDBHelper.h"
@@ -25,7 +25,7 @@ protected:
     void FreshTaskItem(ECtrl& eGroup, ECtrl &eItem, TTodoTask* pTask);
 
     void OnClkDeleteTask(HELEMENT hBtn);
-    // ÍÏ¶¯µÄĞÎÊ½É¾³ıÔªËØ
+    // æ‹–åŠ¨çš„å½¢å¼åˆ é™¤å…ƒç´ 
     void OnDropDeleteTask(HELEMENT target, HELEMENT src, HELEMENT dragging);
     bool _onDeleteTask(int taskid);
 
@@ -49,7 +49,7 @@ protected:
 
     TTodoTask _TaskOfItem(const ETable& tbl);
 
-    // ´ÓÉÏµ½ÏÂÕÒµ½µÚÒ»¸öÓÅÏÈ¼¶Ğ¡ÓÚµÈÓÚnPiorityµÄË÷Òı
+    // ä»ä¸Šåˆ°ä¸‹æ‰¾åˆ°ç¬¬ä¸€ä¸ªä¼˜å…ˆçº§å°äºç­‰äºnPiorityçš„ç´¢å¼•
     int FindFirstLessEqual(int nPiority);
 
 private:
@@ -108,7 +108,7 @@ public:
             {
                 if (QFrame::Create(hWndShellDLL, WS_POPUP | WS_VISIBLE, WS_EX_LAYERED, 0))
                 {
-                    // ÉèÖÃZ-order£¬×îÏÂ²ãÏÔÊ¾
+                    // è®¾ç½®Z-orderï¼Œæœ€ä¸‹å±‚æ˜¾ç¤º
                     SetWindowPos(HWND_BOTTOM, 0, 0, 0, 0,
                         SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE | SWP_SHOWWINDOW);
 
@@ -138,7 +138,7 @@ public:
             {
                 SetWindowLong(GWL_HWNDPARENT, (LONG)hWndShellDLL);
 
-                // ÉèÖÃZ-order£¬×îÏÂ²ãÏÔÊ¾
+                // è®¾ç½®Z-orderï¼Œæœ€ä¸‹å±‚æ˜¾ç¤º
                 SetWindowPos(HWND_BOTTOM, 0, 0, 0, 0,
                     SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE | SWP_SHOWWINDOW);
 

@@ -1,4 +1,4 @@
-//#include "ui/transwnd/transdlg.h"
+﻿//#include "ui/transwnd/transdlg.h"
 #include "LittleTFrame.h"
 
 class LMainWnd : public CTransDlg

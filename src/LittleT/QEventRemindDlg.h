@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ui/QDialog.h"
 #include "../common/QTimer.h"
@@ -32,7 +32,7 @@ protected:
     void OnTimer(UINT nTimerID);
 
     void StartCountDown();
-    // Ë¢ĞÂÌáÊ¾ĞÅÏ¢
+    // åˆ·æ–°æç¤ºä¿¡æ¯
     void RefreshRemindMessage();
 
 protected:
@@ -41,7 +41,7 @@ protected:
     ECtrl       m_ctlCountdown;
 };
 
-// Ö»ÄÜÔÚÖ÷½çÃæÏß³ÌÖĞÊ¹ÓÃ
+// åªèƒ½åœ¨ä¸»ç•Œé¢çº¿ç¨‹ä¸­ä½¿ç”¨
 class LReminderBox
 {
     SINGLETON_ON_DESTRUCTOR(LReminderBox)
@@ -111,14 +111,14 @@ public:
     void RemoveReminderDlg(int nTaskID);
 
     void RmdDlgDestroying(LSingleRmdDlg* pDlg);
-    // ÊÂ¼şµÄ¶¨Ê±Æ÷¸Ä±äÁË£¬¿ÉÒÔ¹Ø±Õµ±Ç°µÄÌáÊ¾¶Ô»°¿ò
+    // äº‹ä»¶çš„å®šæ—¶å™¨æ”¹å˜äº†ï¼Œå¯ä»¥å…³é—­å½“å‰çš„æç¤ºå¯¹è¯æ¡†
     void OnEventTimerChanged( int nEventID );
-    // ÊÂ¼şÉ¾³ıÁË
+    // äº‹ä»¶åˆ é™¤äº†
 
 protected:
     void RemoveAll();
-    // ¼ì²éÏÂÄÇ¸öÊÂ¼şµÄ¶Ô»°¿òÒÑ¾­¹Ø±ÕÁË
-    // Èç¹û±ê¼ÇÎªÒÑ¹Ø±Õ£¬²¢ÇÒ´°¿ÚÈ·ÊµÏú»ÙÁË£¬¾ÍÊÍ·ÅÊı¾İ
+    // æ£€æŸ¥ä¸‹é‚£ä¸ªäº‹ä»¶çš„å¯¹è¯æ¡†å·²ç»å…³é—­äº†
+    // å¦‚æœæ ‡è®°ä¸ºå·²å…³é—­ï¼Œå¹¶ä¸”çª—å£ç¡®å®é”€æ¯äº†ï¼Œå°±é‡Šæ”¾æ•°æ®
     void CheckRmdList();
     
 private:

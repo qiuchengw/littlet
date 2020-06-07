@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ui/QDialog.h"
 #include "BaseType.h"
@@ -34,8 +34,8 @@ protected:
     void OnAbsDateRioCheckChanged(HELEMENT);
     
     /**
-     *	¾ø¶ÔÊ±¼ä£ºÃ¿ÄêµÄÄ³Ìì
-     *      Ã¿Ò»¸öÔÂµÄÌìÊı²»Ò»Ñù£¬µ±ÔÂ¸Ä±äµÄÊ±ºò£¬¸Ä±ä¶ÔÓ¦µÄÈÕ
+     *	ç»å¯¹æ—¶é—´ï¼šæ¯å¹´çš„æŸå¤©
+     *      æ¯ä¸€ä¸ªæœˆçš„å¤©æ•°ä¸ä¸€æ ·ï¼Œå½“æœˆæ”¹å˜çš„æ—¶å€™ï¼Œæ”¹å˜å¯¹åº”çš„æ—¥
      *
     **/
     void OnCmbAbsDateMonthSelectChanged(ECombobox cmb, EOption item);
@@ -104,7 +104,7 @@ protected:
     }
 
 private:
-	BOOL		m_bEditMode;	// Ìí¼ÓÄ£Ê½»¹ÊÇ±à¼­Ä£Ê½
+	BOOL		m_bEditMode;	// æ·»åŠ æ¨¡å¼è¿˜æ˜¯ç¼–è¾‘æ¨¡å¼
 	QTime		m_tmLifeBegin,m_tmLifeEnd;
 	CStdString		m_sTimerExp;
 

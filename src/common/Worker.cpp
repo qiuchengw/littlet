@@ -1,4 +1,4 @@
-#include "Worker.h"
+﻿#include "Worker.h"
 #include <process.h>
 
 #include "ui/QUIDlgs.h"

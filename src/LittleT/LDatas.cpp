@@ -1,4 +1,4 @@
-#include "LDatas.h"
+ï»¿#include "LDatas.h"
 #include "ui/QUIGlobal.h"
 #include "../common/ConstValues.h"
 #include "LViewEvent.h"
@@ -7,7 +7,7 @@
 
 namespace littlet
 {
-    // ½øÈëµ½Ä³Ä£Ê½
+    // è¿›å…¥åˆ°æŸæ¨¡å¼
     void EnterAppMode(ENUM_APP_MODE eMode)
     {
         QUIPostCodeToMainWnd(MWND_CMD_ENTERAPPMODE,(LPARAM)eMode);
@@ -49,19 +49,19 @@ namespace littlet
             {
             case APP_MODE_PLAN:
                 {
-                    // ÐÂ¼Æ»®
+                    // æ–°è®¡åˆ’
                     LDatas::GetInstance()->GetViewPlanPtr()->OnClkNewPlan(NULL);
                     break; 
                 }
             case APP_MODE_EVENTS:
                 {
-                    // ÐÂ×Ô¶¯ÈÎÎñ
+                    // æ–°è‡ªåŠ¨ä»»åŠ¡
                     LDatas::GetInstance()->GetViewEventPtr()->OnClkNewEvent(NULL);
                     break;
                 }
             case APP_MODE_TODO:
                 {
-                    // ÐÂtodoÈÎÎñ
+                    // æ–°todoä»»åŠ¡
                     LDatas::GetInstance()->GetViewTodoPtr()->OnClkNewTask(NULL);
                     break;
                 }

@@ -1,4 +1,4 @@
-#include "ProcessMan.h"
+ï»¿#include "ProcessMan.h"
 #include "deps/file/FileOper.h"
 
 QTime QProcessMan::sm_tmAppStart;
@@ -122,7 +122,7 @@ BOOL  QProcessMan::DebugPrivilege(BOOL   bEnable)
 BOOL QProcessMan::IsExeRun(const CStdString & sExePath,__out QTime &tmRun) 
 { 
 	BOOL  bFind   =   FALSE; 
-	//ÌáÉı½ø³ÌÈ¨ÏŞ 
+	//æå‡è¿›ç¨‹æƒé™ 
 	DebugPrivilege(TRUE); 
 	HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,0); 
 	if(hProcessSnap   ==   INVALID_HANDLE_VALUE) 
@@ -137,7 +137,7 @@ BOOL QProcessMan::IsExeRun(const CStdString & sExePath,__out QTime &tmRun)
 	{ 
 		do 
 		{ 
-			if(0 == pe32.th32ProcessID)   //½ø³ÌID 
+			if(0 == pe32.th32ProcessID)   //è¿›ç¨‹ID 
 				continue;
 			if ((sName == pe32.szExeFile) 
 				&& GetPsPath(pe32.th32ProcessID,sPath,&tmRun)
@@ -149,7 +149,7 @@ BOOL QProcessMan::IsExeRun(const CStdString & sExePath,__out QTime &tmRun)
 		} while(Process32Next(hProcessSnap,&pe32)); 
 	} 
 	CloseHandle(hProcessSnap); 
-	//»Ö¸´½ø³ÌÈ¨ÏŞ 
+	//æ¢å¤è¿›ç¨‹æƒé™ 
 	DebugPrivilege(FALSE); 
 	return   bFind; 
 } 

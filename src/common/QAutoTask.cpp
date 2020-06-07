@@ -1,4 +1,4 @@
-#include "QAutoTask.h"
+ï»¿#include "QAutoTask.h"
 #include <Shlwapi.h>
 #include "QTimerMan.h"
 #include "file/TextFile.h"
@@ -11,24 +11,24 @@ CStdString QGetTaskDoWhatString(ENUM_AUTOTASK_DOWHAT eDo)
 {
 	switch (eDo)
 	{
-	case AUTOTASK_DO_NOTSET : // 0,	// Î´ÉèÖÃ	
-        return L"Î´ÉèÖÃ";
-	case AUTOTASK_DO_REMIND : // 2, // ÌáÊ¾ÐÅÏ¢
-        return L"ÌáÊ¾ÐÅÏ¢";
-	case AUTOTASK_DO_EXECPROG : // 3,  // Ö´ÐÐ³ÌÐò
-        return L"Ö´ÐÐ³ÌÐò";
-	case AUTOTASK_DO_SYSSHUTDOWN : // 4,  // ¹Ø»ú
-        return L"¹Ø»ú";
-	case AUTOTASK_DO_SYSREBOOT : // 5,  // ÖØÆô
-        return L"ÖØÆô";
+	case AUTOTASK_DO_NOTSET : // 0,	// æœªè®¾ç½®	
+        return L"æœªè®¾ç½®";
+	case AUTOTASK_DO_REMIND : // 2, // æç¤ºä¿¡æ¯
+        return L"æç¤ºä¿¡æ¯";
+	case AUTOTASK_DO_EXECPROG : // 3,  // æ‰§è¡Œç¨‹åº
+        return L"æ‰§è¡Œç¨‹åº";
+	case AUTOTASK_DO_SYSSHUTDOWN : // 4,  // å…³æœº
+        return L"å…³æœº";
+	case AUTOTASK_DO_SYSREBOOT : // 5,  // é‡å¯
+        return L"é‡å¯";
 	}
 	return L"";
 }
 
-// ÈÎÎñ¶¨Ê±Æ÷
+// ä»»åŠ¡å®šæ—¶å™¨
 VOID CALLBACK TaskCallback(__in  PVOID lpParameter,__in  BOOLEAN TimerOrWaitFired)
 {	
-    // ÈÎÎñ½»¸ø¹¤×÷ÕßÏß³ÌÀ´Íê³É
+    // ä»»åŠ¡äº¤ç»™å·¥ä½œè€…çº¿ç¨‹æ¥å®Œæˆ
 	QAutoTask *pTask = QAutoTaskMan::GetInstance()->GetTask((int)lpParameter);
 	if (NULL != pTask)
 	{
@@ -44,7 +44,7 @@ VOID CALLBACK TaskCallback(__in  PVOID lpParameter,__in  BOOLEAN TimerOrWaitFire
 
 BOOL QAutoTask::TaskFired()
 {
-	// Ë¢ÐÂ¶¨Ê±Æ÷
+	// åˆ·æ–°å®šæ—¶å™¨
     QTimerMan* pTimerMan = QTimerMan::GetInstance();
 	pTimerMan->StopTimer(m_pTimer);
 	m_eLastStatus = pTimerMan->StartTimer(m_pTimer,m_nID);
@@ -149,7 +149,7 @@ BOOL QAutoTask::SetDoWhat( ENUM_AUTOTASK_DOWHAT eDo ,LPCWSTR szTask)
 BOOL QAutoTask::Edit( LPCWSTR szTask,ENUM_AUTOTASK_DOWHAT eDo,int nFlag )
 {
 	if (IsStartup())
-	{ // ÔËÐÐµÄÊ±ºò²»¿ÉÒÔ±à¼­
+	{ // è¿è¡Œçš„æ—¶å€™ä¸å¯ä»¥ç¼–è¾‘
 		ASSERT(FALSE);
 		return FALSE;
 	}
@@ -226,7 +226,7 @@ CStdString QAutoTask::GetNextExecTimeString()const
 			return m_pTimer->NextExecTime().Format(L"%Y/%m/%d %H:%M:%S");
 		}
 	}
-	return L"ÎÞÐ§µÄ¶¨Ê±Æ÷";
+	return L"æ— æ•ˆçš„å®šæ—¶å™¨";
 }
 
 CStdString QAutoTask::GetDoWhatString()const
@@ -234,32 +234,32 @@ CStdString QAutoTask::GetDoWhatString()const
 	CStdString sRet;
 	switch (m_eDoWhat)
 	{
-	case AUTOTASK_DO_NOTSET : // 0,	// Î´ÉèÖÃ	
+	case AUTOTASK_DO_NOTSET : // 0,	// æœªè®¾ç½®	
 		{
 			ASSERT(FALSE);
 			return L"Not Set";
 		}
-	case AUTOTASK_DO_REMIND : // 2, // ÌáÊ¾ÐÅÏ¢
+	case AUTOTASK_DO_REMIND : // 2, // æç¤ºä¿¡æ¯
 		{
-			sRet.Format(L"ÌáÐÑ:%s",m_sTask);
+			sRet.Format(L"æé†’:%s",m_sTask);
 			break;
 		}
-	case AUTOTASK_DO_EXECPROG : // 3,  // Ö´ÐÐ³ÌÐò
+	case AUTOTASK_DO_EXECPROG : // 3,  // æ‰§è¡Œç¨‹åº
 		{
-			sRet.Format(L"Ö´ÐÐ³ÌÐò:%s",m_sTask);
+			sRet.Format(L"æ‰§è¡Œç¨‹åº:%s",m_sTask);
 			break;			
 		}
-	case AUTOTASK_DO_SYSSHUTDOWN : // 4,  // ¹Ø»ú
+	case AUTOTASK_DO_SYSSHUTDOWN : // 4,  // å…³æœº
 		{
-			return L"¹Ø»ú";
+			return L"å…³æœº";
 		}
-	case AUTOTASK_DO_SYSREBOOT : // 5,  // ÖØÆô
+	case AUTOTASK_DO_SYSREBOOT : // 5,  // é‡å¯
 		{
-			return L"ÖØÆô";
+			return L"é‡å¯";
 		}
-	case AUTOTASK_DO_BREAKAMOMENT : // 6,  // ÐÝÏ¢»á¶ù
+	case AUTOTASK_DO_BREAKAMOMENT : // 6,  // ä¼‘æ¯ä¼šå„¿
 		{
-			return L"ÐÝÏ¢Ò»»á¶ù";
+			return L"ä¼‘æ¯ä¸€ä¼šå„¿";
 		}
 	}
 	return sRet;
@@ -357,12 +357,12 @@ BOOL QAutoTask::IsStartupAndLastExec() const
     QTime tm_nouse;
     switch (m_pTimer->GetNextNextExecTime(tm_nouse))
     {
-    case AUTOTASK_RUNNING_STATUS_OVERDUE:// ,	// ÈÎÎñ¹ýÆÚÁË
-    case AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT://,	// ÐèÒªÏÂ´Î»úÆ÷ÖØÆô£¬ÈÎÎñ²ÅÖ´ÐÐ
-    case AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT://,	// ÐèÒª³ÌÐòÖØÆô£¬ÈÎÎñ²ÅÖ´ÐÐ
-    case AUTOTASK_RUNNING_STATUS_BASEDONEXETERNALPROG://,	// ÒÀÀµµÄÍâ²¿³ÌÐò²¢Ã»ÓÐÔËÐÐ
-    case AUTOTASK_RUNNING_STATUS_TIMENOTMATCH://,	// ÎÞ¿ÉÖ´ÐÐµÄÊ±¼äÆ¥Åä
-    case AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC://,	// ËäÈ»ÈÎÎñÎ´¹ýÆÚ£¬µ«ÊÇÓàÏÂµÄÊ±¼äÀï£¬ÈÎÎñ¶¼Ã»ÓÐ»ú»áÔÙÖ´ÐÐÁË
+    case AUTOTASK_RUNNING_STATUS_OVERDUE:// ,	// ä»»åŠ¡è¿‡æœŸäº†
+    case AUTOTASK_RUNNING_STATUS_UNTILNEXTSYSREBOOT://,	// éœ€è¦ä¸‹æ¬¡æœºå™¨é‡å¯ï¼Œä»»åŠ¡æ‰æ‰§è¡Œ
+    case AUTOTASK_RUNNING_STATUS_UNTILNEXTMINDERREBOOT://,	// éœ€è¦ç¨‹åºé‡å¯ï¼Œä»»åŠ¡æ‰æ‰§è¡Œ
+    case AUTOTASK_RUNNING_STATUS_BASEDONEXETERNALPROG://,	// ä¾èµ–çš„å¤–éƒ¨ç¨‹åºå¹¶æ²¡æœ‰è¿è¡Œ
+    case AUTOTASK_RUNNING_STATUS_TIMENOTMATCH://,	// æ— å¯æ‰§è¡Œçš„æ—¶é—´åŒ¹é…
+    case AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC://,	// è™½ç„¶ä»»åŠ¡æœªè¿‡æœŸï¼Œä½†æ˜¯ä½™ä¸‹çš„æ—¶é—´é‡Œï¼Œä»»åŠ¡éƒ½æ²¡æœ‰æœºä¼šå†æ‰§è¡Œäº†
         return TRUE;
     }
     return FALSE;
@@ -414,18 +414,18 @@ BOOL QAutoTaskMan::DeleteTask( QAutoTask* pTask )
 	TaskListItr itr = _FindTask(pTask);
 	if (m_lstTask.end() != itr)
 	{
-        // ÏÈÍ£Ö¹µôµ±Ç°µÄ¶¨Ê±Æ÷
+        // å…ˆåœæ­¢æŽ‰å½“å‰çš„å®šæ—¶å™¨
         if (pTask->IsStartup())
         {
             pTask->Pause();
         }
-        // É¾³ýµôtimer
+        // åˆ é™¤æŽ‰timer
         QTimer *pTimer = pTask->GetTimer();
         if (NULL != pTimer)
         {
             QTimerMan::GetInstance()->DeleteTimer(pTimer);
         }
-        // ´ÓÊý¾Ý¿âÉ¾³ýÈÎÎñ
+        // ä»Žæ•°æ®åº“åˆ é™¤ä»»åŠ¡
 		if (QDBEvents::GetInstance()->AutoTask_Delete(pTask->ID()))
 		{
 			delete *itr;
@@ -588,14 +588,14 @@ QAutoTask* QAutoTaskMan::NewAutoTask( ENUM_AUTOTASK_DOWHAT nDoWhat,
         sWhenDo, sRemindexp, sDoWhatParam);
     if (NULL == pTimer)
     {
-        sError = L"¶¨Ê±Æ÷´íÎó";
+        sError = L"å®šæ—¶å™¨é”™è¯¯";
         return NULL;
     }
     QAutoTask *pTask = AddTask(sDoWhatParam, pTimer->ID(), nDoWhat, 0);
     if (NULL == pTask)
     {
         pTimerMgr->DeleteTimer(pTimer);
-        sError = L"Ìí¼ÓÈÎÎñÊ§°Ü£¡";
+        sError = L"æ·»åŠ ä»»åŠ¡å¤±è´¥ï¼";
         return NULL;
     }
 
@@ -603,7 +603,7 @@ QAutoTask* QAutoTaskMan::NewAutoTask( ENUM_AUTOTASK_DOWHAT nDoWhat,
     if ((AUTOTASK_RUNNING_STATUS_OVERDUE == eStatus)
         || (AUTOTASK_RUNNING_STATUS_NOCHANCETOEXEC == eStatus))
     {
-        sError = L"¶¨Ê±Ê±¼äÎÞ·¨Ö´ÐÐµ½£¬ÇëÖØÉè¡£";
+        sError = L"å®šæ—¶æ—¶é—´æ— æ³•æ‰§è¡Œåˆ°ï¼Œè¯·é‡è®¾ã€‚";
         pTimerMgr->DeleteTimer(pTimer);
         DeleteTask(pTask);
         return NULL;

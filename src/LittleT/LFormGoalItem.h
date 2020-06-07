@@ -1,19 +1,19 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ui/QForm.h"
 #include "ui/ECtrl.h"
 #include "../common/QLongplan.h"
 
 /**
- *  Ìí¼Ó¡¢ĞŞ¸ÄQGoalItem
+ *  æ·»åŠ ã€ä¿®æ”¹QGoalItem
 **/
 class LGoalitemWidget : public QForm
 {
     QUI_DECLARE_EVENT_MAP;
 
 public:
-    void SetAndShow( QGoalItem* pGoalItem , HELEMENT heShowAt); // Ìí¼ÓÄ£Ê½
-    void SetAndShow( QGoal *pGoal, HELEMENT heShowAt ); // ±à¼­Ä£Ê½
+    void SetAndShow( QGoalItem* pGoalItem , HELEMENT heShowAt); // æ·»åŠ æ¨¡å¼
+    void SetAndShow( QGoal *pGoal, HELEMENT heShowAt ); // ç¼–è¾‘æ¨¡å¼
 
     inline BOOL IsEditMode()const
     {
@@ -22,9 +22,9 @@ public:
 
 protected:
     BOOL CheckDate(__out QTime &tmBegin,__out QTime &tmEnd);
-    // ¼ì²é²ÎÊıµÄºÏ·¨ĞÔ
+    // æ£€æŸ¥å‚æ•°çš„åˆæ³•æ€§
     BOOL CheckMemberParameters();
-    // heShowAt ÏÖÔÚºÎ´¦
+    // heShowAt ç°åœ¨ä½•å¤„
     void Show(HELEMENT heShowAt);
     void OnClkIdbarOK( HELEMENT );
     void OnClkIdbarCancel( HELEMENT );
@@ -59,8 +59,8 @@ public:
             return -1;
         return GetRoot().index();
     }
-    // ĞÂ´´½¨Ò»¸öGoalItem
-    // ÏÔÊ¾µÄ´´½¨¶Ô»°¿òÏÔÊ¾ÔÚheShowAtÏÂÃæ
+    // æ–°åˆ›å»ºä¸€ä¸ªGoalItem
+    // æ˜¾ç¤ºçš„åˆ›å»ºå¯¹è¯æ¡†æ˜¾ç¤ºåœ¨heShowAtä¸‹é¢
     void NewGoalItem( HELEMENT heShowAt );
 
 protected:
@@ -110,7 +110,7 @@ protected:
 private:
     QGoal*      m_pGoal;
     VecGoalItem m_goalitems;
-    LGoalitemWidget m_widgetGoalitemOP; // ÓÃÓÚ²Ù×÷QGoalItem
+    LGoalitemWidget m_widgetGoalitemOP; // ç”¨äºæ“ä½œQGoalItem
     BOOL        m_bShowFinished;
     BOOL        m_bShowUnfinished;
 };
@@ -118,14 +118,14 @@ private:
 // class LGoalItemDlg : public QDialog
 // {
 // public:
-//     LGoalItemDlg(QGoal *pGoal);    // Ìí¼ÓÄ£Ê½
-//     LGoalItemDlg(QGoalItem* pGoalItem);  // ±à¼­Ä£Ê½
+//     LGoalItemDlg(QGoal *pGoal);    // æ·»åŠ æ¨¡å¼
+//     LGoalItemDlg(QGoalItem* pGoalItem);  // ç¼–è¾‘æ¨¡å¼
 // 
 // protected:
 //     virtual LRESULT OnDocumentComplete();
 //     virtual BOOL OnDefaultButton(INT_PTR nBtn);
 //     BOOL CheckDate(__out QTime &tmBegin,__out QTime &tmEnd);
-//     // ¼ì²é²ÎÊıµÄºÏ·¨ĞÔ
+//     // æ£€æŸ¥å‚æ•°çš„åˆæ³•æ€§
 //     BOOL CheckMemberParameters();
 // 
 // private:

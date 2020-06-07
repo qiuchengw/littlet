@@ -1,4 +1,4 @@
-#ifndef ERRNO_H
+﻿#ifndef ERRNO_H
 #define ERRNO_H 1
 
 //#define EPERM           1

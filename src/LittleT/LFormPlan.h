@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ui/QForm.h"
 #include "ui/QDialog.h"
@@ -51,17 +51,17 @@ protected:
 
     void RefreshPlanItem(ETable &tblPlan);
     ETable AddPlan(QPlan *pPlan);
-    // ÊÖ¶¯ĞÂ´´½¨ÁËÒ»¸ö¼Æ»®
+    // æ‰‹åŠ¨æ–°åˆ›å»ºäº†ä¸€ä¸ªè®¡åˆ’
     void NewPlanAdded(QPlan *pPlan);
     void OnPlanItemSelectChanged(HELEMENT he);
     void OnPlanItemClicked(HELEMENT he);
-    /** Ñ¡ÖĞÒ»¸ö¼Æ»®ÏîÄ¿
+    /** é€‰ä¸­ä¸€ä¸ªè®¡åˆ’é¡¹ç›®
      *	return:
-     *      TRUE    ³É¹¦
+     *      TRUE    æˆåŠŸ
      *	params:
      *		-[in]
-     *          tblPlan     ĞèÒª±»Ñ¡ÖĞµÄÏîÄ¿
-     *                      ÎŞĞ§Ê±Ñ¡ÖĞÁĞ±íÖĞµÄµÚÒ»¸öÏîÄ¿
+     *          tblPlan     éœ€è¦è¢«é€‰ä¸­çš„é¡¹ç›®
+     *                      æ— æ•ˆæ—¶é€‰ä¸­åˆ—è¡¨ä¸­çš„ç¬¬ä¸€ä¸ªé¡¹ç›®
     **/
     BOOL SelectPlanItem(__in ETable tblPlan = NULL);
 
@@ -72,13 +72,13 @@ protected:
 class LPlanDlg : public QDialog
 {
 public:
-    LPlanDlg(QPlan *pPlan = NULL);    // NULLÎªÌí¼ÓÄ£Ê½
+    LPlanDlg(QPlan *pPlan = NULL);    // NULLä¸ºæ·»åŠ æ¨¡å¼
 
 protected:
     virtual LRESULT OnDocumentComplete();
     virtual BOOL OnDefaultButton(INT_PTR nBtn);
     BOOL CheckDate(__out QTime &tmBegin,__out QTime &tmEnd);
-    // ¼ì²é²ÎÊıµÄºÏ·¨ĞÔ
+    // æ£€æŸ¥å‚æ•°çš„åˆæ³•æ€§
     BOOL CheckMemberParameters();
 
 private:

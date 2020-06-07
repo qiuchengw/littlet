@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <GdiPlus.h>
 
@@ -9,12 +9,12 @@ public:
 	QImgProcess(void);
 	~QImgProcess(void);
 
-	// �µĿ��ߣ��п��ܱ���
-	// bFailIfSmall = TRUE,�����ǰͼƬ�Ŀ��߶�С��Ҫ����������ͼ��С��
-	//			��ô�Ͳ���������ͼ
-	// �����´���������ͼָ�룬���ָ��Ҫ�ֶ�ɾ����ʹ��delete
+	// 新的宽高，有可能变形
+	// bFailIfSmall = TRUE,如果当前图片的宽高都小于要创建的缩略图大小，
+	//			那么就不创建缩略图
+	// 返回新创建的缩略图指针，这个指针要手动删除，使用delete
 	Gdiplus::Image* CreateThumb( int cx ,int cy,BOOL bFailIfSmall);
-	// ���ֿ��߱�
+	// 保持宽高比
 	Gdiplus::Image* CreateThumb( int cx ,BOOL bFailIfSmall);
 	// open image file
 	BOOL OpenFile(LPCTSTR sFile);

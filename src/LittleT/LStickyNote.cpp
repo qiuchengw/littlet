@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 
 #include "LStickyNote.h"
 #include "common/QDBHelper.h"
@@ -12,14 +12,14 @@ namespace littlet
 {
     LStickyNoteWnd* NewStickyNote(__out TTodoTask& t)
     {
-        t.sTask = L"Ctrl+Tabµ¼º½±ãÇ©";
+        t.sTask = L"Ctrl+Tabå¯¼èˆªä¾¿ç­¾";
         t.nFlag = TODO_FLAG_STICKYNOTE;
         t.nID = QDBEvents::GetInstance()->TodoTask_Add(&t);
         t.nCateID = INVALID_ID;
         t.nPriority = 1;
         t.eStatus = TODO_STATUS_PROCESSING;
 
-        // ´´½¨±ãÇ©
+        // åˆ›å»ºä¾¿ç­¾
         return StickyNoteMan::GetInstance()->Create(t);
     }
 }
@@ -49,7 +49,7 @@ void LStickyNoteWnd::OnclkNewNote(HELEMENT)
     TTodoTask t;
     if (LStickyNoteWnd* w = littlet::NewStickyNote(t))
     {
-        // ÏÔÊ¾ÔÚ×Ô¼ºÅÔ±ß
+        // æ˜¾ç¤ºåœ¨è‡ªå·±æ—è¾¹
         CRect rc;
         GetWindowRect(&rc);
 
@@ -71,7 +71,7 @@ void LStickyNoteWnd::OnStrikeText(HELEMENT he)
 
 void LStickyNoteWnd::OnClkNoteItem(HELEMENT he) 
 {
-    // ±à¼­
+    // ç¼–è¾‘
 }
 
 ETable LStickyNoteWnd::AddItem(__in TTodoTask* p, __in BOOL bAtFirst) 
@@ -93,7 +93,7 @@ void LStickyNoteWnd::OnClose()
 {
     SaveWindowPos();
 
-    // Èç¹û²»ÊÇÍË³ö¾Í²»¹Ø±Õ
+    // å¦‚æœä¸æ˜¯é€€å‡ºå°±ä¸å…³é—­
     SetMsgHandled(FALSE);
 }
 
@@ -106,7 +106,7 @@ void LStickyNoteWnd::OnClkFontEditor(HELEMENT he)
     }
     else
     {
-        // ±ØĞë¼ÓÕâ¾ä£¬·ñÔòtoolbarÉÏµÄ°´Å¥¶¼²»Æğ×÷ÓÃÁË
+        // å¿…é¡»åŠ è¿™å¥ï¼Œå¦åˆ™toolbarä¸Šçš„æŒ‰é’®éƒ½ä¸èµ·ä½œç”¨äº†
         GetCtrl("#editor_msg>.toolbar").SetFocus();
         ctl.set_attribute("xfocus", L"1");
     }
@@ -127,7 +127,7 @@ LRESULT LStickyNoteWnd::OnDocumentComplete()
 
     RestoreSetting();
 
-    _Font().SelectItem_Text(L"ËÎÌå");
+    _Font().SelectItem_Text(L"å®‹ä½“");
 
     TTodoTask task;
     if (QDBEvents::GetInstance()->TodoTask_Get(taskid_, TODOTASK_TYPE_STICKNOTE ,task))
@@ -145,10 +145,10 @@ LRESULT LStickyNoteWnd::OnDocumentComplete()
 
 void LStickyNoteWnd::OnClkClose(HELEMENT he) 
 {
-    // ¹Ø±Õ´°¿ÚÈÏÎªÉ¾³ıÈÎÎñ
+    // å…³é—­çª—å£è®¤ä¸ºåˆ é™¤ä»»åŠ¡
     QDBEvents::GetInstance()->TodoTask_Delete(Task().nID);
 
-    // ¹Ø±Õ´°¿Ú
+    // å…³é—­çª—å£
     SendMessage(WM_CLOSE);
 }
 
@@ -185,14 +185,14 @@ void LStickyNoteWnd::OnKillFocus(HWND)
 
 void LStickyNoteWnd::OnSetFocus(HWND)
 {
-    // ÊäÈë¹â±êÒÆ¶¯µ½×îºóÒ»¸ö×Ö·û
+    // è¾“å…¥å…‰æ ‡ç§»åŠ¨åˆ°æœ€åä¸€ä¸ªå­—ç¬¦
     _Text().SelectText(0xFFFF);
-    // Ä³Ğ©Ê±ºò£¬¹â±ê²»ÊÇÒÆ¶¯µ½×Ö·ûºóÃæ£¬¶øÊÇÒÆ¶¯µ½±ßÔµ£¬Õâ¸öÊ±ºòÊÇÎŞ·¨
-    // ÊäÈëÊı¾İµÄ¡£²»Çå³şÊÇÊ²Ã´Ô­Òò¡£
+    // æŸäº›æ—¶å€™ï¼Œå…‰æ ‡ä¸æ˜¯ç§»åŠ¨åˆ°å­—ç¬¦åé¢ï¼Œè€Œæ˜¯ç§»åŠ¨åˆ°è¾¹ç¼˜ï¼Œè¿™ä¸ªæ—¶å€™æ˜¯æ— æ³•
+    // è¾“å…¥æ•°æ®çš„ã€‚ä¸æ¸…æ¥šæ˜¯ä»€ä¹ˆåŸå› ã€‚
     _Text().SimulateKeybordEvent(VK_LEFT);
     _Text().SetFocus();
 
-    // ÒõÓ°ÑÕÉ«
+    // é˜´å½±é¢œè‰²
     // SetShadowColor(0xE80A4B);
     SetShadowSize(4);
 
@@ -203,7 +203,7 @@ void LStickyNoteWnd::OnSelColorSchemeChanged(HELEMENT he, HELEMENT)
 {
     CStdString cr = EColorPicker(he).GetColor();
     GetBody().SetBkgndColor(cr);
-    // ±£´æ±³¾°É«
+    // ä¿å­˜èƒŒæ™¯è‰²
     QUIGetConfig()->SetValue(L"StickyNoteColor", CStdString::number(taskid_), cr);
 }
 
@@ -244,7 +244,7 @@ BOOL LStickyNoteWnd::RestoreSetting()
     // MainWindow format =0,1,395,198,1012,642
     auto* cfg = QUIGetConfig();
 
-    // ±³¾°É«
+    // èƒŒæ™¯è‰²
     CStdString scolor = cfg->GetValue(L"StickyNoteColor", CStdString::number(taskid_));
     if (!scolor.IsEmpty())
     {
@@ -257,7 +257,7 @@ BOOL LStickyNoteWnd::RestoreSetting()
         SetTopMost(true);
     }
 
-    // Î»ÖÃ
+    // ä½ç½®
     CStdString sPos = cfg->GetValue(L"StickyNote", CStdString::number(taskid_));
     if (sPos.IsEmpty())
     {
@@ -290,7 +290,7 @@ BOOL LStickyNoteWnd::RestoreSetting()
     // sets window's position and iconized/maximized status
     SetWindowPlacement(&wp);
 
-    // ×îºó¸øËüÒ»¸öwm_move ÏûÏ¢
+    // æœ€åç»™å®ƒä¸€ä¸ªwm_move æ¶ˆæ¯
     SendMessage(WM_EXITSIZEMOVE, 0, 0);
 
     return TRUE;
@@ -322,7 +322,7 @@ void LStickyNoteWnd::OnKeyDown(TCHAR ch, UINT n, UINT r)
 
     if (GetKeyState(VK_F3) & 0x8000)
     {
-        // ËÑË÷
+        // æœç´¢
         StickyNoteMan::GetInstance()->SearchNext(this);
         return;
     }
@@ -334,12 +334,12 @@ void LStickyNoteWnd::OnKeyDown(TCHAR ch, UINT n, UINT r)
             LStickyNoteWnd* p = nullptr;
             if (GetKeyState(VK_SHIFT) & 0x8000)
             {
-                // ÏòÇ°
+                // å‘å‰
                 p = StickyNoteMan::GetInstance()->PrevSibling(this);
             }
             else
             {
-                // Ïòºó
+                // å‘å
                 p = StickyNoteMan::GetInstance()->NextSibling(this);
             }
 
@@ -409,7 +409,7 @@ bool LStickyNoteWnd::SearchText(const CStdString& txt)const
     i_start = s_txt.find(txt, i_end);
     if (-1 != i_start)
     {
-        // ÏÈÈ¡ÏûÑ¡ÖĞ
+        // å…ˆå–æ¶ˆé€‰ä¸­
         _Text().SelectText(0xffff);
         _Text().SelectText(i_start, i_start + txt.length());
         // _Text().SelectText(8,9);
@@ -445,7 +445,7 @@ LStickyNoteWnd* StickyNoteMan::Create(const TTodoTask& t)
     LStickyNoteWnd* wnd = Find(t.nID);
     if (nullptr == wnd)
     {
-        // ÏÔÊ¾×ÀÃæ±ãÇ©
+        // æ˜¾ç¤ºæ¡Œé¢ä¾¿ç­¾
         wnd = new LStickyNoteWnd(t);
         wnd->Create(GetDesktopWindow(), WS_POPUP | WS_VISIBLE, WS_EX_TOOLWINDOW,
             WS_QEX_WNDSHADOW | WS_QEX_THICKFRAME);
@@ -552,8 +552,8 @@ void StickyNoteMan::ShowAll()
         if (p->IsWindow() /*&& !p->IsWindowVisible()*/)
         {
             bool is_top = p->IsTopMost();
-            // Èç¹û²»½«ÆäÉèÖÃÎªtopmostµÄ·ç¸ñ£¬ÄÇÃ´LittleT´¦ÓÚºóÌ¨ÔËĞĞ£¨·Ç¼¤»î×´Ì¬£©
-            // ÊÇ²»ÄÜ½«ÕâĞ©´°¿Ú´øµ½×îÉÏ²ãµÄ
+            // å¦‚æœä¸å°†å…¶è®¾ç½®ä¸ºtopmostçš„é£æ ¼ï¼Œé‚£ä¹ˆLittleTå¤„äºåå°è¿è¡Œï¼ˆéæ¿€æ´»çŠ¶æ€ï¼‰
+            // æ˜¯ä¸èƒ½å°†è¿™äº›çª—å£å¸¦åˆ°æœ€ä¸Šå±‚çš„
             p->SetTopMost(true);
             p->ShowWindow(SW_SHOW);
             p->SetTopMost(is_top);  
@@ -578,19 +578,19 @@ LStickyNoteWnd* StickyNoteMan::SearchNext(LStickyNoteWnd* cur_win)
                 p->ShowWindow(true);
                 p->SetFocus();
 
-                // ÕÒµ½ÁË
+                // æ‰¾åˆ°äº†
                 return p;
             }
         }
-        // Ê§°ÜÁË£¡
+        // å¤±è´¥äº†ï¼
         return nullptr;
     };
 
     auto i = std::find(lst_.begin(), lst_.end(), cur_win);
-    // ºó°ë¶ÎÕÒ
+    // ååŠæ®µæ‰¾
     if (LStickyNoteWnd* p = FuncSearch(i, lst_.end()))
         return p;
     
-    // Ç°°ë¶ÎÕÒ
+    // å‰åŠæ®µæ‰¾
     return FuncSearch(lst_.begin(), i);
 }

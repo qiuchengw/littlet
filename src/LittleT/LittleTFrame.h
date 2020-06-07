@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../common/ConstValues.h"
 
@@ -48,7 +48,7 @@ class LittleTFrame : public QFrame
             // app mode
             MSG_QUI_CODE(MWND_CMD_ENTERAPPMODE,OnEnterAppMode)
             //////////////////////////////////////////////////////////////////////////
-            // ÈÎÎñ
+            // ä»»åŠ¡
 //             MSG_QUI_CODE(MWND_CMD_SHOWMESSAGE,OnDoWork)
 //             MSG_QUI_CODE(MWND_CMD_SHUTDOWN,OnDoWork)
 //             MSG_QUI_CODE(MWND_CMD_REBOOT,OnDoWork)
@@ -88,7 +88,7 @@ protected:
 
     void OnEventFired(LPARAM lp);
 
-    // event£¨qautotask£©ÒªÇóÖ´ĞĞÏìÓ¦µÄÈÎÎñ
+    // eventï¼ˆqautotaskï¼‰è¦æ±‚æ‰§è¡Œå“åº”çš„ä»»åŠ¡
 //    void OnDoWork(LPARAM lp);
 
     void OnEventStatusChanged(LPARAM lParam);
@@ -105,29 +105,29 @@ protected:
     void OnPlanNumChanged(LPARAM lParam);
 
     //////////////////////////////////////////////////////////////////////////
-    // ³ÌĞò¸üĞÂ
-   /**          wParam      1£¬ÓĞ¸üĞÂ£¬ 0£¬µ±Ç°ÎŞ¸üĞÂ
-    *          lParam      µ±wParam==0£¬´ËÓòÒ²Îª0 
-    *                        wParam==1£¬´ËÓòÎªLPQUI_USERMSGPARAM£¬
+    // ç¨‹åºæ›´æ–°
+   /**          wParam      1ï¼Œæœ‰æ›´æ–°ï¼Œ 0ï¼Œå½“å‰æ— æ›´æ–°
+    *          lParam      å½“wParam==0ï¼Œæ­¤åŸŸä¹Ÿä¸º0 
+    *                        wParam==1ï¼Œæ­¤åŸŸä¸ºLPQUI_USERMSGPARAMï¼Œ
     *  -----------------------------------------
-    *          LPQUI_USERMSGPARAM ÓòµÄÖµÎª£º
-    *                      wParam  1£º¸üĞÂ³É¹¦
-    *                              0£º¸üĞÂÊ§°Ü
-    *                      sParam  ÒÑÏÂÔØµÄ¸üĞÂÎÄ¼şÂ·¾¶
-    *                      bFreeIt TRUE    ½ÓÊÕÕßÓ¦¸ÃÉ¾³ıÕâ¸öÊı¾İ
+    *          LPQUI_USERMSGPARAM åŸŸçš„å€¼ä¸ºï¼š
+    *                      wParam  1ï¼šæ›´æ–°æˆåŠŸ
+    *                              0ï¼šæ›´æ–°å¤±è´¥
+    *                      sParam  å·²ä¸‹è½½çš„æ›´æ–°æ–‡ä»¶è·¯å¾„
+    *                      bFreeIt TRUE    æ¥æ”¶è€…åº”è¯¥åˆ é™¤è¿™ä¸ªæ•°æ®
     *		-[out]
     **/
     LRESULT OnAppVersionCheck(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
     /*
-     *	ÔÚ²à±ßÀ¸Òş²ØµÄÏûÏ¢
+     *	åœ¨ä¾§è¾¹æ éšè—çš„æ¶ˆæ¯
      */
     LRESULT OnSideVisibleChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-    // system tray ÏûÏ¢
+    // system tray æ¶ˆæ¯
     LRESULT OnSysTrayMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     void OnCommand(UINT nType, int nID ,HWND hWnd);
     LRESULT OnCopyData(HWND hWnd, PCOPYDATASTRUCT pps);
-    // ´°¿Ú×Ô¶¯Òş²ØÏûÏ¢´¦Àí
+    // çª—å£è‡ªåŠ¨éšè—æ¶ˆæ¯å¤„ç†
 //    LRESULT HandleAutohideMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
     void OnTabSwitched(HELEMENT he );

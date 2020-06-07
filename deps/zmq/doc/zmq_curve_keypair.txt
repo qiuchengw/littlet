@@ -1,4 +1,4 @@
-zmq_curve_keypair(3)
+﻿zmq_curve_keypair(3)
 ====================
 
 
