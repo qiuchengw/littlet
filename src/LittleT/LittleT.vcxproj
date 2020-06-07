@@ -70,10 +70,12 @@
       </Command>
     </PreBuildEvent>
     <PreLinkEvent>
-      <Command>$(MyToolsDir)\7za.exe u $(OutDir)\UI.ZIP ..\UI\* -r</Command>
+      <Command>
+      </Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>copy $(UIBase)\lib\*.dll $(MyOutDir)\</Command>
+      <Command>copy $(UIBase)\lib\*.dll $(MyOutDir)\
+copy $(TopDir)\data\* $(MyOutDir)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -100,10 +102,12 @@
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <PreLinkEvent>
-      <Command>$(MyToolsDir)\7za.exe u $(OutDir)\UI.ZIP ..\UI\* -r</Command>
+      <Command>
+      </Command>
     </PreLinkEvent>
     <PostBuildEvent>
-      <Command>copy $(UIBase)\lib\*.dll $(MyOutDir)\</Command>
+      <Command>copy $(UIBase)\lib\*.dll $(MyOutDir)\
+copy $(TopDir)\data\* $(MyOutDir)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

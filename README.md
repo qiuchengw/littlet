@@ -38,20 +38,29 @@
 
 ## 编译说明
 
-**说明：此项目依赖的`UIBase`已全新重构为`QUI`项目，但是此项目并未进行更新，所以编译会有问题。** 
+> 0. 准备windows 7或更高版本系统 + VisualStudio 2013
+> 1. 签出本项目代码到`littlet`
+> 2. 签出依赖的qui（https://github.com/qiuchengw/qui）项目，和`littlet`放到同一级目录下
+> 3. 先编译qui，再编译`littlet`
+>   3.1 使用 uipacker 打包`UI`目录到bin下（此过程是自动完成的 ，如果失败请手动编译uipacker项目，并手动打包）
+> 4. 编译后的程序在 `littlet\bin`目录下
+> 5. 执行exe程序，可看到效果
 
-所有UIBase代码都在最新的[QUI](https://github.com/qiuchengw/qui)项目内了，所以对工程加以修改是可以编译的。
+**说明1：**本项目的`svr`为服务端项目，用于收集用户反馈的信息，不部署并不影响客户端程序运行。
 
-步骤：
-1. 编译qui项目
-2. 编译此项目（仅LittleT即可），shell和服务端可以不用编译。
-3. 使用[uipacker](https://github.com/qiuchengw/quipacker) 打包`UI`目录
-4. 完成
+**说明2：**本项目的`LittleTShell`为客户端命令行程序，用于从命令行创建任务、TODO、定时等功能，不存在也并不影响主程序运行，功能介绍请参考`cron`项目（见下）
 
-## 你可能感兴趣的一些技术点
+**说明3：**此程序内的“逻辑表达式定时器”代码质量比较差，此前已经过一轮重构，形成了一个独立的项目`cron`。但是并未合并回此项目中。重构后的项目代码开源到这儿[cron - https://github.com/qiuchengw/cron](https://github.com/qiuchengw/cron)。个人感觉这个还是蛮有用处的。能够让你在自己的项目中实现强大灵活的定时任务。支持“相对定时”和“绝对定时”。
+
+以下是LittleTShell截图：
+
+ ![LittleTShell](https://raw.githubusercontent.com/qiuchengw/cron/master/sc.png)
+
+
+## 你可能感兴趣的项目
 1. [HTMLayout](https://terrainformatica.com/a-homepage-section/htmlayout/)
-2. 基于WTL和HTMLayout的GUI库：[QUI - https://github.com/qiuchengw/qui](https://github.com/qiuchengw/qui)
-3. 逻辑表达式定时器： [cron - https://github.com/qiuchengw/cron](https://github.com/qiuchengw/cron)
+2. 基于WTL和HTMLayout的GUI库：[qui - https://github.com/qiuchengw/qui](https://github.com/qiuchengw/qui)
+3. **逻辑表达式定时器（很有用哦）**： [cron - https://github.com/qiuchengw/cron](https://github.com/qiuchengw/cron)
 
 
 ## 关于
@@ -67,12 +76,61 @@
 
 ```html
 更新历史：<br/>
+LittleT v5.4 2015 / 7 / 19 < br / >
+----------------------<br/>
+增加：ctrl + shift + m 全局快捷键显示所有的便签到前台来 ，CTRL + N 创建新的便签<br/>
+增加：TODO 按照重要性排序 <br/>
+增加：拖动删除TODO和事件 <br/>
+增加：便签上添加删除线效果 <br/>
+增强：优化计划列表项的显示（之前界面会显示不全） <br/>
+增强：更好的随机乱序播放图片<br/>
+增强：界面显示优化（之前日期/时间地方会显示不全）<br/>
+修复：在系统盘运行程序不能正确添加数据的问题（需要管理员权限）<br/>
+<br/>
+LittleT v5.3 2015 / 7 / 15 < br / >
+----------------------<br/>
+增强：支持多显示器<br/>
+增强：去掉微博连接<br/>
+<br/>
+LittleT v5.2 2015 / 7 / 8 < br / >
+----------------------<br/>
+增强：便签功能Tab键缩进<br/>
+增强：便签功能Ctrl + [Shift] + Tab进行便签导航<br/>
+<br/>
+LittleT v5.0 2015 / 6 / 11 < br / >
+----------------------<br/>
+增强：随机播放图片<br/>
+新增：添加便签功能 <br/>
+<br/>
+LittleT v4.0 2015 / 3 / 18 < br / >
+----------------------<br/>
+增强：检测提示信息是否只有一次，如果是则需要手动关闭提示，以免错过重要的提示。
+修改：提醒界面重新设计，简洁了一点（好像更难看了？！）。<br/>
+修复：计划界面下拉列表不显示滚动条的问题 <br/>
+<br/>
+LittleT v3.8 2014 / 12 / 6 < br / >
+----------------------<br/>
+新增：添加到任务栏快速启动<br/>
+修改：提醒界面重新设计，简介了一点（好像更难看了？！）。<br/>
+修改：已用提示音保存记录，方便下次选择。
+修改：多处界面微调。<br/>
+<br/>
+LittleT v3.6 2014/7/6<br/>
+----------------------<br/>
+新增：意见反馈<br/>
+修改：界面微调<br/>
+新增：增加了用户量统计的代码<br/>
+<br/>
+LittleT v3.4 2014/5/21<br/>
+----------------------<br/>
+新增：自动任务“每年的某天”执行功能<br/>
+修改：修改为每5个小时自动检查更新<br/>
+新增：我的微博连接地址<br/>
 
 LittleT v3.3 2013/10/28<br/>
 ----------------------<br/>
 新增：自动任务“每年的某天”执行功能
 修复数个小bug
-
 
 <br/>
 LittleT v3.2 2013/10/28<br/>
